@@ -32,7 +32,7 @@ def user_info():
                     'errcode': 1,
                     'errmsg': '请检查网络或其他设置'}
 
-        elif(result['phoneLength']==False):
+        elif(phoneResult['phoneLength']==False):
             return{
                 'errcode': 1,
                 'errmsg': '手机号格式不正确'
