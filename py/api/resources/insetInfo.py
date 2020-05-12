@@ -1,5 +1,5 @@
 from flask import request, session
-from api.database.database import insertInfo,getInfo
+from api.database.database import insertInfo,getInfo,checkPhone
 
 @app.route('/user_info', methods=['POST'])
 def user_info():
