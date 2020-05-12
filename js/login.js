@@ -1,3 +1,19 @@
+var file = document.getElementById('head_pic');
+var base64img = null;
+var head_pic_div=document.getElementById('head_pic_div');
+file.onchange = function () {
+    var head_pic = file.files[0];
+    var reader = new FileReader();
+    if (head_pic) {
+        reader.readAsDataURL(head_pic);
+        reader.onloadend = function () {
+            base64img = reader.result;
+            head_pic_div.src=base64img;
+            head_pic_div.style.display='block';
+        }
+    }
+}
+
 function sendMes() {
     var nickname = document.getElementById('nickname').value;
     var phone = document.getElementById('phone').value;
@@ -5,7 +21,7 @@ function sendMes() {
 
     var data = {
         'nickname': nickname,
-        // 'head_pic': head_pic,
+        'head_pic': base64img,
         'phone': phone,
         'email': email
     }
@@ -14,6 +30,7 @@ function sendMes() {
         phone: checkErr(phone, '', /^1\d{10}$/, null),
         email: checkErr(email, '', /^\w+([-\.]\w+)*@\w+([\.-]\w+)*\.\w{2,4}$/, null)
     }
+
     console.log(JSON.stringify(data));
     console.log(check);
     var sum = true;
@@ -26,7 +43,7 @@ function sendMes() {
         postMes(serverUrl + loginUrl, data, Response);
         var errcode = RESPONSE['errcode'];
         var errmsg = RESPONSE['errmsg'];
-        if (errcode == 0) { 
+        if (errcode == 0) {
             window.location.href = './index.html';
         } else if (errcode == 1) {
 

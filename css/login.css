@@ -1,3 +1,8 @@
 input[type="text"]{
     border:1px solid #000;
 }
+#head_pic_div{
+    display: none;
+    width: 300px;
+    height: 100px;
+}
