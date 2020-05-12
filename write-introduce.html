@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0,user-scalable=no">
+    <title>时光胶囊</title>
+    <link rel="stylesheet" href="./css/init.css">
+    <link rel="stylesheet" href="./css/write-introduce.css">
+</head>
+
+<body>
+    <div class="page1">
+        <div class="header">
+            <a href="index.html">返回</a>
+        </div>
+        <div class="content">
+            引导文案
+            blblbl
+        </div>
+        <div class="bottom">
+            <div class="sender">
+                <label><input type="radio" name="sender" id="person" value="私密">私密</label>
+                <label><input type="radio" name="sender" id="" value="陌生人">陌生人</label>
+                <label><input type="radio" name="sender" id="" value="写给TA">写给TA</label>
+            </div>
+            <a href="#" id="next">下一步</a>
+        </div>
+        <button id="aw">s1</button>
+    </div>
+    <div class="page2">
+        <div class="header">
+            <a href="write-introduce.html">返回</a>
+        </div>
+        <div class="content">
+            引导文案
+            <div class="year">
+                <label><input type="radio" name="year" id="" value="半年后">半年后</label>
+                <label><input type="radio" name="year" id="" value="一年后">一年后</label>
+
+            </div>
+        </div>
+        <div class="bottom">
+            <a href="#">下一步</a>
+        </div>
+        <button id="af">s2</button>
+    </div>
+    <script>
+        function getRadio(obj) {
+            for (var i = 0; i < obj.length; i++) {
+                if (obj[i].checked === true) {
+                    return obj[i].value;
+                }
+            }
+            return null;
+        }
+        var next = document.getElementById('next');
+        next.addEventListener('click', function () {
+            let page1 = document.getElementsByClassName('page1');
+            let page2 = document.getElementsByClassName('page2');
+            page1[0].style.display = 'none';
+            page2[0].style.display = 'block';
+
+        })
+
+        var aw = document.getElementById('aw');
+        var af = document.getElementById('af');
+        aw.addEventListener('click', function () {
+            var sender = getRadio(document.getElementsByName('sender'));
+            console.log(sender);
+        })
+        af.addEventListener('click', function () {
+            var year = getRadio(document.getElementsByName('year'));
+            console.log(year);
+
+        })
+    </script>
+    <script src="./js/config.js"></script>
+</body>
+
+</html>
