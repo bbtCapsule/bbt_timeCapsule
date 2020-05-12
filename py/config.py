@@ -11,5 +11,5 @@ Time = {
     "end" : "EVEBT_END",
 }
 app = {
-    'secret_key': 'dlhaso8(*(Y*&Tdasdi'
+    'secret_key': ' '
 }
