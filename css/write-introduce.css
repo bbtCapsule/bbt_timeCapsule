@@ -1,3 +1,9 @@
 .page2 {
     display: none;
 }
+span{
+    border: 1px solid #000;
+}
+input[type='radio']:checked +span{
+    background-color: blue;
+}
