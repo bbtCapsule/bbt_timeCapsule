@@ -93,3 +93,12 @@ class database:
             text=message.replace(x,'*'*len(x))
         return text
 
+    def checkPhone(phone):
+        db.execute('select * from users where `phone`=%s',(phone,))
+        result = db.fetchone()
+        dictReturn=dict()
+        uniqueness=(result==None)
+        phoneLength=((len(phone)==11)and phone[0]=='1')
+        return {
+            'phoneLength':phoneLength,
+            'uniqueness':uniqueness}
