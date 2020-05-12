@@ -1,5 +1,5 @@
 import pymysql
-from config.config import db
+from config import db
 import json
 
 class database:
@@ -47,14 +47,28 @@ class database:
         con.commit()
         con.close()
 
-#塞入胶囊
-    def insertCapsule(open_id, receiver_name, receiver_tel, receiver_email, capsule_type, time_limit, cap_template, cap_location, content_word, content_pic, content_voice, registered, sent):
-        info = database.getInfo(open_id)
+#塞入给Ta的胶囊
+    def insertToTaCapsule(sender_name, receiver_name, receiver_tel, receiver_email, time_limit, cap_template, cap_location, content_word, content_pic, content_voice, registered, sent, content_name, content_phone, content_birth):
         (con, cur) = database.getCursor()
-        if info is None:
-            cur.execute("INSERT INTO capsules(sender_id, receiver_name, receiver_tel, receiver_email, capsule_type, time_limit, cap_template, cap_location, content_word, content_pic, content_voice, registered, sent) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",[None, receiver_name, receiver_tel, receiver_email, capsule_type, time_limit, cap_template, cap_location, content_word, content_pic, content_voice, registered, sent])
-        else:
-            cur.execute("INSERT INTO capsules(sender_id, receiver_name, receiver_tel, receiver_email, capsule_type, time_limit, cap_template, cap_location, content_word, content_pic, content_voice, registered, sent) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",[info[0], receiver_name, receiver_tel, receiver_email, capsule_type, time_limit, cap_template, cap_location, content_word, content_pic, content_voice, registered, sent])
+        cur.execute("INSERT INTO toTaCapsules( code, sender_name, receiver_name, receiver_tel, receiver_email, time_limit, cap_template, cap_location, content_word, content_pic, content_voice, registered, sent, content_name, content_phone, content_birth) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",[None, sender_name, receiver_name, receiver_tel, receiver_email, time_limit, cap_template, cap_location, content_word, content_pic, content_voice, registered, sent, content_name, content_phone, content_birth])
+        cur.close()
+        con.commit()
+        con.close()
+
+#塞入给自己的胶囊
+    def insertSelfCapsule(open_id, time_limit, cap_template, cap_location, content_word, content_pic, content_voice, registered, sent):
+        (con, cur) = database.getCursor()
+        info = database.getInfo(open_id)
+        cur.execute("INSERT INTO selfCapsules(sender_id, time_limit, cap_template, cap_location, content_word, content_pic, content_voice, registered, sent) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",[info[0], time_limit, cap_template, cap_location, content_word, content_pic, content_voice, registered, sent])
+        cur.close()
+        con.commit()
+        con.close()
+
+#塞入给陌生人的胶囊
+    def insertStraengerCpasule(open_id, time_limit, cap_template, cap_location, content_word, content_pic, content_voice):
+        (con, cur) = database.getCursor()
+        info = database.getInfo(open_id)
+        cur.execute("INSERT INTO strangerCapsules(sender_id, time_limit, cap_template, cap_location, content_word, content_pic, content_voice) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",[info[0], time_limit, cap_template, cap_location, content_word, content_pic, content_voice])
         cur.close()
         con.commit()
         con.close()
