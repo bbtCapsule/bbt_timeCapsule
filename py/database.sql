@@ -16,7 +16,6 @@ CREATE TABLE `DATABASE`.`selfCapsules` (
 	`content_word` TEXT NULL ,
 	`content_pic` TEXT NULL ,
 	`content_voice`  TEXT NULL,
--- 	`from_qrcode` BOOLEAN NOT NULL ,
  	`registered` TIMESTAMP NOT NULL, --DEFAULT CURRENT_TIMESTAMP 新增胶囊形成时间
 	`sent` TIMESTAMP NOT NULL, --DEFAULT CURRENT_TIMESTAMP , --新增胶囊发送时间
 	PRIMARY KEY (`capsule_id`)
@@ -24,7 +23,7 @@ CREATE TABLE `DATABASE`.`selfCapsules` (
 
 CREATE TABLE `DATABASE`.`toTaCapsules` (
 	`capsule_id` INT NOT NULL AUTO_INCREMENT ,
-	`code` INT NULL ,   --取信码
+	`code` TEXT NULL ,   --取信码
 	`sender_name` INT NULL , --已注册使用注册的昵称，未注册使用微信用户名
 	`receiver_name` TEXT NOT NULL ,
 	`receiver_tel` TEXT NOT NULL ,
@@ -35,7 +34,6 @@ CREATE TABLE `DATABASE`.`toTaCapsules` (
 	`content_word` TEXT NULL ,
 	`content_pic` TEXT NULL ,
 	`content_voice`  TEXT NULL,
--- 	`from_qrcode` BOOLEAN NOT NULL ,
  	`registered` TIMESTAMP NOT NULL, --DEFAULT CURRENT_TIMESTAMP 新增胶囊形成时间
 	`sent` TIMESTAMP NOT NULL, --DEFAULT CURRENT_TIMESTAMP , --新增胶囊发送时间
 	`content_name` TEXT NULL DEFAULT NULL ,
