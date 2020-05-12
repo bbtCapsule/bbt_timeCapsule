@@ -15,14 +15,15 @@
     <div class="content">
         <div class="nickname">
             <div>昵称</div>
-            <input type="text" name="nickname" id="nickname">
+            <input type="text" name="nickname" id="nickname" maxlength="16">
         </div>
         <div class="head_pic">
-
+            <div>头像</div>
+            <input type="file" name="file" id="head_pic">
         </div>
         <div class="phone">
             <div>手机号</div>
-            <input type="text" name="phone" id="phone">
+            <input type="text" name="phone" id="phone" maxlength="11">
         </div>
         <div class="email">
             <div>邮箱</div>
@@ -30,10 +31,12 @@
         </div>
     </div>
     <div class="bottom">
-        <a  id="submit">下一步</a>
+        <a id="submit">下一步</a>
     </div>
 
     <script src="./js/config.js"></script>
+    <script src="./js/ajax.js"></script>
+    <script src="./js/function.js"></script>
     <script src="./js/login.js"></script>
 </body>
 

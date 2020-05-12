@@ -9,27 +9,33 @@ function sendMes() {
         'phone': phone,
         'email': email
     }
-    console.log(JSON.stringify(data));
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open('POST', serverUrl + loginUrl, true);
-    xmlhttp.setRequestHeader('Content-type', 'application/json');
-    xmlhttp.send(JSON.stringify(data));
-    xmlhttp.onreadystatechange = function () {
-        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-            var response = xmlhttp.responseText;
-            var RESPONSE = JSON.parse(response);
-            var errcode = RESPONSE['errcode'];
-            var errmsg = RESPONSE['errmsg'];
-            if (errcode == 0) {
-                window.location.href='./index.html';
-            } else {
-                // document.getElementById('uWarn').innerHTML = errmsg;
-                // document.getElementById('uWarn').style.color = 'red';
-            }
-        } else {
-            // document.getElementById('uWarn').innerHTML = errmsg;
-            // document.getElementById('uWarn').style.color = 'red';
-        }
+    var check = {
+        nickname: checkErr(nickname, '', /[\w\W]{1,16}/, null),
+        phone: checkErr(phone, '', /^1\d{10}$/, null),
+        email: checkErr(email, '', /^\w+([-\.]\w+)*@\w+([\.-]\w+)*\.\w{2,4}$/, null)
     }
+    console.log(JSON.stringify(data));
+    console.log(check);
+    var sum = true;
+    for (key in check) {
+        sum = check[key] && sum;
+    }
+    if (sum) {
+        console.log('success con');
+        var Response;
+        postMes(serverUrl + loginUrl, data, Response);
+        var errcode = RESPONSE['errcode'];
+        var errmsg = RESPONSE['errmsg'];
+        if (errcode == 0) { 
+            window.location.href = './index.html';
+        } else if (errcode == 1) {
+
+        }
+    } else {
+        console.log('fail con ');
+    }
+
+
+
 }
 document.getElementById('submit').addEventListener('click', sendMes);
