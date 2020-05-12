@@ -1,0 +1,16 @@
+.header{
+    text-align: left;
+}
+.content{
+    padding-top: 50px;
+    text-align: center;
+}
+.bottom{
+    text-align: center;
+    padding-top: 50px;
+}
+.element{
+    padding-top: 400px;
+    position: relative;
+    right: 50px;
+}
