@@ -7,6 +7,8 @@ import base64
 import json
 import requests
 
+/*按照去年模板保留海报与二维码的拼接，图片，颜色，大小未知*/
+
 img_bg = Image.open("static/icorn.png") //图片未定
 
 @app.route('/getQRCode', methods=['GET'])
