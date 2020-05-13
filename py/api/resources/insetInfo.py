@@ -11,9 +11,9 @@ def user_info():
         }
     else:   
         data = request.get_json()
-        nickname=data[1]
-        phone=data[2]
-        email=data[3]
+        nickname=data['nickname']
+        phone=data['phone']
+        email=data['email']
         phoneResult = checkPhone(phone)
         if (phoneResult['phoneLength']==True):
             if(phoneResult['uniqueness']==False):
