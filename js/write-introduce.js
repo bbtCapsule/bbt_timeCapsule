@@ -1,5 +1,3 @@
-
-
 var next = document.getElementById('next');
 next.addEventListener('click', function () {
     let page1 = document.getElementsByClassName('page1');
@@ -23,12 +21,12 @@ nextPage.addEventListener('click', function () {
     var year = getRadio(document.getElementsByName('year'));
     sessionStorage.setItem('capsule_type', sender);
     sessionStorage.setItem('time_limit', year);
-    if (sender === null) {
+    if (sender === null || year == null) {
         console.log(null);
     } else if (sender == 2) {
         console.log(sender);
         window.location.href = 'write-TA.html';
-    } else  {
+    } else {
         console.log(sender);
 
         window.location.href = 'write-one.html';
