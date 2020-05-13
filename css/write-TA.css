@@ -1,0 +1,35 @@
+.header{
+    text-align: left;
+}
+.content{
+    margin: 0 auto;
+    text-align: center;
+    padding-top: 100px;
+}
+.bottom{
+    text-align: center;
+}
+.element{
+    padding-top: 200px;
+}
+.line1{
+    position: relative;
+    right: 50px;
+}
+.line2{
+    padding-top: 30px;
+    padding-bottom: 50px;
+}
+.img{}
+.voice{
+    position: relative;
+    left: 20px;
+}
+.paper1{
+    position: relative;
+    right: 40px;
+}
+.paper2{
+    position: relative;
+    left: 30px
+}

@@ -1,0 +1,14 @@
+.header{
+    text-align: left;
+}
+.content{
+    text-align: center;
+    padding-top: 50px;
+    padding-bottom: 400px;
+}
+.bottom{
+    text-align: center;
+}
+.write{
+    padding-bottom: 30px;
+}

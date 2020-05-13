@@ -1,9 +1,41 @@
 .page2 {
     display: none;
 }
-span{
-    border: 1px solid #000;
+.header{
+    text-align: left;
 }
-input[type='radio']:checked +span{
-    background-color: blue;
+.content{
+    padding-top: 50px;
+    text-align: center;
+}
+.bottom{
+    padding-top: 50px;
+    text-align: center;
+}
+.text2{
+    padding-top: 50px;
+    height: 300px;
+}
+.choice1{
+    position: relative;
+    right: 30px;
+}
+.choice3{
+    position: relative;
+    left:30px;
+}
+.next_{
+    padding-top: 50px;
+    padding-bottom: 30px;
+}
+.aw_{
+    text-align: center;
+}
+.year{
+    padding-top: 200px;
+    padding-bottom: 200px;
+}
+.af_{
+    padding-top: 30px;
+    text-align: center;
 }

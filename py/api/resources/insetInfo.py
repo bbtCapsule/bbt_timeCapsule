@@ -9,10 +9,11 @@ def user_info():
             'errcode':1,
             'errmsg':'该用户已存在'
         }
-    else:    
-        nickname=result[1]
-        phone=result[2]
-        email=result[3]
+    else:   
+        data = request.get_json()
+        nickname=data['nickname']
+        phone=data['phone']
+        email=data['email']
         phoneResult = checkPhone(phone)
         if (phoneResult['phoneLength']==True):
             if(phoneResult['uniqueness']==False):
