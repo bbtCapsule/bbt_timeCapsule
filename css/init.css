@@ -27,6 +27,7 @@ input::-webkit-input-placeholder {
 }
 
 a {
+    user-select: none;
     text-decoration: none;
     -webkit-tap-highlight-color: transparent;
 }

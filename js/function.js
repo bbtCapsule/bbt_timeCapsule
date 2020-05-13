@@ -7,9 +7,6 @@ function getRadio(obj) {
     return null;
 }
 
-function aw(){
-    return true;
-}
 function checkErr(key, value, reg,errmsg) {
     if (key === value||!(reg.test(key))) {
         // errmsg.classList.add('show');
