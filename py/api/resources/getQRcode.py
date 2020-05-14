@@ -1,5 +1,5 @@
 from flask import session, request
-from api.database.database import *
+from api.database.database import database
 from api.resources.encode import encodeUID
 from PIL import Image
 import qrcode
