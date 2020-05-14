@@ -10,6 +10,10 @@ const baseUrl = "https://hemc.100steps.net/2020//bbt_timeCapsule/py/api"; //测�
 const apiurl = `${baseUrl}/`;
 const shareurl = encodeURIComponent(location.href);
 const shareimg_url = "图片url";
+var nickname = "Hi~";
+var icon = "your_icon.jpg";//头像地址
+var imgs = [];//上传的图片地址数组
+var voice ="";//录音文件链接
 function checkLogin() {
     var checkurl = apiurl + "check_wechat_login";//后台检测登录
     axios.get(checkurl).then(res => {
@@ -37,7 +41,11 @@ function wxlogin() {
           timestamp: res.timestamp,
           nonceStr: res.nonceStr,
           signature: res.signature,
-          jsApiList: ["updateTimelineShareData", "updateAppMessageShareData"],
+          jsApiList: ['chooseImage','uploadImage',"startRecord",
+          "stopRecord","onVoiceRecordEnd",
+          "pauseVoice","playVoice","stopVoice","onVoicePlayEnd",
+          "uploadVoice",
+          "updateTimelineShareData", "updateAppMessageShareData"],
           debug: false
         });
         wx.ready(function() {
@@ -79,6 +87,7 @@ function wxlogin() {
 }//微信登录
 
 //检测录入信息状态
+sessionStorage.setItem("username","none");
 function checkInfo(){
     var checkInfo_url = apiurl + "check_user_info";
     axios.get(checkInfo_url).then(res =>{
@@ -86,18 +95,60 @@ function checkInfo(){
             if(res.data.record){
                 sessionStorage.setItem("username",res.data.nickname);
             return true;
+            }else{
+                return false;
             }
         }else{
-            $(".getInfo").faceIn();
         return false;
         }
     })
 }
-setTimeout(function(){
+// if(!checkInfo()||sessionStorage.getItem("username")=="none"){
+    if(sessionStorage.getItem("username")=="none"){
+    var nickname ,phone,email ="";
     $(".getInfo").fadeIn();
-},1000)
+    $("#nickname").on('input',function(e){
+        nickname = $("#nickname").val();
+        console.log("name  "+nickname);
+     });
+     $("#phone").on('input',function(e){
+        phone = $("#phone").val();
+        console.log("phone  "+phone);
+     });
+     $("#email").on('input',function(e){
+       email= $("#email").val();
+       console.log("email  "+email);
+     });
+}
+//把防注入单独写一个函数 传str进到函数里验证 返回true为通过验证 false为输入了非法信息
 
 //调用微信图片接口
+function chooseImg(type){//type  如果是1 就是指上传的是头像（只能选一张图  是0 就是上传信封的图片（可以有多张图
+    if(type == 1){
+    wx.chooseImage({
+        count: 1, // 默认9
+        sizeType: ['original'], // 可以指定是原图还是压缩图，默认二者都有
+        sourceType: ['album'], // 可以指定来源是相册还是相机，默认二者都有
+        success: function (res) {
+        var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
+        $("#head_pic").src = localIds[0];
+        icon = localIds[0];
+    }
+      });
+    }else{
+        wx.chooseImage({
+            count: 9, // 默认9
+            sizeType: ['original'], // 可以指定是原图还是压缩图，默认二者都有
+            sourceType: ['album'], // 可以指定来源是相册还是相机，默认二者都有
+            success: function (res) {
+            var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
+            for(num in localIds){
+                imgs[num] = localIds[num];
+            }
+        }
+          });
+    }
+}
 
 //调用录音
 

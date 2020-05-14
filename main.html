@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
     <head>
         <meta charset="UTF-8">
-        <meta name="viewport"content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0,user-scalable=no">
+        <meta name="viewport"
+            content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0,user-scalable=no">
         <title>时光胶囊</title>
         <link rel="stylesheet" href="./css/main.css">
         <script src="./js/jquery-3.4.1.min.js"></script>
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
         <script src="http://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
     </head>
+
     <body>
         <div class="header">
             <div class="intro">说明</div>
@@ -20,28 +23,37 @@
         </div>
         <div class="getInfo">
             <div class="info">
-                <span class="info_name">头像</span>
+                <!---span class="info_name">头像</span-->
                 <div class="icon_container">
-                    <img src="" id="head_pic_div">
+                    <img src="" id="head_pic">
                 </div>
             </div>
-            <div class="info" id="nickname">
+            <div class="info" >
                 <span class="info_name">昵称</span>
-                <input type="text" name="nickname" id="nickname" maxlength="16">
+                <input class="info_input" type="text" name="nickname" id="nickname" maxlength="16">
+            <span class="attention_text"></span>
             </div>
-            <div class="info" id="phone">
+            <div class="info" >
                 <span class="info_name">手机号</span>
-                <input type="text" name="phone" id="phone" maxlength="11">
+                <input class="info_input" type="text" name="phone" id="phone" maxlength="11">
+                        <span class="attention_text"></span>
             </div>
-            <div class="info" id="email">
+            <div class="info" >
                 <span class="info_name">邮箱</span>
-                <input type="text" name="email" id="email">
+                <input  class="info_input" type="text" name="email" id="email">
+                        <span class="attention_text"></span>
+
             </div>
-            <input id="submitInfo" type="submit">下一步
+            <input id="submitInfo" type="submit" value="">
         </div>
         </div>
         <div class="map"></div>
+        <img id="img_map" src="./images/map.jpg" usemap="#mapmap" />
+        <map name="mapmap" id="mapmap">
+            <area shape="circle" coords="200,200,30" href="www.baidu.com" target="_blank" alt="Venus" id="mapArea" />
+        </map>
 
     </body>
-        <script src="./js/main.js"></script>
+    <script src="./js/main.js"></script>
+
 </html>
