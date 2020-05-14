@@ -8,7 +8,7 @@ import base64
 import json
 import requests
 
-/*按照去年模板保留海报与二维码的拼接，图片，颜色，大小暂时同去年*/
+# /*按照去年模板保留海报与二维码的拼接，图片，颜色，大小暂时同去年*/
 
 img_bg = Image.open("static/icorn.png") 
 
