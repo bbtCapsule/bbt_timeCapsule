@@ -7,9 +7,9 @@ import base64
 import json
 import requests
 
-/*按照去年模板保留海报与二维码的拼接，图片，颜色，大小未知*/
+/*按照去年模板保留海报与二维码的拼接，图片，颜色，大小暂时同去年*/
 
-img_bg = Image.open("static/icorn.png") //图片未定
+img_bg = Image.open("static/icorn.png") 
 
 @app.route('/getQRCode', methods=['GET'])
 def get():
@@ -38,7 +38,7 @@ def get():
 		qr = qrcode.QRCode(border = 2)
 		qr.add_data(url)
 		qr.make(fit = True)
-		img_qr = qr.make_image(back_color = "xxxx").resize((x, x), Image.ANTIALIAS) //颜色等未定
+		img_qr = qr.make_image(back_color = "#fffcd3").resize((130, 130), Image.ANTIALIAS) 
 		pos = (img_bg.size[0] // 2 - img_qr.size[0] // 2, img_bg.size[1] - img_qr.size[1] * 2 - 110)
 		img_bg.paste(img_qr, pos)
 		img_bg.save("QRCode.jpg")
