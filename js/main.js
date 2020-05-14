@@ -119,6 +119,10 @@ function checkInfo(){
        email= $("#email").val();
        console.log("email  "+email);
      });
+     //调用检测函数 通过验证时把个人信息发给后台
+     $("#submitInfo").on('click',function(e){
+        uploadInfo(nickname,phone,email);
+      });
 }
 //把防注入单独写一个函数 传str进到函数里验证 返回true为通过验证 false为输入了非法信息
 
@@ -137,7 +141,7 @@ function chooseImg(type){//type  如果是1 就是指上传的是头像（只能
       });
     }else{
         wx.chooseImage({
-            count: 9, // 默认9
+            count: 3, // 限制为三张图片
             sizeType: ['original'], // 可以指定是原图还是压缩图，默认二者都有
             sourceType: ['album'], // 可以指定来源是相册还是相机，默认二者都有
             success: function (res) {
@@ -152,4 +156,27 @@ function chooseImg(type){//type  如果是1 就是指上传的是头像（只能
 
 //调用录音
 
-//上传
+//上传个人信息
+function uploadInfo(nickname,phone,email){
+    //icon是有默认值的（比如不想自定义头像）直接上传就行
+    //先禁用按钮！！！！
+    $("#submitInfo").attr("disabled","disabled");
+    axios({
+        method: 'post',
+        url: apiurl+'user_info',
+        headers: {'X-Requested-With': 'application/json'},
+        data: {
+          nickname: nickname,
+          phone: phone,
+          email:email,
+          head_pic:icon
+        }
+      }).then(res => {
+        if (res.data.errcode != 0 || res.status == 400) {
+            //上传失败 把错误信息显示出来
+        }else if(res.data.errcode == 0){
+            $(".getinfo").fadeOut();//关掉表单 进入下一个页面
+            window.location.href="nextpage";
+        }
+      });
+}
