@@ -44,35 +44,43 @@ class database:
     def insertInfo(open_id, nickname, phone, email):
         (con, cur) = database.getCursor()
         cur.execute("INSERT INTO users(open_id, nickname, phone, email) VALUES (?, ?, ?)",[open_id, nickname, phone, email])
+        rowcount=cur.row_count()
         cur.close()
         con.commit()
         con.close()
+        return rowcount
 
 #塞入给Ta的胶囊
     def insertToTaCapsule(sender_name, receiver_name, receiver_tel, receiver_email, time_limit, cap_template, cap_location, content_word, content_pic, content_voice, registered, sent, content_name, content_phone, content_birth):
         (con, cur) = database.getCursor()
         cur.execute("INSERT INTO toTaCapsules( code, sender_name, receiver_name, receiver_tel, receiver_email, time_limit, cap_template, cap_location, content_word, content_pic, content_voice, registered, sent, content_name, content_phone, content_birth) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",[None, sender_name, receiver_name, receiver_tel, receiver_email, time_limit, cap_template, cap_location, content_word, content_pic, content_voice, registered, sent, content_name, content_phone, content_birth])
+        rowcount=cur.row_count()
         cur.close()
         con.commit()
         con.close()
+        return rowcount
 
 #塞入给自己的胶囊
     def insertSelfCapsule(open_id, time_limit, cap_template, cap_location, content_word, content_pic, content_voice, registered, sent):
         (con, cur) = database.getCursor()
         info = database.getInfo(open_id)
         cur.execute("INSERT INTO selfCapsules(sender_id, time_limit, cap_template, cap_location, content_word, content_pic, content_voice, registered, sent) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",[info[0], time_limit, cap_template, cap_location, content_word, content_pic, content_voice, registered, sent])
+        rowcount=cur.row_count()
         cur.close()
         con.commit()
         con.close()
+        return rowcount
 
 #塞入给陌生人的胶囊
     def insertStraengerCpasule(open_id, time_limit, cap_template, cap_location, content_word, content_pic, content_voice):
         (con, cur) = database.getCursor()
         info = database.getInfo(open_id)
         cur.execute("INSERT INTO strangerCapsules(sender_id, time_limit, cap_template, cap_location, content_word, content_pic, content_voice) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",[info[0], time_limit, cap_template, cap_location, content_word, content_pic, content_voice])
+        rowcount=cur.row_count()
         cur.close()
         con.commit()
         con.close()
+        return rowcount
 
 #对胶囊文本敏感词过滤
     def capsuleTextCheck(message):
