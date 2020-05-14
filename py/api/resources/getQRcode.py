@@ -2,6 +2,7 @@ from flask import session, request
 from api.database.database import database
 from api.resources.encode import encodeUID
 from PIL import Image
+from app import app
 import qrcode
 import base64
 import json
