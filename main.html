@@ -1,18 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport"
-            content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0,user-scalable=no">
-        <title>时光胶囊</title>
-        <link rel="stylesheet" href="./css/main.css">
-        <script src="./js/jquery-3.4.1.min.js"></script>
-        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-        <script src="http://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0,user-scalable=no">
+    <title>时光胶囊</title>
+    <link rel="stylesheet" href="./css/main.css">
+    <script src="./js/jquery-3.4.1.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
+</head>
 
-    <body>
+<body>
+    <div class="welcome">
+        <div class="header welcome_header">引导文案</div>
+        <div class="content welcome_content">blblblblblbl</div>
+        <div class="bottom"><a href="login.html">好der</a></div>
+    </div>
+    <div class="login">
         <div class="header">
             <div class="intro">说明</div>
         </div>
@@ -28,32 +34,41 @@
                     <img src="" id="head_pic">
                 </div>
             </div>
-            <div class="info" >
+            <div class="info">
                 <span class="info_name">昵称</span>
                 <input class="info_input" type="text" name="nickname" id="nickname" maxlength="16">
-            <span class="attention_text"></span>
+                <span class="attention_text"></span>
             </div>
-            <div class="info" >
+            <div class="info">
                 <span class="info_name">手机号</span>
                 <input class="info_input" type="text" name="phone" id="phone" maxlength="11">
-                        <span class="attention_text"></span>
+                <span class="attention_text"></span>
             </div>
-            <div class="info" >
+            <div class="info">
                 <span class="info_name">邮箱</span>
-                <input  class="info_input" type="text" name="email" id="email">
-                        <span class="attention_text"></span>
+                <input class="info_input" type="text" name="email" id="email">
+                <span class="attention_text"></span>
 
             </div>
             <input id="submitInfo" type="submit" value="">
         </div>
-        </div>
+
         <div class="map"></div>
         <img id="img_map" src="./images/map.jpg" usemap="#mapmap" />
         <map name="mapmap" id="mapmap">
             <area shape="circle" coords="200,200,30" href="www.baidu.com" target="_blank" alt="Venus" id="mapArea" />
         </map>
+    </div>
+    <div class="introduce">
+        <div class="header">此处有说明</div>
+        <div class="content"></div>
+        <div class="bottom">
+            <a href="index.html">返回</a>
+        </div>
+    </div>
 
-    </body>
-    <script src="./js/main.js"></script>
+
+</body>
+<script src="./js/main.js"></script>
 
 </html>

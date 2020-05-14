@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0,user-scalable=no">
+    <title>时光胶囊</title>
+    <link rel="stylesheet" href="./css/all.css">
+</head>
+
+<body>
+    <div class="page1">
+        <div class="header_l">
+            <a href="index.html">返回</a>
+        </div>
+        <div class="content write-introduce_content">
+            <div class="text1">引导文案</div>
+            <div class="text2">blblbl</div>
+        </div>
+        <div class="bottom write-introduce_bottom">
+            <div class="sender">
+                <label><input type="radio" name="sender" id="" value="0"><span>私密</span></label>
+                <label><input type="radio" name="sender" id="" value="1"><span>陌生人</span></label>
+                <label><input type="radio" name="sender" id="" value="2"><span>写给TA</span></label>
+            </div>
+            <a  id="next">下一步</a>
+        </div>
+
+    </div>
+    <div class="page2">
+        <div class="header">
+            <a id="back">返回</a>
+        </div>
+        <div class="content">
+            引导文案
+            <div class="year">
+                <label><input type="radio" name="year" id="" value="0"><span>半年后</span></label>
+                <label><input type="radio" name="year" id="" value="1"><span>一年后</span></label>
+
+            </div>
+        </div>
+        <div class="bottom">
+            <a id="nextPage">下一步</a>
+        </div>
+      
+    </div>
+    <div class="write-one">
+        <div class="header_l">
+            <a href="write-introduce.html">返回</a>
+        </div>
+        <div class="content write-one_content">
+            此处有普通信纸
+            <div class="write-one_element">
+                <button class="img" id="images">图片</button>
+                <button class="voice" id="voiceStart">语音</button>
+                <button class="play" id="voicePlay" >播放</button>
+            </div>
+        </div>
+        <div class="bottom write-one_bottom">
+            <a href="write-map.html">塞入胶囊</a>
+        </div>
+    </div>
+    <div class="write-TA">
+        <div class="header_l">
+            <a href="write-introduce.html">返回</a>
+        </div>
+        <div class="content write-TA_content">
+            此处有信纸选择
+            <div class="write-TA_element">
+                <div class="line1">
+                    <button class="img">图片</button>
+                    <button class="voice">语音</button>
+                </div>
+                <div class="line2">
+                    <button class="paper1">信纸1</button>
+                    <button class="paper2">信纸2</button>
+                </div>
+            </div>
+        </div>
+        <div class="bottom">
+    <a href="write-TA-receive.html">下一步</a>
+        </div>
+    </div>
+    <div class="write-TA-send">
+        <div class="header write-TA-re_header">
+            为了让信成功送到TA的手中，梯仔需要收集一点TA的信息哦~
+        </div>
+    
+        <div class="content write-TA-re_content">
+            <div class="username">
+                <div>TA的昵称</div>
+                <input type="text" name="" id="">
+            </div>
+            <div class="write-TA-re_phone">
+                <div>TA的手机号</div>
+                <input type="text" name="" id="">
+            </div>
+            <div class="write-TA-re_email">
+                <div>TA的邮箱</div>
+                <input type="email" name="" id="">
+            </div>
+        </div>
+        <div class="bottom">
+            <a href="write-map.html">塞入胶囊</a>
+        </div>
+    </div>
+    <div class="write-map">
+        <div class="header">
+            <a href="#">说明</a>
+        </div>
+        <div class="content">
+            <div class="schoolMap">
+                <img src="./images/map.jpg" alt="map" usemap="#school" id="school">
+            </div>
+        
+            <!-- <map name="school" id="school">
+            <area shape="circle" coords="10,10,100" >
+        </map> -->
+        </div>
+    </div>
+    <div class="finish">
+        <div class="header">
+
+        </div>
+        <div class="content finish_content">
+        <p>反馈页面</p>
+        </div>
+        <div class="bottom finish_bottom">
+            <div class="finish_btn1"><a href="write-introduce.html">再写一封</a></div>
+            <div class="finish_btn2"><a href="#">返回</a></div>
+        </div>
+    </div>
+    <script src="./js/config.js"></script>
+    <script src="./js/function.js"></script>
+    <script src="./js/write-introduce.js"></script>
+</body>
+
+</html>
