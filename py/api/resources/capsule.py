@@ -17,6 +17,7 @@ def capsule():
 	receiver_name=data['receiver_name']
 	receiver_tel=data['receiver_tel']
 	receiver_email=data['receiver_email']
+	sender_name="unknown"
 	now=datetime.datetime.now()
 	registered=now.strftime("%Y-%m-%d %H:%M:%S")
 	if(time_limit):
