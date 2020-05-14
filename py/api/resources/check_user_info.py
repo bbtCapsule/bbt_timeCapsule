@@ -2,7 +2,7 @@ import flask
 import requests
 from api.database.database import database
 from flask import jsonify
-import encode
+from api.resources.encode import *
 from app import app
 
 

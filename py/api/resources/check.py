@@ -1,5 +1,5 @@
 import datetime
-from config.config import Time
+from config import Time
 
 def checkTime():
     now = datetime.datetime.now()
