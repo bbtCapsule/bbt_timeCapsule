@@ -1,0 +1,50 @@
+/* 加了地图的 */
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    height: 100%;
+    width: 300%;
+    overflow-y: hidden;
+}
+.map::-webkit-scrollbar{
+    display: none;
+}
+.header{
+    text-align: left;
+}
+.map{
+    z-index: -9;
+    position: absolute;
+    top: 0;
+    margin: 0;
+    height: 100%;
+    width: 300%;
+    background-image: url("../images/map.jpg");
+    background-size: 120%;
+    background-position-x: center;
+    background-repeat: no-repeat;
+    overflow-x: scroll;
+    scroll-behavior: smooth;
+}
+.content{
+    text-align: center;
+    padding-top: 50px;
+    padding-bottom: 400px;
+}
+.bottom_btn{
+    position: fixed;
+    text-align: center;
+    width:100px;
+    height:50px;
+    top:calc(50% - 25px);
+    top: 60%;
+    left:calc(50% - 50px)
+}
+.btn{
+    margin-bottom: 20px;
+width:100px;
+height:60px;
+ background-color: black;
+}
