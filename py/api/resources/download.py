@@ -58,15 +58,8 @@ def downloadSelf(open_id, time_limit, cap_template, cap_location, content_word, 
     info = database.database.getInfo(open_id)
     if info is None:
         abort(make_response(jsonify(message="Please update information first."),403))
-    database.insertSelfCapsule(info[0], time_limit, cap_template, cap_location, content_word, content_pic, content_voice, registered, sent)
-    if(downloadPic(content_pic) and downloadVoice(content_voice)):
-        return{'err_pic':True,'err_voice':True}
-    elif( (not downloadPic(content_pic)) and (not downloadVoice(content_voice)) ):#语音和图片均失败
-        return{'err_pic':False,'err_voice':False}
-    elif(not downloadPic(content_pic)):
-        return{'err_pic':False,'err_voice':True}
-    elif(not downloadVoice(content_voice)):
-        return{'err_pic':True,'err_voice':False}
+    rowcount=database.insertSelfCapsule(info[0], time_limit, cap_template, cap_location, content_word, content_pic, content_voice, registered, sent)
+    return rowcount
 
 #下载给Ta的胶囊
 def downloadToTa(sender_name, receiver_name, receiver_tel, receiver_email, time_limit, cap_template, cap_location, content_word, content_pic, content_voice, registered, sent, content_name, content_phone, content_birth):
@@ -85,15 +78,8 @@ def downloadToTa(sender_name, receiver_name, receiver_tel, receiver_email, time_
                 pass
     if "open_id" not in session:
         abort(make_response(jsonify(message="Please bind Wechat account first."),401))
-    database.insertToTaCapsule(sender_name, receiver_name, receiver_tel, receiver_email, time_limit, cap_template, cap_location, content_word, content_pic, content_voice, registered, sent, content_name, content_phone, content_birth)
-    if(downloadPic(content_pic) and downloadVoice(content_voice)):
-        return{'err_pic':True,'err_voice':True}
-    elif( (not downloadPic(content_pic)) and (not downloadVoice(content_voice)) ):#语音和图片均失败
-        return{'err_pic':False,'err_voice':False}
-    elif(not downloadPic(content_pic)):
-        return{'err_pic':False,'err_voice':True}
-    elif(not downloadVoice(content_voice)):
-        return{'err_pic':True,'err_voice':False}
+    rowcount=database.insertToTaCapsule(sender_name, receiver_name, receiver_tel, receiver_email, time_limit, cap_template, cap_location, content_word, content_pic, content_voice, registered, sent, content_name, content_phone, content_birth)
+    return rowcount
 
 #下载给陌生人的胶囊
 def downloadStranger(open_id, time_limit, cap_template, cap_location, content_word, content_pic, content_voice):
@@ -115,12 +101,5 @@ def downloadStranger(open_id, time_limit, cap_template, cap_location, content_wo
     info = database.database.getInfo(open_id)
     if info is None:
         abort(make_response(jsonify(message="Please update information first."),403))
-    database.database.insertStraengerCpasule(info[0], time_limit, cap_template, cap_location, content_word, content_pic, content_voice)
-    if(downloadPic(content_pic) and downloadVoice(content_voice)):
-        return{'err_pic':True,'err_voice':True}
-    elif( (not downloadPic(content_pic)) and (not downloadVoice(content_voice)) ):#语音和图片均失败
-        return{'err_pic':False,'err_voice':False}
-    elif(not downloadPic(content_pic)):
-        return{'err_pic':False,'err_voice':True}
-    elif(not downloadVoice(content_voice)):
-        return{'err_pic':True,'err_voice':False}
+    rowcount=database.database.insertStraengerCpasule(info[0], time_limit, cap_template, cap_location, content_word, content_pic, content_voice)
+    return rowcount
