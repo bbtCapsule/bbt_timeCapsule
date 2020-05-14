@@ -1,9 +1,10 @@
 from flask import request, session
-from api.database.database import insertInfo,getInfo,checkPhone
+from api.database.database import database
+from app import app
 
 @app.route('/user_info', methods=['POST'])
 def user_info():
-    result=getInfo(session["open_id"])
+    result=database.getInfo(session["open_id"])
     if(result!=None):
         return {
             'errcode':1,
@@ -14,7 +15,7 @@ def user_info():
         nickname=data['nickname']
         phone=data['phone']
         email=data['email']
-        phoneResult = checkPhone(phone)
+        phoneResult = database.checkPhone(phone)
         if (phoneResult['phoneLength']==True):
             if(phoneResult['uniqueness']==False):
                 return {
@@ -22,7 +23,7 @@ def user_info():
                 'errmsg': '该手机已被填写'
                 }
             else:
-                rowcount = insertInfo(session['open_id'],nickname,phone,email)
+                rowcount = database.insertInfo(session['open_id'],nickname,phone,email)
                 if rowcount > 0:
                     return {
                         'errcode': 0,
