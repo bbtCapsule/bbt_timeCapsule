@@ -1,0 +1,183 @@
+.header_l{
+    text-align: left;
+}
+.header{
+    text-align: center;
+}
+.content{
+    margin: 0 auto;
+    text-align: center;
+}
+.bottom{
+    margin: 0 auto;
+    text-align: center;
+}
+.index_btn1{}
+.index_btn2{}
+.index_btn3{
+    padding-bottom: 30px;
+}
+.index_content{
+    padding-top: 50px;
+    padding-bottom: 400px;
+}
+.finish_content{
+    padding-top: 100px;
+    font-size: 48px;
+}
+.finish_bottom{
+    font-size: 32px;
+    padding-top: 300px;
+}
+.finish_btn1{}
+.finish_btn2{
+    padding-top: 50px;
+}
+input[type="text"]{
+    border:1px solid #000;
+}
+#head_pic_div{
+    display: none;
+    width: 300px;
+    height: 100px;
+}
+.login_bottom{
+    padding-top: 50px;
+}
+.nickname{
+    padding-top: 100px;
+}
+.head_pic{
+    padding-top: 50px;
+    width: 200px;
+    margin: 0 auto;
+    text-align: center;
+}
+.login_phone{
+    padding-top: 50px;
+}
+.login_email{
+    padding-top: 50px;
+}
+.head_pic_input{
+    position: relative;
+    left: 20px;
+}
+.head_pic_div{
+    position: relative;
+    right: 50px;
+}
+.receive_header{
+    padding-top: 50px;
+}
+.receive_content{
+    padding-top: 300px;
+}
+.welcome_header{
+    padding-top: 30px;
+}
+.welcome_content{
+    padding-top: 50px;
+    height: 400px;
+}
+.write-introduce_content{
+    padding-top: 50px;
+}
+.write-introduce_bottom{
+    padding-top: 50px;
+}
+.text2{
+    padding-top: 50px;
+    height: 300px;
+}
+.choice1{
+    position: relative;
+    right: 30px;
+}
+.choice3{
+    position: relative;
+    left:30px;
+}
+.next_{
+    padding-top: 50px;
+    padding-bottom: 30px;
+}
+.aw_{
+    text-align: center;
+}
+.year{
+    padding-top: 200px;
+    padding-bottom: 200px;
+}
+.af_{
+    padding-top: 30px;
+    text-align: center;
+}
+span{
+    display: inline-block;
+    border: 1px solid #000;
+}
+input[type="radio"]:checked+span{
+    background-color: blue;
+}
+.write-one_content{
+    padding-top: 50px;
+    text-align: center;
+}
+.write-one_bottom{
+    padding-top: 50px;
+    text-align: center;
+}
+.write-one_element{
+    padding-top: 400px;
+    position: relative;
+    right: 50px;
+}
+.write-TA_element{
+    padding-top: 200px;
+}
+.write-TA_content{
+    padding-top: 100px;
+}
+.line1{
+    position: relative;
+    right: 50px;
+}
+.line2{
+    padding-top: 30px;
+    padding-bottom: 50px;
+}
+.img{}
+.voice{
+    position: relative;
+    left: 20px;
+}
+.paper1{
+    position: relative;
+    right: 40px;
+}
+.paper2{
+    position: relative;
+    left: 30px
+}
+.write-TA-re_header{
+    width: 250px;
+    padding-top: 100px;
+}
+.write-TA-re_content{
+    width: 150px;
+}
+.username{
+    padding-top: 100px;
+}
+.write-TA-re_phone{
+    padding-top: 50px;
+}
+.write-TA-re_email{
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+.play{
+    position: relative;
+    left:40px;
+}
