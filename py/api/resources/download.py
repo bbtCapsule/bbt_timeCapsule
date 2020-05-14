@@ -55,7 +55,7 @@ def downloadSelf(open_id, time_limit, cap_template, cap_location, content_word, 
                 pass
     if "open_id" not in session:
         abort(make_response(jsonify(message="Please bind Wechat account first."),401))
-    info = database.database.getInfo(open_id)
+    info = database.getInfo(open_id)
     if info is None:
         abort(make_response(jsonify(message="Please update information first."),403))
     rowcount=database.insertSelfCapsule(info[0], time_limit, cap_template, cap_location, content_word, content_pic, content_voice, registered, sent)
@@ -98,8 +98,8 @@ def downloadStranger(open_id, time_limit, cap_template, cap_location, content_wo
                 pass
     if "open_id" not in session:
         abort(make_response(jsonify(message="Please bind Wechat account first."),401))
-    info = database.database.getInfo(open_id)
+    info = database.getInfo(open_id)
     if info is None:
         abort(make_response(jsonify(message="Please update information first."),403))
-    rowcount=database.database.insertStraengerCpasule(info[0], time_limit, cap_template, cap_location, content_word, content_pic, content_voice)
+    rowcount=database.insertStraengerCpasule(info[0], time_limit, cap_template, cap_location, content_word, content_pic, content_voice)
     return rowcount
