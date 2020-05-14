@@ -42,12 +42,12 @@ def capsule():
 
 	if(rowcount):
 		if(result_pic and result_voice):
-			return{'errcode':0,'errmsg':"成功获取胶囊",'mesg_voice':"成功"，'mesg_pic':"成功"}
+			return{'errcode':0,'errmsg':"成功获取胶囊",'mesg_voice':"成功",'mesg_pic':"成功"}
 		elif((not result_pic) and (not result_voice)):
-			return{'errcode':1,'errmsg':"语音或图片加载失败",'mesg_voice':"失败"，'mesg_pic':"失败"}
+			return{'errcode':1,'errmsg':"语音或图片加载失败",'mesg_voice':"失败",'mesg_pic':"失败"}
 		elif(not result_pic):
-			return{'errcode':1,'errmsg':"语音或图片加载失败",'mesg_voice':"成功"，'mesg_pic':"失败"}
+			return{'errcode':1,'errmsg':"语音或图片加载失败",'mesg_voice':"成功",'mesg_pic':"失败"}
 		elif(not result_voice):
-			return{'errcode':1,'errmsg':"语音或图片加载失败",'mesg_voice':"失败"，'mesg_pic':"成功"}
+			return{'errcode':1,'errmsg':"语音或图片加载失败",'mesg_voice':"失败",'mesg_pic':"成功"}
 	else:
-		return{'errcode':1,'errmsg':"获取胶囊失败",'mesg_voice':"失败"，'mesg_pic':"失败"}
+		return{'errcode':1,'errmsg':"获取胶囊失败",'mesg_voice':"失败",'mesg_pic':"失败"}
