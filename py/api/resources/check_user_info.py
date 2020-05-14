@@ -1,5 +1,5 @@
 import flask
-imort requests
+import requests
 from api.database.database import database
 from database import getInfo
 import json
