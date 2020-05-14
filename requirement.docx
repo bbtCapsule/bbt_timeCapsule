@@ -1,0 +1,6 @@
+flask
+pymysql  
+PIL 
+qrcode
+requests
+ahocorasick
