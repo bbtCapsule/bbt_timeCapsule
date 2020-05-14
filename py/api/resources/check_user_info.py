@@ -1,7 +1,10 @@
-from flask import request,session
+import flask
+imort requests
+from api.database.database import database
 from database import getInfo
 import json
 import encode
+from app import app
 
 
 
@@ -9,7 +12,7 @@ import encode
 def check_user_info():
 	openid=flask.session['openid']
 	if(openid):
-		userinfo=getInfo(openid)
+		userinfo=database.getInfo(openid)
 		if(userinfo):
 			nickname=userinfo[1]
 			phone=userinfo[2]
