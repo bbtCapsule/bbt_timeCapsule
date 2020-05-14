@@ -17,10 +17,11 @@ def downloadVoice(content_voice):
                 f = open("media/voice/%s.amr" % hashlib.md5(content_voice.encode(encoding='UTF-8')).hexdigest(), "wb")
                 f.write(base64.b64decode(t["data"]))
                 f.close()
+                return True
             else:
-                abort(404, message="Voice not found.")
+                return False
         except:
-            abort(404, message="Voice not found.")
+            return False
 
 def downloadPic(content_pic):
     if not content_pic is None:
@@ -31,15 +32,16 @@ def downloadPic(content_pic):
                 f = open("media/picture/%s.amr" % hashlib.md5(content_pic.encode(encoding='UTF-8')).hexdigest(), "wb")
                 f.write(base64.b64decode(t["data"]))
                 f.close()
+                return True
             else:
-                abort(404, message="Picture not found.")
+                return False
         except:
-            abort(404, message="Picture not found.")
+            return False
 
 #下载给自己的胶囊
 def downloadSelf(open_id, time_limit, cap_template, cap_location, content_word, content_pic, content_voice, registered, sent):
     if checkTime() != 0:
-        abort(416, message="Event is not ongoing.")
+        abort(make_response(jsonify(message="Event is not ongoing."),416))
     if "open_id" not in session:
         sess_id = request.cookies.get("PHPSESSID")
         if sess_id is not None:
@@ -52,18 +54,24 @@ def downloadSelf(open_id, time_limit, cap_template, cap_location, content_word, 
             except:
                 pass
     if "open_id" not in session:
-        abort(401, message="Please bind Wechat account first.")
+        abort(make_response(jsonify(message="Please bind Wechat account first."),401))
     info = database.database.getInfo(open_id)
     if info is None:
-        abort(403, message="Please update information first.")
+        abort(make_response(jsonify(message="Please update information first."),403))
     database.insertSelfCapsule(info[0], time_limit, cap_template, cap_location, content_word, content_pic, content_voice, registered, sent)
-    downloadPic(content_pic)
-    downloadVoice(content_voice)
+    if(downloadPic(content_pic) and downloadVoice(content_voice)):
+        return{'err_pic':True,'err_voice':True}
+    elif( (not downloadPic(content_pic)) and (not downloadVoice(content_voice)) ):#语音和图片均失败
+        return{'err_pic':False,'err_voice':False}
+    elif(not downloadPic(content_pic)):
+        return{'err_pic':False,'err_voice':True}
+    elif(not downloadVoice(content_voice)):
+        return{'err_pic':True,'err_voice':False}
 
 #下载给Ta的胶囊
 def downloadToTa(sender_name, receiver_name, receiver_tel, receiver_email, time_limit, cap_template, cap_location, content_word, content_pic, content_voice, registered, sent, content_name, content_phone, content_birth):
     if checkTime() != 0:
-        abort(416, message="Event is not ongoing.")
+        abort(make_response(jsonify(message="Event is not ongoing."),416))
     if "open_id" not in session:
         sess_id = request.cookies.get("PHPSESSID")
         if sess_id is not None:
@@ -76,15 +84,21 @@ def downloadToTa(sender_name, receiver_name, receiver_tel, receiver_email, time_
             except:
                 pass
     if "open_id" not in session:
-        abort(401, message="Please bind Wechat account first.")
+        abort(make_response(jsonify(message="Please bind Wechat account first."),401))
     database.insertToTaCapsule(sender_name, receiver_name, receiver_tel, receiver_email, time_limit, cap_template, cap_location, content_word, content_pic, content_voice, registered, sent, content_name, content_phone, content_birth)
-    downloadPic(content_pic)
-    downloadVoice(content_voice)
+    if(downloadPic(content_pic) and downloadVoice(content_voice)):
+        return{'err_pic':True,'err_voice':True}
+    elif( (not downloadPic(content_pic)) and (not downloadVoice(content_voice)) ):#语音和图片均失败
+        return{'err_pic':False,'err_voice':False}
+    elif(not downloadPic(content_pic)):
+        return{'err_pic':False,'err_voice':True}
+    elif(not downloadVoice(content_voice)):
+        return{'err_pic':True,'err_voice':False}
 
 #下载给陌生人的胶囊
 def downloadStranger(open_id, time_limit, cap_template, cap_location, content_word, content_pic, content_voice):
     if checkTime() != 0:
-        abort(416, message="Event is not ongoing.")
+        abort(make_response(jsonify(message="Event is not ongoing."),416))
     if "open_id" not in session:
         sess_id = request.cookies.get("PHPSESSID")
         if sess_id is not None:
@@ -97,10 +111,16 @@ def downloadStranger(open_id, time_limit, cap_template, cap_location, content_wo
             except:
                 pass
     if "open_id" not in session:
-        abort(401, message="Please bind Wechat account first.")
+        abort(make_response(jsonify(message="Please bind Wechat account first."),401))
     info = database.database.getInfo(open_id)
     if info is None:
-        abort(403, message="Please update information first.")
+        abort(make_response(jsonify(message="Please update information first."),403))
     database.database.insertStraengerCpasule(info[0], time_limit, cap_template, cap_location, content_word, content_pic, content_voice)
-    downloadPic(content_pic)
-    downloadVoice(content_voice)
+    if(downloadPic(content_pic) and downloadVoice(content_voice)):
+        return{'err_pic':True,'err_voice':True}
+    elif( (not downloadPic(content_pic)) and (not downloadVoice(content_voice)) ):#语音和图片均失败
+        return{'err_pic':False,'err_voice':False}
+    elif(not downloadPic(content_pic)):
+        return{'err_pic':False,'err_voice':True}
+    elif(not downloadVoice(content_voice)):
+        return{'err_pic':True,'err_voice':False}
