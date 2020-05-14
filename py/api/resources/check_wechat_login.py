@@ -1,6 +1,7 @@
 #检查微信登录。/check_wechat_login.py
 
-from flask import request,session
+import flask
+import requests
 import json
 
 @app.route('/check_wechat_login',methods=['GET'])
