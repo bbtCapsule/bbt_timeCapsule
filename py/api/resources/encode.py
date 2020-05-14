@@ -1,3 +1,7 @@
+mp_prime = 2
+
+ad_prime = 2
+
 def decodeUID(uid):
 	try:
 		n = int(uid, 16) - ad_prime
