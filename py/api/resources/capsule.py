@@ -11,6 +11,7 @@ def capsule():
 	cap_location=data['cap_location']
 	content_word=data['content_word']
 	content_pic=data['content_pic']
+	content_voice=data['content_voice']
 	content_name=data['content_name']
 	content_phone=data['content_phone']
 	content_birth=data['content_birth']
