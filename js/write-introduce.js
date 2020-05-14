@@ -28,7 +28,6 @@ nextPage.addEventListener('click', function () {
         window.location.href = 'write-TA.html';
     } else {
         console.log(sender);
-
         window.location.href = 'write-one.html';
 
     }
