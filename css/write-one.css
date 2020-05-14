@@ -14,3 +14,8 @@
     position: relative;
     right: 50px;
 }
+/* 播放录音的必备样式  开始*/
+.voicePlay{
+    background-color: green;
+}
+/* 播放录音的必备样式  结束*/

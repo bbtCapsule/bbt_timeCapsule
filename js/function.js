@@ -16,3 +16,14 @@ function checkErr(key, value, reg,errmsg) {
         return true;
     }
 }
+
+
+
+
+// 获取access_token
+
+//获取jsticket
+
+// 生成随机数串
+
+//生成签名
