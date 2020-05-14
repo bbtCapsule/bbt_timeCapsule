@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <div class="page1">
+    <div id="page1">
         <div class="header_l">
             <a href="index.html">返回</a>
         </div>
@@ -24,13 +24,13 @@
                 <label><input type="radio" name="sender" id="" value="1"><span>陌生人</span></label>
                 <label><input type="radio" name="sender" id="" value="2"><span>写给TA</span></label>
             </div>
-            <a  id="next">下一步</a>
+            <a class="nextPage">下一步</a>
         </div>
 
     </div>
-    <div class="page2">
+    <div id="page2">
         <div class="header">
-            <a id="back">返回</a>
+            <a class="prePage">返回</a>
         </div>
         <div class="content">
             引导文案
@@ -41,31 +41,34 @@
             </div>
         </div>
         <div class="bottom">
-            <a id="nextPage">下一步</a>
+            <a class="nextPage">下一步</a>
         </div>
-      
+
     </div>
-    <div class="write-one">
+    <div id="write-one">
         <div class="header_l">
-            <a href="write-introduce.html">返回</a>
+            <a class="prePage">返回</a>
         </div>
         <div class="content write-one_content">
             此处有普通信纸
             <div class="write-one_element">
                 <button class="img" id="images">图片</button>
                 <button class="voice" id="voiceStart">语音</button>
-                <button class="play" id="voicePlay" >播放</button>
+                <button class="play" id="voicePlay">播放</button>
             </div>
         </div>
         <div class="bottom write-one_bottom">
-            <a href="write-map.html">塞入胶囊</a>
+            <a class="nextPage">塞入胶囊</a>
         </div>
     </div>
-    <div class="write-TA">
+    <div id="write-TA">
         <div class="header_l">
-            <a href="write-introduce.html">返回</a>
+            <a class="prePage">返回</a>
         </div>
         <div class="content write-TA_content">
+            <div>
+                <textarea name="" id="content_word" cols="30" rows="10"></textarea>
+            </div>
             此处有信纸选择
             <div class="write-TA_element">
                 <div class="line1">
@@ -79,14 +82,14 @@
             </div>
         </div>
         <div class="bottom">
-    <a href="write-TA-receive.html">下一步</a>
+            <a class="nextPage">下一步</a>
         </div>
     </div>
-    <div class="write-TA-send">
+    <div id="write-TA-send">
         <div class="header write-TA-re_header">
             为了让信成功送到TA的手中，梯仔需要收集一点TA的信息哦~
         </div>
-    
+
         <div class="content write-TA-re_content">
             <div class="username">
                 <div>TA的昵称</div>
@@ -102,10 +105,10 @@
             </div>
         </div>
         <div class="bottom">
-            <a href="write-map.html">塞入胶囊</a>
+            <a class="nextPage">塞入胶囊</a>
         </div>
     </div>
-    <div class="write-map">
+    <div id="write-map">
         <div class="header">
             <a href="#">说明</a>
         </div>
@@ -113,27 +116,30 @@
             <div class="schoolMap">
                 <img src="./images/map.jpg" alt="map" usemap="#school" id="school">
             </div>
-        
+
             <!-- <map name="school" id="school">
             <area shape="circle" coords="10,10,100" >
         </map> -->
         </div>
+        <div class="bottom">
+            <a class="nextPage">下一步</a>
+        </div>
     </div>
-    <div class="finish">
+    <div id="finish">
         <div class="header">
 
         </div>
         <div class="content finish_content">
-        <p>反馈页面</p>
+            <p>反馈页面</p>
         </div>
         <div class="bottom finish_bottom">
             <div class="finish_btn1"><a href="write-introduce.html">再写一封</a></div>
             <div class="finish_btn2"><a href="#">返回</a></div>
         </div>
     </div>
-    <script src="./js/config.js"></script>
+    <!-- <script src="./js/config.js"></script> -->
     <script src="./js/function.js"></script>
-    <script src="./js/write-introduce.js"></script>
+    <script src="./js/write.js"></script>
 </body>
 
 </html>
