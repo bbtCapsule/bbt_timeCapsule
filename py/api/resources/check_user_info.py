@@ -1,7 +1,7 @@
 import flask
 import requests
 from api.database.database import database
-from json import jsonify
+from flask import jsonify
 import encode
 from app import app
 
