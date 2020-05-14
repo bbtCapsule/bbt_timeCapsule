@@ -1,5 +1,4 @@
 from flask import request,session
-from database import insertToTaCapsule,insertSelfCapsule,insertStraengerCpasule
 from download import downloadVoice,downloadPic,downloadSelf,downloadToTa,downloadStranger
 import datetime
 @app.route('/capsule',methods=['POST'])
