@@ -6,7 +6,7 @@ from app import app
 
 @app.route('/check_wechat_login',methods=['GET'])
 def check_wechat_login():
-	if 'openid' not in flask.session:
+    if 'openid' not in flask.session:
         phpsessid = flask.request.cookies.get('PHPSESSID')
         if phpsessid is not None:
             res = requests.get(
