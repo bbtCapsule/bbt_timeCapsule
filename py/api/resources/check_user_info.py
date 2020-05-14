@@ -1,7 +1,6 @@
 import flask
 import requests
 from api.database.database import database
-from database import getInfo
 import json
 import encode
 from app import app
