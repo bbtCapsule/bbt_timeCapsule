@@ -1,6 +1,6 @@
 from flask import session, request, abort
 from check import checkphone,checkTime
-import database
+from api.database.database import database
 import hashlib
 import base64
 import json
