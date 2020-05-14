@@ -180,3 +180,9 @@ function uploadInfo(nickname,phone,email){
         }
       });
 }
+function gotoWrite() {
+    document.getElementById("aaa");window.location.href="write.html";
+}
+function gotoReceive() {
+    document.getElementById("bbb");window.location.href="receive.html";
+}
