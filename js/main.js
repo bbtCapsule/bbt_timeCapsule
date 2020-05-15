@@ -125,7 +125,14 @@ function checkInfo(){
       });
 }
 //把防注入单独写一个函数 传str进到函数里验证 返回true为通过验证 false为输入了非法信息
-
+function checkErr(str, reg) {
+  var x = str.replace(/\s/g, '')
+  if (reg.test(x)) {
+    return true;
+  } else {
+    return false;
+  }
+}
 //调用微信图片接口
 function chooseImg(type){//type  如果是1 就是指上传的是头像（只能选一张图  是0 就是上传信封的图片（可以有多张图
     if(type == 1){
@@ -155,7 +162,42 @@ function chooseImg(type){//type  如果是1 就是指上传的是头像（只能
 }
 
 //调用录音
+function voiceRecord(e, minTime) { //录音最少时间
+  var startTime, endTime;
+  if (e == 'touchstart') {
+    startTime = new Date().getTime();
+    wx.startRecord(); //开始录音
+  } else if (e == 'touchend') {
+    endTime = new Date().getTime();
+    if (endTime - startTime < minTime) {
+      var localId = '';
+      alert('录音时间小于' + minTime / 1000 + '秒，请重试');
+    } else {
+      wx.stopRecord({ // 停止录音
+        success: function (res) {
+          voice = res.localId;
 
+        }
+      });
+    }
+  }
+}
+
+function voicePlay() {
+  if ($(this).hasClass('voicePlay')) {
+    $(this).removeClass('voicePlay');
+    // 停止播放接口
+    wx.stopVoice({
+      localId: localId // 需要停止的音频的本地ID，由stopRecord接口获得
+    });
+  } else {
+    $(this).addClass('voicePlay');
+    // 播放语音接口
+    wx.playVoice({
+      localId: localId // 需要播放的音频的本地ID，由stopRecord接口获得
+    });
+  }
+}
 //上传个人信息
 function uploadInfo(nickname,phone,email){
     //icon是有默认值的（比如不想自定义头像）直接上传就行
@@ -179,6 +221,35 @@ function uploadInfo(nickname,phone,email){
             window.location.href="nextpage";
         }
       });
+}
+function uploadCapsule() {
+  $("#submitCapsule").attr("disabled", "disabled");
+  axios({
+    method: 'post',
+    url: apiurl + 'capsule',
+    headers: {
+      'X-Requested-With': 'application/json'
+    },
+    data: {
+      capsule_type: capsule_type,
+      time_limit: time_limit,
+      cap_template: cap_template,
+      cap_location: cap_location,
+      content_word: content_word,
+      content_pic: content_pic,
+      content_voice: content_voice,
+      content_name: content_name,
+      content_phone: content_phone,
+      content_birth: content_birth
+    }
+  }).then(res => {
+    if (res.data.errcode != 0 || res.status == 400) {
+      //上传失败 把错误信息显示出来
+    } else if (res.data.errcode == 0) {
+      page.writemap.attr('style', 'display:none;');
+      page.finish.attr('style', 'display:block;');
+    }
+  });
 }
 function gotoWrite() {
     document.getElementById("aaa");window.location.href="write.html";

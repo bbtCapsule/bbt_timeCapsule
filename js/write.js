@@ -25,20 +25,23 @@ function getRadio(obj) {
     return null;
 }
 
-function checkErr(key, value, reg, errmsg) {
-    if (key === value || !(reg.test(key))) {
-        // errmsg.classList.add('show');
-        return false;
-    } else {
-        // errmsg.classList.remove('show');
+function checkErr(str, reg) {
+    var x = str.replace(/\s/g, '')
+    if (reg.test(x)) {
         return true;
+    } else {
+        return false;
     }
+}
+
+function deleteSpace(key) {
+    return key.replace(/\s/g, '');
 }
 //页面开关
 //1&2 开始
 var nextPage = document.getElementsByClassName('nextPage');
 var prePage = document.getElementsByClassName('prePage');
-var capsule_type, time_limit, cap_template, cap_location, content_word, content_pic, content_voice;
+var capsule_type, time_limit, cap_template, cap_location, content_word, content_pic, content_voice, content_name, content_phone, content_birth;
 nextPage[0].addEventListener('click', function () {
     capsule_type = getRadio(document.getElementsByName('sender'));
     if (capsule_type === null) {
@@ -61,36 +64,39 @@ nextPage[1].addEventListener('click', function () {
     } else if (capsule_type == 0 || capsule_type == 1) {
         page.page2.setAttribute('style', 'display:none;');
         page.writeone.setAttribute('style', 'display:block;');
-    }
-    else if(capsule_type == 2){
+    } else if (capsule_type == 2) {
         page.page2.setAttribute('style', 'display:none;');
         page.writeTA.setAttribute('style', 'display:block;');
     }
 })
-prePage[1].addEventListener('click',function(){
+prePage[1].addEventListener('click', function () {
     page.writeone.setAttribute('style', 'display:none;');
     page.page2.setAttribute('style', 'display:block;');
 })
-prePage[2].addEventListener('click',function(){
+prePage[2].addEventListener('click', function () {
     page.writeTA.setAttribute('style', 'display:none;');
     page.page2.setAttribute('style', 'display:block;');
 })
 //2&writeone&writeTA 结束
 // writeone&writemap 开始
-nextPage[2].addEventListener('click',function(){
-    
-})
-
-// writeone&writemap 结束
-
-//writeTA&writeTAsend 开始
-nextPage[3].addEventListener('click',function(){
-    console.log(2233);
-    
+nextPage[2].addEventListener('click', function () {
     // cap_template, content_word
-    content_word =document.getElementById('content_word').value;
-    console.log(content_word);
-    if (content_word === null) {
+    content_word = document.getElementById('content_word_one').value;
+    content_word = deleteSpace(content_word);
+    if (content_word == '') {
+        alert('无信息');
+    } else {
+        page.writeone.setAttribute('style', 'display:none;');
+        page.writemap.setAttribute('style', 'display:block;')
+    }
+})
+// writeone&writemap 结束
+//writeTA&writeTAsend 开始
+nextPage[3].addEventListener('click', function () {
+    // cap_template, content_word
+    content_word = document.getElementById('content_word_TA').value;
+    content_word = deleteSpace(content_word);
+    if (content_word == '') {
         alert('无信息');
     } else {
         page.writeTA.setAttribute('style', 'display:none;');
@@ -98,3 +104,26 @@ nextPage[3].addEventListener('click',function(){
     }
 })
 //writeTA&writeTAsend 结束
+// writeTAsend&writemap 开始
+nextPage[4].addEventListener('click', function () {
+    // content_name,content_phone,content_birth;
+    content_name = document.getElementById('content_name');
+    content_phone = document.getElementById('content_phone');
+    content_birth = document.getElementById('content_birth');
+    var sum = true;
+    var check = {
+        content_name: checkErr(content_name, /[\w\W]{1,16}/),
+        content_phone: checkErr(content_phone, /^1\d{10}$/),
+        content_birth: checkErr(content_birth, /[\w\W]{1,16}/)
+    }
+    for (key in check) {
+        sum = check[key] && sum;
+    }
+    if (sum === false) {
+        alert('无信息或信息错误');
+    } else {
+        page.writeTAsend.setAttribute('style', 'display:none;');
+        page.writemap.setAttribute('style', 'display:block;')
+    }
+})
+// writeTAsend&writemap 结束
