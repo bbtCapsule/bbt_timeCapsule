@@ -25,17 +25,8 @@ function getRadio(obj) {
     return null;
 }
 
-function checkErr(str, reg) {
-    var x = str.replace(/\s/g, '')
-    if (reg.test(x)) {
-        return true;
-    } else {
-        return false;
-    }
-}
-
-function deleteSpace(key) {
-    return key.replace(/\s/g, '');
+function deleteSpace(str) {
+    return str.replace(/\s/g, '');
 }
 //页面开关
 //1&2 开始
@@ -81,7 +72,7 @@ prePage[2].addEventListener('click', function () {
 // writeone&writemap 开始
 nextPage[2].addEventListener('click', function () {
     // cap_template, content_word
-    content_word = document.getElementById('content_word_one').value;
+    content_word = $('#content_word_one').val();
     content_word = deleteSpace(content_word);
     if (content_word == '') {
         alert('无信息');
@@ -94,7 +85,7 @@ nextPage[2].addEventListener('click', function () {
 //writeTA&writeTAsend 开始
 nextPage[3].addEventListener('click', function () {
     // cap_template, content_word
-    content_word = document.getElementById('content_word_TA').value;
+    content_word = $('#content_word_TA').val();
     content_word = deleteSpace(content_word);
     if (content_word == '') {
         alert('无信息');
@@ -107,9 +98,9 @@ nextPage[3].addEventListener('click', function () {
 // writeTAsend&writemap 开始
 nextPage[4].addEventListener('click', function () {
     // content_name,content_phone,content_birth;
-    content_name = document.getElementById('content_name');
-    content_phone = document.getElementById('content_phone');
-    content_birth = document.getElementById('content_birth');
+    content_name = $('#content_name').val();
+    content_phone = $('#content_phone').val();
+    content_birth = $('#content_birth').val();
     var sum = true;
     var check = {
         content_name: checkErr(content_name, /[\w\W]{1,16}/),
@@ -127,3 +118,19 @@ nextPage[4].addEventListener('click', function () {
     }
 })
 // writeTAsend&writemap 结束
+$('#images').on('click', function () {
+    chooseImg(0);
+});
+$('#voiceStart').on('touchstart', function () {
+    voiceRecord(0, 3000);
+});
+$('#voiceStart').on('touchend', function () {
+    voiceRecord(1, 3000);
+});
+$('#voicePlay').on('click', function () {
+    voicePlay();
+});
+//信息录入
+$("#submitCapsule").on('click', function () {
+    uploadCapsule(capsule_type, time_limit, cap_template, cap_location, content_word, content_pic, content_voice, content_name, content_phone, content_birth);
+});
