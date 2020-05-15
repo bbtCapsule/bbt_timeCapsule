@@ -4,8 +4,8 @@ import json
 import ahocorasick
 
 class database:
-    def getCursor():
-        con = pymysql.connector.connect(
+    def getCursor(self):
+        con = pymysql.connect(
             host=db["host"],
             user=db["user"],
             passwd=db["pwd"],
@@ -17,7 +17,7 @@ class database:
         return con, cur
 
 # 用于检测是否收集了信息
-    def getInfo(open_id):
+    def getInfo(self,open_id):
         (con, cur) = database.getCursor()
         cur.execute("SELECT uid, nickname, phone, email FROM users WHERE open_id=?", [open_id])
         r = cur.fetchone()
@@ -29,7 +29,7 @@ class database:
             return [r[0], str(r[1], 'utf-8'), str(r[2], 'utf-8'), str(r[3], 'utf-8')]
 
 #通过用户的id获取相关信息，胶囊的发送者与接收者
-    def getInfoByUID(uid):
+    def getInfoByUID(self, uid):
         (con, cur) = database.getCursor()
         cur.execute("SELECT uid, nickname, phone, email FROM users WHERE uid=?", [uid])
         r = cur.fetchone()
@@ -41,9 +41,9 @@ class database:
             return [r[0], str(r[1], 'utf-8'), str(r[2], 'utf-8'), str(r[3], 'utf-8')]
 
 #收集用户信息
-    def insertInfo(open_id, nickname, phone, email):
+    def insertInfo(self, open_id, nickname, phone, email):
         (con, cur) = database.getCursor()
-        cur.execute("INSERT INTO users(open_id, nickname, phone, email) VALUES (?, ?, ?)",[open_id, nickname, phone, email])
+        cur.execute("INSERT INTO users(open_id, nickname, phone, email) VALUES (?, ?, ?, ?)",[open_id, nickname, phone, email])
         rowcount=cur.row_count()
         cur.close()
         con.commit()
@@ -51,9 +51,9 @@ class database:
         return rowcount
 
 #塞入给Ta的胶囊
-    def insertToTaCapsule(sender_name, receiver_name, receiver_tel, receiver_email, time_limit, cap_template, cap_location, content_word, content_pic, content_voice, registered, sent, content_name, content_phone, content_birth):
+    def insertToTaCapsule(self, receiver_name, receiver_tel, receiver_email, time_limit, cap_template, cap_location, content_word, content_pic, content_voice, from_qrcode, content_name, content_phone, content_birth):
         (con, cur) = database.getCursor()
-        cur.execute("INSERT INTO toTaCapsules( code, sender_name, receiver_name, receiver_tel, receiver_email, time_limit, cap_template, cap_location, content_word, content_pic, content_voice, registered, sent, content_name, content_phone, content_birth) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",[None, sender_name, receiver_name, receiver_tel, receiver_email, time_limit, cap_template, cap_location, content_word, content_pic, content_voice, registered, sent, content_name, content_phone, content_birth])
+        cur.execute("INSERT INTO toTaCapsules(code, receiver_name, receiver_tel, receiver_email, time_limit, cap_template, cap_location, content_word, content_pic, content_voice, from_qrcode, content_name, content_phone, content_birth) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",[None, receiver_name, receiver_tel, receiver_email, time_limit, cap_template, cap_location, content_word, content_pic, content_voice, from_qrcode, content_name, content_phone, content_birth])
         rowcount=cur.row_count()
         cur.close()
         con.commit()
@@ -61,10 +61,10 @@ class database:
         return rowcount
 
 #塞入给自己的胶囊
-    def insertSelfCapsule(open_id, time_limit, cap_template, cap_location, content_word, content_pic, content_voice, registered, sent):
+    def insertSelfCapsule(self, open_id, time_limit, cap_template, cap_location, content_word, content_pic, content_voice):
         (con, cur) = database.getCursor()
         info = database.getInfo(open_id)
-        cur.execute("INSERT INTO selfCapsules(sender_id, time_limit, cap_template, cap_location, content_word, content_pic, content_voice, registered, sent) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",[info[0], time_limit, cap_template, cap_location, content_word, content_pic, content_voice, registered, sent])
+        cur.execute("INSERT INTO selfCapsules(sender_id, time_limit, cap_template, cap_location, content_word, content_pic, content_voice) VALUES (?, ?, ?, ?, ?, ?, ?)",[info[0], time_limit, cap_template, cap_location, content_word, content_pic, content_voice])
         rowcount=cur.row_count()
         cur.close()
         con.commit()
@@ -72,10 +72,10 @@ class database:
         return rowcount
 
 #塞入给陌生人的胶囊
-    def insertStraengerCpasule(open_id, time_limit, cap_template, cap_location, content_word, content_pic, content_voice):
+    def insertStraengerCpasule(self, open_id, time_limit, cap_template, cap_location, content_word, content_pic, content_voice):
         (con, cur) = database.getCursor()
         info = database.getInfo(open_id)
-        cur.execute("INSERT INTO strangerCapsules(sender_id, time_limit, cap_template, cap_location, content_word, content_pic, content_voice) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",[info[0], time_limit, cap_template, cap_location, content_word, content_pic, content_voice])
+        cur.execute("INSERT INTO strangerCapsules(sender_id, time_limit, cap_template, cap_location, content_word, content_pic, content_voice) VALUES (?, ?, ?, ?, ?, ?, ?)",[info[0], time_limit, cap_template, cap_location, content_word, content_pic, content_voice])
         rowcount=cur.row_count()
         cur.close()
         con.commit()
@@ -83,7 +83,7 @@ class database:
         return rowcount
 
 #对胶囊文本敏感词过滤
-    def capsuleTextCheck(message):
+    def capsuleTextCheck(self, message):
         check=ahocorasick.Automaton()
         orignWds=[]
         aimWds=[]
@@ -101,7 +101,7 @@ class database:
             text=message.replace(x,'*'*len(x))
         return text
 
-    def checkPhone(phone):
+    def checkPhone(self, phone):
         db.execute('select * from users where `phone`=%s',(phone,))
         result = db.fetchone()
         dictReturn=dict()
