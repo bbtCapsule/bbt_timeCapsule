@@ -136,6 +136,7 @@ height: 32px;
     display: none;
 }
 #mapmap{
+    z-index: -1;
     outline: none;
     user-select: none;
     position: absolute;
@@ -152,7 +153,7 @@ area{
     position: absolute;
     width: 20vh;
     height: 17vh;
-
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 #A1{
     /* top: 40vw;
@@ -193,7 +194,7 @@ area{
     bottom: 70vh;
 }
 /* 以上为area定位 */
-area:before {
+area.go:before {
     content: " ";
     display: block;
     height: 40px;
@@ -201,12 +202,47 @@ area:before {
     background: url("../images/地图-箭头.png") no-repeat;
     background-size: contain;
     margin-left: 13vw;
-    animation-delay:0.3s;
-    animation: fadeIn 1s;
+    animation-delay:0.1s;
+    animation: fadeIn 1.2s;
+    animation-iteration-count:2;
+    animation-direction:alternate reverse;
     animation-fill-mode: forwards;
 }
 @keyframes fadeIn{
     0%{opacity: 0;margin-top: -30px;}
-    70%{opacity: 1;margin-top: -10px;}
+    25%{opacity: 1;margin-top: 0px;}
+    75%{opacity: 1;margin-top: -40px;}
     100%{opacity: 0;margin-top: 0px;}
+}
+/* 箭头动画↑ */
+#mai_att{
+    position: fixed;
+    width: 70vw;
+    height: 30vh;
+    left: 15vw;
+    right: 0;
+    /* bottom: 50%; */
+    top: 25%;
+    /* margin: auto; */
+    z-index: 2;
+    background: url(../images/地图-弹框.png) no-repeat;
+    background-size: contain;
+    text-align: center;
+    padding-top: 10vh;
+    line-height: 30px;
+    font-weight: 200;
+}
+#mai_att>span {
+    font-size: small;
+    position: relative;
+    bottom: -3vh;
+}
+#mai_anim{
+    display: none;
+    width: 20vh;
+    height: unset;
+    position: absolute;
+    margin-top: -36vh;
+    margin-left: -9vh;
+    transform: scale(1.5);
 }
