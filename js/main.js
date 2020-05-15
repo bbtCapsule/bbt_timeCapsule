@@ -110,7 +110,7 @@ function checkInfo() {
 // if(!checkInfo()||sessionStorage.getItem("username")=="none"){
 if (sessionStorage.getItem("username") == "none") {
   var nickname, phone, email = "";
-  $(".getInfo").fadeIn();
+  //$(".getInfo").fadeIn();
   $("#nickname").on('input', function (e) {
     nickname = $("#nickname").val();
     console.log("name  " + nickname);

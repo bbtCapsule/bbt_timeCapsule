@@ -3,10 +3,15 @@
     margin: 0;
     padding: 0;
 }
+
+
+
 body{
     height: 100%;
     width:max-content;
     /* overflow-y: hidden; */
+        -webkit-user-select: none; /*webkit浏览器*/
+        user-select: none;
 }
 .map::-webkit-scrollbar{
     display: none;
@@ -31,7 +36,7 @@ body{
     scroll-behavior: smooth;
 }
 #img_map{
-    height: 200vh;
+    height: 135vh;
     position: absolute;
     top: 0px;
     z-index: -9;
@@ -44,17 +49,20 @@ body{
 .bottom_btn{
     position: fixed;
     text-align: center;
-    width:100px;
-    height:50px;
+    width:150px;
+    height:80px;
     top:calc(50% - 25px);
-    top: 60%;
-    left:calc(50% - 50px)
+    top:  76%;
+    left:calc(50% - 75px)
 }
 .btn{
-    margin-bottom: 20px;
-width:100px;
-height:60px;
- background-color: black;
+    margin-bottom: 10px;
+    background-size: 100%;
+    background-repeat: no-repeat;
+/* width:100px;
+height:60px; */
+width: 20vh;
+height: 32px;
 }
 .getInfo{
     display: none;
@@ -107,4 +115,98 @@ height:60px;
     width: 50%;
     height: 30px;
     margin-left: 25%;
+}
+#go_write{
+    background-image: url("../images/我要写信.png");
+    width: 100%;
+}
+#go_receive{
+    background-image: url("../images/我要收信.png");
+    width: 100%;
+}
+#go_intro{
+    background-image: url("../images/说明.png");
+    width: 6vh;
+    height: 9vh;
+    background-size: cover;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+.welcome,.introduce{
+    display: none;
+}
+#mapmap{
+    outline: none;
+    user-select: none;
+    position: absolute;
+    /* width: 750vw;
+    height: 290vw; */
+    /* width: 600%;
+    height: 130%; */
+    width: 340vh;
+    height: 135vh;
+    top: 0;
+    left: 0;
+}
+area{
+    position: absolute;
+    width: 20vh;
+    height: 17vh;
+
+}
+#A1{
+    /* top: 40vw;
+    left: 30vw; */
+    top: 18vh;
+    left: 12vh;
+}
+#A2{
+    bottom: 30vh;
+    left: 10vw;
+    /* bottom: 75vw;
+    left: 20vw; */
+}
+#A3{
+    top: 50vh;
+    left: 130vh;
+    /* top: 120vw;
+    left: 275vw; */
+
+}
+#A4{
+    right: 109vh;
+    top: 30vh;
+}
+#A5{
+    right: 86vh;
+    top: 20vh;
+
+}
+#A6{
+    right: 50vh;
+    bottom: 20vh;
+}
+#A7{
+    /* right: 20vw;
+    bottom: 150vw; */
+    right: 0vh;
+    bottom: 70vh;
+}
+/* 以上为area定位 */
+area:before {
+    content: " ";
+    display: block;
+    height: 40px;
+    width:  13vw;
+    background: url("../images/地图-箭头.png") no-repeat;
+    background-size: contain;
+    margin-left: 13vw;
+    animation-delay:0.3s;
+    animation: fadeIn 1s;
+    animation-fill-mode: forwards;
+}
+@keyframes fadeIn{
+    0%{opacity: 0;margin-top: -30px;}
+    70%{opacity: 1;margin-top: -10px;}
+    100%{opacity: 0;margin-top: 0px;}
 }
