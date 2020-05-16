@@ -1,3 +1,11 @@
+/* 清除基础样式 */
+*{
+    outline: none;
+}
+input[type="text"] {
+    border: none;
+    background: none;
+}
 .letter{
     display: none;
     background-image: url(../images/letter/1.png);
@@ -34,24 +42,18 @@ input.prePage{
 .nextPage{
     width: 50%;
 }
+/* 第三种信纸 */
 #write-sec{
     background-image: url(../images/letter/3.png);
 }
-#txl_btn{
-        /* margin-top: -20vh; */
-        height: 5vh;
-        /* margin-bottom: 20px; */
-        position: fixed;
-        z-index: 3;
-        margin: 0;
-        bottom: 30px;
-}
+/* 同学录样式 */
 #txl_img{
     position: absolute;
     top: 0;
     z-index: -1;
     /* width: 150vw; */
     height: 120vh;
+    left: -10px;
 }
 #write-TA{
     background: none;
@@ -67,6 +69,121 @@ input.prePage{
     float: right;
     margin-right: -15vh;
     width: 8vh;
+}
+/* 左边的同学录 姓名 基础内容 */
+.txl_left{
+    background: none;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    /* background: yellow; */
+    /* width: 35vh; */
+    position: absolute;
+    /* float: left; */
+    /* margin-top: 60%; */
+    /* margin-left: 10%; */
+    width: 100%;
+    /* height: 25vh; */
+    left: 5%;
+    top: 30%;
+    transform: scale(0.75);
+}
+}
+.txl_right,.txl_left_bottom,.txl_right_bottom{
+    background: none;
+    border: none;
+    display: flex;
+    flex-direction: column;
+}
+.txl_right{
+    position: absolute;
+    display: flex;
+    right: -50%;
+    /* float: right; */
+    width: max-content;
+    /* left: 80vw; */
+    bottom: 40%;
+    /* margin-left: 30vw; */
+    flex-direction: column;
+    transform: scale(0.65);
+}
+.txl_left_bottom {
+    /* width: max-content; */
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    /* margin-left: 10px; */
+    transform: scale(0.75);
+}
+.txl_right_bottom{
+    position: absolute;
+    bottom: 0;
+    right: -60%;
+    width: 200px;
+    bottom: 2%;
+    transform: scale(0.65);
+}
+.txl_contain{
+    float: left;
+}
+.txl_input{
+    margin-top: -20px;
+    width: 20vh;
+    height: vh;
+    /* margin-left: 50px; */
+    /* background-image: url(../images/letter/line2.png); */
+    border-color: transparent !important;
+    border-bottom-color: white !important;
+    border-bottom-width: 1.5px !important;
+    border-style: dashed !important;
+}
+.txl_textarea{
+    background: no-repeat;
+    border: none;
+    background-image: url(../images/letter/line2.png);
+    position: relative;
+    /* left: -125px; */
+    /* margin-top: 35px; */
+    width: 70vw;
+    height: 56px;
+    background-size: cover;
+    background-position-y: 0px;
+    color: white;
+    font-size: 25px;
+    font-family: 'cute';
+    outline: none;
+    margin-top: 12px;
+    margin-bottom: 12px;
+    padding: 4px;
+}
+.txl_item{
+    border: none;
+    color: white;
+    float: left;
+    font-family: 'cute';
+    font-size: 28px;
+    
+}
+#txl_tucao{
+    width: 100%;
+    /* margin: 0 !important; */
+    height: 100px;
+    left: 0;
+}
+.txl_left_bottom>.txl_contain{
+    display: flex;
+    flex-direction: column;
+}
+#txl_btn{
+        /* margin-top: -20vh; */
+        height: 5vh;
+        /* margin-bottom: 20px; */
+        position: absolute;
+        z-index: 3;
+        margin: 0;
+        bottom: -10%;
+        right: -55%;
+        width: 80%;
 }
 /* 以上为覆盖内容 包含同学录样式 */
 /* 信纸选择器 */

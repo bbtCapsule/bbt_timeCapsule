@@ -113,23 +113,49 @@
             <input type="image" src="./images/letter/photobtn.png" class="add" id="images" />
             <img src="./images/letter/4.png" id="txl_img" />
             <div class="txl_left">
-                <input type="text" id="txl_name" />
-                <input type="text" id="txl_birth" />
-                <input type="text" id="txl_star" />
-                <input type="text" id="txl_hobby" />
+                <div class="txl_contain">
+                    <div class="txl_contain">
+                        <span class="txl_item">姓名：</span><input class="txl_input" type="text" id="txl_name" />
+                    </div>
+                    <div class="txl_contain">
+                        <span class="txl_item">生日：</span><input class="txl_input" type="text" id="txl_birth" />
+                    </div>
+                    <div class="txl_contain">
+                        <span class="txl_item">星座：</span><input class="txl_input" type="text" id="txl_star" />
+                    </div>
+                    <div class="txl_contain">
+                        <span class="txl_item">爱好：</span><input type="text" class="txl_input" id="txl_hobby" />
+                    </div>
+                </div>
             </div>
             <div class="txl_right">
-                <input type="text" id="txl_wechat" />
-                <input type="text" id="txl_qq" />
-                <input type="text" id="txl_email" />
+                <div class="txl_contain">
+                    <span class="txl_item">微信：</span><input type="text" class="txl_input" id="txl_wechat" />
+                </div>
+                <div class="txl_contain">
+                    <span class="txl_item">QQ：</span><input type="text" class="txl_input" id="txl_qq" />
+                </div>
+                <div class="txl_contain">
+                    <span class="txl_item">邮箱：</span><input type="text" class="txl_input" id="txl_email" />
+                </div>
             </div>
             <div class="txl_left_bottom">
-                <input type="text" id="txl_place" />
-                <input type="text" id="txl_music" />
-                <input type="text" id="txl_movie" />
-                <input type="text" id="txl_food" />
+                <div class="txl_contain">
+                    <span class="txl_item">想去的地方：</span><textarea rows="5" cols="15"  class="txl_textarea" id="txl_place"></textarea>
+                </div>
+                <div class="txl_contain">
+                    <span class="txl_item">喜欢的音乐：</span><textarea rows="5" cols="15" class="txl_textarea" id="txl_music"></textarea>
+                </div>
+                <div class="txl_contain">
+                    <span class="txl_item">喜欢的电影：</span><textarea rows="5" cols="15" class="txl_textarea" id="txl_movie"></textarea>
+                </div>
+                <div class="txl_contain">
+                    <span class="txl_item">喜欢的美食：</span><textarea rows="5" cols="15" class="txl_textarea" id="txl_food"></textarea>
+                 </div>
             </div>
-            <textarea rows="8" cols="10" id="txl_tucao" /></textarea>
+            <div class="txl_right_bottom">
+            <span class="txl_item">吐槽专区：</span><textarea rows="8" cols="10" class="txl_textarea" id="txl_tucao"></textarea>
+            </div>
             <div class="bottom write-one_bottom" id="txl_btn">
                 <input type="image" src="./images/letter/L1.png" class="nextPage" />
             </div>
