@@ -53,7 +53,7 @@ class database:
 #塞入给Ta的胶囊
     def insertToTaCapsule(self, time_limit, cap_template, from_qrcode, cap_location, receiver_name, receiver_tel, receiver_email, content_word, content_pic, content_voice, content_name, content_phone, content_birth, xingzuo, hobby, music, movie, food, wechat, QQ, email):
         (con, cur) = database.getCursor()
-        cur.execute("INSERT INTO toTaCapsules(code, time_limit, cap_template, from_qrcode, cap_location, receiver_name, receiver_tel, receiver_email, content_word, content_pic, content_voice, content_name, content_phone, content_birth, xingzuo, hobby, music, movie, food, wechat, QQ, email) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",[None, time_limit, cap_template, from_qrcode, cap_location, receiver_name, receiver_tel, receiver_email, content_word, content_pic, content_voice, content_name, content_phone, content_birth, xingzuo, hobby, music, movie, food, wechat, QQ, email])
+        cur.execute("INSERT INTO toTaCapsules(code, time_limit, cap_template, from_qrcode, cap_location, receiver_name, receiver_tel, receiver_email, content_word, content_pic, content_voice, content_name, content_phone, content_birth, xingzuo, hobby, music, movie, food, wechat, QQ, email) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",[None, time_limit, cap_template, from_qrcode, cap_location, receiver_name, receiver_tel, receiver_email, content_word, str(content_pic), content_voice, content_name, content_phone, content_birth, xingzuo, hobby, music, movie, food, wechat, QQ, email])
         rowcount=cur.row_count()
         cur.close()
         con.commit()
