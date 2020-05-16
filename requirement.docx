@@ -1,6 +1,6 @@
 flask
 pymysql  
-PIL 
+Pillow
 qrcode
 requests
 ahocorasick
