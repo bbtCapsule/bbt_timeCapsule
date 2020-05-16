@@ -5,6 +5,12 @@
 input[type="text"] {
     border: none;
     background: none;
+    border: 1px solid #000;
+    color: white;
+    /* margin-top: 8px; */
+    padding: 10px;
+    font-size: 20px;
+    font-family: 'cute';
 }
 *{
     margin: 0;
@@ -177,7 +183,6 @@ input.prePage{
     top: 30%;
     transform: scale(0.75);
 }
-}
 .txl_right,.txl_left_bottom,.txl_right_bottom{
     background: none;
     border: none;
@@ -227,9 +232,9 @@ input.prePage{
     border-style: dashed !important;
 }
 .txl_textarea{
-    background: no-repeat;
+    background: none;
     border: none;
-    background-image: url(../images/letter/line2.png);
+    /* background-image: url(../images/letter/line2.png); */
     position: relative;
     /* left: -125px; */
     /* margin-top: 35px; */
@@ -264,15 +269,11 @@ input.prePage{
     flex-direction: column;
 }
 #txl_btn{
-        /* margin-top: -20vh; */
-        height: 5vh;
-        /* margin-bottom: 20px; */
-        position: absolute;
-        z-index: 3;
-        margin: 0;
-        bottom: -10%;
-        right: -55%;
-        width: 80%;
+    width: 260px;
+    margin: 0;
+    position: absolute;
+    right: -40%;
+    bottom: -15%;
 }
 /* 以上为覆盖内容 包含同学录样式 */
 /* 信纸选择器 */
