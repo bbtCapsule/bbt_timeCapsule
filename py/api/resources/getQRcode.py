@@ -8,9 +8,23 @@ import base64
 import json
 import requests
 
-# /*按照去年模板保留海报与二维码的拼接，图片，颜色，大小暂时同去年*/
 
-img_bg = Image.open("static/icorn.png") 
+img_bg = Image.open("api/image/background.jpg") 
+trans = 0.72  #透明度
+
+# 修改所有白色的地方的透明度
+def transparent_back(img):
+    img = img.convert('RGBA')
+    L, H = img.size
+    color_0 = (255, 255, 255, 255)
+    for h in range(H):
+        for l in range(L):
+            dot = (l, h)
+            color_1 = img.getpixel(dot)
+            if color_1 == color_0:
+                color_1 = color_1[:-1] + (int(trans * 255),)
+                img.putpixel(dot, color_1)
+    return img
 
 @app.route('/getQRCode', methods=['GET'])
 def get():
@@ -36,12 +50,13 @@ def get():
 				'errmsg': 'Please update information first.'
 				}, 403
 		url = "https://hemc.100steps.net/2019/time-capsule/QR.html?uid=%s" % encodeUID(info[0])
-		qr = qrcode.QRCode(border = 2)
+		qr = qrcode.QRCode(border = 1)
 		qr.add_data(url)
 		qr.make(fit = True)
-		img_qr = qr.make_image(back_color = "#fffcd3").resize((130, 130), Image.ANTIALIAS) 
+		img = qr.make_image(fill_color="#3f454b",back_color="#ffffff").resize((1000, 1000), Image.ANTIALIAS)  
+		img_qr = transparent_back(img).resize((288, 288), Image.ANTIALIAS)  
 		pos = (img_bg.size[0] // 2 - img_qr.size[0] // 2, img_bg.size[1] - img_qr.size[1] * 2 - 110)
-		img_bg.paste(img_qr, pos)
+		img_bg.paste(img_qr, pos,img_qr)  
 		img_bg.save("QRCode.jpg")
 		openQR = open("QRCode.jpg", "rb")
 		image = base64.b64encode(openQR.read())
