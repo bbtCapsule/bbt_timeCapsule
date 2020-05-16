@@ -1,5 +1,5 @@
-from flask import session, request, abort
-from api.resources.check import checkphone,checkTime
+from flask import session, request, abort,jsonify,make_response
+from api.resources.check import checkphone, checkTime
 from api.database.database import database
 import hashlib
 import base64
@@ -39,9 +39,9 @@ def downloadPic(content_pic):
             return False
 
 #下载给自己的胶囊
-def downloadSelf(open_id, time_limit, cap_template, cap_location, content_word, content_pic, content_voice, registered, sent):
+def downloadSelf(open_id, time_limit, cap_template, cap_location, content_word, content_pic, content_voice):
     if checkTime() != 0:
-        abort(make_response(jsonify(message="Event is not ongoing."),416))
+        abort(make_response(jsonify(message="Event is not ongoing."), 416))
     if "open_id" not in session:
         sess_id = request.cookies.get("PHPSESSID")
         if sess_id is not None:
@@ -54,17 +54,17 @@ def downloadSelf(open_id, time_limit, cap_template, cap_location, content_word, 
             except:
                 pass
     if "open_id" not in session:
-        abort(make_response(jsonify(message="Please bind Wechat account first."),401))
+        abort(make_response(jsonify(message="Please bind Wechat account first."), 401))
     info = database.getInfo(open_id)
     if info is None:
-        abort(make_response(jsonify(message="Please update information first."),403))
-    rowcount=database.insertSelfCapsule(info[0], time_limit, cap_template, cap_location, content_word, content_pic, content_voice, registered, sent)
+        abort(make_response(jsonify(message="Please update information first."), 403))
+    rowcount = database.insertSelfCapsule(info[0], time_limit, cap_template, cap_location, content_word, content_pic, content_voice)
     return rowcount
 
 #下载给Ta的胶囊
-def downloadToTa(sender_name, receiver_name, receiver_tel, receiver_email, time_limit, cap_template, cap_location, content_word, content_pic, content_voice, registered, sent, content_name, content_phone, content_birth):
+def downloadToTa(receiver_name, receiver_tel, receiver_email, time_limit, cap_template, cap_location, content_word, content_pic, content_voice, from_qrcode, content_name, content_phone, content_birth, xingzuo, hobby, music, movie, food, wechat, QQ, email):
     if checkTime() != 0:
-        abort(make_response(jsonify(message="Event is not ongoing."),416))
+        abort(make_response(jsonify(message="Event is not ongoing."), 416))
     if "open_id" not in session:
         sess_id = request.cookies.get("PHPSESSID")
         if sess_id is not None:
@@ -77,14 +77,14 @@ def downloadToTa(sender_name, receiver_name, receiver_tel, receiver_email, time_
             except:
                 pass
     if "open_id" not in session:
-        abort(make_response(jsonify(message="Please bind Wechat account first."),401))
-    rowcount=database.insertToTaCapsule(sender_name, receiver_name, receiver_tel, receiver_email, time_limit, cap_template, cap_location, content_word, content_pic, content_voice, registered, sent, content_name, content_phone, content_birth)
+        abort(make_response(jsonify(message="Please bind Wechat account first."), 401))
+    rowcount = database.insertToTaCapsule(receiver_name, receiver_tel, receiver_email, time_limit, cap_template, cap_location, content_word, content_pic, content_voice, content_name, content_phone, content_birth, xingzuo, hobby, music, movie, food, wechat, QQ, email)
     return rowcount
 
 #下载给陌生人的胶囊
 def downloadStranger(open_id, time_limit, cap_template, cap_location, content_word, content_pic, content_voice):
     if checkTime() != 0:
-        abort(make_response(jsonify(message="Event is not ongoing."),416))
+        abort(make_response(jsonify(message="Event is not ongoing."), 416))
     if "open_id" not in session:
         sess_id = request.cookies.get("PHPSESSID")
         if sess_id is not None:
@@ -97,9 +97,9 @@ def downloadStranger(open_id, time_limit, cap_template, cap_location, content_wo
             except:
                 pass
     if "open_id" not in session:
-        abort(make_response(jsonify(message="Please bind Wechat account first."),401))
+        abort(make_response(jsonify(message="Please bind Wechat account first."), 401))
     info = database.getInfo(open_id)
     if info is None:
-        abort(make_response(jsonify(message="Please update information first."),403))
-    rowcount=database.insertStraengerCpasule(info[0], time_limit, cap_template, cap_location, content_word, content_pic, content_voice)
+        abort(make_response(jsonify(message="Please update information first."), 403))
+    rowcount = database.insertStraengerCpasule(info[0], time_limit, cap_template, cap_location, content_word, content_pic, content_voice)
     return rowcount
