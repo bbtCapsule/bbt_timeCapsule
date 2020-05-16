@@ -6,6 +6,95 @@ input[type="text"] {
     border: none;
     background: none;
 }
+*{
+    margin: 0;
+    padding: 0;
+}
+.content{
+    margin: 0 auto;
+    text-align: center;
+}
+.bottom{
+    margin: 0 auto;
+    text-align: center;
+}
+.finish_content{
+    padding-top: 100px;
+    font-size: 48px;
+}
+.finish_bottom{
+    font-size: 32px;
+    padding-top: 300px;
+}
+.finish_btn1{}
+.finish_btn2{
+    padding-top: 50px;
+}
+input[type="text"]{
+    border:1px solid #000;
+}
+.receive_header{
+    padding-top: 50px;
+}
+.receive_content{
+    padding-top: 300px;
+}
+/* 奇奇怪怪 */
+.write-introduce_content{
+    padding-top: 50px;
+}
+.write-introduce_bottom{
+    padding-top: 50px;
+}
+.text2{
+    padding-top: 50px;
+    height: 300px;
+}
+/* 奇奇怪怪 */
+#page2 span{
+    display: inline-block;
+    border: 1px solid #000;
+}
+input[type="radio"]:checked+span{
+    background-color: blue;
+}
+.write-one_content{
+    padding-top: 50px;
+    text-align: center;
+}
+.write-one_bottom{
+    padding-top: 50px;
+    text-align: center;
+}
+.write-one_element{
+    padding-top: 400px;
+    position: relative;
+    right: 50px;
+}
+.write-TA_element{
+    padding-top: 200px;
+}
+.write-TA_content{
+    padding-top: 100px;
+}
+.write-TA-re_header{
+    width: 250px;
+    padding-top: 100px;
+}
+.write-TA-re_content{
+    width: 150px;
+}
+.username{
+    padding-top: 100px;
+}
+.write-TA-re_phone{
+    padding-top: 50px;
+}
+.write-TA-re_email{
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+/* 👆以上是从all.css中拿来的 */
 .letter{
     display: none;
     background-image: url(../images/letter/1.png);
@@ -388,3 +477,4 @@ area.go:before {
     margin-left: -9vh;
     transform: scale(1.5);
 }
+/*  */

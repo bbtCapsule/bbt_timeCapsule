@@ -109,8 +109,9 @@ function checkInfo() {
 }
 // if(!checkInfo()||sessionStorage.getItem("username")=="none"){
 if (sessionStorage.getItem("username") == "none") {
-  var nickname, phone, email = "";
-  //$(".getInfo").fadeIn();
+  var nickname, phone = '',
+    email = "";
+  //$("#getInfo").fadeIn();
   $("#nickname").on('input', function (e) {
     nickname = $("#nickname").val();
     console.log("name  " + nickname);
@@ -125,19 +126,29 @@ if (sessionStorage.getItem("username") == "none") {
   });
   //调用检测函数 通过验证时把个人信息发给后台
   $("#submitInfo").on('click', function (e) {
-      uploadInfo(nickname, phone, email);
+    if (checkErr(nickname, /[\w\W]{1,16}/) && checkErr(phone, /^1\d{10}$/) && checkErr(email, /^\w+([-\.]\w+)*@\w+([\.-]\w+)*\.\w{2,4}$/)) {
+      //测试用
+      console.log(nickname);
+      console.log(phone);
+      console.log(email);
+      mainPage.getInfo.attr('style', 'display:none;');
+      mainPage.main.attr('style', 'display:block;');
+      // uploadInfo(nickname, phone, email);//对接时加上
+    } else {
+      alert('无信息或信息错误');
+    }
   });
 }
 //把防注入单独写一个函数 传str进到函数里验证 返回true为通过验证 false为输入了非法信息
-// function checkErr(str, reg) {
-//   var x = str.replace(/\s/g, '');
-//   var reg2 = new RegExp('[<>&*=:;]');
-//   if (reg.test(x) && !reg2.test(x)) {
-//     return true;
-//   } else {
-//     return false;
-//   }
-// }
+function checkErr(str, reg) {
+  var x = str.replace(/\s/g, '');
+  var reg2 = new RegExp('[<>&*=:;]');
+  if (reg.test(x) && !reg2.test(x)) {
+    return true;
+  } else {
+    return false;
+  }
+}
 //调用微信图片接口
 function chooseImg(type) { //type  如果是1 就是指上传的是头像（只能选一张图  是0 就是上传信封的图片（可以有多张图
   if (type == 1) {
@@ -167,64 +178,64 @@ function chooseImg(type) { //type  如果是1 就是指上传的是头像（只�
 }
 
 //调用录音
-// var startTime, endTime = '';
-// function voiceRecord(type, minTime) { //type为0是录音，type为1是结束 minTime录音最少时间(单位毫秒)
-//   if (type == 0) {
-//     startTime = new Date().getTime();
-//     wx.startRecord(); //开始录音
-//   } else if (type == 1) {
-//     endTime = new Date().getTime();
-//     if (endTime - startTime < minTime) {
-//       var localId = '';
-//       alert('录音时间小于' + minTime / 1000 + '秒，请重试');
-//     } else {
-//       wx.stopRecord({ // 停止录音
-//         success: function (res) {
-//           voice = res.localId;
-//         }
-//       });
-//     }
-//   }
-// }
+var startTime, endTime = '';
 
-// function voicePlay() {
-//   if ($(this).hasClass('voicePlay')) {
-//     $(this).removeClass('voicePlay');
-//     // 停止播放接口
-//     wx.stopVoice({
-//       localId: voice // 需要停止的音频的本地ID，由stopRecord接口获得
-//     });
-//   } else {
-//     $(this).addClass('voicePlay');
-//     // 播放语音接口
-//     wx.playVoice({
-//       localId: voice // 需要播放的音频的本地ID，由stopRecord接口获得
-//     });
-//   }
-// }
+function voiceRecord(type, minTime) { //type为0是录音，type为1是结束 minTime录音最少时间(单位毫秒)
+  if (type == 0) {
+    startTime = new Date().getTime();
+    wx.startRecord(); //开始录音
+  } else if (type == 1) {
+    endTime = new Date().getTime();
+    if (endTime - startTime < minTime) {
+      var localId = '';
+      alert('录音时间小于' + minTime / 1000 + '秒，请重试');
+    } else {
+      wx.stopRecord({ // 停止录音
+        success: function (res) {
+          voice = res.localId;
+        }
+      });
+    }
+  }
+}
+
+function voicePlay() {
+  if ($(this).hasClass('voicePlay')) {
+    $(this).removeClass('voicePlay');
+    // 停止播放接口
+    wx.stopVoice({
+      localId: voice // 需要停止的音频的本地ID，由stopRecord接口获得
+    });
+  } else {
+    $(this).addClass('voicePlay');
+    // 播放语音接口
+    wx.playVoice({
+      localId: voice // 需要播放的音频的本地ID，由stopRecord接口获得
+    });
+  }
+}
+//按钮的禁用
+var countTime = 10; //设为10秒钟
+function setTime(obj) {
+  $(obj).attr("disabled", "true");
+  var time = setInterval(function () {
+    if (countTime <= 0) {
+      obj.attr('disabled', 'false');
+      clearInterval(time);
+      countTime = 10;
+      console.log(true);
+    } else {
+      console.log(false);
+      countTime--;
+    }
+  }, 1000)
+}
 //上传个人信息
-// var countTime = 10;
-// function setTime(obj) {
-//   var time = setInterval(function () {
-//     if (countTime <= 0) {
-//       obj.removeAttr('disabled');
-//       clearInterval(time);
-//       countTime = 10;
-//       console.log(true);
-      
-//     } else {
-//       obj.innerHTML=countTime;
-//       console.log(false);
-//       countTime--;
-//     }
-//   }, 1000)
-// }
-
 function uploadInfo(nickname, phone, email) {
   //icon是有默认值的（比如不想自定义头像）直接上传就行
   //先禁用按钮！！！！
-  // setTime($('#submitInfo'));
-  $("#submitInfo").attr("disabled", "disabled");
+  setTime($('#submitInfo'));
+  // $("#submitInfo").attr("disabled", "disabled");
   axios({
     method: 'post',
     url: apiurl + 'user_info',
@@ -241,49 +252,66 @@ function uploadInfo(nickname, phone, email) {
     if (res.data.errcode != 0 || res.status == 400) {
       //上传失败 把错误信息显示出来
     } else if (res.data.errcode == 0) {
-      $(".getinfo").fadeOut(); //关掉表单 进入下一个页面
-      window.location.href = "nextpage";
+      $("#getinfo").fadeOut(); //关掉表单 进入下一个页面
+      mainPage.getInfo.attr('style', 'display:none;');
+      mainPage.main.attr('style', 'display:block;');
     }
   });
 }
 
-// function uploadCapsule(capsule_type, time_limit, cap_template, cap_location, content_word, content_pic, content_voice, content_name, content_phone, content_birth) {
-//   $("#submitCapsule").attr("disabled", "disabled");
-//   axios({
-//     method: 'post',
-//     url: apiurl + 'capsule',
-//     headers: {
-//       'X-Requested-With': 'application/json'
-//     },
-//     data: {
-//       capsule_type: capsule_type,
-//       time_limit: time_limit,
-//       cap_template: cap_template,
-//       cap_location: cap_location,
-//       content_word: content_word,
-//       content_pic: content_pic,
-//       content_voice: content_voice,
-//       content_name: content_name,
-//       content_phone: content_phone,
-//       content_birth: content_birth
-//     }
-//   }).then(res => {
-//     if (res.data.errcode != 0 || res.status == 400) {
-//       //上传失败 把错误信息显示出来
-//     } else if (res.data.errcode == 0) {
-//       page.writemap.attr('style', 'display:none;');
-//       page.finish.attr('style', 'display:block;');
-//     }
-//   });
-// }
+function uploadCapsule(capsule_type, time_limit, cap_template, cap_location, content_word, content_pic, content_voice, content_name, content_phone, content_birth) {
+  $("#submitCapsule").attr("disabled", "disabled");
+  axios({
+    method: 'post',
+    url: apiurl + 'capsule',
+    headers: {
+      'X-Requested-With': 'application/json'
+    },
+    data: {
+      capsule_type: capsule_type,
+      time_limit: time_limit,
+      cap_template: cap_template,
+      cap_location: cap_location,
+      content_word: content_word,
+      content_pic: content_pic,
+      content_voice: content_voice,
+      content_name: content_name,
+      content_phone: content_phone,
+      content_birth: content_birth
+    }
+  }).then(res => {
+    if (res.data.errcode != 0 || res.status == 400) {
+      //上传失败 把错误信息显示出来
+    } else if (res.data.errcode == 0) {
+      page.writemap.attr('style', 'display:none;');
+      page.finish.attr('style', 'display:block;');
+    }
+  });
+}
 
+// main页面跳转 有bug
+var mainPage = {
+  welcome: $('#welcome'),
+  getInfo: $('#getInfo'),
+  main: $('#main'),
+  introduce: $('#introduce')
+}
+for (var key in mainPage) {
+  mainPage[key].attr('style', 'display:none;')
+}
 
-// function gotoWrite() {
-//   document.getElementById("aaa");
-//   window.location.href = "write.html";
-// }
-
-// function gotoReceive() {
-//   document.getElementById("bbb");
-//   window.location.href = "receive.html";
-// }
+window.onload = function () {
+  mainPage.welcome.attr('style', 'display:block;');
+}
+$('#welcome_btn').on('click', function () {
+  mainPage.welcome.attr('style', 'display:none;');
+  mainPage.getInfo.attr('style', 'display:block;');
+})
+$('#go_intro').on('click',function(){
+  mainPage.main.attr('style', 'display:none;');
+  mainPage.introduce.attr('style', 'display:block;');
+})
+$('#intro_btn').on('click',function(){
+  mainPage.introduce.attr('style', 'display:none;');
+  mainPage.main.attr('style', 'display:block;');
+})
