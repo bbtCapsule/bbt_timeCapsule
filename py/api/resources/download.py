@@ -62,7 +62,7 @@ def downloadSelf(open_id, time_limit, cap_template, cap_location, content_word, 
     return rowcount
 
 #下载给Ta的胶囊
-def downloadToTa(receiver_name, receiver_tel, receiver_email, time_limit, cap_template, cap_location, content_word, content_pic, content_voice, from_qrcode, content_name, content_phone, content_birth, xingzuo, hobby, music, movie, food, wechat, QQ, email):
+def downloadToTa(time_limit, cap_template, from_qrcode, cap_location, receiver_name, receiver_tel, receiver_email, content_word, content_pic, content_voice, content_name, content_phone, content_birth, xingzuo, hobby, music, movie, food, wechat, QQ, email):
     if checkTime() != 0:
         abort(make_response(jsonify(message="Event is not ongoing."), 416))
     if "open_id" not in session:
@@ -78,7 +78,7 @@ def downloadToTa(receiver_name, receiver_tel, receiver_email, time_limit, cap_te
                 pass
     if "open_id" not in session:
         abort(make_response(jsonify(message="Please bind Wechat account first."), 401))
-    rowcount = database.insertToTaCapsule(receiver_name, receiver_tel, receiver_email, time_limit, cap_template, cap_location, content_word, content_pic, content_voice, content_name, content_phone, content_birth, xingzuo, hobby, music, movie, food, wechat, QQ, email)
+    rowcount = database.insertToTaCapsule(time_limit, cap_template, from_qrcode, cap_location, receiver_name, receiver_tel, receiver_email, content_word, content_pic, content_voice, content_name, content_phone, content_birth, xingzuo, hobby, music, movie, food, wechat, QQ, email)
     return rowcount
 
 #下载给陌生人的胶囊
