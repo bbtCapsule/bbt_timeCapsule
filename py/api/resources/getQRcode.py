@@ -49,19 +49,25 @@ def get():
 				'errcode': 403,
 				'errmsg': 'Please update information first.'
 				}, 403
-		url = "https://hemc.100steps.net/2019/time-capsule/QR.html?uid=%s" % encodeUID(info[0])
-		qr = qrcode.QRCode(border = 1)
-		qr.add_data(url)
-		qr.make(fit = True)
-		img = qr.make_image(fill_color="#3f454b",back_color="#ffffff").resize((800, 800), Image.ANTIALIAS)  
-		img_qr = transparent_back(img).resize((288, 288), Image.ANTIALIAS)  
-		pos = (img_bg.size[0] // 2 - img_qr.size[0] // 2, img_bg.size[1] - img_qr.size[1] * 2 - 110)
-		img_bg.paste(img_qr, pos,img_qr)  
-		img_bg.save("QRCode.jpg")
-		openQR = open("QRCode.jpg", "rb")
-		image = base64.b64encode(openQR.read())
-		openQR.close()
-		return {
-			"errcode":0,
-			"image": "data:image/jpeg;base64," + str(image, 'utf-8')
-		}
+		try:
+			url = "https://hemc.100steps.net/2019/time-capsule/QR.html?uid=%s" % encodeUID(info[0])
+			qr = qrcode.QRCode(border = 1)
+			qr.add_data(url)
+			qr.make(fit = True)
+			img = qr.make_image(fill_color="#3f454b",back_color="#ffffff").resize((800, 800), Image.ANTIALIAS)  
+			img_qr = transparent_back(img).resize((288, 288), Image.ANTIALIAS)  
+			pos = (img_bg.size[0] // 2 - img_qr.size[0] // 2, img_bg.size[1] - img_qr.size[1] * 2 - 110)
+			img_bg.paste(img_qr, pos,img_qr)  
+			img_bg.save("QRCode.jpg")
+			openQR = open("QRCode.jpg", "rb")
+			image = base64.b64encode(openQR.read())
+			openQR.close()
+			return {
+				"errcode":0,
+				"image": "data:image/jpeg;base64," + str(image, 'utf-8')
+				}
+		except: 
+			return{
+				"errcode":1,
+				"errmsg":"QRCode generting system has some problrms"
+				}
