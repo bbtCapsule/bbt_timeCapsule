@@ -25,18 +25,19 @@ def downloadVoice(content_voice):
 
 def downloadPic(content_pic):
     if not content_pic is None:
-        try:
-            r = requests.get("https://hemc.100steps.net/2017/wechat/Home/Public/getMedia?media_id=%s" % [content_pic], timeout=20)
-            t = json.loads(r.text)
-            if t["status"] == 0:
-                f = open("media/picture/%s.amr" % hashlib.md5(content_pic.encode(encoding='UTF-8')).hexdigest(), "wb")
-                f.write(base64.b64decode(t["data"]))
-                f.close()
-                return True
-            else:
+        for i in content_pic:
+            try:
+                r = requests.get("https://hemc.100steps.net/2017/wechat/Home/Public/getMedia?media_id=%s" % [i], timeout=20)
+                t = json.loads(r.text)
+                if t["status"] == 0:
+                    f = open("media/picture/%s.amr" % hashlib.md5(i.encode(encoding='UTF-8')).hexdigest(),"wb")
+                    f.write(base64.b64decode(t["data"]))
+                    f.close()
+                else:
+                    return False
+            except:
                 return False
-        except:
-            return False
+    return True
 
 #下载给自己的胶囊
 def downloadSelf(open_id, time_limit, cap_template, cap_location, content_word, content_pic, content_voice):
