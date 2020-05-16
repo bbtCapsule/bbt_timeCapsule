@@ -49,19 +49,19 @@
                     <!--滑动选择信纸  123为普通信纸 切换到对应的div 其中1和2切换到write-one即可
                 3单独是wite-3  然后同学录是write-TXL-->
                     <div class="show_letter" id="show_L1">
-                    <img class="show_img" src="./images/letter/1.png"/>
+                        <img class="show_img" src="./images/letter/1.png" />
                         <input type="radio" name="year" id="L1" value="L1">
                     </div>
                     <div class="show_letter" id="show_L2">
-                    <img class="show_img" src="./images/letter/2.png"/>
+                        <img class="show_img" src="./images/letter/2.png" />
                         <input type="radio" name="year" id="L2" value="L2">
                     </div>
                     <div class="show_letter" id="show_L3">
-                    <img class="show_img" src="./images/letter/3.png"/>
+                        <img class="show_img" src="./images/letter/3.png" />
                         <input type="radio" name="year" id="L3" value="L3">
                     </div>
                     <div class="show_letter" id="show_L4">
-                    <img class="show_img" src="./images/letter/4.png"/>
+                        <img class="show_img" src="./images/letter/41.png" />
                         <input type="radio" name="year" id="L4" value="L4">
                     </div>
 
@@ -89,16 +89,50 @@
                 <input type="image" src="./images/letter/L1.png" class="nextPage" />
             </div>
         </div>
-        <div id="write-TA">
-
+        <div id="write-sec" class="letter">
+            <!--此处普通信纸3-->
             <div class="header_l">
-                <a class="prePage">返回</a>
+                <input type="image" id="write_back" src="./images/letter/back.png" class="prePage">
             </div>
-            <div class="bottom">
-                <button class="nextPage">下一步</button>
+            <div class="content write-one_content">
+                <textarea id="letter3" class="letter_text" rows="20" cols="25" placeholder="写下你要说的话~"></textarea>
+                <div class="write-one_element">
+                    <input type="image" src="./images/letter/photobtn.png" class="add" id="images" />
+                    <input type="image" src="./images/letter/record.png" class="add" id="voiceStart" />
+                </div>
+            </div>
+            <div class="bottom write-one_bottom">
+                <input type="image" src="./images/letter/L1.png" class="nextPage" />
             </div>
         </div>
-
+        <div id="write-TA" class="letter">
+            <!--专属类型 同学录 -->
+            <div class="header_l">
+                <input type="image" id="write_back" src="./images/letter/back.png" class="prePage">
+            </div>
+            <input type="image" src="./images/letter/photobtn.png" class="add" id="images" />
+            <img src="./images/letter/4.png" id="txl_img" />
+            <div class="txl_left">
+                <input type="text" id="txl_name" />
+                <input type="text" id="txl_birth" />
+                <input type="text" id="txl_star" />
+                <input type="text" id="txl_hobby" />
+            </div>
+            <div class="txl_right">
+                <input type="text" id="txl_wechat" />
+                <input type="text" id="txl_qq" />
+                <input type="text" id="txl_email" />
+            </div>
+            <div class="txl_left_bottom">
+                <input type="text" id="txl_place" />
+                <input type="text" id="txl_music" />
+                <input type="text" id="txl_movie" />
+                <input type="text" id="txl_food" />
+            </div>
+            <textarea rows="8" cols="10" id="txl_tucao" /></textarea>
+            <div class="bottom write-one_bottom" id="txl_btn">
+                <input type="image" src="./images/letter/L1.png" class="nextPage" />
+            </div>
         </div>
         <div id="write-TA-send">
             <!--专属类型 需要在提交胶囊之前收集信息-->
