@@ -1,0 +1,238 @@
+.letter{
+    background-image: url(../images/letter/1.png);
+    background-size: 100% 100%;
+    height: 100vh;
+    width: 100vw;
+    background-repeat: no-repeat;
+}
+.header_l{
+    height: 2vh;
+}
+.write-one_content {
+    padding-top: 50px;
+    text-align: left;
+    width: 80%;
+    height: 75vh;
+}
+input.prePage{
+    margin-top: 3vh;
+    margin-left: 3vh;
+    height: 4.5vh;
+}
+.write-one_element {
+    padding-top: 0px;
+    position: relative;
+    right: 0px;
+}
+.write-one_bottom {
+    height: 10vh;
+    width: 100%;
+    margin-top: -5vh;
+    padding-top: 0px;
+}
+.nextPage{
+    width: 50%;
+}
+/* 以上为覆盖内容 */
+/* 信纸选择器 */
+.switchbox{
+    margin-top: 30px;
+    margin-bottom: 30px;
+    width: 70vw;
+    margin-left: 15vw;
+    height: max-content;
+    display: flex;
+    flex-direction: row;
+    justify-items: center;
+    align-items: center;
+    /* padding: 3%; */
+    overflow-x: scroll;
+}
+.show_img {
+    width: 30vh;
+    height: 100%;
+}
+.show_letter{
+    width: 100%;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+/*下面是信纸样式 */
+.letter_text{
+    width: 90%;
+    margin-left: 5%;
+    background: none;
+    outline: none;
+    border: none;
+    /* color: white; */
+    font-family: AdobeHeitiStd-Regular;
+    font-size: 15px;
+    font-weight: 100;
+    font-stretch: normal;
+    line-height: 34px;
+    letter-spacing: 0px;
+    color: #ffffff;
+    height: 70%;
+    overflow-y: scroll;
+    letter-spacing: 2px;
+    background-image: url(../images/letter/line.png);
+    background-position-y: 33px;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.add{
+    width: 5vh;
+    margin-left: 5%;
+    margin-top: 4%;
+    outline: none;
+}
+@font-face{
+    font-family: 'cute'; 
+    src: url('../images/HYYOUYUANTIJ.TTF');
+}
+
+/* ！！！！！！！！！！！！！！！！！！！！！！！！！ */
+/* 从这里开始是搬运过来的地图+动画 */
+body{
+    height: 100%;
+    /* width:max-content; */
+    /* overflow-y: hidden; */
+        -webkit-user-select: none; /*webkit浏览器*/
+        user-select: none;
+}
+.map::-webkit-scrollbar{
+    display: none;
+}
+.map{
+    z-index: -9;
+    position: absolute;
+    top: 0;
+    margin: 0;
+    height: 100%;
+    width: 300%;
+    background-image: url("../images/map.jpg");
+    background-size: 120%;
+    background-position-x: center;
+    background-repeat: no-repeat;
+    overflow-x: scroll;
+    scroll-behavior: smooth;
+}
+#img_map{
+    height: 135vh;
+    position: absolute;
+    top: 0px;
+    z-index: -9;
+}
+#mapmap{
+    z-index: -1;
+    outline: none;
+    user-select: none;
+    position: absolute;
+    /* width: 750vw;
+    height: 290vw; */
+    /* width: 600%;
+    height: 130%; */
+    width: 340vh;
+    height: 135vh;
+    top: 0;
+    left: 0;
+}
+area{
+    position: absolute;
+    width: 20vh;
+    height: 17vh;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+#A1{
+    /* top: 40vw;
+    left: 30vw; */
+    top: 18vh;
+    left: 12vh;
+}
+#A2{
+    bottom: 30vh;
+    left: 10vw;
+    /* bottom: 75vw;
+    left: 20vw; */
+}
+#A3{
+    top: 50vh;
+    left: 130vh;
+    /* top: 120vw;
+    left: 275vw; */
+
+}
+#A4{
+    right: 109vh;
+    top: 30vh;
+}
+#A5{
+    right: 86vh;
+    top: 20vh;
+
+}
+#A6{
+    right: 50vh;
+    bottom: 20vh;
+}
+#A7{
+    /* right: 20vw;
+    bottom: 150vw; */
+    right: 0vh;
+    bottom: 70vh;
+}
+/* 以上为area定位 */
+area.go:before {
+    content: " ";
+    display: block;
+    height: 40px;
+    width:  13vw;
+    background: url("../images/地图-箭头.png") no-repeat;
+    background-size: contain;
+    margin-left: 13vw;
+    animation-delay:0.1s;
+    animation: fadeIn 1.2s;
+    animation-iteration-count:2;
+    animation-direction:alternate reverse;
+    animation-fill-mode: forwards;
+}
+@keyframes fadeIn{
+    0%{opacity: 0;margin-top: -30px;}
+    25%{opacity: 1;margin-top: 0px;}
+    75%{opacity: 1;margin-top: -40px;}
+    100%{opacity: 0;margin-top: 0px;}
+}
+/* 箭头动画↑ */
+#mai_att{
+    position: fixed;
+    width: 70vw;
+    height: 30vh;
+    left: 15vw;
+    right: 0;
+    /* bottom: 50%; */
+    top: 25%;
+    /* margin: auto; */
+    z-index: 2;
+    background: url(../images/地图-弹框.png) no-repeat;
+    background-size: contain;
+    text-align: center;
+    padding-top: 10vh;
+    line-height: 30px;
+    font-weight: 200;
+}
+#mai_att>span {
+    font-size: small;
+    position: relative;
+    bottom: -3vh;
+    outline: none;
+    border: none;
+}
+#mai_anim{
+    display: none;
+    width: 20vh;
+    height: unset;
+    position: absolute;
+    margin-top: -36vh;
+    margin-left: -9vh;
+    transform: scale(1.5);
+}

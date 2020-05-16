@@ -72,7 +72,7 @@ prePage[2].addEventListener('click', function () {
 // writeone&writemap 开始
 nextPage[2].addEventListener('click', function () {
     // cap_template, content_word
-    content_word = $('#content_word_one').val();
+    content_word = $('.letter_text').val();
     content_word = deleteSpace(content_word);
     if (content_word == '') {
         alert('无信息');

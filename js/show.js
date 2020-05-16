@@ -26,6 +26,12 @@ $("#mai_att").on('click', function (e) {
     $("#mai_att").fadeOut(400);
     areaShow();
 })
+$("#go_receive").on('click', function (e) {
+    window.location.href="receive.html"
+})
+$("#go_write").on('click', function (e) {
+    window.location.href="write.html"
+})
 // function addChanzi(){
 //     //出现铲子动画
 // $(document).mousemove(function (e) {
