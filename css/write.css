@@ -138,6 +138,12 @@ input.prePage{
     width: 50%;
 }
 /* 第三种信纸 */
+#letter3{
+    /* 它的textarea会短一点 */
+    height: 30%;
+    position: relative;
+    margin-top: 68%;
+}
 #write-sec{
     background-image: url(../images/letter/3.png);
 }
