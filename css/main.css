@@ -64,7 +64,7 @@ height:60px; */
 width: 20vh;
 height: 32px;
 }
-.getInfo{
+#getInfo{
     display: none;
     position: fixed;
     width: 50%;
@@ -131,9 +131,6 @@ height: 32px;
     background-size: cover;
     margin-left: 10px;
     margin-top: 10px;
-}
-.welcome,.introduce{
-    display: none;
 }
 #mapmap{
     z-index: -1;
@@ -245,4 +242,28 @@ area.go:before {
     margin-top: -36vh;
     margin-left: -9vh;
     transform: scale(1.5);
+}
+/*  welcome*/
+#welcome{
+    width: 100vw;
+    height: 100vh;
+    background-color: #bfdbc5;
+}
+.welcome_btn{
+    width: 200px;
+    height: 43px;
+    margin: auto;
+    background-color: pink;
+}
+/* 说明页 */
+#introduce{
+    width: 100vw;
+    height: 100vh;
+    background-color: #bfdbc5;
+}
+#intro_btn{
+    width: 200px;
+    height: 43px;
+    margin: auto;
+    background-color: pink;
 }

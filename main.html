@@ -10,15 +10,16 @@
         <script src="./js/jquery-3.4.1.min.js"></script>
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
         <script src="http://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
+   
     </head>
 
     <body>
-        <div class="welcome">
-            <div class="header welcome_header">引导文案</div>
-            <div class="content welcome_content">blblblblblbl</div>
-            <div class="bottom">好der</a></div>
+        <div id="welcome">
+            <!-- <div class="header welcome_header">引导文案</div> -->
+            <div class="content welcome_content">时光胶囊</div>
+            <div class="welcome_btn" id="welcome_btn"></div>
         </div>
-        <div class="getInfo">
+        <div id="getInfo">
             <div class="info">
                 <!---span class="info_name">头像</span-->
                 <div class="icon_container">
@@ -32,18 +33,18 @@
             </div>
             <div class="info">
                 <span class="info_name">手机号</span>
-                <input class="info_input" type="text" name="phone" id="phone" maxlength="11">
+                <input class="info_input" type="text" name="phone" id="phone" maxlength="11" value="111111111111">
                 <span class="attention_text"></span>
             </div>
             <div class="info">
                 <span class="info_name">邮箱</span>
-                <input class="info_input" type="text" name="email" id="email">
+                <input class="info_input" type="text" name="email" id="email" value="232323232@qq.com">
                 <span class="attention_text"></span>
 
             </div>
             <input id="submitInfo" type="submit" value="">
         </div>
-        <div class="main">
+        <div id="main">
             <div class="header" id="go_intro"></div>
             <div class="bottom_btn">
                 <div class="btn" id="go_write"></div>
@@ -78,16 +79,13 @@
             </map>
         </div>
         </div>
-        <div class="introduce">
+        <div id="introduce">
             <div class="header">此处有说明</div>
             <div class="content"></div>
-            <div class="bottom">
-                <a href="index.html">返回</a>
+            <div class="bottom" id="intro_btn">
+                
             </div>
         </div>
-        <div id="aaa"></div>
-        <div id="bbb"></div>
-
     </body>
     <script src="./js/main.js"></script>
     <script src="./js/show.js"></script>

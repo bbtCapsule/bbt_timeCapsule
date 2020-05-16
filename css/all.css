@@ -77,13 +77,7 @@ input[type="text"]{
 .receive_content{
     padding-top: 300px;
 }
-.welcome_header{
-    padding-top: 30px;
-}
-.welcome_content{
-    padding-top: 50px;
-    height: 400px;
-}
+
 .write-introduce_content{
     padding-top: 50px;
 }

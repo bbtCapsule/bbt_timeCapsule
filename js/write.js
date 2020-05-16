@@ -1,8 +1,11 @@
+// 相关参数
+var capsule_type, time_limit, cap_template, cap_location, content_word, content_pic, content_voice, content_name, content_phone, content_birth;
 //页面初始的显示
 var page = {
     page1: document.getElementById('page1'),
     page2: document.getElementById('page2'),
     writeone: document.getElementById('write-one'),
+    writesec: document.getElementById('write-sec'),
     writeTA: document.getElementById('write-TA'),
     writeTAsend: document.getElementById('write-TA-send'),
     writemap: document.getElementById('write-map'),
@@ -13,6 +16,21 @@ for (var key in page) {
 }
 window.onload = function () {
     page.page1.setAttribute('style', 'display:block;');
+}
+var nextPage = {
+    page1: $('.nextPage')[0],
+    page2: $('.nextPage')[1],
+    writeone: $('.nextPage')[2],
+    writesec: $('.nextPage')[3],
+    writeTA: $('.nextPage')[4],
+    writeTAsend: $('.nextPage')[5]
+}
+var prePage = {
+    page1: $('.prePage')[0],
+    page2: $('.prePage')[1],
+    writeone: $('.prePage')[2],
+    writesec: $('.prePage')[3],
+    writeTA: $('.prePage')[4]
 }
 
 //函数
@@ -29,11 +47,11 @@ function deleteSpace(str) {
     return str.replace(/\s/g, '');
 }
 //页面开关
+prePage.page1.addEventListener('click', function () {
+    window.location.href = 'main.html';
+})
 //1&2 开始
-var nextPage = document.getElementsByClassName('nextPage');
-var prePage = document.getElementsByClassName('prePage');
-var capsule_type, time_limit, cap_template, cap_location, content_word, content_pic, content_voice, content_name, content_phone, content_birth;
-nextPage[0].addEventListener('click', function () {
+nextPage.page1.addEventListener('click', function () {
     capsule_type = getRadio(document.getElementsByName('sender'));
     if (capsule_type === null) {
         alert('无信息');
@@ -42,35 +60,59 @@ nextPage[0].addEventListener('click', function () {
         page.page2.setAttribute('style', 'display:block;')
     }
 })
-prePage[0].addEventListener('click', function () {
+prePage.page2.addEventListener('click', function () {
     page.page2.setAttribute('style', 'display:none;');
     page.page1.setAttribute('style', 'display:block;');
 })
 //1&2 结束
-//2&writeone&writeTA 开始
-nextPage[1].addEventListener('click', function () {
-    time_limit = getRadio(document.getElementsByName('year'));
-    if (time_limit === null) {
-        alert('无信息');
-    } else if (capsule_type == 0 || capsule_type == 1) {
+//page2的分支有三个 
+//type 若0 选了信纸1、2。 若1选了信纸3。 若2选了同学录
+function switchPage(type) {
+    if (type == 0) {
         page.page2.setAttribute('style', 'display:none;');
         page.writeone.setAttribute('style', 'display:block;');
-    } else if (capsule_type == 2) {
+    } else if (type == 1) {
+        page.page2.setAttribute('style', 'display:none;');
+        page.writesec.setAttribute('style', 'display:block;');
+    } else if (type == 2) {
         page.page2.setAttribute('style', 'display:none;');
         page.writeTA.setAttribute('style', 'display:block;');
     }
+}
+//2&writeone&writesec&writeTA
+nextPage.page2.addEventListener('click', function () {
+    time_limit = getRadio(document.getElementsByName('year'));
+    var template = getRadio(document.getElementsByName('template'));
+    if (time_limit === null) {
+        alert('无信息');
+    } else {
+        if (template == 'L1' || template == 'L2') {
+            switchPage(0);
+            cap_template = 0;
+        } else if (template == 'L3') {
+            switchPage(1);
+            cap_template = 0; //0是普通信纸
+        } else if (template == 'L4') {
+            switchPage(2);
+            cap_template = 1; //1是同学录
+        }
+    }
+
 })
-prePage[1].addEventListener('click', function () {
+prePage.writeone.addEventListener('click', function () {
     page.writeone.setAttribute('style', 'display:none;');
     page.page2.setAttribute('style', 'display:block;');
 })
-prePage[2].addEventListener('click', function () {
+prePage.writesec.addEventListener('click', function () {
+    page.writesec.setAttribute('style', 'display:none;');
+    page.page2.setAttribute('style', 'display:block;');
+})
+prePage.writeTA.addEventListener('click', function () {
     page.writeTA.setAttribute('style', 'display:none;');
     page.page2.setAttribute('style', 'display:block;');
 })
-//2&writeone&writeTA 结束
-// writeone&writemap 开始
-nextPage[2].addEventListener('click', function () {
+//writeone&writemap
+nextPage.writeone.addEventListener('click', function () {
     // cap_template, content_word
     content_word = $('.letter_text').val();
     content_word = deleteSpace(content_word);
@@ -82,8 +124,13 @@ nextPage[2].addEventListener('click', function () {
     }
 })
 // writeone&writemap 结束
+//writesec&writemap 开始
+nextPage.writesec.addEventListener('click', function () {
+    page.writesec.setAttribute('style', 'display:none;');
+    page.writemap.setAttribute('style', 'display:block;')
+})
 //writeTA&writeTAsend 开始
-nextPage[3].addEventListener('click', function () {
+nextPage.writeTA.addEventListener('click', function () {
     // cap_template, content_word
     content_word = $('#content_word_TA').val();
     content_word = deleteSpace(content_word);
@@ -96,7 +143,7 @@ nextPage[3].addEventListener('click', function () {
 })
 //writeTA&writeTAsend 结束
 // writeTAsend&writemap 开始
-nextPage[4].addEventListener('click', function () {
+nextPage.writeTAsend.addEventListener('click', function () {
     // content_name,content_phone,content_birth;
     content_name = $('#content_name').val();
     content_phone = $('#content_phone').val();
