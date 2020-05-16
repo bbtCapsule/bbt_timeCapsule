@@ -53,7 +53,7 @@ def get():
 		qr = qrcode.QRCode(border = 1)
 		qr.add_data(url)
 		qr.make(fit = True)
-		img = qr.make_image(fill_color="#3f454b",back_color="#ffffff").resize((1000, 1000), Image.ANTIALIAS)  
+		img = qr.make_image(fill_color="#3f454b",back_color="#ffffff").resize((800, 800), Image.ANTIALIAS)  
 		img_qr = transparent_back(img).resize((288, 288), Image.ANTIALIAS)  
 		pos = (img_bg.size[0] // 2 - img_qr.size[0] // 2, img_bg.size[1] - img_qr.size[1] * 2 - 110)
 		img_bg.paste(img_qr, pos,img_qr)  
