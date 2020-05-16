@@ -13,20 +13,20 @@ def capsule():
 	content_word = data['content_word']
 	content_pic = data['content_pic']
 	content_voice = data['content_voice']
-	content_name = data['content_name']
-	content_phone = data['content_phone']
-	content_birth = data['content_birth']
-	receiver_name = data['receiver_name']
-	receiver_tel = data['receiver_tel']
-	receiver_email = data['receiver_email']
-	xingzuo = data['xingzuo']
-	hobby = data['hobby']
-	music = data['music']
-	movie = data['movie']
-	food = data['food']
-	wechat = data['wechat']
-	QQ = data['QQ']
-	email = data['email']
+	content_name = data.get('content_name')
+	content_phone = data.get('content_phone')
+	content_birth = data.get('content_birth')
+	receiver_name = data.get('receiver_name')
+	receiver_tel = data.get('receiver_tel')
+	receiver_email = data.get('receiver_email')
+	xingzuo = data.get('xingzuo')
+	hobby = data.get('hobby')
+	music = data.get('music')
+	movie = data.get('movie')
+	food = data.get('food')
+	wechat = data.get('wechat')
+	QQ = data.get('QQ')
+	email = data.get('email')
 	if content_voice:#有音频则下载，无则视为成功。
 		result_voice = downloadVoice(content_voice)
 	else:
@@ -36,11 +36,11 @@ def capsule():
 	else:
 		result_pic = True
 
-	if data['capsule'] == 0:   #私密
+	if data['capsule_type'] == 0:   #私密
 		rowcount = downloadSelf(open_id, time_limit, cap_template, cap_location, content_word, content_pic, content_voice)
-	elif data['capsule'] == 1:  #给Ta
-		rowcount = downloadToTa(receiver_name, receiver_tel, receiver_email, time_limit, cap_template, cap_location, content_word, content_pic, content_voice, from_qrcode, content_name, content_phone, content_birth, xingzuo, hobby, music, movie, food, wechat, QQ, email)
-	elif data['capsule'] == 2:  #陌生人
+	elif data['capsule_type'] == 1:  #给Ta
+		rowcount = downloadToTa(time_limit, cap_template, from_qrcode, cap_location, receiver_name, receiver_tel, receiver_email, content_word, content_pic, content_voice, content_name, content_phone, content_birth, xingzuo, hobby, music, movie, food, wechat, QQ, email)
+	elif data['capsule_type'] == 2:  #陌生人
 		rowcount = downloadStranger(open_id, time_limit, cap_template, cap_location, content_word, content_pic, content_voice)
 
 	if rowcount:
