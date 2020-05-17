@@ -452,6 +452,7 @@ area.go:before {
 }
 /* 箭头动画↑ */
 #mai_att{
+    
     position: fixed;
     width: 70vw;
     height: 30vh;
@@ -461,17 +462,20 @@ area.go:before {
     top: 25%;
     /* margin: auto; */
     z-index: 2;
+    padding: 10px;
     background: url(../images/地图-弹框.png) no-repeat;
     background-size: contain;
     text-align: center;
     padding-top: 10vh;
     line-height: 30px;
     font-weight: 200;
+    left: 12.5vw;
+
 }
 #mai_att>span {
     font-size: small;
     position: relative;
-    bottom: -3vh;
+    bottom: -2vh;
     outline: none;
     border: none;
 }
