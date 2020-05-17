@@ -1,15 +1,28 @@
 from flask import Flask
-import uuid
-import mysql.connector
 import config
+from flask_cors import CORS
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = config.app['secret_key']
+CORS(app, supports_credentials=True)
+
+from api.resources import bp
+from api.middleware import before_request
+
+app.register_blueprint(bp, url_prefix='/')
+app.before_request(before_request)
+
+"""
+for test
+"""
 
 
-from api.database.database import *
-from api.resources import *
+@app.route('/set_open_id', methods=['post'])
+def openid():
+    from flask import session, request
+    session['open_id'] = request.get_json(force=True)['openid']
+    return str(session['open_id'])
 
 
 if __name__ == '__main__':
-    app.run(host='127.0.0.1') #用本地服务器调试
+    app.run()

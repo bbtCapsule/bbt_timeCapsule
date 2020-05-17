@@ -1,42 +1,43 @@
 from flask import request, session
-from api.database.database import database
-from app import app
+from api.database import database
+from . import bp
 
-@app.route('/user_info', methods=['POST'])
+
+@bp.route('/user_info', methods=['POST'])
 def user_info():
-    result=database.getInfo(session["open_id"])
-    if(result!=None):
+    result = database.getInfo(session["open_id"])
+
+    if result:
         return {
-            'errcode':1,
-            'errmsg':'该用户已存在'
+            'errcode': 1,
+            'errmsg': '用户已存在'
         }
-    else:   
-        data = request.get_json()
-        nickname=data['nickname']
-        phone=data['phone']
-        email=data['email']
+    else:
+        data = request.get_json(force=True)
+        nickname = data['nickname']
+        phone = data['phone']
+        email = data['email']
         phoneResult = database.checkPhone(phone)
-        if (phoneResult['phoneLength']==True):
-            if(phoneResult['uniqueness']==False):
+        if phoneResult['phoneLength']:
+            if not phoneResult['uniqueness']:
                 return {
-                'errcode': 1,
-                'errmsg': '该手机已被填写'
+                    'errcode': 1,
+                    'errmsg': '该手机已被填写'
                 }
             else:
-                rowcount = database.insertInfo(session['open_id'],nickname,phone,email)
+                rowcount = database.insertInfo(session['open_id'], nickname, phone, email)
                 if rowcount > 0:
                     return {
                         'errcode': 0,
                         'errmsg': '填写成功'
                     }
-    
                 return {
                     'errcode': 1,
-                    'errmsg': '请检查网络或其他设置'}
+                    'errmsg': '请检查网络或其他设置'
+                }
 
-        elif(phoneResult['phoneLength']==False):
-            return{
+        else:
+            return {
                 'errcode': 1,
                 'errmsg': '手机号格式不正确'
-                }
-        
+            }

@@ -178,8 +178,9 @@ function chooseImg(type) { //type  如果是1 就是指上传的是头像（只�
 }
 
 //调用录音
-var startTime, endTime = '';
-
+var startTime = 0,
+  endTime = 0;
+//录音开始
 function voiceRecord(type, minTime) { //type为0是录音，type为1是结束 minTime录音最少时间(单位毫秒)
   if (type == 0) {
     startTime = new Date().getTime();
@@ -199,6 +200,7 @@ function voiceRecord(type, minTime) { //type为0是录音，type为1是结束 mi
   }
 }
 
+//录音播放
 function voicePlay() {
   if ($(this).hasClass('voicePlay')) {
     $(this).removeClass('voicePlay');
@@ -214,6 +216,21 @@ function voicePlay() {
     });
   }
 }
+//录音删除
+function voiceDel() {
+  voice = '';
+}
+//录音上传
+function uploadVoice(){
+  wx.uploadVoice({
+    localId: voice, // 需要上传的音频的本地ID，由stopRecord接口获得
+    isShowProgressTips: 1, // 默认为1，显示进度提示
+    success: function (res) {
+      return res.serverId; // 返回音频的服务器端ID
+    }
+  });
+};
+
 //按钮的禁用
 var countTime = 10; //设为10秒钟
 function setTime(obj) {
@@ -289,7 +306,7 @@ function uploadCapsule(capsule_type, time_limit, cap_template, cap_location, con
   });
 }
 
-// main页面跳转 有bug
+// main页面跳转 
 var mainPage = {
   welcome: $('#welcome'),
   getInfo: $('#getInfo'),
@@ -307,11 +324,16 @@ $('#welcome_btn').on('click', function () {
   mainPage.welcome.attr('style', 'display:none;');
   mainPage.getInfo.attr('style', 'display:block;');
 })
-$('#go_intro').on('click',function(){
+$('#go_intro').on('click', function () {
   mainPage.main.attr('style', 'display:none;');
   mainPage.introduce.attr('style', 'display:block;');
 })
-$('#intro_btn').on('click',function(){
+$('#intro_btn').on('click', function () {
   mainPage.introduce.attr('style', 'display:none;');
   mainPage.main.attr('style', 'display:block;');
 })
+//测试用
+// window.onload=function(){
+//   mainPage.welcome.attr('style', 'display:none;');
+//   mainPage.introduce.attr('style', 'display:block;');
+// }
