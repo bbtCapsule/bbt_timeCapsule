@@ -1,0 +1,9 @@
+config.py
+.idea/
+.vscode/
+__pycache__/
+venv/
+logs/
+migrations/
+*.log
+*test.py

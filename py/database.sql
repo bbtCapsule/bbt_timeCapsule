@@ -1,4 +1,4 @@
-CREATE TABLE `DATABASE`.`users` (
+CREATE TABLE `users` (
 	`uid` INT NOT NULL AUTO_INCREMENT ,
 	`open_id` TEXT NOT NULL ,
 	`nickname` TEXT NOT NULL ,
@@ -7,10 +7,10 @@ CREATE TABLE `DATABASE`.`users` (
 	PRIMARY KEY (`uid`)
 ) ENGINE = InnoDB CHARSET=utf8mb4 COLLATE utf8mb4_unicode_ci;
 
-CREATE TABLE `DATABASE`.`selfCapsules` (
+CREATE TABLE `selfCapsules` (
 	`capsule_id` INT NOT NULL AUTO_INCREMENT ,
-	`sender_id` INT NULL ,
-	`time_limit` INT NOT NULL ,
+	`sender_id` TEXT NULL ,
+	`time_limit` TEXT NOT NULL ,
 	`cap_template` INT NOT NULL ,
 	`cap_location` INT NOT NULL ,
 	`content_word` TEXT NULL ,
@@ -19,14 +19,15 @@ CREATE TABLE `DATABASE`.`selfCapsules` (
 	PRIMARY KEY (`capsule_id`)
 ) ENGINE = InnoDB CHARSET=utf8mb4 COLLATE utf8mb4_unicode_ci;
 
-CREATE TABLE `DATABASE`.`toTaCapsules` (
+CREATE TABLE `toTaCapsules` (
 	`capsule_id` INT NOT NULL AUTO_INCREMENT ,
-	`code` INT NULL ,
-	`time_limit` INT NOT NULL ,
+	`code` TEXT NULL ,
+	`sender_id` TEXT NOT NULL ,
+	`time_limit` TEXT NOT NULL ,
 	`cap_template` INT NOT NULL ,
 	`from_qrcode` BOOLEAN NOT NULL ,
 	`cap_location` INT NOT NULL ,
-    	`receiver_name` TEXT NOT NULL ,
+    `receiver_name` TEXT NOT NULL ,
 	`receiver_tel` TEXT NOT NULL ,
 	`receiver_email` TEXT NOT NULL ,
 	`content_word` TEXT NULL ,
@@ -46,10 +47,10 @@ CREATE TABLE `DATABASE`.`toTaCapsules` (
 	PRIMARY KEY (`capsule_id`)
 ) ENGINE = InnoDB CHARSET=utf8mb4 COLLATE utf8mb4_unicode_ci;
 
-CREATE TABLE `DATABASE`.`strangerCapsules` (
+CREATE TABLE `strangerCapsules` (
 	`capsule_id` INT NOT NULL AUTO_INCREMENT ,
-	`sender_id` INT NULL ,
-	`time_limit` INT NOT NULL ,
+	`sender_id` TEXT NOT NULL ,
+	`time_limit` TEXT NOT NULL ,
 	`cap_template` INT NOT NULL ,
 	`cap_location` INT NOT NULL ,
 	`content_word` TEXT NULL ,

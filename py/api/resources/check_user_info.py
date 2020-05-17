@@ -1,23 +1,19 @@
-import flask
 import requests
-from api.database.database import database
-from flask import jsonify
-from api.resources.encode import *
-from app import app
+from api.database import database
+from flask import jsonify, session
+from . import bp
 
 
-
-@app.route('/check_user_info',methods=['POST'])
+@bp.route('/check_user_info', methods=['GET'])
 def check_user_info():
-	openid=flask.session['openid']
-	if(openid):
-		userinfo=database.getInfo(openid)
-		if(userinfo):
-			nickname=userinfo[1]
-			phone=userinfo[2]
-			email=userinfo[3]
-			result=jsonify({'record':True,'nickname':nickname,'phone':phone,'email':email})
-			return result
+    openid = session['open_id']
+    userinfo = database.getInfo(openid)
+    if userinfo:
+        nickname = userinfo[1]
+        phone = userinfo[2]
+        email = userinfo[3]
+        result = jsonify({'record': True, 'nickname': nickname, 'phone': phone, 'email': email})
+        return result
 
-		else :
-			return jsonify({'record':False})
+    else:
+        return jsonify({'record': False})
