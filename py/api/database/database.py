@@ -1,10 +1,5 @@
 import pymysql
 from config import db
-import json
-
-
-# import ahocorasick
-
 
 def getCursor():
     con = pymysql.connect(
