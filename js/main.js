@@ -332,7 +332,8 @@ $('#intro_btn').on('click', function () {
   mainPage.introduce.attr('style', 'display:none;');
   mainPage.main.attr('style', 'display:block;');
 })
-window.onload=function(){
-  mainPage.welcome.attr('style', 'display:none;');
-  mainPage.introduce.attr('style', 'display:block;');
-}
+//测试用
+// window.onload=function(){
+//   mainPage.welcome.attr('style', 'display:none;');
+//   mainPage.introduce.attr('style', 'display:block;');
+// }

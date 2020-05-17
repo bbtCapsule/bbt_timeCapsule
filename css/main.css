@@ -315,21 +315,21 @@ area.go:before {
 
 .welcome_header {
     width: 70%;
-    height: 75px;
+    height: 15%;
     margin: auto;
-    background: url(../images/other/title.png) no-repeat;
+    background: url(../images/other/title.png) no-repeat center;
     background-size: contain;
     margin-bottom: 40px;
     margin-top: 70px;
 }
 
 .welcome_content {
-    width: 63%;
+    width: 69%;
     height: 75px;
     margin: auto;
     margin-bottom: 40px;
     font-family: AdobeHeitiStd-Regular;
-    font-size: 13px;
+    font-size: 4vw;
     font-weight: 500;
     font-stretch: normal;
     line-height: 34px;
@@ -340,10 +340,10 @@ area.go:before {
 }
 
 .welcome_btn {
-    width: 32%;
-    height: 60px;
+    width: 40vw;
+    height: 11vh;
     margin: auto;
-    background: url(../images/other/btn-start.png) no-repeat;
+    background: url(../images/other/btn-start.png) no-repeat center;
     background-size: contain;
 }
 

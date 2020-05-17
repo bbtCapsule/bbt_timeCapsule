@@ -2,12 +2,7 @@
 *{
     outline: none;
 }
-input {
-    outline: none;
-    border: none;
-    -webkit-tap-highlight-color: transparent;
-    -webkit-appearance: none;
-}
+
 textarea{
     resize: none;
 }
