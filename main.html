@@ -7,13 +7,18 @@
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0,user-scalable=no">
     <title>时光胶囊</title>
     <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/load.css">
     <script src="./js/jquery-3.4.1.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="http://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
-
+    <script src="https://cdn.bootcss.com/PreloadJS/1.0.1/preloadjs.min.js"></script>
+    <script src="./js/preload.js"></script>
 </head>
-
 <body>
+    <div id="loading">
+        <img id="rotate" src="./images/2.png" />
+        <span class="loadspan">Loading..</span>
+    </div>
     <div id="welcome">
         <div class=" welcome_header"></div>
         <div class=" welcome_content"> &ensp;&ensp;&ensp;&ensp;欢迎来到百步梯毕业季之时光胶囊活动~ <br>
@@ -81,7 +86,6 @@
             <area id="A7" onfocus="this.blur()" shape="circle" coords="87,115,109,143" href="#" hidefocus="true"
                 alt="雕像" />
         </map>
-    </div>
     </div>
     <div id="introduce">
         <div class="header">此处有说明</div>

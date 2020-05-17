@@ -1,4 +1,7 @@
 //可以把不涉及数据传输的 动画函数、展示写在这里
+$("#loading").on('click', function (e) {
+    $("#loading").fadeOut(300);
+})
 function areaShow() {
     for(i=1;i<8;i++){
         $("#A"+i).on('click', function (e) {

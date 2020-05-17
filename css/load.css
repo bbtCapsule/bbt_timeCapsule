@@ -1,0 +1,115 @@
+@keyframes rotate {
+    0% { 
+        transform:rotate(0);
+    }
+    50% {
+        transform:rotate(180deg) ;
+       } 
+   100% {
+       transform:rotate(360deg) ;
+   }
+}
+@-webkit-keyframes rotate {
+    0% { 
+        transform:rotate(0);
+    }
+    50% {
+        transform:rotate(180deg);
+       } 
+   100% {
+       transform:rotate(360deg);
+   }
+}
+#loading{
+    width: -webkit-fill-available;
+    height: -webkit-fill-available;
+    height: 100%;
+    width: 100%;
+    background-color: #646670b3;
+    position: absolute;
+}
+#rotate{
+    width: 10vw;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    margin-top: -15%;
+    left: 50%;
+    margin-left: -30px;
+    animation:   rotate 1.2s linear infinite;
+    -webkit-animation:   rotate 1.2s linear infinite;
+    -webkit-transform-origin:center;
+    -moz-animation:    rotate 1.2s linear infinite;
+    -o-animation:     rotate 1.2s linear infinite; 
+    margin-bottom: 20px;
+}
+.loadspan{
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: 0;
+    padding: 0;
+    height: 25px;
+    width: 70px;
+    margin-top: 20px;
+    margin-left: -50px;
+    animation:   tiao 1.8s linear infinite;
+    -webkit-animation:   tiao 1.8s linear infinite;
+    -webkit-transform-origin:center;
+    -moz-animation:    tiao 1.8s linear infinite;
+    -o-animation:     tiao 1.8s linear infinite; 
+}
+.loadspan{
+    border-radius: 100%;
+    left: 50%;
+    font-size: 5vw;
+    border-radius: 100%;
+    /* margin-left: 20px; */
+    /* margin-top: 4px; */
+}
+/* .loadspan::before, */
+.loadspan::after{
+    content: ". ";
+    margin-left: 5px;
+    font-size: 5vw;
+    color: white;
+    animation:   tiao 1.8s linear infinite;
+    -webkit-animation:   tiao 1.8s linear infinite;
+    -webkit-transform-origin:center;
+    -moz-animation:    tiao 1.8s linear infinite;
+    -o-animation:     tiao 1.8s linear infinite; 
+}
+@keyframes tiao{
+    0%{
+        opacity: 1;
+    }
+    10%{
+        opacity: 0.5;
+    }
+    40%{
+        opacity: 1;
+
+    }
+    100%{
+        opacity: 0.2;
+
+    }
+}
+@-webkit-keyframes tiao{
+    0%{
+        opacity: 1;
+    }
+    10%{
+        opacity: 0.5;
+
+    }
+    40%{
+        opacity: 1;
+
+    }
+    100%{
+        opacity: 0.2;
+
+    }
+}
