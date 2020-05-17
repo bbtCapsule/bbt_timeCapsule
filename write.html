@@ -21,20 +21,22 @@
     </div> -->
     <div id="page1">
         <div class="header_l">
-            <a class="prePage">返回</a>
+            <input type="image" id="write_back" src="./images/letter/back.png" class="prePage">
         </div>
-        <div class="content page1_content">
+        <div class=" page1_content">
             <div class="page1_intro">伞尖浮空的划动，勾勒年少无畏的梦，人生漫长有时也匆匆，想要将差距抹平，已经是再无可能；</div>
             <div class="page1_text">选择一个你喜欢的胶囊吧~</div>
-            <div class="page1_radio"></div>
+            <div class="page1_radio">
+                <label class="C1_pic"><input type="radio" name="sender" id="C1" value="0"></label>
+                <label class="C2_pic"><input type="radio" name="sender" id="C2" value="1"></label>
+                <label class="C3_pic"><input type="radio" name="sender" id="C3" value="2"></label>
+            </div>
+            <div class="page1_radio_triangle">
+                <div id="C1_triangle"></div>
+            </div>
         </div>
         <div class="bottom page1_bottom">
-            <div class="sender">
-                <label><input type="radio" name="sender" id="" value="0"><span>私密</span></label>
-                <label><input type="radio" name="sender" id="" value="1"><span>陌生人</span></label>
-                <label><input type="radio" name="sender" id="" value="2"><span>写给TA</span></label>
-            </div>
-            <button class="nextPage">下一步</button>
+            <input type="image" src="./images/other/btn-下一步.png" class="nextPage" />
         </div>
 
     </div>
@@ -191,7 +193,7 @@
                 <input type="text" name="" id="receiver_email">
             </div>
         </div>
-        <div class="bottom write-TA-re_btn" >
+        <div class="bottom write-TA-re_btn">
             <input type="image" src="./images/other/塞入胶囊.png" class="nextPage" />
 
         </div>
