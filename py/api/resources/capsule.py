@@ -1,56 +1,71 @@
 from flask import request, session
-from api.resources.download import downloadVoice, downloadPic, downloadSelf, downloadToTa, downloadStranger
-from app import app
-import datetime
-@app.route ('/capsule', methods=['POST'])
+from api.resources.download import to_ta_from_qrcode, downloadVoice, downloadPic, downloadSelf, downloadToTa, \
+    downloadStranger
+from . import bp
+from .encode import decodeUID
+
+
+@bp.route('/capsule', methods=['POST'])
 def capsule():
-	data = request.get_json()
-	open_id = session["openid"]
-	time_limit = data['time_limit']
-	cap_template = data['cap_template']
-	from_qrcode = ['from_qrcode']
-	cap_location = data['cap_location']
-	content_word = data['content_word']
-	content_pic = data['content_pic']
-	content_voice = data['content_voice']
-	content_name = data.get('content_name')
-	content_phone = data.get('content_phone')
-	content_birth = data.get('content_birth')
-	receiver_name = data.get('receiver_name')
-	receiver_tel = data.get('receiver_tel')
-	receiver_email = data.get('receiver_email')
-	xingzuo = data.get('xingzuo')
-	hobby = data.get('hobby')
-	music = data.get('music')
-	movie = data.get('movie')
-	food = data.get('food')
-	wechat = data.get('wechat')
-	QQ = data.get('QQ')
-	email = data.get('email')
-	if content_voice:#有音频则下载，无则视为成功。
-		result_voice = downloadVoice(content_voice)
-	else:
-		result_voice = True
-	if content_pic:#同理
-		result_pic = downloadPic(content_pic)
-	else:
-		result_pic = True
+    data = request.get_json(force=True)
+    open_id = session["open_id"]
+    time_limit = "one-year" if data['time_limit'] else "half-year"  # 取信时间
+    cap_template = data['cap_template']  # 胶囊模板 普通信纸|同学录
+    cap_location = data['cap_location']  # 胶囊地点
+    content_word = data['content_word']  # 内容
+    content_pic = data.get('content_pic')  # 图片
+    content_voice = data.get('content_voice')  # 录音
 
-	if data['capsule_type'] == 0:   #私密
-		rowcount = downloadSelf(open_id, time_limit, cap_template, cap_location, content_word, content_pic, content_voice)
-	elif data['capsule_type'] == 1:  #给Ta
-		rowcount = downloadToTa(time_limit, cap_template, from_qrcode, cap_location, receiver_name, receiver_tel, receiver_email, content_word, content_pic, content_voice, content_name, content_phone, content_birth, xingzuo, hobby, music, movie, food, wechat, QQ, email)
-	elif data['capsule_type'] == 2:  #陌生人
-		rowcount = downloadStranger(open_id, time_limit, cap_template, cap_location, content_word, content_pic, content_voice)
+    # 普通信纸
+    receiver_name = data.get('receiver_name')  # TA的名字
+    receiver_tel = data.get('receiver_tel')  # TA的电话
+    receiver_email = data.get('receiver_email')  # TA的邮箱
 
-	if rowcount:
-		if result_pic and result_voice :
-			return{'errcode': 0, 'errmsg': "成功获取胶囊", 'mesg_voice': "成功", 'mesg_pic':"成功"}
-		elif (not result_pic) and (not result_voice):
-			return{'errcode': 1, 'errmsg': "语音或图片加载失败", 'mesg_voice': "失败", 'mesg_pic':"失败"}
-		elif not result_pic:
-			return{'errcode': 1, 'errmsg': "语音或图片加载失败", 'mesg_voice': "成功", 'mesg_pic': "失败"}
-		elif not result_voice:
-			return{'errcode': 1, 'errmsg': "语音或图片加载失败", 'mesg_voice': "失败", 'mesg_pic': "成功"}
-	else:
-		return{'errcode': 1, 'errmsg': "获取胶囊失败", 'mesg_voice': "失败", 'mesg_pic': "失败"}
+    # 同学录
+    content_name = data.get('content_name')  # TA的名字
+    content_phone = data.get('content_phone')  # TA的电话
+    content_birth = data.get('content_birth')  # TA的生日
+    xingzuo = data.get('xingzuo')  # 星座
+    hobby = data.get('hobby')  # 爱好
+    music = data.get('music')  # 音乐
+    movie = data.get('movie')  # 电影
+    food = data.get('food')  # 美食
+    wechat = data.get('wechat')  # 微信
+    QQ = data.get('QQ')  # qq
+    email = data.get('email')  # 邮箱
+
+    # 二维码
+    from_qrcode = bool(data.get('from_qrcode'))  # 是否是二维码收信
+    user_id = data.get('user_id')
+
+    id_decode = decodeUID(user_id)
+
+    if content_voice:  # 有音频则下载，无则视为成功。
+        result_voice = downloadVoice(content_voice)
+    else:
+        result_voice = True
+
+    if content_pic:  # 同理
+        result_pic = downloadPic(content_pic)
+    else:
+        result_pic = True
+    if from_qrcode:
+        to_ta_from_qrcode(open_id, time_limit, cap_template, from_qrcode, cap_location, content_word, content_pic,
+                          id_decode, content_voice, content_name, content_phone,
+                          content_birth, xingzuo, hobby, music, movie, food, wechat, QQ, email)
+    else:
+        if data['capsule_type'] == 0:  # 私密
+            downloadSelf(open_id, time_limit, cap_template, cap_location, content_word, content_pic,
+                         content_voice)
+        elif data['capsule_type'] == 1:  # 给Ta
+            downloadToTa(open_id, time_limit, cap_template, from_qrcode, cap_location, receiver_name, receiver_tel,
+                         receiver_email, content_word, content_pic, content_voice, content_name, content_phone,
+                         content_birth, xingzuo, hobby, music, movie, food, wechat, QQ, email)
+        elif data['capsule_type'] == 2:  # 陌生人
+            downloadStranger(open_id, time_limit, cap_template, cap_location, content_word, content_pic,
+                             content_voice)
+
+    if result_pic and result_voice:
+        return {'errcode': 0, 'errmsg': "成功获取胶囊", 'mesg_voice': "成功", 'mesg_pic': "成功"}
+    else:
+        return {'errcode': 1, 'errmsg': '录音或图片保存失败', 'mesg_voice': result_voice, 'mesg_pic': result_pic}
