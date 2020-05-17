@@ -84,6 +84,46 @@ height:60px; */
     height: 32px;
 }
 
+#getInfo {
+    display: none;
+    position: fixed;
+    width: 50%;
+    height: max-content;
+    left: 0;
+    right: 0;
+    bottom: 50%;
+    top: 25%;
+    margin: auto;
+    z-index: 3;
+    padding: 35px 35px 35px 35px;
+    background: url(../images/other/信息填写-背景.jpg);
+}
+
+.info {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.info_name {
+    font-size: 20px;
+    white-space: pre;
+    width: 30px;
+    margin-right: 40px;
+}
+
+.icon_container {
+    height: 50px;
+    width: 100%;
+    /* background: white; */
+    border-radius: 2rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
 
 
 #go_write {

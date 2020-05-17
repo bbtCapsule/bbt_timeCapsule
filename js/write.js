@@ -204,3 +204,12 @@ $("#submitCapsule").on('click', function () {
 //     page.page1.attr('style', 'display:none;');
 //     page.finish.attr('style', 'display:block;');
 // }
+$('#C1').on('click',function(){
+    console.log(0);
+});
+$('#C2').on('click',function(){
+    console.log(1);
+});
+$('#C3').on('click',function(){
+    console.log(2);
+})
