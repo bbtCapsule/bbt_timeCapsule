@@ -172,6 +172,15 @@ nextPage.writeTAsend.on('click', function () {
     }
 })
 // writeTAsend&writemap 结束
+//反馈界面
+$('#finish_rewrite').on('click', function () {
+    page.finish.attr('style', 'display:none;');
+    page.page1.attr('style', 'display:block;')
+});
+$('#finish_back').on('click', function () {
+    window.location.href = 'main.html';
+});
+
 $('#images').on('click', function () {
     chooseImg(0);
 });
@@ -190,3 +199,8 @@ $('#voicePlay').on('click', function () {
 $("#submitCapsule").on('click', function () {
     uploadCapsule(capsule_type, time_limit, cap_template, cap_location, content_word, content_pic, content_voice, content_name, content_phone, content_birth);
 });
+// 测试用
+// window.onload = function () {
+//     page.page1.attr('style', 'display:none;');
+//     page.finish.attr('style', 'display:block;');
+// }

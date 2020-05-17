@@ -1,242 +1,245 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport"
-            content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0,user-scalable=no">
-        <title>时光胶囊</title>
-        <link rel="stylesheet" href="./css/write.css">
-        <link rel="stylesheet" href="./css/load.css">
-        <script src="./js/jquery-3.4.1.min.js"></script>
-        <script src="http://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
-        <script src="https://cdn.bootcss.com/PreloadJS/1.0.1/preloadjs.min.js"></script>
-        <script src="./js/preload.js"></script>
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0,user-scalable=no">
+    <title>时光胶囊</title>
+    <link rel="stylesheet" href="./css/write.css">
+    <link rel="stylesheet" href="./css/load.css">
+    <script src="./js/jquery-3.4.1.min.js"></script>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
+    <script src="https://cdn.bootcss.com/PreloadJS/1.0.1/preloadjs.min.js"></script>
+    <script src="./js/preload.js"></script>
+</head>
 
-    <body>
-    <div id="loading">
-    <img id="rotate" src="./images/1.png"/>
-    <span class="loadspan">Loading..</span>
+<body>
+    <!-- <div id="loading">
+        <img id="rotate" src="./images/1.png" />
+        <span class="loadspan">Loading..</span>
+    </div> -->
+    <div id="page1">
+        <div class="header_l">
+            <a class="prePage">返回</a>
+        </div>
+        <div class="content page1_content">
+            <div class="page1_intro">伞尖浮空的划动，勾勒年少无畏的梦，人生漫长有时也匆匆，想要将差距抹平，已经是再无可能；</div>
+            <div class="page1_text">选择一个你喜欢的胶囊吧~</div>
+            <div class="page1_radio"></div>
+        </div>
+        <div class="bottom page1_bottom">
+            <div class="sender">
+                <label><input type="radio" name="sender" id="" value="0"><span>私密</span></label>
+                <label><input type="radio" name="sender" id="" value="1"><span>陌生人</span></label>
+                <label><input type="radio" name="sender" id="" value="2"><span>写给TA</span></label>
+            </div>
+            <button class="nextPage">下一步</button>
+        </div>
+
     </div>
-        <div id="page1">
-            <div class="header_l">
-                <a class="prePage">返回</a>
-            </div>
-            <div class="content write-introduce_content">
-                <div class="text1">引导文案</div>
-                <div class="text2">blblbl</div>
-            </div>
-            <div class="bottom write-introduce_bottom">
-                <div class="sender">
-                    <label><input type="radio" name="sender" id="" value="0"><span>私密</span></label>
-                    <label><input type="radio" name="sender" id="" value="1"><span>陌生人</span></label>
-                    <label><input type="radio" name="sender" id="" value="2"><span>写给TA</span></label>
-                </div>
-                <button class="nextPage">下一步</button>
-            </div>
-
+    <div id="page2">
+        <!--信纸选择器-->
+        <div class="header">
+            <a class="prePage">返回</a>
         </div>
-        <div id="page2">
-            <!--信纸选择器-->
-            <div class="header">
-                <a class="prePage">返回</a>
+        <div class="content">
+            引导文案
+            <div class="year">
+                <label><input type="radio" name="year" id="" value="0"><span>半年后</span></label>
+                <label><input type="radio" name="year" id="" value="1"><span>一年后</span></label>
             </div>
-            <div class="content">
-                引导文案
-                <div class="year">
-                    <label><input type="radio" name="year" id="" value="0"><span>半年后</span></label>
-                    <label><input type="radio" name="year" id="" value="1"><span>一年后</span></label>
-                </div>
-                <!--此处有信纸选择-->
+            <!--此处有信纸选择-->
 
-                <div class="switchbox">
-                    <!--滑动选择信纸  123为普通信纸 切换到对应的div 其中1和2切换到write-one即可
+            <div class="switchbox">
+                <!--滑动选择信纸  123为普通信纸 切换到对应的div 其中1和2切换到write-one即可
                 3单独是wite-3  然后同学录是write-TXL-->
-                    <div class="show_letter" id="show_L1">
-                        <img class="show_img" src="./images/letter/1.png" />
-                        <input type="radio" name="template" id="L1" value="L1">
-                    </div>
-                    <div class="show_letter" id="show_L2">
-                        <img class="show_img" src="./images/letter/2.png" />
-                        <input type="radio" name="template" id="L2" value="L2">
-                    </div>
-                    <div class="show_letter" id="show_L3">
-                        <img class="show_img" src="./images/letter/3.png" />
-                        <input type="radio" name="template" id="L3" value="L3">
-                    </div>
-                    <div class="show_letter" id="show_L4">
-                        <img class="show_img" src="./images/letter/41.png" />
-                        <input type="radio" name="template" id="L4" value="L4">
-                    </div>
-
+                <div class="show_letter" id="show_L1">
+                    <img class="show_img" src="./images/letter/1.png" />
+                    <input type="radio" name="template" id="L1" value="L1">
+                </div>
+                <div class="show_letter" id="show_L2">
+                    <img class="show_img" src="./images/letter/2.png" />
+                    <input type="radio" name="template" id="L2" value="L2">
+                </div>
+                <div class="show_letter" id="show_L3">
+                    <img class="show_img" src="./images/letter/3.png" />
+                    <input type="radio" name="template" id="L3" value="L3">
+                </div>
+                <div class="show_letter" id="show_L4">
+                    <img class="show_img" src="./images/letter/41.png" />
+                    <input type="radio" name="template" id="L4" value="L4">
                 </div>
 
             </div>
-            <div class="bottom">
-                <button class="nextPage">下一步</button>
-            </div>
 
         </div>
-        <div id="write-one" class="letter">
-            <!--此处普通信纸1和2  2的时候把语音和塞入胶囊的图片换掉 按钮L2 R2 背景换成2-->
-            <div class="header_l">
-                <input type="image" id="write_back" src="./images/letter/back.png" class="prePage">
-            </div>
-            <div class="content write-one_content">
-                <textarea class="letter_text" rows="20" cols="25" placeholder="写下你要说的话~"></textarea>
-                <div class="write-one_element">
-                    <input type="image" src="./images/letter/photobtn.png" class="add" id="images" />
-                    <input type="image" src="./images/letter/record.png" class="add" id="voiceStart" />
-                </div>
-            </div>
-            <div class="bottom write-one_bottom">
-                <input type="image" src="./images/letter/L1.png" class="nextPage" />
-            </div>
-        </div>
-        <div id="write-TA" class="letter">
-            <!--专属类型 同学录 -->
-            <div class="header_l">
-                <input type="image" id="write_back" src="./images/letter/back.png" class="prePage">
-            </div>
-            <input type="image" src="./images/letter/photobtn.png" class="add" id="images" />
-            <img src="./images/letter/4.png" id="txl_img" />
-            <div class="txl_left">
-                <div class="txl_contain">
-                    <div class="txl_contain">
-                        <span class="txl_item">姓名：</span><input class="txl_input" type="text" id="txl_name" />
-                    </div>
-                    <div class="txl_contain">
-                        <span class="txl_item">生日：</span><input class="txl_input" type="text" id="txl_birth" />
-                    </div>
-                    <div class="txl_contain">
-                        <span class="txl_item">星座：</span><input class="txl_input" type="text" id="txl_star" />
-                    </div>
-                    <div class="txl_contain">
-                        <span class="txl_item">爱好：</span><input type="text" class="txl_input" id="txl_hobby" />
-                    </div>
-                </div>
-            </div>
-            <div class="txl_right">
-                <div class="txl_contain">
-                    <span class="txl_item">微信：</span><input type="text" class="txl_input" id="txl_wechat" />
-                </div>
-                <div class="txl_contain">
-                    <span class="txl_item">QQ：</span><input type="text" class="txl_input" id="txl_qq" />
-                </div>
-                <div class="txl_contain">
-                    <span class="txl_item">邮箱：</span><input type="text" class="txl_input" id="txl_email" />
-                </div>
-            </div>
-            <div class="txl_left_bottom">
-                <div class="txl_contain">
-                    <span class="txl_item">想去的地方：</span><textarea rows="5" cols="15" class="txl_textarea"
-                        id="txl_place"></textarea>
-                </div>
-                <div class="txl_contain">
-                    <span class="txl_item">喜欢的音乐：</span><textarea rows="5" cols="15" class="txl_textarea"
-                        id="txl_music"></textarea>
-                </div>
-                <div class="txl_contain">
-                    <span class="txl_item">喜欢的电影：</span><textarea rows="5" cols="15" class="txl_textarea"
-                        id="txl_movie"></textarea>
-                </div>
-                <div class="txl_contain">
-                    <span class="txl_item">喜欢的美食：</span><textarea rows="5" cols="15" class="txl_textarea"
-                        id="txl_food"></textarea>
-                </div>
-            </div>
-            <div class="txl_right_bottom">
-                <span class="txl_item">吐槽专区：</span><textarea rows="8" cols="10" class="txl_textarea"
-                    id="txl_tucao"></textarea>
-            </div>
-            <div class="bottom write-one_bottom" id="txl_btn">
-                <input type="image" src="./images/letter/L1.png" class="nextPage" />
-            </div>
-        </div>
-        <div id="write-sec" class="letter">
-            <!--此处普通信纸3-->
-            <div class="header_l">
-                <input type="image" id="write_back" src="./images/letter/back.png" class="prePage">
-            </div>
-            <div class="content write-one_content">
-                <textarea id="letter3" class="letter_text" rows="20" cols="25" placeholder="写下你要说的话~"></textarea>
-                <div class="write-one_element">
-                    <input type="image" src="./images/letter/photobtn.png" class="add" id="images" />
-                    <input type="image" src="./images/letter/record.png" class="add" id="voiceStart" />
-                </div>
-            </div>
-            <div class="bottom write-one_bottom">
-                <input type="image" src="./images/letter/L1.png" class="nextPage" />
-            </div>
-        </div>
-        <div id="write-TA-send">
-            <!--专属类型 需要在提交胶囊之前收集信息-->
-            <div class="header write-TA-re_header">
-                为了让信成功送到TA的手中，梯仔需要收集一点TA的信息哦~
-            </div>
-
-            <div class="content write-TA-re_content">
-                <div class="username">
-                    <div>TA的昵称</div>
-                    <input type="text" name="" id="">
-                </div>
-                <div class="write-TA-re_phone">
-                    <div>TA的手机号</div>
-                    <input type="text" name="" id="">
-                </div>
-                <div class="write-TA-re_email">
-                    <div>TA的邮箱</div>
-                    <input type="email" name="" id="">
-                </div>
-            </div>
-            <div class="bottom">
-                <button class="nextPage">塞入胶囊</button>
-            </div>
-        </div>
-        <div id="write-map">
-            <div class="mai">
-                <!--埋胶囊的div-->
-                <div id="mai_att">
-                    <p>移动地图<br>选择埋胶囊的地点吧~</p>
-                    <span>点击地图开始</span>
-                </div>
-                <img src="./images/anim/1.gif" id="mai_anim" />
-            </div>
-            <img id="img_map" src="./images/map.jpg" usemap="#mapmap" />
-            <map name="mapmap" id="mapmap">
-                <area id="A1" onfocus="this.blur()" shape="circle" coords="27,117,109,143" href="#" hidefocus="true"
-                    alt="最左边的花坛" />
-                <area id="A2" onfocus="this.blur()" shape="circle" coords="150,117,109,143" href="#" hidefocus="true"
-                    alt="左边下面的花坛" />
-                <area id="A3" onfocus="this.blur()" shape="circle" coords="200,117,109,143" href="#" hidefocus="true"
-                    alt="Venus" />
-                <area id="A4" onfocus="this.blur()" shape="circle" coords="200,227,109,143" href="#" hidefocus="true"
-                    alt="五山花坛" />
-                <area id="A5" onfocus="this.blur()" shape="circle" coords="100,117,109,143" href="#" hidefocus="true"
-                    alt="雕像" />
-                <area id="A6" onfocus="this.blur()" shape="circle" coords="45,147,109,143" href="#" hidefocus="true"
-                    alt="雕像" />
-                <area id="A7" onfocus="this.blur()" shape="circle" coords="87,115,109,143" href="#" hidefocus="true"
-                    alt="雕像" />
-            </map>
-        </div>
-        <div id="finish">
-            <div class="header">
-
-            </div>
-            <div class="content finish_content">
-                <p>反馈页面</p>
-            </div>
-            <div class="bottom finish_bottom">
-                <div class="finish_btn1"><a href="write-introduce.html">再写一封</a></div>
-                <div class="finish_btn2"><a href="#">返回</a></div>
-            </div>
+        <div class="bottom">
+            <button class="nextPage">下一步</button>
         </div>
 
-    </body>
-    <script src="./js/main.js"></script>
-    <script src="./js/show.js"></script>
-    <script src="./js/write.js"></script>
+    </div>
+    <div id="write-one" class="letter">
+        <!--此处普通信纸1和2  2的时候把语音和塞入胶囊的图片换掉 按钮L2 R2 背景换成2-->
+        <div class="header_l">
+            <input type="image" id="write_back" src="./images/letter/back.png" class="prePage">
+        </div>
+        <div class="content write-one_content">
+            <textarea class="letter_text" rows="20" cols="25" placeholder="写下你要说的话~"></textarea>
+            <div class="write-one_element">
+                <input type="image" src="./images/letter/photobtn.png" class="add" id="images" />
+                <input type="image" src="./images/letter/record.png" class="add" id="voiceStart" />
+            </div>
+        </div>
+        <div class="bottom write-one_bottom">
+            <input type="image" src="./images/letter/L1.png" class="nextPage" />
+        </div>
+    </div>
+    <div id="write-TA" class="letter">
+        <!--专属类型 同学录 -->
+        <div class="header_l">
+            <input type="image" id="write_back" src="./images/letter/back.png" class="prePage">
+        </div>
+        <input type="image" src="./images/letter/photobtn.png" class="add" id="images" />
+        <img src="./images/letter/4.png" id="txl_img" />
+        <div class="txl_left">
+            <div class="txl_contain">
+                <div class="txl_contain">
+                    <span class="txl_item">姓名：</span><input class="txl_input" type="text" id="txl_name" />
+                </div>
+                <div class="txl_contain">
+                    <span class="txl_item">生日：</span><input class="txl_input" type="text" id="txl_birth" />
+                </div>
+                <div class="txl_contain">
+                    <span class="txl_item">星座：</span><input class="txl_input" type="text" id="txl_star" />
+                </div>
+                <div class="txl_contain">
+                    <span class="txl_item">爱好：</span><input type="text" class="txl_input" id="txl_hobby" />
+                </div>
+            </div>
+        </div>
+        <div class="txl_right">
+            <div class="txl_contain">
+                <span class="txl_item">微信：</span><input type="text" class="txl_input" id="txl_wechat" />
+            </div>
+            <div class="txl_contain">
+                <span class="txl_item">QQ：</span><input type="text" class="txl_input" id="txl_qq" />
+            </div>
+            <div class="txl_contain">
+                <span class="txl_item">邮箱：</span><input type="text" class="txl_input" id="txl_email" />
+            </div>
+        </div>
+        <div class="txl_left_bottom">
+            <div class="txl_contain">
+                <span class="txl_item">想去的地方：</span><textarea rows="5" cols="15" class="txl_textarea"
+                    id="txl_place"></textarea>
+            </div>
+            <div class="txl_contain">
+                <span class="txl_item">喜欢的音乐：</span><textarea rows="5" cols="15" class="txl_textarea"
+                    id="txl_music"></textarea>
+            </div>
+            <div class="txl_contain">
+                <span class="txl_item">喜欢的电影：</span><textarea rows="5" cols="15" class="txl_textarea"
+                    id="txl_movie"></textarea>
+            </div>
+            <div class="txl_contain">
+                <span class="txl_item">喜欢的美食：</span><textarea rows="5" cols="15" class="txl_textarea"
+                    id="txl_food"></textarea>
+            </div>
+        </div>
+        <div class="txl_right_bottom">
+            <span class="txl_item">吐槽专区：</span><textarea rows="8" cols="10" class="txl_textarea"
+                id="txl_tucao"></textarea>
+        </div>
+        <div class="bottom write-one_bottom" id="txl_btn">
+            <input type="image" src="./images/letter/L1.png" class="nextPage" />
+        </div>
+    </div>
+    <div id="write-sec" class="letter">
+        <!--此处普通信纸3-->
+        <div class="header_l">
+            <input type="image" id="write_back" src="./images/letter/back.png" class="prePage">
+        </div>
+        <div class="content write-one_content">
+            <textarea id="letter3" class="letter_text" rows="20" cols="25" placeholder="写下你要说的话~"></textarea>
+            <div class="write-one_element">
+                <input type="image" src="./images/letter/photobtn.png" class="add" id="images" />
+                <input type="image" src="./images/letter/record.png" class="add" id="voiceStart" />
+            </div>
+        </div>
+        <div class="bottom write-one_bottom">
+            <input type="image" src="./images/letter/L1.png" class="nextPage" />
+        </div>
+    </div>
+    <div id="write-TA-send">
+        <!--专属类型 需要在提交胶囊之前收集信息-->
+        <div class="header write-TA-re_header">
+            为了让信成功送到TA的手中，梯仔 需要收集一点TA的信息哦~
+        </div>
+
+        <div class="content write-TA-re_content">
+            <div class="username">
+                <div>TA的昵称</div>
+                <input type="text" name="" id="receiver_name">
+            </div>
+            <div class="write-TA-re_phone">
+                <div>TA的手机号</div>
+                <input type="text" name="" id="receiver_tel">
+            </div>
+            <div class="write-TA-re_email">
+                <div>TA的邮箱</div>
+                <input type="text" name="" id="receiver_email">
+            </div>
+        </div>
+        <div class="bottom write-TA-re_btn" >
+            <input type="image" src="./images/other/塞入胶囊.png" class="nextPage" />
+
+        </div>
+    </div>
+    <div id="write-map">
+        <div class="mai">
+            <!--埋胶囊的div-->
+            <div id="mai_att">
+                <p>移动地图<br>选择埋胶囊的地点吧~</p>
+                <span>点击地图开始</span>
+            </div>
+            <img src="./images/anim/1.gif" id="mai_anim" />
+        </div>
+        <img id="img_map" src="./images/map.jpg" usemap="#mapmap" />
+        <map name="mapmap" id="mapmap">
+            <area id="A1" onfocus="this.blur()" shape="circle" coords="27,117,109,143" href="#" hidefocus="true"
+                alt="最左边的花坛" />
+            <area id="A2" onfocus="this.blur()" shape="circle" coords="150,117,109,143" href="#" hidefocus="true"
+                alt="左边下面的花坛" />
+            <area id="A3" onfocus="this.blur()" shape="circle" coords="200,117,109,143" href="#" hidefocus="true"
+                alt="Venus" />
+            <area id="A4" onfocus="this.blur()" shape="circle" coords="200,227,109,143" href="#" hidefocus="true"
+                alt="五山花坛" />
+            <area id="A5" onfocus="this.blur()" shape="circle" coords="100,117,109,143" href="#" hidefocus="true"
+                alt="雕像" />
+            <area id="A6" onfocus="this.blur()" shape="circle" coords="45,147,109,143" href="#" hidefocus="true"
+                alt="雕像" />
+            <area id="A7" onfocus="this.blur()" shape="circle" coords="87,115,109,143" href="#" hidefocus="true"
+                alt="雕像" />
+        </map>
+    </div>
+    <div id="finish">
+        <div class="header">
+
+        </div>
+        <div class="content finish_content">
+            <p>胶囊已埋入</p>
+        </div>
+
+        <div class="bottom finish_bottom">
+            <div class="finish_btn1" id="finish_rewrite"></div>
+            <div class="finish_btn2" id="finish_back"></div>
+        </div>
+    </div>
+
+</body>
+<script src="./js/main.js"></script>
+<script src="./js/show.js"></script>
+<script src="./js/write.js"></script>
 
 </html>

@@ -306,7 +306,7 @@ area.go:before {
 #welcome {
     width: 100vw;
     height: 100vh;
-    background: url(../images/other/START-bg.jpg);
+    background: url(../images/other/START&-bg.jpg);
     background-size: contain;
     padding-top: 0.1px;
     /* 让子元素的margin-top可用 */
@@ -325,7 +325,7 @@ area.go:before {
 
 .welcome_content {
     width: 69%;
-    height: 75px;
+    height: 40%;
     margin: auto;
     margin-bottom: 40px;
     font-family: AdobeHeitiStd-Regular;
@@ -335,7 +335,6 @@ area.go:before {
     line-height: 34px;
     letter-spacing: 2px;
     color: #3f454b;
-    height: 40%;
     text-align: left;
 }
 
