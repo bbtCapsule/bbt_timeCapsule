@@ -18,8 +18,8 @@ $(function(){
         },500)
         function handleComplete(){
             //加载完成 等其他图片放进来以后 把图片放进↓的加载列表 就打开
-           // $("#loading").fadeOut(800);
-           //clearInterval(timer);
+            $("#loading").fadeOut(800);
+           clearInterval(timer);
         }
         // imgdownload.on("fileload", handleFileLoad, this);
         imgdownload.on("complete", handleComplete, this);
@@ -33,7 +33,4 @@ $(function(){
         ]);
     imgdownload.load();
 }
-
-
-
 })

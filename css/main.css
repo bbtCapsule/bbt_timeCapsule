@@ -84,64 +84,7 @@ height:60px; */
     height: 32px;
 }
 
-#getInfo {
-    display: none;
-    position: fixed;
-    width: 50%;
-    height: max-content;
-    left: 0;
-    right: 0;
-    bottom: 50%;
-    top: 25%;
-    margin: auto;
-    z-index: 3;
-    padding: 35px 35px 35px 35px;
-    background-color: antiquewhite;
-}
 
-.info {
-    display: flex;
-    flex-direction: row;
-    justify-content: left;
-    align-items: center;
-    margin-bottom: 10px;
-}
-
-.info_name {
-    font-size: 20px;
-    white-space: pre;
-    width: 30px;
-    margin-right: 40px;
-}
-
-.icon_container {
-    height: 50px;
-    width: 100%;
-    /* background: white; */
-    border-radius: 2rem;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-}
-
-#head_pic {
-    width: 50px;
-    height: 50px;
-    background-color: white;
-    border-radius: 2rem;
-    outline: none;
-}
-
-.info_input {
-    width: 80%;
-}
-
-#submitInfo {
-    width: 50%;
-    height: 30px;
-    margin-left: 25%;
-}
 
 #go_write {
     background-image: url("../images/我要写信.png");
@@ -347,12 +290,90 @@ area.go:before {
 }
 
 /* 登录界面 getInfo */
-/* #getInfo{
+#getInfo{
     width: 100vw;
     height: 100vh;
-    background-color: #bfdbc5;
+    background: url(../images/other/back2.jpg) no-repeat center;
+    background-size: 100%,100%;
     padding-top: 0.1px;
-} */
+}
+.Infocontain {
+    width: 80%;
+    margin-left: 10%;
+    margin-top: 10%;
+    transform: scale(0.9);
+
+}
+.info {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items: left;
+    margin-bottom: 40px;
+    margin-left: 10%;
+    transform: scale(0.9);
+}
+
+.info_name {
+    font-size: 20px;
+    white-space: pre;
+    width: 30px;
+    margin-right: 40px;
+    margin-bottom: 10px;
+    color: #554c4c;
+    letter-spacing: 3px;
+}
+
+.icon_container {
+    height: 50px;
+    width: 80%;
+    /* background: white; */
+    border-radius: 2rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+#head_pic {
+    width: 50px;
+    height: 50px;
+    background-color: white;
+    border-radius: 9rem;
+    outline: none;
+    padding: 5%;
+}
+#icon_div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    margin-left: 5%;
+
+}
+.info_input {
+    width: 85%;
+    background: none;
+    border-color: #8ca190;
+    border-style: solid;
+    border-radius: 0.5rem;
+    padding-top: 3%;
+    padding-bottom: 3%;
+    padding-left: 2%;
+    color: #404b42;
+    font-size: 15px;
+}
+
+#submitInfo {
+    width: 50%;
+    height: 100px;
+    margin-left: 25%;
+    background: url(../images/other/btn-下一步.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
 /* 说明页 */
 #introduce {
     width: 100vw;

@@ -6,7 +6,7 @@ const getWxurl =
   "https://hemc.100steps.net/2017/wechat/Home/Public/getJsApi"; //微信请求jsapi页
 
 //const baseUrl = "https://hemc.100steps.net/2020//bbt_timeCapsule/py/api";
-const baseUrl = "https://hemc.100steps.net/2020//bbt_timeCapsule/py/api"; //测试用url
+const baseUrl = "https://zekaio.cn/2020/timecapsule/api"; //测试用url
 const apiurl = `${baseUrl}/`;
 const shareurl = encodeURIComponent(location.href);
 const shareimg_url = "图片url";
@@ -14,15 +14,25 @@ var nickname = "Hi~";
 var icon = "your_icon.jpg"; //头像地址
 var imgs = []; //上传的图片地址数组
 var voice = ""; //录音文件链接
+axios.post(apiurl+`set_open_id`,{openid:"aaaaa"}).then((ret) => {
+  console.log(ret.data)
+})
 function checkLogin() {
   var checkurl = apiurl + "check_wechat_login"; //后台检测登录
-  axios.get(checkurl).then(res => {
+
+  axios.get(checkurl)
+  .then(res => {
     wxlogin();
-    if (res.data.message == 0 || res.data.errcode == 400) {
+    if (res.data.satus == 401) {
       window.location.href = phpurl; //微信登录授权跳转页
     } else {
+      alert(res.data.message);
       return true;
     }
+  })
+  .catch(err =>{
+    alert(err);
+    console.log(err);
   });
 }
 
@@ -100,42 +110,53 @@ function checkInfo() {
         sessionStorage.setItem("username", res.data.nickname);
         return true;
       } else {
+        console.log(res.data.message);
         return false;
       }
     } else {
+      console.log(res.data.message);
       return false;
     }
   })
+  .catch(err=>{
+    console.log(err);
+  });
 }
 // if(!checkInfo()||sessionStorage.getItem("username")=="none"){
 if (sessionStorage.getItem("username") == "none") {
+  $("#getInfo").hide();
   var nickname, phone = '',
     email = "";
+    $("#nickname").val("");$("#phone").val("");$("#email").val("");
   //$("#getInfo").fadeIn();
   $("#nickname").on('input', function (e) {
     nickname = $("#nickname").val();
-    console.log("name  " + nickname);
+    // console.log("name  " + nickname);
   });
   $("#phone").on('input', function (e) {
     phone = $("#phone").val();
-    console.log("phone  " + phone);
+    // console.log("phone  " + phone);
   });
   $("#email").on('input', function (e) {
     email = $("#email").val();
-    console.log("email  " + email);
+    // console.log("email  " + email);
   });
   //调用检测函数 通过验证时把个人信息发给后台
   $("#submitInfo").on('click', function (e) {
-    if (checkErr(nickname, /[\w\W]{1,16}/) && checkErr(phone, /^1\d{10}$/) && checkErr(email, /^\w+([-\.]\w+)*@\w+([\.-]\w+)*\.\w{2,4}$/)) {
+    $("#submitInfo").attr('disabled',true);
+    if (checkErr(phone, /^1\d{10}$/) && checkErr(email, /^\w+([-\.]\w+)*@\w+([\.-]\w+)*\.\w{2,4}$/)) {
       //测试用
       console.log(nickname);
       console.log(phone);
       console.log(email);
       mainPage.getInfo.attr('style', 'display:none;');
       mainPage.main.attr('style', 'display:block;');
-      // uploadInfo(nickname, phone, email);//对接时加上
+       uploadInfo(nickname, phone, email);//对接时加上
     } else {
-      alert('无信息或信息错误');
+      alert("请填写正确信息！")
+      console.log(nickname);
+      console.log(phone);
+      console.log(email);
     }
   });
 }
@@ -263,7 +284,7 @@ function uploadInfo(nickname, phone, email) {
       nickname: nickname,
       phone: phone,
       email: email,
-      head_pic: icon
+      //head_pic: icon
     }
   }).then(res => {
     if (res.data.errcode != 0 || res.status == 400) {
@@ -322,7 +343,8 @@ window.onload = function () {
 }
 $('#welcome_btn').on('click', function () {
   mainPage.welcome.attr('style', 'display:none;');
-  mainPage.getInfo.attr('style', 'display:block;');
+  //mainPage.getInfo.attr('style', 'display:block;');
+  mainPage.introduce.attr('style', 'display:block;');
 })
 $('#go_intro').on('click', function () {
   mainPage.main.attr('style', 'display:none;');

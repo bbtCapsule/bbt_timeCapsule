@@ -2,7 +2,10 @@
 * {
     outline: none;
 }
-
+@font-face {
+    font-family: 'cute';
+    src: url('../images/HYYOUYUANTIJ.TTF');
+}
 textarea {
     resize: none;
 }
@@ -46,14 +49,6 @@ input[type="text"] {
     padding-top: 300px;
 }
 
-#page2 span {
-    display: inline-block;
-    border: 1px solid #000;
-}
-
-input[type="radio"]:checked+span {
-    background-color: blue;
-}
 
 .write-one_content {
     padding-top: 50px;
@@ -281,9 +276,47 @@ input.prePage {
 
 /* 以上为覆盖内容 包含同学录样式 */
 /* 信纸选择器 */
+.sender{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 30%;
+}
+.sender>img {
+    width: 12vw;
+}
+#page1>.page1_bottom{
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    padding-left: 10%;
+}
+.choose_text {
+    font-family: 'cute';
+    color: white;
+    margin-left: -20px;
+    font-size: 18px;
+    margin-top: 10px;
+}
+#J1{
+    background-image: url(../images/1.png);
+}
+#J2{
+    background-image: url(../images/2.png);
+}
+#J3{
+    background-image: url(../images/3.png);
+}
+#J1,#J2,#J3{
+    width: 100%;
+    height: 8vh;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center
+}
 .switchbox {
     margin-top: 30px;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
     width: 70vw;
     margin-left: 15vw;
     height: max-content;
@@ -294,18 +327,110 @@ input.prePage {
     /* padding: 3%; */
     overflow-x: scroll;
 }
+.template {
+    -webkit-appearance: button;
+    background-color: white;
+    width: 14px;
+    height: 14px;
+    margin-top: 10px;
+    border-radius: 2rem;
+    opacity: 0.1;
+        /* -webkit-appearance: button;
+        background: none;
+        border: none;
+        border-style: solid;
+        padding: 8.5px;
+        border-width: 1.2px;
+        border-color: white;
+        margin-bottom: -3.5px;
+        margin-right: 4px; */
+}
+.template:checked {
+    opacity: 1;
+}
+/* .template:after {
+    content: " ";
+    width: 14px;
+    height: 14px;
+    background: white;
+    position: absolute;
+    border-radius: 5rem;
+    margin-left: 25px;
+}
+.template:before {
+    content: " ";
+    width: 14px;
+    height: 14px;
+    background: white;
+    position: absolute;
+    border-radius: 5rem;
+    margin-left: -25px;
+} */
 
+/* .template:checked:before {
+    content: "";
+    width: 10px;
+    height: 10px;
+    background-color: #5c645d;
+    position: absolute;
+    border-radius: 5rem;
+    margin-top: 5px;
+    margin-left: 5px;
+} */
 .show_img {
+    width: 300px;
+    font-size: 280px;
+    height: 100%;
+    background-image: url(../images/letter/1.png);
+    color: transparent;
+    background-size: 100% 100%;
+}
+#show_L1>label{
     width: 30vh;
     height: 100%;
+    background-image: url(../images/letter/1.png);
 }
-
+#show_L2>label{
+    width: 30vh;
+    height: 100%;
+    background-image: url(../images/letter/2.png); 
+}
+#show_L3>label{
+    width: 30vh;
+    height: 100%;
+    background-image: url(../images/letter/3.png); 
+}
+#show_L4>label{
+    width: 30vh;
+    height: 100%;
+    background-image: url(../images/letter/41.png); 
+}
 .show_letter {
     width: 100%;
     margin-left: 20px;
     margin-right: 20px;
 }
 
+.choose{
+    opacity: 0;
+    -webkit-appearance: unset;
+    width: 0px;
+    height: 10px;
+    border-left: 60px solid transparent;
+    border-right: 60px solid transparent;
+    border-bottom: 50px solid #a59b92;
+    border-top-color: transparent;
+    border-top: 30px;
+    /* position: absolute; */
+    top: 0;
+    transform: scale(0.2,0.3);
+    position: relative;
+    margin-right: 20px;
+}
+.choose:hover,.choose:active{
+    opacity: 1;
+
+}
 /*下面是普通信纸样式 */
 .letter_text {
     width: 90%;
@@ -337,10 +462,7 @@ input.prePage {
     outline: none;
 }
 
-@font-face {
-    font-family: 'cute';
-    src: url('../images/HYYOUYUANTIJ.TTF');
-}
+
 
 /* ！！！！！！！！！！！！！！！！！！！！！！！！！ */
 /* 从这里开始是搬运过来的地图+动画 */
@@ -356,7 +478,9 @@ body {
 .map::-webkit-scrollbar {
     display: none;
 }
-
+.mai{
+    /* //display: none; */
+}
 .map {
     z-index: -9;
     position: absolute;
@@ -503,7 +627,6 @@ area.go:before {
     line-height: 30px;
     font-weight: 200;
     left: 12.5vw;
-
 }
 
 #mai_att>span {
@@ -525,7 +648,7 @@ area.go:before {
 }
 
 /* page1 */
-#page1 {
+#page1 ,#page2{
     width: 100vw;
     height: 100vh;
     background-color: #bfdbc5;
@@ -546,15 +669,55 @@ area.go:before {
     letter-spacing: 2px;
     color: #3f454b;
     text-align: left;
+    overflow-y: scroll;
 }
 .page1_content {
-    padding-top: 50px;
+    margin-top: 50px;
+    width: 90%;
 }
-
+.page1_text {
+    color: #3f454bcf;
+    font-size: 16px;
+}
 .page1_bottom {
     padding-top: 50px;
 }
-
+#page2>.content{
+    margin-top: 10%;
+    color: #4b4f4b;
+    font-size: 2.2vh;
+}
+.year{
+    margin-top: 15px;
+    width: 80%;
+    margin-left: 10%;
+    margin-bottom: 18px;
+}
+.year_choose{
+    margin-right: 15%;
+    margin-left: 10%;
+}
+.year_choose>input[type="radio"] {
+    -webkit-appearance: button;
+    background: none;
+    border: none;
+    border-style: solid;
+    padding: 8.5px;
+    border-width: 1.2px;
+    border-color: white;
+    margin-bottom: -3.5px;
+    margin-right: 4px;
+}
+.year_choose>input[type="radio"]:checked::before{
+    content: "√";
+    width: 0px;
+    /* height: 10px; */
+    position: absolute;
+    /* transform: scale(3,1); */
+    color: #5d655f;
+    /* right: -10px; */
+    transform: translate(-8px,-6px) scale(3,2);
+}
 /* 收集信息 */
 #write-TA-send {
     width: 100vw;

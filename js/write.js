@@ -54,7 +54,7 @@ prePage.page1.on('click', function () {
 nextPage.page1.on('click', function () {
     capsule_type = getRadio(document.getElementsByName('sender'));
     if (capsule_type === null) {
-        alert('无信息');
+        alert('你还没有选择！');
     } else {
         page.page1.attr('style', 'display:none;');
         page.page2.attr('style', 'display:block;')
@@ -84,7 +84,7 @@ nextPage.page2.on('click', function () {
     time_limit = getRadio(document.getElementsByName('year'));
     var template = getRadio(document.getElementsByName('template'));
     if (time_limit === null) {
-        alert('无信息');
+        alert('你还没有选择！');
     } else {
         if (template == 'L1' || template == 'L2') {
             switchPage(0);
@@ -115,9 +115,9 @@ prePage.writeTA.on('click', function () {
 nextPage.writeone.on('click', function () {
     // cap_template, content_word
     content_word = $('.letter_text').val();
-    content_word = deleteSpace(content_word);
+    //content_word = deleteSpace(content_word);
     if (content_word == '') {
-        alert('无信息');
+        alert('你没有写任何东西！');
     } else {
         page.writeone.attr('style', 'display:none;');
         page.writemap.attr('style', 'display:block;')
@@ -128,9 +128,9 @@ nextPage.writeone.on('click', function () {
 nextPage.writesec.on('click', function () {
     // cap_template, content_word
     content_word = $('.letter_text').val();
-    content_word = deleteSpace(content_word);
+    //content_word = deleteSpace(content_word);
     if (content_word == '') {
-        alert('无信息');
+        alert('你没有写任何东西！');
     } else {
         page.writesec.attr('style', 'display:none;');
         page.writemap.attr('style', 'display:block;')
@@ -140,9 +140,9 @@ nextPage.writesec.on('click', function () {
 nextPage.writeTA.on('click', function () {
     // cap_template, content_word
     content_word = $('#content_word_TA').val();
-    content_word = deleteSpace(content_word);
+    //content_word = deleteSpace(content_word);
     if (content_word == '') {
-        alert('无信息');
+        alert('你没有写任何东西！');
     } else {
         page.writeTA.attr('style', 'display:none;');
         page.writeTAsend.attr('style', 'display:block;')
