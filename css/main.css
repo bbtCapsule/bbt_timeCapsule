@@ -14,6 +14,7 @@ body {
     /*webkit浏览器*/
     user-select: none;
 }
+
 input {
     outline: none;
     border: none;
@@ -24,6 +25,7 @@ input {
 input::-webkit-input-placeholder {
     color: #b8b7b7;
 }
+
 .map::-webkit-scrollbar {
     display: none;
 }
@@ -305,9 +307,10 @@ area.go:before {
     width: 100vw;
     height: 100vh;
     background: url(../images/other/START-bg.jpg);
-    background-size: 100% 100%;
-    padding-top: 0.1px;/* 让子元素的margin-top可用 */
-    
+    background-size: contain;
+    padding-top: 0.1px;
+    /* 让子元素的margin-top可用 */
+
 }
 
 .welcome_header {
@@ -341,8 +344,9 @@ area.go:before {
     height: 60px;
     margin: auto;
     background: url(../images/other/btn-start.png) no-repeat;
-background-size: contain;
+    background-size: contain;
 }
+
 /* 登录界面 getInfo */
 /* #getInfo{
     width: 100vw;
@@ -354,26 +358,36 @@ background-size: contain;
 #introduce {
     width: 100vw;
     height: 100vh;
-    background-color: #bfdbc5;
-    padding-top: 0.1px;
+    background: url(../images/other/说明and反馈-背景.jpg);
+    background-size: 100% 100%;
+    padding: 0.1px;
 }
-.intro_content{
-    width: 70%;
-    height: 250px;
-    margin: 135px auto;
-    background-color: pink;
-    font-size: 15px;
-    font-weight: 100;
+
+.intro_content {
+    box-sizing: border-box;
+    width: 90vw;
+    height: 65vh;
+    margin: 22% auto 12% auto;
+    background: url(../images/other/说明框.png) no-repeat center;
+    background-size: contain;
+    font-family: AdobeHeitiStd-Regular;
+    font-size: 4vw;
+    font-weight: 500;
     font-stretch: normal;
     letter-spacing: 2px;
-    line-height: 30px;
+    color: #3f454b;
+    text-align: left;
+    padding: 15% 13%;
 }
+
 #intro_btn {
-    width: 200px;
-    height: 55px;
+    width: 40vw;
+    height: 11vh;
     margin: auto;
-    background-color: pink;
+    background: url(../images/other/btn-返回.png) no-repeat center;
+    background-size: contain;
 }
+
 /* 二维码QR */
 #QR {
     width: 100vw;
@@ -383,12 +397,12 @@ background-size: contain;
     padding-top: 0.1px;
 }
 
-.receive_bottom{
+.receive_bottom {
     position: fixed;
     width: 52vw;
     height: 9vh;
     bottom: 10vh;
-    left: calc(50% - 26vw); 
+    left: calc(50% - 26vw);
     background: url(../images/返回.png) no-repeat center center;
     background-size: contain;
 }
