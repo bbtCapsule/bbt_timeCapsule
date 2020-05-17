@@ -96,7 +96,7 @@ height:60px; */
     margin: auto;
     z-index: 3;
     padding: 35px 35px 35px 35px;
-    background-color: antiquewhite;
+    background: url(../images/other/信息填写-背景.jpg);
 }
 
 .info {
