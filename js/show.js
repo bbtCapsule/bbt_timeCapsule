@@ -2,9 +2,6 @@
 $("#loading").on('click', function (e) {
     $("#loading").fadeOut(300);
 })
-$("#mai_att").on('click', function (e) {
-    $("#mai_att").fadeOut(300);
-})
 function areaShow() {
     for(i=1;i<8;i++){
         $("#A"+i).on('click', function (e) {
@@ -22,7 +19,6 @@ function areaShow() {
                 $("#mai_anim").fadeOut(300);
                 $(".mai").hide();
                 $("#write-map").fadeOut(700);
-
                 $("#finish").fadeIn(600);
             }, 3800);
 
@@ -31,10 +27,6 @@ function areaShow() {
 
 }
 areaShow();
-$("#mai_att").on('click', function (e) {
-    $("#mai_att").fadeOut(400);
-    areaShow();
-})
 $("#go_receive").on('click', function (e) {
     window.location.href="receive.html"
 })

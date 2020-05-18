@@ -1,6 +1,17 @@
 // 相关参数
-var capsule_type, time_limit, cap_template, cap_location, content_word, content_pic, content_voice, content_name, content_phone, content_birth;
+var capsule_type, time_limit, cap_template, //胶囊类型 取信期 信纸类型
+content_word, content_pic, content_voice,
+ content_name, content_phone, content_birth;
+ var TA_info=new Object();
+ var from_qrcode = false;
+ var user_id = "none";
+ var txl_content = new Object();
+ var trySend = false;
 //页面初始的显示
+if(window.location.href.split('?uid=').length==2){
+    user_id = window.location.href.split('?uid=')[1];
+    from_qrcode =true;
+}
 var page = {
     page1: $('#page1'),
     page2: $('#page2'),
@@ -36,7 +47,7 @@ var prePage = {
     writesec: $('#write-sec .prePage'),
     writeTA: $('#write-TA .prePage')
 }
-//函数
+//获取radio
 function getRadio(obj) {
     for (var i = 0; i < obj.length; i++) {
         if (obj[i].checked === true) {
@@ -45,9 +56,14 @@ function getRadio(obj) {
     }
     return null;
 }
+page.writemap.on('click',function(){
+    
+    $("#mai_att").fadeOut(300);
+});
 //页面开关
 prePage.page1.on('click', function () {
     window.location.href = 'main.html';
+    forbidMove();
 })
 //1&2 开始
 nextPage.page1.on('click', function () {
@@ -94,6 +110,7 @@ function switchPage(type) {
         page.page2.fadeOut(200);
         page.writesec.fadeIn(100);
     } else if (type == 2) {
+        OpenMove();
         page.page2.fadeOut(200);
         page.writeTA.fadeIn(100);
     }
@@ -124,25 +141,39 @@ nextPage.page2.on('click', function () {
 
 })
 prePage.writeone.on('click', function () {
-    page.writeone.attr('style', 'display:none;');
-    page.page2.attr('style', 'display:block;');
+    forbidMove();
+    $('.letter_text').val("");
+    page.writeone.fadeOut();
+    page.page2.fadeIn();
 })
 prePage.writesec.on('click', function () {
-    page.writesec.attr('style', 'display:none;');
-    page.page2.attr('style', 'display:block;');
+    forbidMove();
+    $('.letter_text').val("");
+    page.writesec.fadeOut();
+    page.page2.fadeIn();
 })
 prePage.writeTA.on('click', function () {
-    page.writeTA.attr('style', 'display:none;');
-    page.page2.attr('style', 'display:block;');
+    forbidMove();
+    page.writeTA.fadeOut();
+    page.page2.fadeIn();
 })
+function forbidMove(){
+    $('html,body').animate({ scrollTop: $("body").offset().top - 1 }, 200)
+    $('body').css('overflow','hidden');
+}
+function OpenMove(){
+    $('body').css('overflow','scroll');
+}
 // 根据type判断是否跳转填写信息
 function switchCapsule(str){
-    console.log("胶囊类型是"+str+"  1写给自己 2 写给陌生人 3写给专属")
+    console.log("胶囊类型是"+str+" 0写给自己 1写给专属 2写给陌生人")
     switch (Number(str)) {
-        case 2:
+        case 1:
+            forbidMove();
             page.writeTAsend.fadeIn(90);
             break;
         default:
+            OpenMove();
             page.writemap.fadeIn(90);
             break;
     }
@@ -152,10 +183,18 @@ function switchCapsule(str){
 nextPage.writeone.on('click', function () {
     content_word = $('.letter_text').val();
     if (content_word == '') {
+        trySend =false;
         alert('你没有写任何东西！');
     } else {
         //uploadCapsule(capsule_type, time_limit, cap_template, cap_location, content_word, content_pic, content_voice, content_name, content_phone, content_birth);
-        
+        if(checkInput(content_word,'str')){
+            trySend =true;
+            sendLetter(0);
+        }else{
+            trySend =false;
+            alert("是不是有什么信息写错了呢~")
+            return;
+        }
         page.writeone.fadeOut(30);
         switchCapsule(capsule_type);
     }
@@ -163,58 +202,67 @@ nextPage.writeone.on('click', function () {
 // writeone&writemap 结束
 //同学录？？
 nextPage.writesec.on('click', function () {
+    
     // cap_template, content_word
-    content_word = $('.letter_text').val();
+    content_word = $('#letter3').val();
     if (content_word == '') {
+        trySend =false;
         alert('你没有写任何东西！');
     } else {
+        if(checkInput(content_word,'str')){
+            trySend =true;
+            sendLetter(0);
+        }else{
+            trySend =false;
+            alert("是不是有什么信息写错了呢~")
+            return;
+        }
         //uploadCapsule(capsule_type, time_limit, cap_template, cap_location, content_word, content_pic, content_voice, content_name, content_phone, content_birth);
         page.writesec.fadeOut(30);
         switchCapsule(capsule_type);
 
     }
 })
-//writeTA&writeTAsend 开始
+//TA信息
 nextPage.writeTA.on('click', function () {
     // cap_template, content_word
-    content_word = $('#content_word_TA').val();
-    if (content_word == '') {
-        alert('你没有写任何东西！');
-    } else {
+        forbidMove();
         //uploadCapsule(capsule_type, time_limit, cap_template, cap_location, content_word, content_pic, content_voice, content_name, content_phone, content_birth);
+
+        if(($("#txl_qq").val()=="")&&($("#txl_wechat").val()=="")&&($("#txl_email").val()=="")){
+            alert("至少留下联系方式吧~");
+            OpenMove();
+            trySend =false;
+            return;
+        }
+        trySend =true;
         page.writeTA.fadeOut(30);
         switchCapsule(capsule_type);
-    }
+        sendLetter(1);
 })
 //writeTA&writeTAsend 结束
 // writeTAsend&writemap 开始
+
 nextPage.writeTAsend.on('click', function () {
     // content_name,content_phone,content_birth;
-    content_name = $('#content_name').val();
-    content_phone = $('#content_phone').val();
-    content_birth = $('#content_birth').val();
-    var sum = true;
-    var check = {
-        content_name: checkInput(content_name, 'str'),
-        content_phone: checkInput(content_phone, 'num'),
-    }
-    for (key in check) {
-        sum = check[key] && sum;
-    }
-    if (sum === false) {
-        alert('无信息或信息错误');
-    } else {
+    TA_info.name = $('#receiver_name').val();
+    TA_info.phone = $('#receiver_tel').val();
+    TA_info.email = $('#receiver_email').val();
+    if((checkInput(TA_info.phone, 'num'))&&(TA_info.name!="")){
         console.log("提交");
-        //uploadCapsule(capsule_type, time_limit, cap_template, cap_location, content_word, content_pic, content_voice, content_name, content_phone, content_birth);
         page.writeTAsend.fadeOut(100);
         page.writemap.fadeIn(80);
+    }
+    else {
+        alert('信使找不到收件人TAT');
     }
 })
 // writeTAsend&writemap 结束
 //反馈界面
 $('#finish_rewrite').on('click', function () {
-    page.finish.attr('style', 'display:none;');
-    page.page1.attr('style', 'display:block;')
+    window.location.reload();
+    // page.finish.fadeOut();
+    // page.page1.fadeIn();
 });
 $('#finish_back').on('click', function () {
     window.location.href = 'main.html';
@@ -234,10 +282,37 @@ $('#voiceStart').on('touchend', function () {
 $('#voicePlay').on('click', function () {
     voicePlay();
 });
+var message=[];
+function sendLetter(type){
+    switch (type) {//0普通  1同学录
+        case 1:
+            $("input.txl_input").each(function(){
+                message.push( $.trim($(this).val()));
+            }) 
+            txl_content.name=message[0];
+            txl_content.birth=message[1];
+            txl_content.star=message[2];
+            txl_content.hobby=message[3];
+            txl_content.wechat=message[4];
+            txl_content.qq=message[5];
+            txl_content.email=message[6];
+            txl_content.tucao=$("#txl_tucao").text();
+            console.log(txl_content);
+            // //uploadCapsule(capsule_type,
+            //     time_limit, cap_template,
+            //     content_word, content_pic, content_voice, 
+            //     txl_content, TA_info, from_qrcode, user_id);           
+            break;
+        default:
+            console.log('传就完事了')
+            //uploadCapsule()
+            break;
+    }
+}
 //信息录入
-$("#submitCapsule").on('click', function () {
-    uploadCapsule(capsule_type, time_limit, cap_template, cap_location, content_word, content_pic, content_voice, content_name, content_phone, content_birth);
-});
+// $("#submitCapsule").on('click', function () {
+//     uploadCapsule(capsule_type, time_limit, cap_template, cap_location, content_word, content_pic, content_voice, content_name, content_phone, content_birth);
+// });
 // 测试用
 // window.onload = function () {
 //     page.page1.attr('style', 'display:none;');

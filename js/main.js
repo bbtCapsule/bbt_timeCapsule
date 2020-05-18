@@ -279,7 +279,6 @@ function uploadInfo(nickname, phone, email) {
     alert("wrong input!");
     $("#submitInfo").attr("disabled", true);
   }
-
   function post() {
     //upload
     console.log("upload info");
@@ -347,7 +346,7 @@ function uploadCapsule(capsule_type,
         capsule_type: 1, // （胶囊类型）0，1，2分别代表私密，Ta，陌生人
         time_limit: 0, // （时间期限）0，1分别代表半年、一年
         cap_template: 0, // （胶囊模板）0，1分别代表普通信纸和同学录
-        cap_location: 0, // 胶囊位置
+        cap_location: cap_location, // 胶囊位置
         receiver_name: TA_info.name, // 收信人姓名
         receiver_tel: TA_info.tel, // 收信人电话
         receiver_email: TA_info.email, // 收信人邮箱
