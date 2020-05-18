@@ -1,6 +1,7 @@
 import pymysql
 from config import db
 
+
 def getCursor():
     con = pymysql.connect(
         host=db["host"],

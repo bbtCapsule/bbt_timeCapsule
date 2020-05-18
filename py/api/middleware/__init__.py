@@ -4,4 +4,4 @@ from .is_ongoing import is_ongoing
 
 def before_request():
     is_ongoing()
-    # check_wechat_before_request()
+    check_wechat_before_request()
