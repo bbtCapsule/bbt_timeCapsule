@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 db = {
     "host" : "localhost",
-    "user" : "DATABASE_USER",
-    "pwd" : "DATABASE_PASSWORD",
-    "database" : "DATABASE_NAME"
+    "user" : "",
+    "pwd" : "",
+    "database" : ""
 }
 
 Time = {
-    "begin" : "EVENT_BEGIN",
-    "end" : "EVEBT_END",
+    "begin" : "2020-5-18 00:00:00",
+    "end" : "2020-6-15 00:00:00",
 }
 app = {
     'secret_key': '',
