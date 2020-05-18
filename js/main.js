@@ -15,16 +15,18 @@ var icon = "your_icon.jpg"; //头像地址
 var imgs = []; //上传的图片地址数组
 var voice = ""; //录音文件链接
 axios({
-  method:"post",
-  url:apiurl+"set_open_id",
-  data:{
-    openid:11111
-  },
-  withCredentials:true,})
-  .then(res =>{
+    method: "post",
+    url: apiurl + "set_open_id",
+    data: {
+      openid: 11111
+    },
+    withCredentials: true,
+  })
+  .then(res => {
     console.log("set_openid");
     console.log(res);
   });
+
 function checkLogin() {
   let check = false;
   var checkurl = apiurl + "check_wechat_login"; //后台检测登录
@@ -32,7 +34,7 @@ function checkLogin() {
     type: 'GET',
     url: checkurl,
     contentType: "application/json;charset=utf-8",
-   
+
     success(data, textStatus, xhr) {
       //console.log(xhr.status);
       console.log(xhr.statusText);
@@ -125,7 +127,7 @@ function checkInfo() {
     type: 'GET',
     url: checkInfo_url,
     contentType: "application/json;charset=utf-8",
-   
+
     success(data, textStatus, xhr) {
       if (data.record) {
         localStorage.setItem("username", data.nickname);
@@ -174,43 +176,23 @@ $("#submitInfo").on('click', function (e) {
     console.log("按钮解禁");
   }, 3000)
 });
-//把防注入单独写一个函数 传str进到函数里验证 返回true为通过验证 false为输入了非法信息
-function checkErr(str, reg) {
-  var x = str.replace(/\s/g, '');
-  var reg2 = new RegExp('[<>&*=:;]');
-  if (reg.test(x) && !reg2.test(x)) {
-    return true;
-  } else {
-    return false;
-  }
-}
+
 //调用微信图片接口
-function chooseImg(type) { //type  如果是1 就是指上传的是头像（只能选一张图  是0 就是上传信封的图片（可以有多张图
-  if (type == 1) {
-    wx.chooseImage({
-      count: 1, // 默认9
-      sizeType: ['original'], // 可以指定是原图还是压缩图，默认二者都有
-      sourceType: ['album'], // 可以指定来源是相册还是相机，默认二者都有
-      success: function (res) {
-        var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
-        $("#head_pic").src = localIds[0];
-        icon = localIds[0];
-      }
-    });
-  } else {
-    wx.chooseImage({
-      count: 3, // 限制为三张图片
-      sizeType: ['original'], // 可以指定是原图还是压缩图，默认二者都有
-      sourceType: ['album'], // 可以指定来源是相册还是相机，默认二者都有
-      success: function (res) {
-        var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
-        for (num in localIds) {
-          imgs[num] = localIds[num];
-        }
-      }
-    });
-  }
-}
+function chooseImg() { //不用上传头像了 就是上传信封的图片（可以有多张图
+
+  wx.chooseImage({
+    count: 2, // 限制为2张图片
+    sizeType: ['original'], // 可以指定是原图还是压缩图，默认二者都有
+    sourceType: ['album'], // 可以指定来源是相册还是相机，默认二者都有
+    success: function (res) {
+      var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
+      for (num in localIds) {
+        imgs[num] = localIds[num];
+      };
+
+    }
+  })
+};
 
 //调用录音
 var startTime = 0,
@@ -330,6 +312,7 @@ function uploadInfo(nickname, phone, email) {
     });
   }
 }
+//把防注入单独写一个函数 传str进到函数里验证 返回true为通过验证 false为输入了非法信息
 
 function checkInput(str, type) {
   //type 'str'  'num' for text or number
@@ -351,14 +334,39 @@ function checkInput(str, type) {
   return checkres;
 }
 
-function uploadCapsule(capsule_type, time_limit, cap_template, cap_location, content_word, content_pic, content_voice, content_name, content_phone, content_birth) {
+function uploadCapsule(capsule_type,
+  time_limit, cap_template,
+  content_word, content_pic, content_voice, txl_content, TA_info, from_qrcode, user_id) {
   $("#submitCapsule").attr("disabled", "disabled");
   $("#loading").fadeIn();
+  cap_location = Math.floor((Math.random() * 7) + 1);
+  var letter = ({});
+  switch (capsule_type) {
+    case 1:
+      letter = JSON.stringify({
+        capsule_type: 1, // （胶囊类型）0，1，2分别代表私密，Ta，陌生人
+        time_limit: 0, // （时间期限）0，1分别代表半年、一年
+        cap_template: 0, // （胶囊模板）0，1分别代表普通信纸和同学录
+        cap_location: 0, // 胶囊位置
+        receiver_name: TA_info.name, // 收信人姓名
+        receiver_tel: TA_info.tel, // 收信人电话
+        receiver_email: TA_info.email, // 收信人邮箱
+        content_word: 文字, // 文字内容
+        from_qrcode: false, // 是否二维码写信
+        // 可选
+        content_pic: [serverid], // 调用uploadImage返回的serverid，没有上传图片就不传这个参数，就算只有一张图片也传数组
+        content_voice: serverid
+      })
+      break;
+
+    default:
+      break;
+  }
   $.ajax({
     method: 'POST',
     url: apiurl + 'capsule',
     contentType: "application/json;charset=utf-8",
-   
+
     data: JSON.stringify({
       capsule_type: capsule_type,
       time_limit: time_limit,
@@ -371,6 +379,14 @@ function uploadCapsule(capsule_type, time_limit, cap_template, cap_location, con
       content_phone: content_phone,
       content_birth: content_birth
     }),
+    statusCode: {
+      410: res => {
+        alert(res.responseJSON.message);
+      },
+      401: res => {
+        alert(res.responseJSON.message);
+      },
+    },
     success(data, textStatus, xhr) {
       if (data.errcode != 0 || xhr.status == 400) {
         //上传失败 把错误信息显示出来
@@ -404,10 +420,10 @@ window.onload = function () {
 }
 $('#welcome_btn').on('click', function () {
   //if(checkLogin()){
-  if(localStorage.getItem("username")!=undefined){
+  if (localStorage.getItem("username") != undefined) {
     mainPage.introduce.fadeIn(100);
     mainPage.welcome.fadeOut(80);
-  } 
+  }
   getInfo();
   mainPage.getInfo.fadeIn(100);
   mainPage.welcome.fadeOut(80);

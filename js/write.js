@@ -12,10 +12,14 @@ var page = {
     finish: $('#finish')
 }
 for (var key in page) {
-    page[key].attr('style', 'display:none;');
+    if(key==0){
+        key++;
+    }
+    page[key].hide();
 }
+$('#write-map').hide();
 window.onload = function () {
-    page.page1.attr('style', 'display:block;');
+    page.page1.fadeIn();
 }
 var nextPage = {
     page1: $('#page1 .nextPage'),
@@ -32,7 +36,6 @@ var prePage = {
     writesec: $('#write-sec .prePage'),
     writeTA: $('#write-TA .prePage')
 }
-
 //函数
 function getRadio(obj) {
     for (var i = 0; i < obj.length; i++) {
@@ -41,10 +44,6 @@ function getRadio(obj) {
         }
     }
     return null;
-}
-
-function deleteSpace(str) {
-    return str.replace(/\s/g, '');
 }
 //页面开关
 prePage.page1.on('click', function () {
@@ -56,13 +55,13 @@ nextPage.page1.on('click', function () {
     if (capsule_type === null) {
         alert('你还没有选择！');
     } else {
-        page.page1.attr('style', 'display:none;');
-        page.page2.attr('style', 'display:block;')
+        page.page1.fadeOut(200);
+        page.page2.fadeIn(100);
     }
 })
 prePage.page2.on('click', function () {
-    page.page2.attr('style', 'display:none;');
-    page.page1.attr('style', 'display:block;');
+    page.page2.fadeOut(200);
+    page.page1.fadeIn(100);
 })
 //1&2 结束
 //page2的分支有三个 
@@ -89,14 +88,14 @@ $(".switchbox").on('click', function () {
 
 function switchPage(type) {
     if (type == 0) {
-        page.page2.attr('style', 'display:none;');
-        page.writeone.attr('style', 'display:block;');
+        page.page2.fadeOut(200);
+        page.writeone.fadeIn(100);
     } else if (type == 1) {
-        page.page2.attr('style', 'display:none;');
-        page.writesec.attr('style', 'display:block;');
+        page.page2.fadeOut(200);
+        page.writesec.fadeIn(100);
     } else if (type == 2) {
-        page.page2.attr('style', 'display:none;');
-        page.writeTA.attr('style', 'display:block;');
+        page.page2.fadeOut(200);
+        page.writeTA.fadeIn(100);
     }
 }
 //2&writeone&writesec&writeTA
@@ -111,7 +110,6 @@ nextPage.page2.on('click', function () {
             cap_template = 0;
         }else if(template == 'L2'){
             switchPage(0);
-            page.writeone.css("backgroundImage","url('./images/letter/2.png')");
             page.writeone.css("backgroundImage","url('./images/letter/2.png')");
             cap_template = 0;
         }
@@ -137,50 +135,55 @@ prePage.writeTA.on('click', function () {
     page.writeTA.attr('style', 'display:none;');
     page.page2.attr('style', 'display:block;');
 })
+// 根据type判断是否跳转填写信息
+function switchCapsule(str){
+    console.log("胶囊类型是"+str+"  1写给自己 2 写给陌生人 3写给专属")
+    switch (Number(str)) {
+        case 2:
+            page.writeTAsend.fadeIn(90);
+            break;
+        default:
+            page.writemap.fadeIn(90);
+            break;
+    }
+}
+
 //writeone&writemap 1\2信纸
 nextPage.writeone.on('click', function () {
-    // cap_template, content_word
     content_word = $('.letter_text').val();
-    //content_word = deleteSpace(content_word);
     if (content_word == '') {
         alert('你没有写任何东西！');
     } else {
-        uploadCapsule(capsule_type, time_limit, cap_template, cap_location, content_word, content_pic, content_voice, content_name, content_phone, content_birth);
+        //uploadCapsule(capsule_type, time_limit, cap_template, cap_location, content_word, content_pic, content_voice, content_name, content_phone, content_birth);
+        
         page.writeone.fadeOut(30);
-        page.writemap.fadeIn(90);
-        // page.writeone.attr('style', 'display:none;');
-        // page.writemap.attr('style', 'display:block;')
+        switchCapsule(capsule_type);
     }
 })
 // writeone&writemap 结束
-//writesec&writemap 开始
+//同学录？？
 nextPage.writesec.on('click', function () {
     // cap_template, content_word
     content_word = $('.letter_text').val();
-    //content_word = deleteSpace(content_word);
     if (content_word == '') {
         alert('你没有写任何东西！');
     } else {
-        uploadCapsule(capsule_type, time_limit, cap_template, cap_location, content_word, content_pic, content_voice, content_name, content_phone, content_birth);
+        //uploadCapsule(capsule_type, time_limit, cap_template, cap_location, content_word, content_pic, content_voice, content_name, content_phone, content_birth);
         page.writesec.fadeOut(30);
-        page.writemap.fadeIn(90);
-        // page.writesec.attr('style', 'display:none;');
-        // page.writemap.attr('style', 'display:block;');
+        switchCapsule(capsule_type);
+
     }
 })
 //writeTA&writeTAsend 开始
 nextPage.writeTA.on('click', function () {
     // cap_template, content_word
     content_word = $('#content_word_TA').val();
-    //content_word = deleteSpace(content_word);
     if (content_word == '') {
         alert('你没有写任何东西！');
     } else {
-        uploadCapsule(capsule_type, time_limit, cap_template, cap_location, content_word, content_pic, content_voice, content_name, content_phone, content_birth);
+        //uploadCapsule(capsule_type, time_limit, cap_template, cap_location, content_word, content_pic, content_voice, content_name, content_phone, content_birth);
         page.writeTA.fadeOut(30);
-        page.writemap.fadeIn(90);
-        // page.writeTA.attr('style', 'display:none;');
-        // page.writeTAsend.attr('style', 'display:block;')
+        switchCapsule(capsule_type);
     }
 })
 //writeTA&writeTAsend 结束
@@ -192,9 +195,8 @@ nextPage.writeTAsend.on('click', function () {
     content_birth = $('#content_birth').val();
     var sum = true;
     var check = {
-        content_name: checkErr(content_name, /[\w\W]{1,16}/),
-        content_phone: checkErr(content_phone, /^1\d{10}$/),
-        content_birth: checkErr(content_birth, /[\w\W]{1,16}/)
+        content_name: checkInput(content_name, 'str'),
+        content_phone: checkInput(content_phone, 'num'),
     }
     for (key in check) {
         sum = check[key] && sum;
@@ -202,9 +204,10 @@ nextPage.writeTAsend.on('click', function () {
     if (sum === false) {
         alert('无信息或信息错误');
     } else {
-        uploadCapsule(capsule_type, time_limit, cap_template, cap_location, content_word, content_pic, content_voice, content_name, content_phone, content_birth);
-        page.writeTAsend.attr('style', 'display:none;');
-        page.writemap.attr('style', 'display:block;')
+        console.log("提交");
+        //uploadCapsule(capsule_type, time_limit, cap_template, cap_location, content_word, content_pic, content_voice, content_name, content_phone, content_birth);
+        page.writeTAsend.fadeOut(100);
+        page.writemap.fadeIn(80);
     }
 })
 // writeTAsend&writemap 结束
@@ -218,7 +221,7 @@ $('#finish_back').on('click', function () {
 });
 
 $('#images').on('click', function () {
-    chooseImg(0);
+    chooseImg();
 });
 $('#voiceStart').on('touchstart', function (event) {
     event.preventDefault();
@@ -240,12 +243,3 @@ $("#submitCapsule").on('click', function () {
 //     page.page1.attr('style', 'display:none;');
 //     page.finish.attr('style', 'display:block;');
 // }
-$('#C1').on('click', function () {
-    console.log(0);
-});
-$('#C2').on('click', function () {
-    console.log(1);
-});
-$('#C3').on('click', function () {
-    console.log(2);
-})
