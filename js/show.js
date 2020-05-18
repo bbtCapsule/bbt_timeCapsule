@@ -8,7 +8,6 @@ function areaShow() {
             e.preventDefault();
             var clickId=$(this).attr("id");
             $("#"+clickId).attr("class","go");
-
             $("#mai_anim").css("top",e.pageY);
             $("#mai_anim").css("left",e.pageX);
             setTimeout(() => {
@@ -18,6 +17,10 @@ function areaShow() {
             setTimeout(() => {
                 $("#"+clickId).attr("class","");
                 $("#mai_anim").fadeOut(300);
+                $(".mai").hide();
+                $("#write-map").fadeOut(700);
+
+                $("#finish").fadeIn(600);
             }, 3800);
 
         });

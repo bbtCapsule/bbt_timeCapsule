@@ -1,11 +1,15 @@
 /* 清除基础样式 */
-*{
+* {
     outline: none;
 }
-
-textarea{
+@font-face {
+    font-family: 'cute';
+    src: url('../images/HYYOUYUANTIJ.TTF');
+}
+textarea {
     resize: none;
 }
+
 input[type="text"] {
     border: none;
     background: none;
@@ -16,97 +20,59 @@ input[type="text"] {
     font-size: 20px;
     font-family: 'cute';
 }
-*{
+
+* {
     margin: 0;
     padding: 0;
-    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
-.content{
+
+.content {
     margin: 0 auto;
     text-align: center;
 }
-.bottom{
+
+.bottom {
     margin: 0 auto;
     text-align: center;
+    width: 100%;
+    height: 20%;
+    /* position: absolute;
+    bottom: -10%; */
+
 }
-.finish_content{
-    padding-top: 100px;
-    font-size: 48px;
-}
-.finish_bottom{
-    font-size: 32px;
-    padding-top: 300px;
-}
-.finish_btn1{}
-.finish_btn2{
-    padding-top: 50px;
-}
-input[type="text"]{
-    border:1px solid #000;
-}
-.receive_header{
-    padding-top: 50px;
-}
-.receive_content{
-    padding-top: 300px;
-}
-/* 奇奇怪怪 */
-.write-introduce_content{
-    padding-top: 50px;
-}
-.write-introduce_bottom{
-    padding-top: 50px;
-}
-.text2{
-    padding-top: 50px;
-    height: 300px;
-}
-/* 奇奇怪怪 */
-#page2 span{
-    display: inline-block;
+
+input[type="text"] {
     border: 1px solid #000;
 }
-input[type="radio"]:checked+span{
-    background-color: blue;
+
+.receive_header {
+    padding-top: 50px;
 }
-.write-one_content{
+
+.receive_content {
+    padding-top: 300px;
+}
+
+
+.write-one_content {
     padding-top: 50px;
     text-align: center;
 }
-.write-one_bottom{
+
+.write-one_bottom {
     padding-top: 50px;
     text-align: center;
 }
-.write-one_element{
+
+.write-one_element {
     padding-top: 400px;
     position: relative;
     right: 50px;
 }
-.write-TA_element{
-    padding-top: 200px;
-}
-.write-TA_content{
-    padding-top: 100px;
-}
-.write-TA-re_header{
-    width: 250px;
-    padding-top: 100px;
-}
-.write-TA-re_content{
-    width: 150px;
-}
-.username{
-    padding-top: 100px;
-}
-.write-TA-re_phone{
-    padding-top: 50px;
-}
-.write-TA-re_email{
-    padding-top: 50px;
-    padding-bottom: 50px;
-}
+
 /* 👆以上是从all.css中拿来的 */
-.letter{
+.letter {
     display: none;
     background-image: url(../images/letter/1.png);
     background-size: 100% 100%;
@@ -114,46 +80,55 @@ input[type="radio"]:checked+span{
     width: 100vw;
     background-repeat: no-repeat;
 }
-.header_l{
+
+.header_l {
     height: 2vh;
 }
+
 .write-one_content {
     padding-top: 50px;
     text-align: left;
     width: 80%;
     height: 75vh;
 }
-input.prePage{
+
+input.prePage {
     margin-top: 3vh;
     margin-left: 3vh;
     height: 4.5vh;
 }
+
 .write-one_element {
     padding-top: 0px;
     position: relative;
     right: 0px;
 }
+
 .write-one_bottom {
     height: 10vh;
     width: 100%;
     margin-top: -5vh;
     padding-top: 0px;
 }
-.nextPage{
-    width: 50%;
+
+.nextPage {
+    width: 30%;
 }
+
 /* 第三种信纸 */
-#letter3{
+#letter3 {
     /* 它的textarea会短一点 */
     height: 30%;
     position: relative;
-    margin-top: 68%;
+    margin-top: 80%;
 }
-#write-sec{
+
+#write-sec {
     background-image: url(../images/letter/3.png);
 }
+
 /* 同学录样式 */
-#txl_img{
+#txl_img {
     position: absolute;
     top: 0;
     z-index: -1;
@@ -161,23 +136,27 @@ input.prePage{
     height: 120vh;
     left: -10px;
 }
-#write-TA{
+
+#write-TA {
     background: none;
     height: 100vh;
     /* background-color: #eaeaea; */
     z-index: -10;
 }
-#write-TA>.header_l{
+
+#write-TA>.header_l {
     margin-top: 3vh;
     margin-left: -1vh;
 }
-#write-TA>.add{
+
+#write-TA>.add {
     float: right;
     margin-right: -15vh;
     width: 8vh;
 }
+
 /* 左边的同学录 姓名 基础内容 */
-.txl_left{
+.txl_left {
     background: none;
     border: none;
     display: flex;
@@ -194,13 +173,17 @@ input.prePage{
     top: 30%;
     transform: scale(0.75);
 }
-.txl_right,.txl_left_bottom,.txl_right_bottom{
+
+.txl_right,
+.txl_left_bottom,
+.txl_right_bottom {
     background: none;
     border: none;
     display: flex;
     flex-direction: column;
 }
-.txl_right{
+
+.txl_right {
     position: absolute;
     display: flex;
     right: -50%;
@@ -212,6 +195,7 @@ input.prePage{
     flex-direction: column;
     transform: scale(0.65);
 }
+
 .txl_left_bottom {
     /* width: max-content; */
     margin: 0;
@@ -220,7 +204,8 @@ input.prePage{
     /* margin-left: 10px; */
     transform: scale(0.75);
 }
-.txl_right_bottom{
+
+.txl_right_bottom {
     position: absolute;
     bottom: 0;
     right: -60%;
@@ -228,10 +213,12 @@ input.prePage{
     bottom: 2%;
     transform: scale(0.65);
 }
-.txl_contain{
+
+.txl_contain {
     float: left;
 }
-.txl_input{
+
+.txl_input {
     margin-top: -20px;
     width: 20vh;
     height: vh;
@@ -242,7 +229,8 @@ input.prePage{
     border-bottom-width: 1.5px !important;
     border-style: dashed !important;
 }
-.txl_textarea{
+
+.txl_textarea {
     background: none;
     border: none;
     /* background-image: url(../images/letter/line2.png); */
@@ -261,36 +249,79 @@ input.prePage{
     margin-bottom: 12px;
     padding: 4px;
 }
-.txl_item{
+
+.txl_item {
     border: none;
     color: white;
     float: left;
     font-family: 'cute';
     font-size: 28px;
-    
+
 }
-#txl_tucao{
+
+#txl_tucao {
     width: 100%;
     /* margin: 0 !important; */
     height: 100px;
     left: 0;
 }
-.txl_left_bottom>.txl_contain{
+
+.txl_left_bottom>.txl_contain {
     display: flex;
     flex-direction: column;
 }
-#txl_btn{
+
+#txl_btn {
     width: 260px;
     margin: 0;
     position: absolute;
     right: -40%;
     bottom: -15%;
 }
+
 /* 以上为覆盖内容 包含同学录样式 */
 /* 信纸选择器 */
-.switchbox{
-    margin-top: 30px;
-    margin-bottom: 30px;
+.sender{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 30%;
+}
+.sender>img {
+    width: 12vw;
+}
+#page1>.page1_bottom{
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    padding-left: 15%;
+}
+.choose_text {
+    font-family: 'cute';
+    color: white;
+    margin-left: -20px;
+    font-size: 18px;
+    margin-top: 10px;
+}
+#J1{
+    background-image: url(../images/1.png);
+}
+#J2{
+    background-image: url(../images/2.png);
+}
+#J3{
+    background-image: url(../images/3.png);
+}
+#J1,#J2,#J3{
+    width: 100%;
+    height: 8vh;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center
+}
+.switchbox {
+    margin-top: -8%;
+    margin-bottom: 10px;
     width: 70vw;
     margin-left: 15vw;
     height: max-content;
@@ -300,18 +331,74 @@ input.prePage{
     align-items: center;
     /* padding: 3%; */
     overflow-x: scroll;
+    transform: scale(0.8);
+
+}
+.template {
+    -webkit-appearance: button;
+    background-color: white;
+    width: 14px;
+    height: 14px;
+    margin-top: 10px;
+    border-radius: 2rem;
+    opacity: 0.1;
+
+}
+.template:checked {
+    opacity: 1;
 }
 .show_img {
-    width: 30vh;
+    width: 300px;
+    font-size: 300px;
     height: 100%;
+    background-image: url(../images/letter/1.png);
+    color: transparent;
+    background-size: 100% 100%;
 }
-.show_letter{
+#show_L1>label{
+    height: 100%;
+    background-image: url(../images/letter/1.png);
+}
+#show_L2>label{
+    height: 100%;
+    background-image: url(../images/letter/2.png); 
+}
+#show_L3>label{
+    height: 100%;
+    background-image: url(../images/letter/3.png); 
+}
+#show_L4>label{
+    height: 100%;
+    background-image: url(../images/letter/41.png); 
+}
+.show_letter {
     width: 100%;
     margin-left: 20px;
     margin-right: 20px;
 }
+
+.choose{
+    opacity: 0;
+    -webkit-appearance: unset;
+    width: 0px;
+    height: 10px;
+    border-left: 60px solid transparent;
+    border-right: 60px solid transparent;
+    border-bottom: 50px solid #a59b92;
+    border-top-color: transparent;
+    border-top: 30px;
+    /* position: absolute; */
+    top: 0;
+    transform: scale(0.2,0.3);
+    position: relative;
+    margin-right: 20px;
+}
+.choose:hover,.choose:active{
+    opacity: 1;
+
+}
 /*下面是普通信纸样式 */
-.letter_text{
+.letter_text {
     width: 90%;
     margin-left: 5%;
     background: none;
@@ -333,30 +420,35 @@ input.prePage{
     background-repeat: no-repeat;
     background-size: cover;
 }
-.add{
+
+.add {
     width: 5vh;
     margin-left: 5%;
     margin-top: 4%;
     outline: none;
 }
-@font-face{
-    font-family: 'cute'; 
-    src: url('../images/HYYOUYUANTIJ.TTF');
-}
+
+
 
 /* ！！！！！！！！！！！！！！！！！！！！！！！！！ */
 /* 从这里开始是搬运过来的地图+动画 */
-body{
+body {
     height: 100%;
     /* width:max-content; */
     /* overflow-y: hidden; */
-        -webkit-user-select: none; /*webkit浏览器*/
-        user-select: none;
+    -webkit-user-select: none;
+    /*webkit浏览器*/
+    user-select: none;
+    background-color: #d4c5c7;
 }
-.map::-webkit-scrollbar{
+
+.map::-webkit-scrollbar {
     display: none;
 }
-.map{
+.mai{
+    /* //display: none; */
+}
+.map {
     z-index: -9;
     position: absolute;
     top: 0;
@@ -370,13 +462,15 @@ body{
     overflow-x: scroll;
     scroll-behavior: smooth;
 }
-#img_map{
+
+#img_map {
     height: 135vh;
     position: absolute;
     top: 0px;
     z-index: -9;
 }
-#mapmap{
+
+#mapmap {
     z-index: -1;
     outline: none;
     user-select: none;
@@ -390,73 +484,99 @@ body{
     top: 0;
     left: 0;
 }
-area{
+
+area {
     position: absolute;
     width: 20vh;
     height: 17vh;
-    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
-#A1{
+
+#A1 {
     /* top: 40vw;
     left: 30vw; */
     top: 18vh;
     left: 12vh;
 }
-#A2{
+
+#A2 {
     bottom: 30vh;
     left: 10vw;
     /* bottom: 75vw;
     left: 20vw; */
 }
-#A3{
+
+#A3 {
     top: 50vh;
     left: 130vh;
     /* top: 120vw;
     left: 275vw; */
 
 }
-#A4{
+
+#A4 {
     right: 109vh;
     top: 30vh;
 }
-#A5{
+
+#A5 {
     right: 86vh;
     top: 20vh;
 
 }
-#A6{
+
+#A6 {
     right: 50vh;
     bottom: 20vh;
 }
-#A7{
+
+#A7 {
     /* right: 20vw;
     bottom: 150vw; */
     right: 0vh;
     bottom: 70vh;
 }
+
 /* 以上为area定位 */
 area.go:before {
     content: " ";
     display: block;
     height: 40px;
-    width:  13vw;
+    width: 13vw;
     background: url("../images/地图-箭头.png") no-repeat;
     background-size: contain;
     margin-left: 13vw;
-    animation-delay:0.1s;
+    animation-delay: 0.1s;
     animation: fadeIn 1.2s;
-    animation-iteration-count:2;
-    animation-direction:alternate reverse;
+    animation-iteration-count: 2;
+    animation-direction: alternate reverse;
     animation-fill-mode: forwards;
 }
-@keyframes fadeIn{
-    0%{opacity: 0;margin-top: -30px;}
-    25%{opacity: 1;margin-top: 0px;}
-    75%{opacity: 1;margin-top: -40px;}
-    100%{opacity: 0;margin-top: 0px;}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        margin-top: -30px;
+    }
+
+    25% {
+        opacity: 1;
+        margin-top: 0px;
+    }
+
+    75% {
+        opacity: 1;
+        margin-top: -40px;
+    }
+
+    100% {
+        opacity: 0;
+        margin-top: 0px;
+    }
 }
+
 /* 箭头动画↑ */
-#mai_att{
+#mai_att {
     position: fixed;
     width: 70vw;
     height: 30vh;
@@ -466,21 +586,25 @@ area.go:before {
     top: 25%;
     /* margin: auto; */
     z-index: 2;
+    padding: 10px;
     background: url(../images/地图-弹框.png) no-repeat;
     background-size: contain;
     text-align: center;
     padding-top: 10vh;
     line-height: 30px;
     font-weight: 200;
+    left: 12.5vw;
 }
+
 #mai_att>span {
     font-size: small;
     position: relative;
-    bottom: -3vh;
+    bottom: -2vh;
     outline: none;
     border: none;
 }
-#mai_anim{
+
+#mai_anim {
     display: none;
     width: 20vh;
     height: unset;
@@ -489,4 +613,189 @@ area.go:before {
     margin-left: -9vh;
     transform: scale(1.5);
 }
-/*  */
+
+input {
+    outline: none;
+    border: none;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-appearance: none;
+}
+
+/* page1 */
+#page1 ,#page2{
+    width: 100vw;
+    height: 100vh;
+    background-color: #bfdbc5;
+    padding-top: 0.1px;
+    overflow: hidden;
+}
+
+.header_l {
+    position: fixed;
+}
+
+.page1_content {
+    text-align: center;
+}
+
+.page1_intro {
+    box-sizing: border-box;
+    width: 90%;
+    height: 120%;
+    overflow-y: scroll;
+    margin: 5%;
+    padding: 20% 10% 20% 10%;
+    background: url(../images/other/私密胶囊-框.png) no-repeat top center;
+    background-size: 100%;
+    font-family: AdobeHeitiStd-Regular;
+    color: #646b6a;
+    font-size: 16px;
+    font-weight: 500;
+    font-stretch: normal;
+}
+p#num{
+    float: right;
+    margin-right: 15%;
+    margin-left: -20%;
+}
+.page1_content {
+    margin-top: 50px;
+    width: 90%;
+}
+.page1_text {
+    color: #3f454bcf;
+    font-size: 16px;
+}
+.page1_bottom {
+    margin-top: 5%;
+}
+#page2>.content{
+    margin-top: 5%;
+    color: #4b4f4b;
+    font-size: 2.2vh;
+}
+#page2>.bottom{
+    margin-top: -15%;
+}
+.year{
+    margin-top: 15px;
+    width: 80%;
+    margin-left: 10%;
+    margin-bottom: 18px;
+}
+.year_choose{
+    margin-right: 15%;
+    margin-left: 10%;
+}
+.year_choose>input[type="radio"] {
+    -webkit-appearance: button;
+    background: none;
+    border: none;
+    border-style: solid;
+    padding: 8.5px;
+    border-width: 1.2px;
+    border-color: white;
+    margin-bottom: -3.5px;
+    margin-right: 4px;
+}
+.year_choose>input[type="radio"]:checked::before{
+    content: "√";
+    width: 0px;
+    /* height: 10px; */
+    position: absolute;
+    /* transform: scale(3,1); */
+    color: #5d655f;
+    /* right: -10px; */
+    transform: translate(-8px,-6px) scale(3,2);
+}
+/* 收集信息 */
+#write-TA-send {
+    width: 100vw;
+    height: 100vh;
+    background: url(../images/other/信息填写-背景.jpg);
+    background-size: contain;
+    padding-top: 0.1px;
+}
+
+.write-TA-re_header {
+    width: 69%;
+    margin: 14vh 14vw 6vh auto;
+    margin-bottom: 40px;
+    font-family: AdobeHeitiStd-Regular;
+    font-size: 4vw;
+    font-weight: 500;
+    font-stretch: normal;
+    line-height: 34px;
+    letter-spacing: 2px;
+    color: #3f454b;
+    text-align: left;
+}
+
+.write-TA_content {
+    padding-top: 100px;
+}
+
+.write-TA-re_content {
+    width: 69%;
+    text-align: left;
+    font-size: 5vw;
+}
+
+.write-TA-re_content input[type="text"] {
+    box-sizing: border-box;
+    width: 260px;
+    height: 44px;
+    width: 100%;
+    /* height: 12%; */
+    border-radius: 6px;
+    border: 2.5px solid #6e8f76;
+    margin-bottom: 4vh;
+}
+
+.write-TA-re_btn {
+    margin-top: 9%;
+}
+
+/* 反馈页面 */
+#finish {
+    width: 100vw;
+    height: 100vh;
+    background: url(../images/other/START&-bg.jpg);
+    background-size: 100% 100%;
+    padding-top: 0.1px;
+    /* 让子元素的margin-top可用 */
+}
+
+.finish_content {
+    padding: 24vh 0 26vh 0;
+    font-family: AdobeHeitiStd-Regular;
+    font-size: 7vw;
+    font-weight: 500;
+    font-stretch: normal;
+    letter-spacing: 2px;
+    color: #3f454b;
+    text-align: center;
+}
+
+.finish_bottom {
+    width: 40vw;
+    height: 22vh;
+    /* width: 40vw; */
+    /* height: 11vh; */
+    margin: auto;
+    background-size: contain;
+}
+
+.finish_btn1 {
+    width: 100%;
+    height: 11vh;
+    background: url(../images/other/反馈btn-再写一封.png) no-repeat center;
+    background-size: contain;
+}
+
+.finish_btn2 {
+    width: 100%;
+    height: 11vh;
+    background: url(../images/other/反馈btn-返回.png) no-repeat center;
+    background-size: contain;
+}

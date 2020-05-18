@@ -54,7 +54,7 @@ prePage.page1.on('click', function () {
 nextPage.page1.on('click', function () {
     capsule_type = getRadio(document.getElementsByName('sender'));
     if (capsule_type === null) {
-        alert('无信息');
+        alert('你还没有选择！');
     } else {
         page.page1.attr('style', 'display:none;');
         page.page2.attr('style', 'display:block;')
@@ -67,6 +67,26 @@ prePage.page2.on('click', function () {
 //1&2 结束
 //page2的分支有三个 
 //type 若0 选了信纸1、2。 若1选了信纸3。 若2选了同学录
+$(".switchbox").on('click', function () {
+    switch (getRadio(document.getElementsByName('template'))) {
+        case 'L1':
+            $("p#num").text("1/4");
+            break;
+        case 'L2':
+            $("p#num").text("2/4");
+            break;
+        case 'L3':
+            $("p#num").text("3/4");
+            break;
+        case 'L4':
+            $("p#num").text("4/4");
+            break;
+        default:
+            $("p#num").text("0/4");
+            break;
+    }
+})
+
 function switchPage(type) {
     if (type == 0) {
         page.page2.attr('style', 'display:none;');
@@ -84,12 +104,18 @@ nextPage.page2.on('click', function () {
     time_limit = getRadio(document.getElementsByName('year'));
     var template = getRadio(document.getElementsByName('template'));
     if (time_limit === null) {
-        alert('无信息');
+        alert('你还没有选择！');
     } else {
-        if (template == 'L1' || template == 'L2') {
+        if (template == 'L1' ) {
             switchPage(0);
             cap_template = 0;
-        } else if (template == 'L3') {
+        }else if(template == 'L2'){
+            switchPage(0);
+            page.writeone.css("backgroundImage","url('./images/letter/2.png')");
+            page.writeone.css("backgroundImage","url('./images/letter/2.png')");
+            cap_template = 0;
+        }
+        else if (template == 'L3') {
             switchPage(1);
             cap_template = 0; //0是普通信纸
         } else if (template == 'L4') {
@@ -115,12 +141,15 @@ prePage.writeTA.on('click', function () {
 nextPage.writeone.on('click', function () {
     // cap_template, content_word
     content_word = $('.letter_text').val();
-    content_word = deleteSpace(content_word);
+    //content_word = deleteSpace(content_word);
     if (content_word == '') {
-        alert('无信息');
+        alert('你没有写任何东西！');
     } else {
-        page.writeone.attr('style', 'display:none;');
-        page.writemap.attr('style', 'display:block;')
+        uploadCapsule(capsule_type, time_limit, cap_template, cap_location, content_word, content_pic, content_voice, content_name, content_phone, content_birth);
+        page.writeone.fadeOut(30);
+        page.writemap.fadeIn(90);
+        // page.writeone.attr('style', 'display:none;');
+        // page.writemap.attr('style', 'display:block;')
     }
 })
 // writeone&writemap 结束
@@ -128,24 +157,30 @@ nextPage.writeone.on('click', function () {
 nextPage.writesec.on('click', function () {
     // cap_template, content_word
     content_word = $('.letter_text').val();
-    content_word = deleteSpace(content_word);
+    //content_word = deleteSpace(content_word);
     if (content_word == '') {
-        alert('无信息');
+        alert('你没有写任何东西！');
     } else {
-        page.writesec.attr('style', 'display:none;');
-        page.writemap.attr('style', 'display:block;')
+        uploadCapsule(capsule_type, time_limit, cap_template, cap_location, content_word, content_pic, content_voice, content_name, content_phone, content_birth);
+        page.writesec.fadeOut(30);
+        page.writemap.fadeIn(90);
+        // page.writesec.attr('style', 'display:none;');
+        // page.writemap.attr('style', 'display:block;');
     }
 })
 //writeTA&writeTAsend 开始
 nextPage.writeTA.on('click', function () {
     // cap_template, content_word
     content_word = $('#content_word_TA').val();
-    content_word = deleteSpace(content_word);
+    //content_word = deleteSpace(content_word);
     if (content_word == '') {
-        alert('无信息');
+        alert('你没有写任何东西！');
     } else {
-        page.writeTA.attr('style', 'display:none;');
-        page.writeTAsend.attr('style', 'display:block;')
+        uploadCapsule(capsule_type, time_limit, cap_template, cap_location, content_word, content_pic, content_voice, content_name, content_phone, content_birth);
+        page.writeTA.fadeOut(30);
+        page.writemap.fadeIn(90);
+        // page.writeTA.attr('style', 'display:none;');
+        // page.writeTAsend.attr('style', 'display:block;')
     }
 })
 //writeTA&writeTAsend 结束
@@ -167,11 +202,21 @@ nextPage.writeTAsend.on('click', function () {
     if (sum === false) {
         alert('无信息或信息错误');
     } else {
+        uploadCapsule(capsule_type, time_limit, cap_template, cap_location, content_word, content_pic, content_voice, content_name, content_phone, content_birth);
         page.writeTAsend.attr('style', 'display:none;');
         page.writemap.attr('style', 'display:block;')
     }
 })
 // writeTAsend&writemap 结束
+//反馈界面
+$('#finish_rewrite').on('click', function () {
+    page.finish.attr('style', 'display:none;');
+    page.page1.attr('style', 'display:block;')
+});
+$('#finish_back').on('click', function () {
+    window.location.href = 'main.html';
+});
+
 $('#images').on('click', function () {
     chooseImg(0);
 });
@@ -190,3 +235,17 @@ $('#voicePlay').on('click', function () {
 $("#submitCapsule").on('click', function () {
     uploadCapsule(capsule_type, time_limit, cap_template, cap_location, content_word, content_pic, content_voice, content_name, content_phone, content_birth);
 });
+// 测试用
+// window.onload = function () {
+//     page.page1.attr('style', 'display:none;');
+//     page.finish.attr('style', 'display:block;');
+// }
+$('#C1').on('click', function () {
+    console.log(0);
+});
+$('#C2').on('click', function () {
+    console.log(1);
+});
+$('#C3').on('click', function () {
+    console.log(2);
+})
