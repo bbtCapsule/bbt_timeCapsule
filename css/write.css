@@ -35,6 +35,11 @@ input[type="text"] {
 .bottom {
     margin: 0 auto;
     text-align: center;
+    width: 100%;
+    height: 20%;
+    /* position: absolute;
+    bottom: -10%; */
+
 }
 
 input[type="text"] {
@@ -107,7 +112,7 @@ input.prePage {
 }
 
 .nextPage {
-    width: 50%;
+    width: 30%;
 }
 
 /* 第三种信纸 */
@@ -115,7 +120,7 @@ input.prePage {
     /* 它的textarea会短一点 */
     height: 30%;
     position: relative;
-    margin-top: 68%;
+    margin-top: 80%;
 }
 
 #write-sec {
@@ -289,7 +294,7 @@ input.prePage {
     display: flex;
     flex-direction: row;
     width: 90%;
-    padding-left: 10%;
+    padding-left: 15%;
 }
 .choose_text {
     font-family: 'cute';
@@ -315,7 +320,7 @@ input.prePage {
     background-position: center
 }
 .switchbox {
-    margin-top: 30px;
+    margin-top: -8%;
     margin-bottom: 10px;
     width: 70vw;
     margin-left: 15vw;
@@ -326,6 +331,8 @@ input.prePage {
     align-items: center;
     /* padding: 3%; */
     overflow-x: scroll;
+    transform: scale(0.8);
+
 }
 .template {
     -webkit-appearance: button;
@@ -335,73 +342,32 @@ input.prePage {
     margin-top: 10px;
     border-radius: 2rem;
     opacity: 0.1;
-        /* -webkit-appearance: button;
-        background: none;
-        border: none;
-        border-style: solid;
-        padding: 8.5px;
-        border-width: 1.2px;
-        border-color: white;
-        margin-bottom: -3.5px;
-        margin-right: 4px; */
+
 }
 .template:checked {
     opacity: 1;
 }
-/* .template:after {
-    content: " ";
-    width: 14px;
-    height: 14px;
-    background: white;
-    position: absolute;
-    border-radius: 5rem;
-    margin-left: 25px;
-}
-.template:before {
-    content: " ";
-    width: 14px;
-    height: 14px;
-    background: white;
-    position: absolute;
-    border-radius: 5rem;
-    margin-left: -25px;
-} */
-
-/* .template:checked:before {
-    content: "";
-    width: 10px;
-    height: 10px;
-    background-color: #5c645d;
-    position: absolute;
-    border-radius: 5rem;
-    margin-top: 5px;
-    margin-left: 5px;
-} */
 .show_img {
     width: 300px;
-    font-size: 280px;
+    font-size: 300px;
     height: 100%;
     background-image: url(../images/letter/1.png);
     color: transparent;
     background-size: 100% 100%;
 }
 #show_L1>label{
-    width: 30vh;
     height: 100%;
     background-image: url(../images/letter/1.png);
 }
 #show_L2>label{
-    width: 30vh;
     height: 100%;
     background-image: url(../images/letter/2.png); 
 }
 #show_L3>label{
-    width: 30vh;
     height: 100%;
     background-image: url(../images/letter/3.png); 
 }
 #show_L4>label{
-    width: 30vh;
     height: 100%;
     background-image: url(../images/letter/41.png); 
 }
@@ -473,6 +439,7 @@ body {
     -webkit-user-select: none;
     /*webkit浏览器*/
     user-select: none;
+    background-color: #d4c5c7;
 }
 
 .map::-webkit-scrollbar {
@@ -660,6 +627,7 @@ input {
     height: 100vh;
     background-color: #bfdbc5;
     padding-top: 0.1px;
+    overflow: hidden;
 }
 
 .header_l {
@@ -672,21 +640,23 @@ input {
 
 .page1_intro {
     box-sizing: border-box;
-    width: 83%;
-    height: 36vh;
-    margin: 15% 11% 0 6%;
-    padding: 9vh 9.5% 0 12.5%;
-    background: url(../images/other/私密胶囊-框.png) no-repeat center center;
-    background-size: contain;
+    width: 90%;
+    height: 120%;
+    overflow-y: scroll;
+    margin: 5%;
+    padding: 20% 10% 20% 10%;
+    background: url(../images/other/私密胶囊-框.png) no-repeat top center;
+    background-size: 100%;
     font-family: AdobeHeitiStd-Regular;
+    color: #646b6a;
     font-size: 16px;
     font-weight: 500;
     font-stretch: normal;
-    line-height: 34px;
-    letter-spacing: 1px;
-    color: #3f454b;
-    text-align: left;
-    overflow-y: scroll;
+}
+p#num{
+    float: right;
+    margin-right: 15%;
+    margin-left: -20%;
 }
 .page1_content {
     margin-top: 50px;
@@ -696,136 +666,16 @@ input {
     color: #3f454bcf;
     font-size: 16px;
 }
-/* .page1_text {
-    font-family: AdobeHeitiStd-Regular;
-    font-size: 18px;
-    font-weight: 500;
-    font-stretch: normal;
-    line-height: 34px;
-    letter-spacing: 1px;
-    color: #3f454b;
-    margin-bottom: 3vh;
-} */
-
-.page1_radio {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    height: 10vh;
-}
-
-.C1_pic {
-    display: inline-block;
-    position: relative;
-    width: 26%;
-    height: 100%;
-    background-color: purple;
-    background: url(../images/other/胶囊-粉.png) no-repeat center;
-    background-size: contain;
-}
-
-.C1_pic::after {
-    content: "私密胶囊";
-    position: relative;
-    top: 11vh;
-    right: 6%;
-    font-family: AdobeHeitiStd-Regular;
-    font-size: 18px;
-    font-weight: 500;
-    font-stretch: normal;
-    line-height: 34px;
-    letter-spacing: 1px;
-    color: #ffffff;
-}
-
-#C1:checked::before{
-    content: "";
-    position: absolute;
-    top: 16vh;
-    left: calc(44% - 1.5vh);
-    width: 0;
-    height: 0;
-    border: 1.5vh solid;
-    border-top: 0;
-    border-color: transparent transparent #8f8475;
-}
-.C2_pic {
-    display: inline-block;
-    position: relative;
-    width: 26%;
-    height: 100%;
-    background-color: pink;
-    background: url(../images/other/胶囊-蓝.png) no-repeat center;
-    background-size: contain;
-}
-
-.C2_pic::after {
-    content: "漂流胶囊";
-    position: relative;
-    top: 11vh;
-    right: 6%;
-    font-family: AdobeHeitiStd-Regular;
-    font-size: 18px;
-    font-weight: 500;
-    font-stretch: normal;
-    line-height: 34px;
-    letter-spacing: 1px;
-    color: #ffffff;
-}
-
-#C2:checked::before{
-    content: "";
-    position: absolute;
-    top: 16vh;
-    left: calc(44% - 1.5vh);
-    width: 0;
-    height: 0;
-    border: 1.5vh solid;
-    border-top: 0;
-    border-color: transparent transparent #8f8475;
-}
-.C3_pic {
-    display: inline-block;
-    position: relative;
-    width: 26%;
-    height: 100%;
-    background-color: purple;
-    background: url(../images/other/胶囊-紫.png) no-repeat center;
-    background-size: contain;
-}
-
-.C3_pic::after {
-    content: "专属胶囊";
-    position: relative;
-    top: 11vh;
-    right: 6%;
-    font-family: AdobeHeitiStd-Regular;
-    font-size: 18px;
-    font-weight: 500;
-    font-stretch: normal;
-    line-height: 34px;
-    letter-spacing: 1px;
-    color: #ffffff;
-}
-
-#C3:checked::before{
-    content: "";
-    position: absolute;
-    top: 16vh;
-    left: calc(44% - 1.5vh);
-    width: 0;
-    height: 0;
-    border: 1.5vh solid;
-    border-top: 0;
-    border-color: transparent transparent #8f8475;
-}
 .page1_bottom {
-    margin-top: 12vh;
+    margin-top: 5%;
 }
 #page2>.content{
-    margin-top: 10%;
+    margin-top: 5%;
     color: #4b4f4b;
     font-size: 2.2vh;
+}
+#page2>.bottom{
+    margin-top: -15%;
 }
 .year{
     margin-top: 15px;

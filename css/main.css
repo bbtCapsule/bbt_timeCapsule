@@ -91,19 +91,16 @@ height:60px; */
     height: max-content;
     left: 0;
     right: 0;
-    bottom: 50%;
-    top: 25%;
     margin: auto;
     z-index: 3;
-    padding: 35px 35px 35px 35px;
-    background: url(../images/other/信息填写-背景.jpg);
+
 }
 
 .info {
     display: flex;
     flex-direction: row;
     justify-content: left;
-    align-items: center;
+    /* align-items: center; */
     margin-bottom: 10px;
 }
 
