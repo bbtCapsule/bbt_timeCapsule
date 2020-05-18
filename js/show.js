@@ -2,6 +2,9 @@
 $("#loading").on('click', function (e) {
     $("#loading").fadeOut(300);
 })
+$("#mai_att").on('click', function (e) {
+    $("#mai_att").fadeOut(300);
+})
 function areaShow() {
     for(i=1;i<8;i++){
         $("#A"+i).on('click', function (e) {

@@ -107,14 +107,55 @@ input.prePage {
 .write-one_bottom {
     height: 10vh;
     width: 100%;
-    margin-top: -5vh;
+    /* margin-top: -5vh; */
     padding-top: 0px;
 }
 
 .nextPage {
-    width: 30%;
+    width: 43%;
 }
-
+/* 添加的部分 */
+.mp3 {
+    -webkit-appearance: media-play-button;
+    width: 70%;
+    margin-left: 5%;
+    border-radius: 0.6rem;
+    background-color: #f0f5f7;
+    margin-bottom: 5%;
+    margin-top: 3%;
+}
+.player {
+    width: 8%;
+    margin-left: 4%;
+    margin-bottom: 2%;
+    margin-top: 3%;
+}
+#voice_dele {
+    float: right;
+    width: 8%;
+    margin-right: -25px;
+    margin-top: 4%;
+}
+.mp3>span {
+    font-size: 14px;
+    color: #425f73;
+    font-family: 'cute';
+    font-weight: 600;
+    position: absolute;
+    margin-left: 10px;
+    margin-top: 2%;
+}
+.add_img {
+    width: 60px;
+    height: 60px;
+    margin-left: 5%;
+}
+.deleimg {
+    width: 15px;
+    height: 15px;
+    margin-left: -15px;
+    margin-bottom: 50px;
+}
 /* 第三种信纸 */
 #letter3 {
     /* 它的textarea会短一点 */
@@ -126,8 +167,37 @@ input.prePage {
 #write-sec {
     background-image: url(../images/letter/3.png);
 }
-
+#write-sec>.content.write-one_content>.add_img {
+    width: 60px;
+    height: 60px;
+    margin-left: -5%;
+    /* transform: scale(0.7); */
+    transform: scale(0.7) translate(40%,-165vw);
+}
+#write-sec>.content.write-one_content>.deleimg {
+    width: 15px;
+    height: 15px;
+    margin-left: -15px;
+    transform: scale(0.7);
+    margin-bottom: 50px;
+    /* transform: scale(0.65) translate(55%,-240%); */
+    transform: scale(0.7) translate(80%,-160vw);
+}
+#write-sec>.content.write-one_content>.mp3 {
+    -webkit-appearance: media-play-button;
+    width: 70%;
+    margin-left: 5%;
+    border-radius: 0.6rem;
+    background-color: #f0f5f7;
+    margin-bottom: 5%;
+    margin-top: 3%;
+    transform: scale(0.65) translate(55%,-240%);
+}
 /* 同学录样式 */
+.txl_add_img{
+    width: 60px;
+    height: 60px;
+}
 #txl_img {
     position: absolute;
     top: 0;
@@ -136,7 +206,12 @@ input.prePage {
     height: 120vh;
     left: -10px;
 }
-
+.txl_imgdiv {
+    width: max-content;
+    position: absolute;
+    right: -45%;
+    top: 15%;
+}
 #write-TA {
     background: none;
     height: 100vh;
@@ -412,7 +487,7 @@ input.prePage {
     line-height: 34px;
     letter-spacing: 0px;
     color: #ffffff;
-    height: 70%;
+    height: 50%;
     overflow-y: scroll;
     letter-spacing: 2px;
     background-image: url(../images/letter/line.png);
@@ -594,6 +669,7 @@ area.go:before {
     line-height: 30px;
     font-weight: 200;
     left: 12.5vw;
+    z-index: -1;
 }
 
 #mai_att>span {
@@ -644,8 +720,8 @@ input {
     height: 120%;
     overflow-y: scroll;
     margin: 5%;
-    padding: 20% 10% 20% 10%;
-    background: url(../images/other/私密胶囊-框.png) no-repeat top center;
+    padding: 20% 10% 30% 10%;
+        background: url(../images/other/私密胶囊-框.png) no-repeat top center;
     background-size: 100%;
     font-family: AdobeHeitiStd-Regular;
     color: #646b6a;

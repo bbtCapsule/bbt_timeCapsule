@@ -9,8 +9,9 @@
         <link rel="stylesheet" href="./css/write.css">
         <link rel="stylesheet" href="./css/load.css">
         <script src="./js/jquery-3.4.1.min.js"></script>
-            <!--script src="https://unpkg.com/axios/dist/axios.min.js"></script-->
-<script src="https://cdn.bootcss.com/qs/6.5.2/qs.min.js"></script>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script src="https://cdn.bootcss.com/qs/6.5.2/qs.min.js"></script>
+        <!--script src="https://cdn.staticfile.org/jquery-cookie/1.4.1/jquery.cookie.min.js"></script-->
         <script src="http://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
         <script src="https://cdn.bootcss.com/PreloadJS/1.0.1/preloadjs.min.js"></script>
         <script src="./js/preload.js"></script>
@@ -117,9 +118,19 @@
             <div class="content write-one_content">
                 <textarea class="letter_text" rows="20" cols="25" placeholder="写下你要说的话~"></textarea>
                 <div class="write-one_element">
-                    <input type="image" src="./images/letter/photobtn.png" class="add" id="images" />
                     <input type="image" src="./images/letter/record.png" class="add" id="voiceStart" />
+                    <input type="image" src="./images/letter/photobtn.png" class="add" id="images" />
                 </div>
+                <li audioid='"test.mp3"' class="mp3">
+                    <input type="image" src="./images/letter/R1.png" class="player" id="player" />
+                    <input type="image" src="./images/letter/dele.png" class="delemp3" id="voice_dele" />
+                </li>
+
+                <!--li audioid='"+voice.localId+"' class="mp3"><button>音频任务"+riqi+mytime+"</button></li-->
+                <img src="./images/letter/2.png" class="add_img" id="pic1" />
+                <input type="image" src="./images/letter/dele.png" class="deleimg" id="pic_dele1" />
+                <img src="./images/letter/1.png" class="add_img" id="pic2" />
+                <input type="image" src="./images/letter/dele.png" class="deleimg" id="pic_dele2" />
             </div>
             <div class="bottom write-one_bottom">
                 <input type="image" src="./images/letter/L1.png" class="nextPage" />
@@ -127,8 +138,15 @@
         </div>
         <div id="write-TA" class="letter">
             <!--专属类型 同学录 -->
+            <input type="image" id="write_back" src="./images/letter/back.png" class="prePage">
+
+            <div class="txl_imgdiv">
+                <img src="./images/letter/2.png" class="txl_add_img" id="pic1" />
+                <input type="image" src="./images/letter/dele.png" class="deleimg" id="pic_dele1" />
+                <img src="./images/letter/1.png" class="txl_add_img" id="pic2" />
+                <input type="image" src="./images/letter/dele.png" class="deleimg" id="pic_dele2" />
+            </div>
             <div class="header_l">
-                <input type="image" id="write_back" src="./images/letter/back.png" class="prePage">
             </div>
             <input type="image" src="./images/letter/photobtn.png" class="add" id="images" />
             <img src="./images/letter/4.png" id="txl_img" />
@@ -196,6 +214,17 @@
                     <input type="image" src="./images/letter/photobtn.png" class="add" id="images" />
                     <input type="image" src="./images/letter/record.png" class="add" id="voiceStart" />
                 </div>
+                <li audioid='"test.mp3"' class="mp3">
+                    <input type="image" src="./images/letter/R1.png" class="player" id="player" />
+                    <input type="image" src="./images/letter/dele.png" class="delemp3" id="voice_dele" />
+                </li>
+
+                <!--li audioid='"+voice.localId+"' class="mp3"><button>音频任务"+riqi+mytime+"</button></li-->
+                <img src="./images/letter/2.png" class="add_img" id="pic1" />
+                <input type="image" src="./images/letter/dele.png" class="deleimg" id="pic_dele1" />
+                <img src="./images/letter/1.png" class="add_img" id="pic2" />
+                <input type="image" src="./images/letter/dele.png" class="deleimg" id="pic_dele2" />
+
             </div>
             <div class="bottom write-one_bottom">
                 <input type="image" src="./images/letter/L3.png" class="nextPage" />
@@ -228,12 +257,6 @@
                     alt="雕像" />
             </map>
         </div>
-        <div id="finish">
-            <div class="header">
-                <div class="bottom write-one_bottom">
-                    <input type="image" src="./images/letter/L1.png" class="nextPage" />
-                </div>
-            </div>
             <div id="write-TA-send">
                 <!--专属类型 需要在提交胶囊之前收集信息-->
                 <div class="header write-TA-re_header">
@@ -286,15 +309,11 @@
                         alt="雕像" />
                 </map>
             </div>
-<<<<<<< HEAD
             <div id="finish">
                 <div class="header">
-=======
-        </div>
-        <div class="bottom write-TA-re_btn">
-            <input type="image" src="./images/other/塞入胶囊.png" class="nextPage" />
->>>>>>> 6c9ee6fd0f3400ae064b3f24a5741a7b3b52397e
-
+                </div>
+                <div class="bottom write-TA-re_btn">
+                    <input type="image" src="./images/other/塞入胶囊.png" class="nextPage" />
                 </div>
                 <div class="content finish_content">
                     <p>胶囊已埋入</p>

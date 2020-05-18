@@ -14,27 +14,17 @@ var nickname = "Hi~";
 var icon = "your_icon.jpg"; //头像地址
 var imgs = []; //上传的图片地址数组
 var voice = ""; //录音文件链接
-$.ajax({
-  type: 'POST',
-  url: apiurl + "set_open_id",
-  xhrFields: {
-    withCredentials: true // 这里设置了withCredentials
+axios({
+  method:"post",
+  url:apiurl+"set_open_id",
+  data:{
+    openid:11111
   },
-  contentType: "application/json;charset=utf-8",
-  data: JSON.stringify({
-    openid: "test1"
-  }),
-  dataType: 'json',
-  success(data, textStatus, jqXHR) {
-    var statusCode = jqXHR.status;
-    var statusText = jqXHR.statusText;
-    console.log("set openid over——————");
-    //console.log(textStatus);
-  },
-  error: function (err) {
-    console.log(err);
-  }
-}); //set openid
+  withCredentials:true,})
+  .then(res =>{
+    console.log("set_openid");
+    console.log(res);
+  });
 function checkLogin() {
   let check = false;
   var checkurl = apiurl + "check_wechat_login"; //后台检测登录
@@ -42,7 +32,7 @@ function checkLogin() {
     type: 'GET',
     url: checkurl,
     contentType: "application/json;charset=utf-8",
-    dataType: 'json',
+   
     success(data, textStatus, xhr) {
       //console.log(xhr.status);
       console.log(xhr.statusText);
@@ -128,15 +118,14 @@ function wxlogin() {
 sessionStorage.setItem("username", "none");
 
 function checkInfo() {
-  return;
+  // 扫码进入的人才用的
   console.log("check info start");
-
   var checkInfo_url = apiurl + "check_user_info";
   $.ajax({
     type: 'GET',
     url: checkInfo_url,
     contentType: "application/json;charset=utf-8",
-    dataType: 'json',
+   
     success(data, textStatus, xhr) {
       if (data.record) {
         localStorage.setItem("username", data.nickname);
@@ -155,7 +144,7 @@ $("#phone").val("");
 $("#email").val("");
 
 // if(!checkInfo()||sessionStorage.getItem("username")=="none"){
-function getInfo() {//show just
+function getInfo() { //show just
   console.log("get info start");
   $("#getInfo").fadeIn();
   //调用检测函数 通过验证时把个人信息发给后台
@@ -163,28 +152,28 @@ function getInfo() {//show just
 $("#nickname").on('change', function (e) {
   nickname = $("#nickname").val();
   // console.log("name  " + nickname);
-  $("#submitInfo").attr('disabled',false);
+  $("#submitInfo").attr('disabled', false);
 });
 $("#phone").on('input', function (e) {
   phone = $("#phone").val();
   // console.log("phone  " + phone);
-  $("#submitInfo").attr('disabled',false);
+  $("#submitInfo").attr('disabled', false);
 });
 $("#email").on('input', function (e) {
   email = $("#email").val();
   // console.log("email  " + email);
-  $("#submitInfo").attr('disabled',false);
+  $("#submitInfo").attr('disabled', false);
 });
 $("#submitInfo").on('click', function (e) {
   $("#submitInfo").attr('disabled', true);
-     uploadInfo(  $("#nickname").val(),
-     $("#phone").val(),
-     $("#email").val());
-     setTimeout(()=>{
-      $("#submitInfo").attr('disabled',false);
-      console.log("按钮解禁");
-     },3000)
- });
+  uploadInfo($("#nickname").val(),
+    $("#phone").val(),
+    $("#email").val());
+  setTimeout(() => {
+    $("#submitInfo").attr('disabled', false);
+    console.log("按钮解禁");
+  }, 3000)
+});
 //把防注入单独写一个函数 传str进到函数里验证 返回true为通过验证 false为输入了非法信息
 function checkErr(str, reg) {
   var x = str.replace(/\s/g, '');
@@ -300,53 +289,53 @@ function uploadInfo(nickname, phone, email) {
   //先禁用按钮！！！！
 
   // $("#submitInfo").attr("disabled", "disabled");
-  if(checkInput(nickname,'str')&&checkInput(phone,'num')){
+  if (checkInput(nickname, 'str') && checkInput(phone, 'num')) {
     post();
     $('#introduce').fadeIn(300);
     $("#getInfo").fadeOut(80);
-  }else{
+  } else {
     alert("wrong input!");
     $("#submitInfo").attr("disabled", true);
   }
-  function post(){
+
+  function post() {
     //upload
     console.log("upload info");
     $("#loading").fadeIn();
-  $.ajax({
-    method: 'POST',
-    url: apiurl + 'user_info',
-    headers: {
-      'X-Requested-With': 'application/json'
-    },
-    data: JSON.stringify({
-      nickname: nickname,
-      phone: phone,
-      email: email,
-      //head_pic: icon
-    }),
-    success(data, textStatus, xhr) {
-      if (data.errcode != 0 || xhr.status == 400) {
-        //上传失败 把错误信息显示出来
-        alert(data.errmsg);
-        console.log(data);
-      } else if (data.errcode == 0) {
-        $("#loading").fadeOut(80);
-        $("#getinfo").fadeOut(); //关掉表单 进入下一个页面
-        // mainPage.getInfo.attr('style', 'display:none;');
-        mainPage.main.attr('style', 'display:block;');
+    $.ajax({
+      method: 'POST',
+      url: apiurl + 'user_info',
+      contentType: "application/json;charset=utf-8",
+      data: JSON.stringify({
+        nickname: nickname,
+        phone: phone,
+        email: email,
+        //head_pic: icon
+      }),
+      success(data, textStatus, xhr) {
+        if (data.errcode != 0 || xhr.status == 400) {
+          //上传失败 把错误信息显示出来
+          alert(data.errmsg);
+          console.log(data);
+        } else if (data.errcode == 0) {
+          $("#loading").fadeOut(80);
+          $("#getinfo").fadeOut(); //关掉表单 进入下一个页面
+          // mainPage.getInfo.attr('style', 'display:none;');
+          mainPage.main.attr('style', 'display:block;');
+        }
+      },
+      error: function (err) {
+        console.log(err);
       }
-    },
-    error: function (err) {
-      console.log(err);
-    }
-  });
+    });
+  }
 }
-}
+
 function checkInput(str, type) {
   //type 'str'  'num' for text or number
   let checkres = false; //wrong text
   console.log(str);
-  if ((/^\s*$/.test(str) == true)||(str=="")||(str==undefined)) {
+  if ((/^\s*$/.test(str) == true) || (str == "") || (str == undefined)) {
     return checkres;
   }
   if (type == 'str') {
@@ -369,7 +358,7 @@ function uploadCapsule(capsule_type, time_limit, cap_template, cap_location, con
     method: 'POST',
     url: apiurl + 'capsule',
     contentType: "application/json;charset=utf-8",
-    dataType: 'json',
+   
     data: JSON.stringify({
       capsule_type: capsule_type,
       time_limit: time_limit,
@@ -415,12 +404,17 @@ window.onload = function () {
 }
 $('#welcome_btn').on('click', function () {
   //if(checkLogin()){
-  mainPage.welcome.attr('style', 'display:none;');
-  mainPage.getInfo.attr('style', 'display:block;');
+  if(localStorage.getItem("username")!=undefined){
+    mainPage.introduce.fadeIn(100);
+    mainPage.welcome.fadeOut(80);
+  } 
+  getInfo();
+  mainPage.getInfo.fadeIn(100);
+  mainPage.welcome.fadeOut(80);
   //mainPage.introduce.attr('style', 'display:block;');
   //}else{
   //wxlogin();
-  checkInfo();
+  //checkInfo();
   /// }
 })
 $('#go_intro').on('click', function () {
