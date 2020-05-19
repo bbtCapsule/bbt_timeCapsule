@@ -44,6 +44,8 @@ CREATE TABLE `toTaCapsules` (
 	`wechat` TEXT NULL DEFAULT NULL ,
 	`QQ` TEXT NULL DEFAULT NULL ,
 	`email` TEXT NULL DEFAULT NULL ,
+	`place` TEXT NULL DEFAULT NULL ,
+	`tocao` TEXT NULL DEFAULT NULL ,
 	PRIMARY KEY (`capsule_id`)
 ) ENGINE = InnoDB CHARSET=utf8mb4 COLLATE utf8mb4_unicode_ci;
 
