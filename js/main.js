@@ -27,6 +27,7 @@ var img2 = "<img src='B' class='add_img' id='pic2'><input type='image' src='./im
 var txl_img1 = "<img src='B' class='txl_add_img' id='pic1'></img><input type='image' src='./images/letter/dele.png' class='deleimg' id='pic_dele1'>";
 var txl_img2 = "<img src='B' class='txl_add_img' id='pic2'></img><input type='image' src='./images/letter/dele.png' class='deleimg' id='pic_dele2'>";
 var letterType = 0;
+var check = false;
 // axios({
 //     method: "post",
 //     url: apiurl + "set_open_id",
@@ -41,7 +42,7 @@ var letterType = 0;
 //   });
 
 function checkLogin() {
-  let check = false;
+ 
   var checkurl = apiurl + "check_wechat_login"; //后台检测登录
   $.ajax({
     type: 'GET',
