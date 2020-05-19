@@ -22,18 +22,25 @@ var show_imgList = []; //用户绑定页面上显示图片的变量
 var mediaIds = [] //接收上传图片返回的serverId（该字段就是调用获取临时素材接口的媒体ID
 var voice = []; //录音localid
 var voiceIds = [];
-axios({
-    method: "post",
-    url: apiurl + "set_open_id",
-    data: {
-      openid: 11111
-    },
-    withCredentials: true,
-  })
-  .then(res => {
-    console.log("set_openid");
-    console.log(res);
-  });
+//append
+var mp3 = "<li audio src='B' class='mp3' id='mp3'><input type='image' src='./images/letter/R1.png' class='player' id='player'><input type='image' src='./images/letter/dele.png' class='delemp3' id='voice_dele'></li>";
+var img1 = "<img src='B' class='add_img' id='pic1'><input type='image' src='./images/letter/dele.png' class='deleimg' id='pic_dele1'>";
+var img2 = "<img src='B' class='add_img' id='pic2'><input type='image' src='./images/letter/dele.png' class='deleimg' id='pic_dele2'>";
+var txl_img1 = "<img src='B' class='txl_add_img' id='pic1'></img><input type='image' src='./images/letter/dele.png' class='deleimg' id='pic_dele1'>";
+var txl_img2 = "<img src='B' class='txl_add_img' id='pic2'></img><input type='image' src='./images/letter/dele.png' class='deleimg' id='pic_dele2'>";
+var letterType = 0;
+// axios({
+//     method: "post",
+//     url: apiurl + "set_open_id",
+//     data: {
+//       openid: 11111
+//     },
+//     withCredentials: true,
+//   })
+//   .then(res => {
+//     console.log("set_openid");
+//     console.log(res);
+//   });
 
 function checkLogin() {
   let check = false;
@@ -42,19 +49,30 @@ function checkLogin() {
     type: 'GET',
     url: checkurl,
     contentType: "application/json;charset=utf-8",
+    statusCode: {
+      410: res => {
+        attention(res.responseJSON.message);
+      },
+      401: res => {
+        attention(res.responseJSON.message);
+      },
+      500: res => {
+        attention(res.responseJSON.message);
+      },
+    },
 
     success(data, textStatus, xhr) {
       //console.log(xhr.status);
-      console.log(xhr.statusText);
+      attention(xhr.statusText);
       if (xhr.status == 200) {
         check = true;
       } else {
         attention(xhr.statusText);
-        console.log(textStatus);
+        attention(textStatus);
       }
     },
     error: function (err) {
-      console.log("出错了！请检查网络！");
+      attention("出错了！请检查网络！");
       console.log(err);
       attention(err);
     }
@@ -117,12 +135,8 @@ function wxlogin() {
         }
       });
       wx.error(function () {
-        // this.$attention("授权失败了=n=", "提示", {
-        //   confirmButtonText: "重试",
-        //   cancelButtonText: "取消"
-        // }).catch(() => {});
+        attention("授权失败了=n= 刷新一下吧")
         //点击重试 再重新请求一次  取消就消失弹框
-
       });
       //处理验证成功的信息
     })
@@ -138,6 +152,17 @@ function checkInfo() {
     type: 'GET',
     url: checkInfo_url,
     contentType: "application/json;charset=utf-8",
+    statusCode: {
+      410: res => {
+        attention(res.responseJSON.message);
+      },
+      401: res => {
+        attention(res.responseJSON.message);
+      },
+      500: res => {
+        attention(res.responseJSON.message);
+      },
+    },
 
     success(data, textStatus, xhr) {
       if (data.record) {
@@ -191,7 +216,79 @@ $("#submitInfo").on('click', function (e) {
 //调用微信图片接口
 var that = this;
 
+function setitem(letterType) {
+  console.log("信纸类型是" + letterType);
+  let letter1 = $("#writeL3");
+  let letter0 = $("#write1");
+  let letter2 = $("#txl_imgdiv");
+  if (($('.add_img').length > 0) && ($('#mp3').length > 0)) {
+    console.log("已成功初始化");
+    $("#mp3").remove();
+    $(".add_img").remove();
+    $(".delemp3").remove();
+    $(".deleimg").remove();
+  }
+  switch (letterType) {
+    case 0:
+      letter0.append(mp3);
+      letter0.append(img1);
+      letter0.append(img2);
+      letter0.on('click', '#voice_dele', function () {
+        $("#mp3").slideUp();
+        voiceDel();
+      });
+      letter0.on('click', '#pic_dele1', function () {
+        $("#pic1").slideUp();
+        $("#pic_dele1").slideUp();
+      });
+      letter0.on('click', '#pic_dele2', function () {
+        $("#pic2").slideUp();
+        $("#pic_dele2").slideUp();
+      });
+      break;
+    case 1:
+      letter1.append(mp3);
+      letter1.append(img1);
+      letter1.append(img2);
+      letter1.on('click', '#voice_dele', function () {
+        $("#mp3").slideUp();
+        voiceDel();
+      });
+      letter1.on('click', '#pic_dele1', function () {
+        $("#pic1").slideUp();
+        $("#pic_dele1").slideUp();
+      });
+      letter1.on('click', '#pic_dele2', function () {
+        $("#pic2").slideUp();
+        $("#pic_dele2").slideUp();
+      });
+      break;
+    case 2:
+      letter2.append(txl_img1);
+      letter2.append(txl_img2);
+      letter1.on('click', '#pic_dele1', function () {
+        $("#pic1").slideUp();
+        $("#pic_dele1").slideUp();
+      });
+      letter1.on('click', '#pic_dele2', function () {
+        $("#pic2").slideUp();
+        $("#pic_dele2").slideUp();
+      });
+      break;
+  }
+  $("#player").on('click', function () {
+    if (isPlay) {
+      voiceStop();
+      isPlay = false;
+      return;
+    }
+    voicePlay();
+  })
+}
+
+
 function chooseImg() { //不用上传头像了 就是上传信封的图片（可以有多张图
+
   wx.chooseImage({
     count: 2, // 限制为2张图片
     sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
@@ -208,6 +305,7 @@ function chooseImg() { //不用上传头像了 就是上传信封的图片（可
         show_imgList.splice(idx, 1);
       }
       var show = function () {
+
         $("#pic1").src = show_imgList[0];
         $("#pic1").show();
         $("#pic_dele1").show();
@@ -261,7 +359,8 @@ function chooseImg() { //不用上传头像了 就是上传信封的图片（可
             }
           },
           fail: function (res) {
-            attention(JSON.stringify(res));
+            attention(res.data);
+            console.log(res);
           }
         });
       }; //循环上传
@@ -269,7 +368,8 @@ function chooseImg() { //不用上传头像了 就是上传信封的图片（可
 
     },
     fail: function (res) {
-      attention(JSON.stringify(res));
+      attention(res.data);
+      console.log(res);
     }
   });
 
@@ -293,11 +393,13 @@ function voiceRecord(type, minTime) { //type为0是录音，type为1是结束 mi
   } else if (type == 1) {
     endTime = new Date().getTime();
     if (endTime - startTime < minTime) {
-      voice = [];
+
+      voiceDel();
       attention('录音时间小于' + minTime / 1000 + '秒，请重试');
     } else {
       wx.stopRecord({ // 停止录音
         success: function (res) {
+          $("#mp3").show();
           voice = res.localId;
         }
       });
@@ -306,82 +408,196 @@ function voiceRecord(type, minTime) { //type为0是录音，type为1是结束 mi
 }
 
 //录音播放
+var isPlay = false;
+
 function voicePlay() {
-  if ($(this).hasClass('voicePlay')) {
-    $(this).removeClass('voicePlay');
-    // 停止播放接口
-    wx.stopVoice({
-      localId: voice // 需要停止的音频的本地ID，由stopRecord接口获得
-    });
-  } else {
-    $(this).addClass('voicePlay');
-    // 播放语音接口
-    wx.playVoice({
-      localId: voice // 需要播放的音频的本地ID，由stopRecord接口获得
-    });
-  }
-}
-//录音删除
-function voiceDel() {
-  voice = '';
-}
-//录音上传
-function uploadVoice() {
-  wx.uploadVoice({
-    localId: voice, // 需要上传的音频的本地ID，由stopRecord接口获得
-    isShowProgressTips: 1, // 默认为1，显示进度提示
-    success: function (res) {
-      return res.serverId; // 返回音频的服务器端ID
-    }
+  isPlay = true; // 播放语音接口
+  wx.playVoice({
+    localId: voice // 需要播放的音频的本地ID，由stopRecord接口获得
   });
-};
-
-//按钮的禁用
-var countTime = 6; //设为10秒钟
-function setTime(obj) {
-  console.log(String(obj) + " disabled");
-  $(obj).attr("disabled", "true");
-  var time = setInterval(function () {
-    if (countTime <= 0) {
-      obj.attr('disabled', 'false');
-      clearInterval(time);
-      countTime = 6;
-      console.log(true);
-    } else {
-      //console.log(false);
-      countTime--;
-    }
-  }, 800)
 }
-//上传个人信息
-function uploadInfo(nickname, phone, email) {
-  //icon是有默认值的（比如不想自定义头像）直接上传就行
-  //先禁用按钮！！！！
 
-  $("#submitInfo").attr("disabled", "disabled");
-  if (checkInput(nickname, 'str') && checkInput(phone, 'num')) {
-    post();
-    $('#introduce').fadeIn(300);
-    $("#getInfo").fadeOut(80);
-  } else {
-    attention("啊喔！请输入正确信息！");
-    $("#submitInfo").attr("disabled", true);
+// 停止播放接口
+function voiceStop() {
+  wx.stopVoice({
+    localId: voice // 需要停止的音频的本地ID，由stopRecord接口获得
+  });
+}
+
+  //录音删除
+function voiceDel() {
+    voice = [];
+  }
+  //录音上传
+  function uploadVoice() {
+    wx.uploadVoice({
+      localId: voice, // 需要上传的音频的本地ID，由stopRecord接口获得
+      isShowProgressTips: 1, // 默认为1，显示进度提示
+      success: function (res) {
+        voiceIds = res.serverId; // 返回音频的服务器端ID
+      }
+    });
+  };
+
+
+  //上传个人信息
+  function uploadInfo(nickname, phone, email) {
+    //icon是有默认值的（比如不想自定义头像）直接上传就行
+    //先禁用按钮！！！！
+
+    $("#submitInfo").attr("disabled", "disabled");
+    if (checkInput(nickname, 'str') && checkInput(phone, 'num')) {
+      post();
+      $('#introduce').fadeIn(300);
+      $("#getInfo").fadeOut(80);
+    } else {
+      attention("啊喔！请输入正确信息！");
+      $("#submitInfo").attr("disabled", true);
+    }
+
+    function post() {
+      //upload
+      console.log("upload info");
+      $("#loading").fadeIn();
+      $.ajax({
+        method: 'POST',
+        url: apiurl + 'user_info',
+        contentType: "application/json;charset=utf-8",
+        data: JSON.stringify({
+          nickname: nickname,
+          phone: phone,
+          email: email,
+          //head_pic: icon
+        }),
+        statusCode: {
+          410: res => {
+            attention(res.responseJSON.message);
+          },
+          401: res => {
+            attention(res.responseJSON.message);
+          },
+          500: res => {
+            attention(res.responseJSON.message);
+          },
+        },
+        success(data, textStatus, xhr) {
+          if (data.errcode != 0 || xhr.status == 400) {
+            //上传失败 把错误信息显示出来
+            attention(data.errmsg);
+            console.log(data);
+          } else if (data.errcode == 0) {
+            $("#loading").fadeOut(80);
+            $("#getinfo").fadeOut(); //关掉表单 进入下一个页面
+            // mainPage.getInfo.attr('style', 'display:none;');
+            mainPage.main.fadeIn();
+          }
+        },
+        error: function (err) {
+          console.log("出错了！请检查网络！");
+          console.log(err);
+          attention(err);
+        }
+      });
+    }
+  }
+  //把防注入单独写一个函数 传str进到函数里验证 返回true为通过验证 false为输入了非法信息
+
+  function checkInput(str, type) {
+    //type 'str'  'num' for text or number
+    let checkres = false; //wrong text
+    console.log(str);
+    if ((/^\s*$/.test(str) == true) || (str == "") || (str == undefined)) {
+      return checkres;
+    }
+    if (type == 'str') {
+      var check1 = new RegExp(/“|&|’|<|>|[\x00-\x20]|[\x7F-\xFF]|[\u0100-\u2700]/g);
+      var patt_illegal = new RegExp(/[\#\$\ % \^\ & \ *  {\}\:\\L\ < \ > \?}\'\"\\\/\b\f\n\r\t]/g);
+      str.replace(check1, "");
+      str.replace(patt_illegal, "");
+      checkres = true;
+      return checkres;
+    } else if (type == 'num') {
+      checkres = /^1[3|4|5|6|7|8|9][0-9]\d{4,8}$/.test(str);
+    }
+    return checkres;
   }
 
-  function post() {
-    //upload
-    console.log("upload info");
+  function uploadCapsule(capsule_type,
+    time_limit, cap_template,
+    content_word, txl_content, TA_info, from_qrcode, user_id) {
+    $("#submitCapsule").attr("disabled", "disabled");
     $("#loading").fadeIn();
+    cap_location = Math.floor((Math.random() * 7) + 1);
+    if (voice.length > 0) {
+      uploadVoice();
+    }
+    var letter = ({});
+    switch (capsule_type) {
+      case 1: //写给TA
+        if (cap_template == 1) {
+          letter = JSON.stringify({
+            capsule_type: capsule_type, // （胶囊类型）0，1，2分别代表私密，Ta，陌生人
+            time_limit: time_limit, // （时间期限）0，1分别代表半年、一年
+            cap_template: cap_template, // （胶囊模板）0，1分别代表普通信纸和同学录
+            cap_location: cap_location, // 胶囊位置
+            receiver_name: TA_info.name, // 收信人姓名
+            receiver_tel: TA_info.tel, // 收信人电话
+            receiver_email: TA_info.email, // 收信人邮箱
+            content_name: txl_content.name, // 同学录上的姓名
+            content_phone: txl_content.tel, // 同学录上的电话
+            content_birth: txl_content.birth,
+            content_word: txl_content.tucao,
+            xingzuo: txl_content.star,
+            place: txl_content.place,
+            hobby: txl_content.hobby,
+            music: txl_content.music,
+            movie: txl_content.movie,
+            food: txl_content.food,
+            wechat: txl_content.wechat,
+            QQ: txl_content.qq,
+            email: txl_content.email,
+            from_qrcode: from_qrcode,
+            user_id: user_id,
+            // 可选
+            content_pic: mediaIds, // 调用uploadImage返回的serverid，没有上传图片就不传这个参数，就算只有一张图片也传数组
+            content_voice: voiceIds // 调用微信停止录音接口返回的serverid，没有则不传
+          })
+        } else {
+          letter = JSON.stringify({
+            capsule_type: capsule_type, // （胶囊类型）0，1，2分别代表私密，Ta，陌生人
+            time_limit: time_limit, // （时间期限）0，1分别代表半年、一年
+            cap_template: cap_template, // （胶囊模板）0，1分别代表普通信纸和同学录
+            cap_location: cap_location, // 胶囊位置
+            receiver_name: TA_info.name, // 收信人姓名
+            receiver_tel: TA_info.tel, // 收信人电话
+            receiver_email: TA_info.email, // 收信人邮箱
+            content_word: content_word, // 文字内容
+            from_qrcode: from_qrcode, // 是否二维码写信
+            // 可选
+            content_pic: mediaIds, // 调用uploadImage返回的serverid，没有上传图片就不传这个参数，就算只有一张图片也传数组
+            content_voice: voiceIds
+          })
+        }
+        break;
+      default:
+        letter = JSON.stringify({
+          capsule_type: capsule_type, // （胶囊类型）0，1，2分别代表私密，Ta，陌生人
+          time_limit: time_limit, // （时间期限）0，1分别代表半年、一年
+          cap_template: cap_template, // （胶囊模板）0，1分别代表普通信纸和同学录
+          cap_location: cap_location, // 胶囊位置
+          content_word: content_word, // 文字内容
+          // 可选
+          content_pic: mediaIds, // 调用uploadImage返回的serverid，没有上传图片就不传这个参数，就算只有一张图片也传数组
+          content_voice: voiceIds
+        })
+        break;
+    }
     $.ajax({
       method: 'POST',
-      url: apiurl + 'user_info',
+      url: apiurl + 'capsule',
       contentType: "application/json;charset=utf-8",
-      data: JSON.stringify({
-        nickname: nickname,
-        phone: phone,
-        email: email,
-        //head_pic: icon
-      }),
+
+      data: letter,
       statusCode: {
         410: res => {
           attention(res.responseJSON.message);
@@ -396,10 +612,77 @@ function uploadInfo(nickname, phone, email) {
           attention(data.errmsg);
           console.log(data);
         } else if (data.errcode == 0) {
-          $("#loading").fadeOut(80);
-          $("#getinfo").fadeOut(); //关掉表单 进入下一个页面
-          // mainPage.getInfo.attr('style', 'display:none;');
-          mainPage.main.attr('style', 'display:block;');
+          $("#loading").fadeOut(200);
+          page.writemap.attr('style', 'display:none;');
+          page.finish.attr('style', 'display:block;');
+        }
+      },
+      error: function (err) {
+        console.log("出错了！请检查网络！");
+        console.log(err);
+        attention(err);
+      }
+    })
+  }
+
+  // main页面跳转 
+  var mainPage = {
+    welcome: $('#welcome'),
+    getInfo: $('#getInfo'),
+    main: $('#main'),
+    introduce: $('#introduce')
+  }
+  for (var key in mainPage) {
+    mainPage[key].attr('style', 'display:none;')
+  }
+
+
+  mainPage.welcome.show();
+
+  $('#welcome_btn').on('click', function () {
+    if(checkLogin()){
+    if (localStorage.getItem("username") != undefined) {
+      mainPage.introduce.fadeIn(100);
+      mainPage.welcome.fadeOut(80);
+    }
+    getInfo();
+    mainPage.getInfo.fadeIn(100);
+    mainPage.welcome.fadeOut(80);
+    //mainPage.introduce.attr('style', 'display:block;');
+    }else{
+    wxlogin();
+    checkInfo();
+     }
+  })
+  $('#go_intro').on('click', function () {
+    $('#introduce').fadeIn(300);
+    $('#main').fadeOut(80);
+  })
+  $('#intro_btn').on('click', function () {
+    $('#introduce').fadeOut(300);
+    $('#main').fadeIn(80);
+  })
+  function getQR(){
+    $.ajax({
+      type: 'GET',
+      url: apiurl+'/getQRCode',
+      contentType: "application/json;charset=utf-8",
+      statusCode: {
+        410: res => {
+          attention(res.responseJSON.message);
+        },
+        401: res => {
+          attention(res.responseJSON.message);
+        },
+        404:res => {
+          attention(res.responseJSON.message);
+        }
+      },
+      success(data) {
+        if(errcode == 0){
+          $("#QR").attr('src',data.message);
+        }else{
+          attention('咦获取二维码失败了~')
         }
       },
       error: function (err) {
@@ -408,168 +691,5 @@ function uploadInfo(nickname, phone, email) {
         attention(err);
       }
     });
+  
   }
-}
-//把防注入单独写一个函数 传str进到函数里验证 返回true为通过验证 false为输入了非法信息
-
-function checkInput(str, type) {
-  //type 'str'  'num' for text or number
-  let checkres = false; //wrong text
-  console.log(str);
-  if ((/^\s*$/.test(str) == true) || (str == "") || (str == undefined)) {
-    return checkres;
-  }
-  if (type == 'str') {
-    var check1 = new RegExp(/“|&|’|<|>|[\x00-\x20]|[\x7F-\xFF]|[\u0100-\u2700]/g);
-    var patt_illegal = new RegExp(/[\#\$\ % \^\ & \ *  {\}\:\\L\ < \ > \?}\'\"\\\/\b\f\n\r\t]/g);
-    str.replace(check1, "");
-    str.replace(patt_illegal, "");
-    checkres = true;
-    return checkres;
-  } else if (type == 'num') {
-    checkres = /^1[3|4|5|6|7|8|9][0-9]\d{4,8}$/.test(str);
-  }
-  return checkres;
-}
-
-function uploadCapsule(capsule_type,
-  time_limit, cap_template,
-  content_word,   txl_content, TA_info, from_qrcode, user_id) {
-  $("#submitCapsule").attr("disabled", "disabled");
-  $("#loading").fadeIn();
-  cap_location = Math.floor((Math.random() * 7) + 1);
-  var letter = ({});
-  switch (capsule_type) {
-    case 1: //写给TA
-      if (cap_template == 1) {
-        letter = JSON.stringify({
-          capsule_type: capsule_type, // （胶囊类型）0，1，2分别代表私密，Ta，陌生人
-          time_limit: time_limit, // （时间期限）0，1分别代表半年、一年
-          cap_template: cap_template, // （胶囊模板）0，1分别代表普通信纸和同学录
-          cap_location: cap_location, // 胶囊位置
-          receiver_name: TA_info.name, // 收信人姓名
-          receiver_tel: TA_info.tel, // 收信人电话
-          receiver_email: TA_info.email, // 收信人邮箱
-          content_name: txl_content.name, // 同学录上的姓名
-          content_phone: txl_content.tel, // 同学录上的电话
-          content_birth: txl_content.birth,
-          content_word: txl_content.tucao,
-          xingzuo: txl_content.star,
-          place: txl_content.place,
-          hobby: txl_content.hobby,
-          music: txl_content.music,
-          movie: txl_content.movie,
-          food: txl_content.food,
-          wechat: txl_content.wechat,
-          QQ: txl_content.qq,
-          email: txl_content.email,
-          from_qrcode: from_qrcode,
-          user_id: user_id,
-          // 可选
-          content_pic: mediaIds, // 调用uploadImage返回的serverid，没有上传图片就不传这个参数，就算只有一张图片也传数组
-          content_voice: voiceIds // 调用微信停止录音接口返回的serverid，没有则不传
-        })
-      } else {
-        letter = JSON.stringify({
-          capsule_type: capsule_type, // （胶囊类型）0，1，2分别代表私密，Ta，陌生人
-          time_limit: time_limit, // （时间期限）0，1分别代表半年、一年
-          cap_template: cap_template, // （胶囊模板）0，1分别代表普通信纸和同学录
-          cap_location: cap_location, // 胶囊位置
-          receiver_name: TA_info.name, // 收信人姓名
-          receiver_tel: TA_info.tel, // 收信人电话
-          receiver_email: TA_info.email, // 收信人邮箱
-          content_word: content_word, // 文字内容
-          from_qrcode: from_qrcode, // 是否二维码写信
-          // 可选
-          content_pic: mediaIds, // 调用uploadImage返回的serverid，没有上传图片就不传这个参数，就算只有一张图片也传数组
-          content_voice: voiceIds
-        })
-      }
-      break;
-    default:
-      letter = JSON.stringify({
-        capsule_type:capsule_type, // （胶囊类型）0，1，2分别代表私密，Ta，陌生人
-        time_limit: time_limit, // （时间期限）0，1分别代表半年、一年
-        cap_template: cap_template, // （胶囊模板）0，1分别代表普通信纸和同学录
-        cap_location: cap_location, // 胶囊位置
-        content_word: content_word, // 文字内容
-        // 可选
-        content_pic: mediaIds, // 调用uploadImage返回的serverid，没有上传图片就不传这个参数，就算只有一张图片也传数组
-        content_voice: voiceIds
-      })
-      break;
-  }
-  $.ajax({
-    method: 'POST',
-    url: apiurl + 'capsule',
-    contentType: "application/json;charset=utf-8",
-
-    data: letter,
-    statusCode: {
-      410: res => {
-        attention(res.responseJSON.message);
-      },
-      401: res => {
-        attention(res.responseJSON.message);
-      },
-    },
-    success(data, textStatus, xhr) {
-      if (data.errcode != 0 || xhr.status == 400) {
-        //上传失败 把错误信息显示出来
-        attention(data.errmsg);
-        console.log(data);
-      } else if (data.errcode == 0) {
-        $("#loading").fadeOut(200);
-        page.writemap.attr('style', 'display:none;');
-        page.finish.attr('style', 'display:block;');
-      }
-    },
-    error: function (err) {
-      console.log("出错了！请检查网络！");
-      console.log(err);
-      attention(err);
-    }
-  })
-}
-
-// main页面跳转 
-var mainPage = {
-  welcome: $('#welcome'),
-  getInfo: $('#getInfo'),
-  main: $('#main'),
-  introduce: $('#introduce')
-}
-for (var key in mainPage) {
-  mainPage[key].attr('style', 'display:none;')
-}
-
-
-mainPage.welcome.show();
-
-$('#welcome_btn').on('click', function () {
-  //if(checkLogin()){
-  if (localStorage.getItem("username") != undefined) {
-    mainPage.introduce.fadeIn(100);
-    mainPage.welcome.fadeOut(80);
-  }
-  getInfo();
-  mainPage.getInfo.fadeIn(100);
-  mainPage.welcome.fadeOut(80);
-  //mainPage.introduce.attr('style', 'display:block;');
-  //}else{
-  //wxlogin();
-  //checkInfo();
-  /// }
-})
-$('#go_intro').on('click', function () {
-  $('#introduce').fadeIn(300);
-  $('#main').fadeOut(80);
-  // mainPage.main.attr('style', 'display:none;');
-  // mainPage.introduce.attr('style', 'display:block;');
-})
-$('#intro_btn').on('click', function () {
-  // mainPage.introduce.attr('style', 'display:none;');
-  // mainPage.main.attr('style', 'display:block;');
-  $('#introduce').fadeOut(300);
-  $('#main').fadeIn(80);
-})

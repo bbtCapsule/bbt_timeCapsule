@@ -39,8 +39,12 @@
                 <input type="image" id="intro_back1" src="./images/back2.png" class="prePage">
             </div>
             <div class="content page1_content">
-                <div class="page1_intro">伞尖浮空的划动，勾勒年少无畏的梦，人生漫长有时也匆匆，想要将差距抹平，已经是再无可能；</div>
-                <div class="page1_text">选择一个你喜欢的胶囊吧~</div>
+                <div class="page1_intro">
+                <p id="page1_intro">
+                当过去凋零成遗迹<br>用文字刻划出暖意<br>我们携手在华园地图上标记<br>保存那些珍贵的回忆<br>为你定格那一刻的美好</div>
+                </p>
+                <div class="page1_text">选择一个你喜欢的胶囊吧~
+                </div>
             </div>
             <div class="bottom page1_bottom">
                 <div class="sender">
@@ -127,23 +131,22 @@
             <div class="header_l">
                 <input type="image" id="write_back" src="./images/letter/back.png" class="prePage">
             </div>
-            <div class="content write-one_content">
+            <div class="content write-one_content" id="write1">
                 <textarea class="letter_text" rows="20" cols="25" placeholder="写下你要说的话~"></textarea>
                 <div class="write-one_element">
                     <input type="image" src="./images/letter/record.png" class="add" id="voiceStart" />
                     <input type="image" src="./images/letter/photobtn.png" class="add" id="images" />
                 </div>
-                <li audioid='./test.mp3' class="mp3" id="mp3">
-                    <span>1s</span>
-                    <input type="image" src="./images/letter/R1.png" class="player" id="player" />
+                <!--li audioid='./test.mp3' class="mp3" id="mp3">
+                    <input type="image" src="./images/letter/R3.png" class="player" id="player" />
                     <input type="image" src="./images/letter/dele.png" class="delemp3" id="voice_dele" />
                 </li>
 
-                <!--li audioid='"+voice.localId+"' class="mp3"><button>音频任务"+riqi+mytime+"</button></li-->
+                <li audioid='"+voice.localId+"' class="mp3"><button>音频任务"+riqi+mytime+"</button></li>
                 <img src="./images/letter/2.png" class="add_img" id="pic1" />
                 <input type="image" src="./images/letter/dele.png" class="deleimg" id="pic_dele1" />
                 <img src="./images/letter/1.png" class="add_img" id="pic2" />
-                <input type="image" src="./images/letter/dele.png" class="deleimg" id="pic_dele2" />
+                <input type="image" src="./images/letter/dele.png" class="deleimg" id="pic_dele2" /-->
             </div>
             <div class="bottom write-one_bottom">
                 <input type="image" src="./images/letter/L1.png" class="nextPage" />
@@ -153,15 +156,15 @@
             <!--专属类型 同学录 -->
             <input type="image" id="write_back" src="./images/letter/back.png" class="prePage">
 
-            <div class="txl_imgdiv">
-                <img src="./images/letter/2.png" class="txl_add_img" id="pic1" />
+            <div class="txl_imgdiv" id="txl_imgdiv">
+                <!--img src="./images/letter/2.png" class="txl_add_img" id="pic1" />
                 <input type="image" src="./images/letter/dele.png" class="deleimg" id="pic_dele1" />
                 <img src="./images/letter/1.png" class="txl_add_img" id="pic2" />
-                <input type="image" src="./images/letter/dele.png" class="deleimg" id="pic_dele2" />
+                <input type="image" src="./images/letter/dele.png" class="deleimg" id="pic_dele2" /-->
             </div>
             <div class="header_l">
             </div>
-            <input type="image" src="./images/letter/photobtn.png" class="add" id="images" />
+            <input type="image" src="./images/letter/photobtn.png" class="add" id="images4" />
             <img src="./images/letter/4.png" id="txl_img" />
             <div class="txl_left">
                 <div class="txl_contain">
@@ -221,23 +224,22 @@
             <div class="header_l">
                 <input type="image" id="write_back" src="./images/letter/back.png" class="prePage">
             </div>
-            <div class="content write-one_content">
+            <div class="content write-one_content" id="writeL3">
                 <textarea id="letter3" class="letter_text" rows="20" cols="25" placeholder="写下你要说的话~"></textarea>
                 <div class="write-one_element">
-                    <input type="image" src="./images/letter/photobtn.png" class="add" id="images" />
-                    <input type="image" src="./images/letter/record.png" class="add" id="voiceStart" />
+                    <input type="image" src="./images/letter/photobtn3.png" class="add" id="images3" />
+                    <input type="image" src="./images/letter/record3.png" class="add" id="voiceStart3" />
                 </div>
-                <li audioid='./test.mp3' class="mp3" id="mp3">
-                    <span>1s</span>
-                    <input type="image" src="./images/letter/R1.png" class="player" id="player" />
-                    <input type="image" src="./images/letter/dele.png" class="delemp3" id="voice_dele" />
+                <!--li audioid='./test.mp3' class="mp3" id="mp3">
+                    <input type="image" src="./images/letter/R3.png" class="player" id="player3" />
+                    <input type="image" src="./images/letter/dele.png" class="delemp3" id="voice_dele3" />
                 </li>
 
-                <!--li audioid='"+voice.localId+"' class="mp3"><button>音频任务"+riqi+mytime+"</button></li-->
+                <li audioid='"+voice.localId+"' class="mp3"><button>音频任务"+riqi+mytime+"</button></li>
                 <img src="./images/letter/2.png" class="add_img" id="pic1" />
                 <input type="image" src="./images/letter/dele.png" class="deleimg" id="pic_dele1" />
                 <img src="./images/letter/1.png" class="add_img" id="pic2" />
-                <input type="image" src="./images/letter/dele.png" class="deleimg" id="pic_dele2" />
+                <input type="image" src="./images/letter/dele.png" class="deleimg" id="pic_dele2" /-->
 
             </div>
             <div class="bottom write-one_bottom">

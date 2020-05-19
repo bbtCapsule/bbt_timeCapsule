@@ -160,7 +160,6 @@ input.prePage {
 
 /* 添加的部分 */
 .mp3 {
-    /* display: none; */
     -webkit-appearance: media-play-button;
     width: 70%;
     margin-left: 5%;
@@ -177,8 +176,7 @@ input.prePage {
     margin-top: 3%;
 }
 
-#voice_dele {
-    /* display: none; */
+#voice_dele,.delemp3 {
     float: right;
     width: 8%;
     margin-right: -25px;
@@ -196,20 +194,20 @@ input.prePage {
 }
 
 .add_img {
-    /* display: none; */
     width: 60px;
     height: 60px;
     margin-left: 5%;
 }
 
 .deleimg {
-    display: none;
     width: 15px;
     height: 15px;
     margin-left: -15px;
     margin-bottom: 50px;
 }
-
+.mp3,.player,.delemp3,.add_img,.deleimg,.txl_add_img{
+    display: none;
+}
 /* 第三种信纸 */
 #letter3 {
     /* 它的textarea会短一点 */
@@ -241,7 +239,8 @@ input.prePage {
 }
 
 #write-sec>.content.write-one_content>.mp3 {
-    -webkit-appearance: media-play-button;
+    -webkit-appearance: unset;
+    color: transparent;
     width: 70%;
     margin-left: 5%;
     border-radius: 0.6rem;
@@ -253,7 +252,7 @@ input.prePage {
 
 /* 同学录样式 */
 .txl_add_img {
-    display: none;
+    /* display: none; */
     width: 60px;
     height: 60px;
 }
@@ -841,16 +840,16 @@ input {
     height: 120%;
     overflow-y: scroll;
     margin: 5%;
-    padding: 20% 10% 30% 10%;
+    padding: 12% 10% 30% 10%;
     background: url(../images/other/K-1.png) no-repeat top center;
     background-size: 100%;
     font-family: AdobeHeitiStd-Regular;
     color: #646b6a;
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 500;
     font-stretch: normal;
     text-align: center;
-    line-height: 25px;
+    line-height: 27px;
 }
 
 p#num {

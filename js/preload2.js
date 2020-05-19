@@ -25,20 +25,19 @@ $(function(){
         imgdownload.on("complete", handleComplete, this);
         imgdownload.loadManifest([
             "./images/map.jpg",
-            "./images/letter/1.png",
-            "./images/letter/2.png",
-            "./images/letter/3.png",
-            "./images/letter/4.png",
-            "./images/letter/41.png",
-            "./images/letter/line2.png",
-            "./images/letter/dele.png",
-            "./images/letter/L1.png",
-            "./images/letter/photobtn.png",
-            "./images/letter/record.png",
-            "./images/HYYOUYUANTIJ.TTF",
-            "./images/地图-箭头.png",
-            "./images/record_normal.png",
-            "./images/sing.gif",
+            "./images/我要写信.png",
+            "./images/我要收信.png",
+            "./images/说明.png",
+            "./images/地图-弹框.png",
+            "./images/other/back2.jpg",
+            "./images/other/btn-start.png",
+            "./images/other/btn-返回.png",
+            "./images/other/title.png",
+            "./images/other/START&-bg.jpg",
+            "./images/other/说明框.png",
+            "./images/other/说明and反馈-背景.jpg",
+            "./images/other/START&-bg.jpg",
+            "./images/other/START&-bg.jpg",
         ]);
     imgdownload.load();
 }

@@ -1,11 +1,8 @@
 $(function(){
     allload();
     var nowpage=window.location.pathname.match(/(\w+.html)$/) [0];
-    $("img").click(function(event){
-        event.preventDefault();
-        return false;
-    })
     function allload(){
+
         var imgdownload = new createjs.LoadQueue(true);
         var idx=1;
         var timer = setInterval(function(){
@@ -21,24 +18,12 @@ $(function(){
             $("#loading").fadeOut(800);
            clearInterval(timer);
         }
+
         // imgdownload.on("fileload", handleFileLoad, this);
         imgdownload.on("complete", handleComplete, this);
         imgdownload.loadManifest([
-            "./images/map.jpg",
-            "./images/letter/1.png",
-            "./images/letter/2.png",
-            "./images/letter/3.png",
-            "./images/letter/4.png",
-            "./images/letter/41.png",
-            "./images/letter/line2.png",
-            "./images/letter/dele.png",
-            "./images/letter/L1.png",
-            "./images/letter/photobtn.png",
-            "./images/letter/record.png",
-            "./images/HYYOUYUANTIJ.TTF",
-            "./images/地图-箭头.png",
-            "./images/record_normal.png",
-            "./images/sing.gif",
+            "./images/return.png",
+            "./images/地图-弹框.png",
         ]);
     imgdownload.load();
 }
