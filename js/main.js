@@ -28,6 +28,7 @@ var txl_img1 = "<img src='B' class='txl_add_img' id='pic1'></img><input type='im
 var txl_img2 = "<img src='B' class='txl_add_img' id='pic2'></img><input type='image' src='./images/letter/dele.png' class='deleimg' id='pic_dele2'>";
 var letterType = 0;
 var check = false;
+var info_check =false;
 // axios({
 //     method: "post",
 //     url: apiurl + "set_open_id",
@@ -102,7 +103,7 @@ function wxlogin() {
         url: location.href.split("#")[0]
       })
     })
-    .then(res => res.json())
+    // .then(res => res.json())
     .then(res => {
       wx.config({
         appId: res.appId, // 和获取Ticke的必须一样------必填，公众号的唯一标识
@@ -179,7 +180,7 @@ function checkInfo() {
     statusCode: {
       410: res => {
         attention(res.responseJSON.message);
-        return false;
+
       },
       401: res => {
         attention(res.responseJSON.message);
@@ -187,22 +188,20 @@ function checkInfo() {
       },
       500: res => {
         attention(res.responseJSON.message);
-        return false;
+
+      },
+      200: res => {
+        //attention(res.responseJSON.message);
+        // info_check =true;
       },
     },
 
     success(data, textStatus, xhr) {
-      if (data.record) {
-        return true;
-      } else {
-        getInfo();
-        console.log("没有录入过信息");
-        return false;
-      }
+      info_check =data.record;
     },
     error: function (err) {
       console.log(err);
-      return false;
+      info_check =false;
     }
   });
 }
@@ -684,7 +683,7 @@ function voiceDel() {
     $("#go_receive").hide();
   })
   $('#intro_btn').on('click', function () {
-    if(checkInfo()){
+    if(info_check){
       $('#introduce').fadeOut(300);
       {$('#main').fadeIn(80);}
       $("#go_write").show();
@@ -734,9 +733,11 @@ function voiceDel() {
   
   }
   $("#go_receive").on('click',function(){
-    if(checkLogin()&&checkInfo()){
+    checkInfo();
+    if(check&&info_check){
       
       getQR(); }else{
-        console.log("没有登录")
+        console.log("没有登录");
+        checkLogin();
       }
   })

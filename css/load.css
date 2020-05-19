@@ -25,9 +25,9 @@
     height: -webkit-fill-available;
     height: 100%;
     width: 100%;
-    background-color: #646670b3;
+    background-color: #000000c4;
     position: absolute;
-    z-index: 50;
+    z-index: 90;
 }
 #rotate{
     width: 10vw;
@@ -43,8 +43,7 @@
     -moz-animation:    rotate 1.2s linear infinite;
     -o-animation:     rotate 1.2s linear infinite; 
     margin-bottom: 20px;
-    z-index: 50;
-}
+    z-index: 90;}
 .loadspan{
     color: white;
     position: absolute;
@@ -61,7 +60,7 @@
     -webkit-transform-origin:center;
     -moz-animation:    tiao 1.8s linear infinite;
     -o-animation:     tiao 1.8s linear infinite; 
-    z-index: 50;
+    z-index: 90;
 }
 .loadspan{
     border-radius: 100%;
@@ -127,7 +126,7 @@
     top: 0;
     margin: auto;
     z-index: 99;
-    background: #00000054;
+    background: #000000c4;
     text-align: center;
     padding-left: 10%;
     padding-right: 10%;
