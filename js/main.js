@@ -2,8 +2,6 @@
 const phpurl =
   "https://hemc.100steps.net/2018/fireman/auth.php?redirect=" +
   encodeURIComponent(location.href); //微信登录授权跳转页
-const tokenurl = "https://api.weixin.qq.com/cgi-bin/token?grant_\
-type=client_credentia";
 const getWxurl =
   "https://hemc.100steps.net/2017/wechat/Home/Public/getJsApi"; //微信请求jsapi页
 
@@ -114,37 +112,37 @@ function wxlogin() {
         ],
         debug: false
       });
-      wx.ready(function () {
-        //attention(window.location.href.split('#')[0]);
-        wx.updateTimelineShareData({
-          title: "毕业季：时光胶囊", // 分享标题
-          link: shareurl,
-          imgUrl: shareimg_url,
-          success: function () {},
-          cancel: function () {
-            attention("取消了分享~")
-          }
-        });
-      //分享给朋友
-      wx.updateAppMessageShareData({
-        title: "毕业季：时光胶囊",
-        desc: "", // 分享描述
-        link: shareurl,
-        imgUrl: shareimg_url, //分享d 图片小方块
-        success: function () {
-          // 用户确认分享后执行的回调函数
-        },
-        cancel: function () {
-          // 用户取消分享后执行的回调函数
-          attention("取消了分享~")
-        }
-      });
-      wx.error(function () {
-        attention("授权失败了=n= 刷新一下吧")
-        //点击重试 再重新请求一次  取消就消失弹框
-      });
-      //处理验证成功的信息
-    });
+    //   wx.ready(function () {
+    //     //attention(window.location.href.split('#')[0]);
+    //     wx.updateTimelineShareData({
+    //       title: "毕业季：时光胶囊", // 分享标题
+    //       link: shareurl,
+    //       imgUrl: shareimg_url,
+    //       success: function () {},
+    //       cancel: function () {
+    //         attention("取消了分享~")
+    //       }
+    //     });
+    //   //分享给朋友
+    //   wx.updateAppMessageShareData({
+    //     title: "毕业季：时光胶囊",
+    //     desc: "", // 分享描述
+    //     link: shareurl,
+    //     imgUrl: shareimg_url, //分享d 图片小方块
+    //     success: function () {
+    //       // 用户确认分享后执行的回调函数
+    //     },
+    //     cancel: function () {
+    //       // 用户取消分享后执行的回调函数
+    //       attention("取消了分享~")
+    //     }
+    //   });
+    //   wx.error(function () {
+    //     //attention("授权失败了=n= 刷新一下吧")
+    //     //点击重试 再重新请求一次  取消就消失弹框
+    //   });
+    //   //处理验证成功的信息
+    // });
   })
 } //微信登录
 //检测录入信息状态
