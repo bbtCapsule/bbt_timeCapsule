@@ -55,6 +55,7 @@ function checkLogin() {
       },
       401: res => {
         attention(res.responseJSON.message);
+        window.location.href =phpurl;
       },
       500: res => {
         attention(res.responseJSON.message);
@@ -69,7 +70,7 @@ function checkLogin() {
       } else {
         attention(xhr.statusText);
         attention(textStatus);
-        wxlogin();
+
       }
     },
     error: function (err) {
@@ -80,7 +81,9 @@ function checkLogin() {
   });
   return check;
 }
-
+if(window.location.href.split("/")[window.location.href.split("/").length-1]=="write.html"){
+  checkLogin();
+}
 function wxlogin() {
   console.log("wx login start");
   fetch(getWxurl, {
@@ -146,7 +149,6 @@ function wxlogin() {
 sessionStorage.setItem("username", "none");
 
 function checkInfo() {
-  // 扫码进入的人才用的
   console.log("check info start");
   var checkInfo_url = apiurl + "check_user_info";
   $.ajax({
@@ -159,6 +161,7 @@ function checkInfo() {
       },
       401: res => {
         attention(res.responseJSON.message);
+        window.location.href =phpurl;
       },
       500: res => {
         attention(res.responseJSON.message);
@@ -639,7 +642,7 @@ function voiceDel() {
 
 
   mainPage.welcome.show();
-
+  wxlogin();
   $('#welcome_btn').on('click', function () {
     if(checkLogin()){
     if (localStorage.getItem("username") != undefined) {
@@ -651,7 +654,7 @@ function voiceDel() {
     mainPage.welcome.fadeOut(80);
     //mainPage.introduce.attr('style', 'display:block;');
     }else{
-    wxlogin();
+
     checkInfo();
      }
   })
@@ -694,3 +697,9 @@ function voiceDel() {
     });
   
   }
+  $("#go_receive").on('click',function(){
+    if(checkLogin()){
+      checkInfo();
+    }
+    getQR();
+  })

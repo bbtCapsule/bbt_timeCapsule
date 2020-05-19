@@ -1,6 +1,5 @@
 $(function(){
     allload();
-    var nowpage=window.location.pathname.match(/(\w+.html)$/) [0];
     $("img").click(function(event){
         event.preventDefault();
         return false;

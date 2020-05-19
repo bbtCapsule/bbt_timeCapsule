@@ -1,6 +1,5 @@
 $(function(){
     allload();
-    var nowpage=window.location.pathname.match(/(\w+.html)$/) [0];
     function allload(){
 
         var imgdownload = new createjs.LoadQueue(true);
