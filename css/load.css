@@ -27,7 +27,7 @@
     width: 100%;
     background-color: #646670b3;
     position: absolute;
-    z-index: 5;
+    z-index: 50;
 }
 #rotate{
     width: 10vw;
@@ -43,7 +43,7 @@
     -moz-animation:    rotate 1.2s linear infinite;
     -o-animation:     rotate 1.2s linear infinite; 
     margin-bottom: 20px;
-    z-index: 10;
+    z-index: 50;
 }
 .loadspan{
     color: white;
@@ -61,7 +61,7 @@
     -webkit-transform-origin:center;
     -moz-animation:    tiao 1.8s linear infinite;
     -o-animation:     tiao 1.8s linear infinite; 
-    z-index: 10;
+    z-index: 50;
 }
 .loadspan{
     border-radius: 100%;
