@@ -8,7 +8,7 @@ const getWxurl =
   "https://hemc.100steps.net/2017/wechat/Home/Public/getJsApi"; //微信请求jsapi页
 
 //const baseUrl = "https://hemc.100steps.net/2020//bbt_timeCapsule/py/api";
-const baseUrl = "https://zekaio.cn/2020/timecapsule/api"; //测试用url
+const baseUrl = "https://hemc.100steps.net/2020/timecapsule/test/api/"; //测试用url
 const apiurl = `${baseUrl}/`;
 const shareurl = encodeURIComponent(location.href);
 const shareimg_url = "图片url";
