@@ -382,10 +382,9 @@ function sendLetter(type) {
                 }
             })
             console.log(message);
-            uploadCapsule(capsule_type,
-                time_limit, cap_template,
-                message[0], content_pic, content_voice,
-                [], TA_info, from_qrcode, user_id);
+                uploadCapsule(capsule_type,
+                    time_limit, cap_template,
+                    message[0], [], TA_info, from_qrcode, user_id)
             break;
     }
 }
