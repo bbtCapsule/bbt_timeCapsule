@@ -560,7 +560,7 @@ function voiceDel() {
             user_id: user_id,
             // 可选
             content_pic: mediaIds, // 调用uploadImage返回的serverid，没有上传图片就不传这个参数，就算只有一张图片也传数组
-            content_voice: voiceIds // 调用微信停止录音接口返回的serverid，没有则不传
+            content_voice: voiceIds[0] // 调用微信停止录音接口返回的serverid，没有则不传
           })
         } else {
           letter = JSON.stringify({
@@ -575,7 +575,7 @@ function voiceDel() {
             from_qrcode: from_qrcode, // 是否二维码写信
             // 可选
             content_pic: mediaIds, // 调用uploadImage返回的serverid，没有上传图片就不传这个参数，就算只有一张图片也传数组
-            content_voice: voiceIds
+            content_voice: voiceIds[0]
           })
         }
         break;
@@ -588,7 +588,7 @@ function voiceDel() {
           content_word: content_word, // 文字内容
           // 可选
           content_pic: mediaIds, // 调用uploadImage返回的serverid，没有上传图片就不传这个参数，就算只有一张图片也传数组
-          content_voice: voiceIds
+          content_voice: voiceIds[0]
         })
         break;
     }
