@@ -83,6 +83,7 @@ function checkLogin() {
       return check;
     }
   });
+  return check;
 }
 if(window.location.href.split("/")[window.location.href.split("/").length-1]=="write.html"){
   checkLogin();
@@ -652,8 +653,8 @@ function voiceDel() {
   mainPage.welcome.show();
   wxlogin();
   $('#welcome_btn').on('click', function () {
-    if(checkLogin()){    mainPage.getInfo.fadeIn(100);
-      mainPage.welcome.fadeOut(80);}  
+    $('#introduce').fadeIn(300);
+    $('#main').fadeOut(80);
     //mainPage.introduce.attr('style', 'display:block;');
   })
   $('#go_intro').on('click', function () {
@@ -702,8 +703,9 @@ function voiceDel() {
   
   }
   $("#go_receive").on('click',function(){
-    if(checkLogin()){
-      checkInfo();
-    }
-    getQR();
+    if(checkLogin()&&checkInfo()){
+      
+      getQR(); }else{
+        console.log("没有登录")
+      }
   })
