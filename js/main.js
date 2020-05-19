@@ -8,7 +8,7 @@ const getWxurl =
   "https://hemc.100steps.net/2017/wechat/Home/Public/getJsApi"; //微信请求jsapi页
 
 //const baseUrl = "https://hemc.100steps.net/2020//bbt_timeCapsule/py/api";
-const baseUrl = "https://hemc.100steps.net/2020/timecapsule_test/api/"; //测试用url
+const baseUrl = "https://hemc.100steps.net/2020/timecapsule_test/api"; //测试用url
 const apiurl = `${baseUrl}/`;
 const shareurl = encodeURIComponent(location.href);
 const shareimg_url = "图片url";
@@ -69,6 +69,7 @@ function checkLogin() {
       } else {
         attention(xhr.statusText);
         attention(textStatus);
+        wxlogin();
       }
     },
     error: function (err) {
@@ -119,7 +120,6 @@ function wxlogin() {
             attention("取消了分享~")
           }
         });
-      });
       //分享给朋友
       wx.updateAppMessageShareData({
         title: "毕业季：时光胶囊",
@@ -139,7 +139,8 @@ function wxlogin() {
         //点击重试 再重新请求一次  取消就消失弹框
       });
       //处理验证成功的信息
-    })
+    });
+  })
 } //微信登录
 //检测录入信息状态
 sessionStorage.setItem("username", "none");
