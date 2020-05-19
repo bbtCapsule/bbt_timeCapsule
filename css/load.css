@@ -133,6 +133,7 @@
     padding-right: 10%;
     padding-top: 10vh;
     line-height: 30px;
+    z-index: 50;
 }
 
 #att{

@@ -296,7 +296,7 @@ area.go:before {
     background-size: contain;
     padding-top: 0.1px;
     /* 让子元素的margin-top可用 */
-
+    z-index: 0;
 }
 
 .welcome_header {
@@ -342,6 +342,7 @@ area.go:before {
     background: url(../images/other/back2.jpg) no-repeat center;
     background-size: 100%,100%;
     padding-top: 0.1px;
+    z-index: 0;
 }
 .Infocontain {
     width: 80%;
@@ -427,6 +428,7 @@ area.go:before {
     background: url(../images/other/说明and反馈-背景.jpg);
     background-size: 100% 100%;
     padding: 0.1px;
+    z-index: 0;
 }
 
 .intro_content {

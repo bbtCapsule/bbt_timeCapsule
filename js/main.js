@@ -88,6 +88,7 @@ function checkLogin() {
 }
 if(window.location.href.split("/")[window.location.href.split("/").length-1]=="write.html"){
   checkLogin();
+  wxlogin();
 }
 function wxlogin() {
   console.log("wx login start");
@@ -117,6 +118,22 @@ function wxlogin() {
         ],
         debug: false
       });
+      wx.ready(function(){
+        // config信息验证后会执行ready方法，所有接口调用都必须在config接口获得结果之后，config是一个客户端的异步操作，所以如果需要在页面加载时就调用相关接口，则须把相关接口放在ready函数中调用来确保正确执行。对于用户触发时才调用的接口，则可以直接调用，不需要放在ready函数中。
+        x.checkJsApi({
+          jsApiList: ['chooseImage', 'uploadImage',
+          "startRecord",
+          "stopRecord", "onVoiceRecordEnd",
+          "pauseVoice", "playVoice", "stopVoice", "onVoicePlayEnd",
+          "uploadVoice",
+          "updateTimelineShareData", "updateAppMessageShareData"
+        ],// 需要检测的JS接口列表，所有JS接口列表见附录2,
+          success: function(res) {
+          console.log('接口可用');
+          console.log(res);
+          }
+        });
+      });
     //   wx.ready(function () {
     //     //attention(window.location.href.split('#')[0]);
     //     wx.updateTimelineShareData({
@@ -142,12 +159,11 @@ function wxlogin() {
     //       attention("取消了分享~")
     //     }
     //   });
-    //   wx.error(function () {
-    //     //attention("授权失败了=n= 刷新一下吧")
-    //     //点击重试 再重新请求一次  取消就消失弹框
-    //   });
-    //   //处理验证成功的信息
-    // });
+      wx.error(function (err) {
+        console.log(err);
+        //attention("授权失败了=n= 刷新一下吧")
+        //点击重试 再重新请求一次  取消就消失弹框
+      });
   })
 } //微信登录
 //检测录入信息状态
@@ -654,22 +670,36 @@ function voiceDel() {
   mainPage.welcome.show();
   wxlogin();
   $('#welcome_btn').on('click', function () {
+    forbidMove();
     $('#introduce').fadeIn(300);
-    $('#main').fadeOut(80);
+    $('#welcome').fadeOut(80);
+    $("#go_write").hide();
+    $("#go_receive").hide();
     //mainPage.introduce.attr('style', 'display:block;');
   })
   $('#go_intro').on('click', function () {
     $('#introduce').fadeIn(300);
     $('#main').fadeOut(80);
+    $("#go_write").hide();
+    $("#go_receive").hide();
   })
   $('#intro_btn').on('click', function () {
     if(checkInfo()){
       $('#introduce').fadeOut(300);
       {$('#main').fadeIn(80);}
+      $("#go_write").show();
+      $("#go_receive").show();
+      $("#go_write").show();
+      $("#go_receive").show();
+      $("#go_intro").show();
+  
     }else{
       attention("你还没有录入过信息！");
       getInfo();
       $('#introduce').fadeOut(300);
+      $("#go_write").show();
+      $("#go_receive").show();
+      $("#go_intro").hide();
     }
   })
   function getQR(){
