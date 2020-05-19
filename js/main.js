@@ -55,6 +55,7 @@ function checkLogin() {
       },
       401: res => {
         attention(res.responseJSON.message);
+        check=true;
         window.location.href =phpurl;
       },
       500: res => {
@@ -64,22 +65,23 @@ function checkLogin() {
 
     success(data, textStatus, xhr) {
       //console.log(xhr.status);
-      attention(xhr.statusText);
+      //attention(xhr.statusText);
       if (xhr.status == 200) {
         check = true;
+        return check;
       } else {
         attention(xhr.statusText);
         attention(textStatus);
-
+        return check;
       }
     },
     error: function (err) {
       attention("出错了！请检查网络！");
       console.log(err);
       attention(err);
+      return check;
     }
   });
-  return check;
 }
 if(window.location.href.split("/")[window.location.href.split("/").length-1]=="write.html"){
   checkLogin();
@@ -158,6 +160,7 @@ function checkInfo() {
     statusCode: {
       410: res => {
         attention(res.responseJSON.message);
+        return false;
       },
       401: res => {
         attention(res.responseJSON.message);
@@ -165,19 +168,22 @@ function checkInfo() {
       },
       500: res => {
         attention(res.responseJSON.message);
+        return false;
       },
     },
 
     success(data, textStatus, xhr) {
       if (data.record) {
-        localStorage.setItem("username", data.nickname);
+        return true;
       } else {
         getInfo();
         console.log("没有录入过信息");
+        return false;
       }
     },
     error: function (err) {
       console.log(err);
+      return false;
     }
   });
 }
@@ -188,6 +194,7 @@ $("#email").val("");
 // if(!checkInfo()||sessionStorage.getItem("username")=="none"){
 function getInfo() { //show just
   console.log("get info start");
+  $("#welcome").fadeOut();
   $("#getInfo").fadeIn();
   //调用检测函数 通过验证时把个人信息发给后台
 }
@@ -644,27 +651,23 @@ function voiceDel() {
   mainPage.welcome.show();
   wxlogin();
   $('#welcome_btn').on('click', function () {
-    if(checkLogin()){
-    if (localStorage.getItem("username") != undefined) {
-      mainPage.introduce.fadeIn(100);
-      mainPage.welcome.fadeOut(80);
-    }
-    getInfo();
-    mainPage.getInfo.fadeIn(100);
-    mainPage.welcome.fadeOut(80);
+    if(checkLogin()){    mainPage.getInfo.fadeIn(100);
+      mainPage.welcome.fadeOut(80);}  
     //mainPage.introduce.attr('style', 'display:block;');
-    }else{
-
-    checkInfo();
-     }
   })
   $('#go_intro').on('click', function () {
     $('#introduce').fadeIn(300);
     $('#main').fadeOut(80);
   })
   $('#intro_btn').on('click', function () {
-    $('#introduce').fadeOut(300);
-    $('#main').fadeIn(80);
+    if(checkInfo()){
+      $('#introduce').fadeOut(300);
+      {$('#main').fadeIn(80);}
+    }else{
+      attention("你还没有录入过信息！");
+      getInfo();
+      $('#introduce').fadeOut(300);
+    }
   })
   function getQR(){
     $.ajax({
