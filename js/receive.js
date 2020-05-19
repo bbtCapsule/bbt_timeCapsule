@@ -8,6 +8,8 @@ fetch(apiurl + "getQRCode", {
   .then((res) => {
     if (res.errcode == 0) {
       document.getElementById("QR").src = res.image;
+      $("#loading").fadeOut(800);
+      clearInterval(timer);
     }
   })
   .catch((err) => {
