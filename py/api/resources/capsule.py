@@ -25,6 +25,7 @@ def capsule():
     content_name = data.get('content_name')  # TA的名字
     content_phone = data.get('content_phone')  # TA的电话
     content_birth = data.get('content_birth')  # TA的生日
+    place = data.get('place_to_go')  # 想去的地方
     xingzuo = data.get('xingzuo')  # 星座
     hobby = data.get('hobby')  # 爱好
     music = data.get('music')  # 音乐
@@ -33,7 +34,7 @@ def capsule():
     wechat = data.get('wechat')  # 微信
     QQ = data.get('QQ')  # qq
     email = data.get('email')  # 邮箱
-
+    tucao = data.get('tucao')  # 吐槽
     # 二维码
     from_qrcode = bool(data.get('from_qrcode'))  # 是否是二维码收信
     user_id = data.get('user_id')
@@ -52,7 +53,7 @@ def capsule():
     if from_qrcode:
         to_ta_from_qrcode(open_id, time_limit, cap_template, from_qrcode, cap_location, content_word, content_pic,
                           id_decode, content_voice, content_name, content_phone,
-                          content_birth, xingzuo, hobby, music, movie, food, wechat, QQ, email)
+                          content_birth, xingzuo, hobby, music, movie, food, wechat, QQ, email, place, tucao)
     else:
         if data['capsule_type'] == 0:  # 私密
             downloadSelf(open_id, time_limit, cap_template, cap_location, content_word, content_pic,
@@ -60,7 +61,7 @@ def capsule():
         elif data['capsule_type'] == 1:  # 给Ta
             downloadToTa(open_id, time_limit, cap_template, from_qrcode, cap_location, receiver_name, receiver_tel,
                          receiver_email, content_word, content_pic, content_voice, content_name, content_phone,
-                         content_birth, xingzuo, hobby, music, movie, food, wechat, QQ, email)
+                         content_birth, xingzuo, hobby, music, movie, food, wechat, QQ, email, place, tucao)
         elif data['capsule_type'] == 2:  # 陌生人
             downloadStranger(open_id, time_limit, cap_template, cap_location, content_word, content_pic,
                              content_voice)

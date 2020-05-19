@@ -56,11 +56,11 @@ def downloadSelf(open_id, time_limit, cap_template, cap_location, content_word, 
 def downloadToTa(open_id, time_limit, cap_template, from_qrcode, cap_location, receiver_name, receiver_tel,
                  receiver_email,
                  content_word, content_pic, content_voice, content_name, content_phone, content_birth, xingzuo, hobby,
-                 music, movie, food, wechat, QQ, email):
+                 music, movie, food, wechat, QQ, email, place, tucao):
     rowcount = database.insertToTaCapsule(open_id, time_limit, cap_template, from_qrcode, cap_location, receiver_name,
                                           receiver_tel, receiver_email, content_word, content_pic, content_voice,
                                           content_name, content_phone, content_birth, xingzuo, hobby, music, movie,
-                                          food, wechat, QQ, email)
+                                          food, wechat, QQ, email, place, tucao)
     return rowcount
 
 
@@ -73,7 +73,7 @@ def downloadStranger(open_id, time_limit, cap_template, cap_location, content_wo
 
 def to_ta_from_qrcode(open_id, time_limit, cap_template, from_qrcode, cap_location, content_word, content_pic, user_id,
                       content_voice, content_name, content_phone, content_birth, xingzuo, hobby, music, movie, food,
-                      wechat, QQ, email):
+                      wechat, QQ, email, place, tucao):
     userinfo = database.getInfoByUID(user_id)
     if userinfo is None:
         my_abort(404, message="用户不存在")
@@ -82,4 +82,4 @@ def to_ta_from_qrcode(open_id, time_limit, cap_template, from_qrcode, cap_locati
     receiver_email = userinfo[3]
     downloadToTa(open_id, time_limit, cap_template, from_qrcode, cap_location, receiver_name, receiver_tel,
                  receiver_email, content_word, content_pic, content_voice, content_name, content_phone,
-                 content_birth, xingzuo, hobby, music, movie, food, wechat, QQ, email)
+                 content_birth, xingzuo, hobby, music, movie, food, wechat, QQ, email, place, tucao)

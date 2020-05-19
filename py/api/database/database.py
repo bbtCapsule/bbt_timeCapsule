@@ -48,14 +48,14 @@ def insertInfo(open_id, nickname, phone, email):
 def insertToTaCapsule(open_id, time_limit, cap_template, from_qrcode, cap_location, receiver_name, receiver_tel,
                       receiver_email,
                       content_word, content_pic, content_voice, content_name, content_phone, content_birth, xingzuo,
-                      hobby, music, movie, food, wechat, QQ, email):
+                      hobby, music, movie, food, wechat, QQ, email, place, tucao):
     (con, cur) = getCursor()
     cur.execute(
-        "INSERT INTO toTaCapsules(code,sender_id, time_limit, cap_template, from_qrcode, cap_location, receiver_name, receiver_tel, receiver_email, content_word, content_pic, content_voice, content_name, content_phone, content_birth, xingzuo, hobby, music, movie, food, wechat, QQ, email) VALUES (%s,%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
+        "INSERT INTO toTaCapsules(code,sender_id, time_limit, cap_template, from_qrcode, cap_location, receiver_name, receiver_tel, receiver_email, content_word, content_pic, content_voice, content_name, content_phone, content_birth, xingzuo, hobby, music, movie, food, wechat, QQ, email, place, tucao) VALUES (%s,%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
         [None, open_id, time_limit, cap_template, from_qrcode, cap_location, receiver_name, receiver_tel,
          receiver_email,
          content_word, str(content_pic), content_voice, content_name, content_phone, content_birth, xingzuo, hobby,
-         music, movie, food, wechat, QQ, email])
+         music, movie, food, wechat, QQ, email, place, tucao])
     con.commit()
     cur.close()
     con.close()
