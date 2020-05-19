@@ -9,10 +9,10 @@ from .encode import decodeUID
 def capsule():
     data = request.get_json(force=True)
     open_id = session["open_id"]
-    time_limit = "one-year" if data['time_limit'] else "half-year"  # 取信时间
-    cap_template = data['cap_template']  # 胶囊模板 普通信纸|同学录
-    cap_location = data['cap_location']  # 胶囊地点
-    content_word = data['content_word']  # 内容
+    time_limit = "one-year" if data.get('time_limit') else "half-year"  # 取信时间
+    cap_template = data.get('cap_template')  # 胶囊模板 普通信纸|同学录
+    cap_location = data.get('cap_location') # 胶囊地点
+    content_word = data.get('content_word')  # 内容
     content_pic = data.get('content_pic')  # 图片
     content_voice = data.get('content_voice')  # 录音
 
