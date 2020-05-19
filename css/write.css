@@ -206,6 +206,7 @@ input.prePage {
     margin-bottom: 50px;
 }
 .mp3,.player,.delemp3,.add_img,.deleimg,.txl_add_img{
+    cursor: pointer;
     display: none;
 }
 /* 第三种信纸 */
@@ -408,6 +409,7 @@ input.prePage {
 }
 
 #txl_btn {
+    cursor: pointer;
     width: 260px;
     margin: 0;
     position: absolute;

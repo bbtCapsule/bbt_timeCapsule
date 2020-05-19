@@ -328,8 +328,11 @@ area.go:before {
     width: 40vw;
     height: 11vh;
     margin: auto;
-    background: url(../images/other/btn-start.png) no-repeat center;
+    /* background: url(../images/other/btn-start.png) no-repeat center; */
     background-size: contain;
+    color: #8f8475;
+    font-size: 20px;
+
 }
 
 /* 登录界面 getInfo */
@@ -453,7 +456,7 @@ area.go:before {
     width: 40vw;
     height: 11vh;
     margin: auto;
-    background: url(../images/other/btn-返回.png) no-repeat center;
+    background: url(../images/other/btn-start.png) no-repeat center;
     background-size: contain;
 }
 
