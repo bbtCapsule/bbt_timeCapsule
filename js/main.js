@@ -48,6 +48,9 @@ function checkLogin() {
     url: checkurl,
     contentType: "application/json;charset=utf-8",
     statusCode: {
+      200:res =>{
+        return true;
+      },
       410: res => {
         attention(res.responseJSON.message);
       },
@@ -68,8 +71,8 @@ function checkLogin() {
         check = true;
         return check;
       } else {
-        attention(xhr.statusText);
-        attention(textStatus);
+        // attention(xhr.statusText);
+        // attention(textStatus);
         return check;
       }
     },
