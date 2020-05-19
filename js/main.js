@@ -2,6 +2,8 @@
 const phpurl =
   "https://hemc.100steps.net/2018/fireman/auth.php?redirect=" +
   encodeURIComponent(location.href); //微信登录授权跳转页
+const tokenurl = "https://api.weixin.qq.com/cgi-bin/token?grant_\
+type=client_credentia";
 const getWxurl =
   "https://hemc.100steps.net/2017/wechat/Home/Public/getJsApi"; //微信请求jsapi页
 
@@ -12,8 +14,14 @@ const shareurl = encodeURIComponent(location.href);
 const shareimg_url = "图片url";
 var nickname = "Hi~";
 var icon = "your_icon.jpg"; //头像地址
-var imgs = []; //上传的图片地址数组
-var voice = ""; //录音文件链接
+var imgages = {
+  localIds: [],
+  serverId: []
+}; //上传的图片地址数组
+var show_imgList = []; //用户绑定页面上显示图片的变量
+var mediaIds = [] //接收上传图片返回的serverId（该字段就是调用获取临时素材接口的媒体ID
+var voice = []; //录音localid
+var voiceIds = [];
 axios({
     method: "post",
     url: apiurl + "set_open_id",
@@ -41,12 +49,14 @@ function checkLogin() {
       if (xhr.status == 200) {
         check = true;
       } else {
-        alert(xhr.statusText);
+        attention(xhr.statusText);
         console.log(textStatus);
       }
     },
     error: function (err) {
+      console.log("出错了！请检查网络！");
       console.log(err);
+      attention(err);
     }
   });
   return check;
@@ -71,7 +81,8 @@ function wxlogin() {
         timestamp: res.timestamp,
         nonceStr: res.nonceStr,
         signature: res.signature,
-        jsApiList: ['chooseImage', 'uploadImage', "startRecord",
+        jsApiList: ['chooseImage', 'uploadImage',
+          "startRecord",
           "stopRecord", "onVoiceRecordEnd",
           "pauseVoice", "playVoice", "stopVoice", "onVoicePlayEnd",
           "uploadVoice",
@@ -80,14 +91,14 @@ function wxlogin() {
         debug: false
       });
       wx.ready(function () {
-        //alert(window.location.href.split('#')[0]);
+        //attention(window.location.href.split('#')[0]);
         wx.updateTimelineShareData({
           title: "毕业季：时光胶囊", // 分享标题
           link: shareurl,
           imgUrl: shareimg_url,
           success: function () {},
           cancel: function () {
-            alert("取消了分享~")
+            attention("取消了分享~")
           }
         });
       });
@@ -102,11 +113,11 @@ function wxlogin() {
         },
         cancel: function () {
           // 用户取消分享后执行的回调函数
-          alert("取消了分享~")
+          attention("取消了分享~")
         }
       });
       wx.error(function () {
-        // this.$alert("授权失败了=n=", "提示", {
+        // this.$attention("授权失败了=n=", "提示", {
         //   confirmButtonText: "重试",
         //   cancelButtonText: "取消"
         // }).catch(() => {});
@@ -178,22 +189,99 @@ $("#submitInfo").on('click', function (e) {
 });
 
 //调用微信图片接口
-function chooseImg() { //不用上传头像了 就是上传信封的图片（可以有多张图
+var that = this;
 
+function chooseImg() { //不用上传头像了 就是上传信封的图片（可以有多张图
   wx.chooseImage({
     count: 2, // 限制为2张图片
-    sizeType: ['original'], // 可以指定是原图还是压缩图，默认二者都有
-    sourceType: ['album'], // 可以指定来源是相册还是相机，默认二者都有
+    sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+    sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
     success: function (res) {
-      var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
-      for (num in localIds) {
-        imgs[num] = localIds[num];
-      };
+      that.images.localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
+      for (var i = 0; i < res.localIds.length; i++) {
+        that.show_imgList.push(res.localIds[i]);
+      }
+      var dele = function (idx) {
+        if (show_imgList.length == 0) {
+          return;
+        }
+        show_imgList.splice(idx, 1);
+      }
+      var show = function () {
+        $("#pic1").src = show_imgList[0];
+        $("#pic1").show();
+        $("#pic_dele1").show();
+        $("#pic_dele1").on('click', function () {
+          $("#pic1").hide();
+          $("#pic_dele1").hide();
+          dele(0);
+        })
+        if (show_imgList.length > 1) {
+          $("#pic2").src = show_imgList[1];
+          $("#pic2").show();
+          $("#pic_dele2").show();
+          $("#pic_dele2").on('click', function () {
+            $("#pic2").hide();
+            $("#pic_dele2").hide();
+            dele(1);
+          })
+        }
+      }
+      show();
+      var uploadCount = 0;
+      var localIdLength = that.imgages.localIds.length;
+      var upload = function () {
+        wx.uploadImage({
+          localId: imgages.localIds[uploadCount],
+          success: function (res) {
+            that.imgages.serverId.push(res.serverId); //微信返回的该图片的服务ID，可调用获取素材的接口下载到自己项目的应用服务器
+            var mediaIdsLength = that.mediaIds.length;
+            var flag = false;
+            if (mediaIdsLength > 0) {
+              for (var i = 0; i < mediaIdsLength; i++) {
+                if (that.mediaIds[i].id == value.id) {
+                  that.mediaIds[i].mediaId.push(res.serverId);
+                }
+                flag = true;
+              }
+            }
+            if (!flag) {
+              var item = {
+                id: '',
+                mediaId: []
+              };
+              item.id = value.id;
+              item.mediaId.push(res.serverId);
+              that.mediaIds.push(item);
+            }
+            //如果还有照片，继续上传
+            uploadCount++;
+            if (uploadCount < localIdLength) {
+              upload();
+            }
+          },
+          fail: function (res) {
+            attention(JSON.stringify(res));
+          }
+        });
+      }; //循环上传
+      upload();
 
+    },
+    fail: function (res) {
+      attention(JSON.stringify(res));
     }
-  })
+  });
+
 };
 
+function attention(str) {
+  $("#allatt").fadeIn();
+  $("#att").text(str);
+  $("#allatt").on('click', function () {
+    $("#allatt").fadeOut();
+  })
+}
 //调用录音
 var startTime = 0,
   endTime = 0;
@@ -205,8 +293,8 @@ function voiceRecord(type, minTime) { //type为0是录音，type为1是结束 mi
   } else if (type == 1) {
     endTime = new Date().getTime();
     if (endTime - startTime < minTime) {
-      var localId = '';
-      alert('录音时间小于' + minTime / 1000 + '秒，请重试');
+      voice = [];
+      attention('录音时间小于' + minTime / 1000 + '秒，请重试');
     } else {
       wx.stopRecord({ // 停止录音
         success: function (res) {
@@ -270,15 +358,16 @@ function uploadInfo(nickname, phone, email) {
   //icon是有默认值的（比如不想自定义头像）直接上传就行
   //先禁用按钮！！！！
 
-  // $("#submitInfo").attr("disabled", "disabled");
+  $("#submitInfo").attr("disabled", "disabled");
   if (checkInput(nickname, 'str') && checkInput(phone, 'num')) {
     post();
     $('#introduce').fadeIn(300);
     $("#getInfo").fadeOut(80);
   } else {
-    alert("wrong input!");
+    attention("啊喔！请输入正确信息！");
     $("#submitInfo").attr("disabled", true);
   }
+
   function post() {
     //upload
     console.log("upload info");
@@ -293,10 +382,18 @@ function uploadInfo(nickname, phone, email) {
         email: email,
         //head_pic: icon
       }),
+      statusCode: {
+        410: res => {
+          attention(res.responseJSON.message);
+        },
+        401: res => {
+          attention(res.responseJSON.message);
+        },
+      },
       success(data, textStatus, xhr) {
         if (data.errcode != 0 || xhr.status == 400) {
           //上传失败 把错误信息显示出来
-          alert(data.errmsg);
+          attention(data.errmsg);
           console.log(data);
         } else if (data.errcode == 0) {
           $("#loading").fadeOut(80);
@@ -306,7 +403,9 @@ function uploadInfo(nickname, phone, email) {
         }
       },
       error: function (err) {
+        console.log("出错了！请检查网络！");
         console.log(err);
+        attention(err);
       }
     });
   }
@@ -335,30 +434,69 @@ function checkInput(str, type) {
 
 function uploadCapsule(capsule_type,
   time_limit, cap_template,
-  content_word, content_pic, content_voice, txl_content, TA_info, from_qrcode, user_id) {
+  content_word,   txl_content, TA_info, from_qrcode, user_id) {
   $("#submitCapsule").attr("disabled", "disabled");
   $("#loading").fadeIn();
   cap_location = Math.floor((Math.random() * 7) + 1);
   var letter = ({});
   switch (capsule_type) {
-    case 1:
-      letter = JSON.stringify({
-        capsule_type: 1, // （胶囊类型）0，1，2分别代表私密，Ta，陌生人
-        time_limit: 0, // （时间期限）0，1分别代表半年、一年
-        cap_template: 0, // （胶囊模板）0，1分别代表普通信纸和同学录
-        cap_location: cap_location, // 胶囊位置
-        receiver_name: TA_info.name, // 收信人姓名
-        receiver_tel: TA_info.tel, // 收信人电话
-        receiver_email: TA_info.email, // 收信人邮箱
-        content_word: 文字, // 文字内容
-        from_qrcode: false, // 是否二维码写信
-        // 可选
-        content_pic: [serverid], // 调用uploadImage返回的serverid，没有上传图片就不传这个参数，就算只有一张图片也传数组
-        content_voice: serverid
-      })
+    case 1: //写给TA
+      if (cap_template == 1) {
+        letter = JSON.stringify({
+          capsule_type: capsule_type, // （胶囊类型）0，1，2分别代表私密，Ta，陌生人
+          time_limit: time_limit, // （时间期限）0，1分别代表半年、一年
+          cap_template: cap_template, // （胶囊模板）0，1分别代表普通信纸和同学录
+          cap_location: cap_location, // 胶囊位置
+          receiver_name: TA_info.name, // 收信人姓名
+          receiver_tel: TA_info.tel, // 收信人电话
+          receiver_email: TA_info.email, // 收信人邮箱
+          content_name: txl_content.name, // 同学录上的姓名
+          content_phone: txl_content.tel, // 同学录上的电话
+          content_birth: txl_content.birth,
+          content_word: txl_content.tucao,
+          xingzuo: txl_content.star,
+          place: txl_content.place,
+          hobby: txl_content.hobby,
+          music: txl_content.music,
+          movie: txl_content.movie,
+          food: txl_content.food,
+          wechat: txl_content.wechat,
+          QQ: txl_content.qq,
+          email: txl_content.email,
+          from_qrcode: from_qrcode,
+          user_id: user_id,
+          // 可选
+          content_pic: mediaIds, // 调用uploadImage返回的serverid，没有上传图片就不传这个参数，就算只有一张图片也传数组
+          content_voice: voiceIds // 调用微信停止录音接口返回的serverid，没有则不传
+        })
+      } else {
+        letter = JSON.stringify({
+          capsule_type: capsule_type, // （胶囊类型）0，1，2分别代表私密，Ta，陌生人
+          time_limit: time_limit, // （时间期限）0，1分别代表半年、一年
+          cap_template: cap_template, // （胶囊模板）0，1分别代表普通信纸和同学录
+          cap_location: cap_location, // 胶囊位置
+          receiver_name: TA_info.name, // 收信人姓名
+          receiver_tel: TA_info.tel, // 收信人电话
+          receiver_email: TA_info.email, // 收信人邮箱
+          content_word: content_word, // 文字内容
+          from_qrcode: from_qrcode, // 是否二维码写信
+          // 可选
+          content_pic: mediaIds, // 调用uploadImage返回的serverid，没有上传图片就不传这个参数，就算只有一张图片也传数组
+          content_voice: voiceIds
+        })
+      }
       break;
-
     default:
+      letter = JSON.stringify({
+        capsule_type:capsule_type, // （胶囊类型）0，1，2分别代表私密，Ta，陌生人
+        time_limit: time_limit, // （时间期限）0，1分别代表半年、一年
+        cap_template: cap_template, // （胶囊模板）0，1分别代表普通信纸和同学录
+        cap_location: cap_location, // 胶囊位置
+        content_word: content_word, // 文字内容
+        // 可选
+        content_pic: mediaIds, // 调用uploadImage返回的serverid，没有上传图片就不传这个参数，就算只有一张图片也传数组
+        content_voice: voiceIds
+      })
       break;
   }
   $.ajax({
@@ -366,30 +504,19 @@ function uploadCapsule(capsule_type,
     url: apiurl + 'capsule',
     contentType: "application/json;charset=utf-8",
 
-    data: JSON.stringify({
-      capsule_type: capsule_type,
-      time_limit: time_limit,
-      cap_template: cap_template,
-      cap_location: cap_location,
-      content_word: content_word,
-      content_pic: content_pic,
-      content_voice: content_voice,
-      content_name: content_name,
-      content_phone: content_phone,
-      content_birth: content_birth
-    }),
+    data: letter,
     statusCode: {
       410: res => {
-        alert(res.responseJSON.message);
+        attention(res.responseJSON.message);
       },
       401: res => {
-        alert(res.responseJSON.message);
+        attention(res.responseJSON.message);
       },
     },
     success(data, textStatus, xhr) {
       if (data.errcode != 0 || xhr.status == 400) {
         //上传失败 把错误信息显示出来
-        alert(data.errmsg);
+        attention(data.errmsg);
         console.log(data);
       } else if (data.errcode == 0) {
         $("#loading").fadeOut(200);
@@ -398,7 +525,9 @@ function uploadCapsule(capsule_type,
       }
     },
     error: function (err) {
+      console.log("出错了！请检查网络！");
       console.log(err);
+      attention(err);
     }
   })
 }
@@ -414,9 +543,9 @@ for (var key in mainPage) {
   mainPage[key].attr('style', 'display:none;')
 }
 
-window.onload = function () {
-  mainPage.welcome.attr('style', 'display:block;');
-}
+
+mainPage.welcome.show();
+
 $('#welcome_btn').on('click', function () {
   //if(checkLogin()){
   if (localStorage.getItem("username") != undefined) {

@@ -13,6 +13,8 @@
         <script src="https://cdn.bootcss.com/qs/6.5.2/qs.min.js"></script>
         <!--script src="https://cdn.staticfile.org/jquery-cookie/1.4.1/jquery.cookie.min.js"></script-->
         <script src="http://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
+        <script src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+
         <script src="https://cdn.bootcss.com/PreloadJS/1.0.1/preloadjs.min.js"></script>
         <script src="./js/preload.js"></script>
     </head>
@@ -21,6 +23,16 @@
         <div id="loading">
             <img id="rotate" src="./images/1.png" />
             <span class="loadspan">Loading..</span>
+        </div>
+        <div id="allatt">
+            <p id="att">提示</p>
+        </div>
+        <div id="sing_box">
+
+            <img src="./images/record_normal.png" id="sing_anim">
+
+            <input type="button" id="recordbtn" value="按住 开始" />
+
         </div>
         <div id="page1">
             <div class="header_l">
@@ -121,7 +133,8 @@
                     <input type="image" src="./images/letter/record.png" class="add" id="voiceStart" />
                     <input type="image" src="./images/letter/photobtn.png" class="add" id="images" />
                 </div>
-                <li audioid='"test.mp3"' class="mp3">
+                <li audioid='./test.mp3' class="mp3" id="mp3">
+                    <span>1s</span>
                     <input type="image" src="./images/letter/R1.png" class="player" id="player" />
                     <input type="image" src="./images/letter/dele.png" class="delemp3" id="voice_dele" />
                 </li>
@@ -174,7 +187,7 @@
                     <span class="txl_item">QQ：</span><input type="tel" class="txl_input" id="txl_qq" />
                 </div>
                 <div class="txl_contain">
-                    <span class="txl_item">邮箱：</span><input  type="email" class="txl_input" id="txl_email" />
+                    <span class="txl_item">邮箱：</span><input type="email" class="txl_input" id="txl_email" />
                 </div>
             </div>
             <div class="txl_left_bottom">
@@ -214,7 +227,8 @@
                     <input type="image" src="./images/letter/photobtn.png" class="add" id="images" />
                     <input type="image" src="./images/letter/record.png" class="add" id="voiceStart" />
                 </div>
-                <li audioid='"test.mp3"' class="mp3">
+                <li audioid='./test.mp3' class="mp3" id="mp3">
+                    <span>1s</span>
                     <input type="image" src="./images/letter/R1.png" class="player" id="player" />
                     <input type="image" src="./images/letter/dele.png" class="delemp3" id="voice_dele" />
                 </li>

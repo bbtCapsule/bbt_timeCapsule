@@ -1,119 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0,user-scalable=no">
-    <title>时光胶囊</title>
-    <link rel="stylesheet" href="./css/main.css">
-    <link rel="stylesheet" href="./css/load.css">
-    <script src="./js/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.bootcss.com/qs/6.5.2/qs.min.js"></script>
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<!--script src="https://cdn.staticfile.org/jquery-cookie/1.4.1/jquery.cookie.min.js"></script-->
-             <script src="http://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
-    <script src="https://cdn.bootcss.com/PreloadJS/1.0.1/preloadjs.min.js"></script>
-    <script src="./js/preload.js"></script>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+            content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0,user-scalable=no">
+        <title>时光胶囊</title>
+        <link rel="stylesheet" href="./css/main.css">
+        <link rel="stylesheet" href="./css/load.css">
+        <script src="./js/jquery-3.4.1.min.js"></script>
+        <script src="https://cdn.bootcss.com/qs/6.5.2/qs.min.js"></script>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <!--script src="https://cdn.staticfile.org/jquery-cookie/1.4.1/jquery.cookie.min.js"></script-->
+        <script src="http://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
+        <script src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
 
-<body style="background-color: #bfdbc6;">
-     <div id="loading">
-        <img id="rotate" src="./images/2.png" />
-        <span class="loadspan">Loading..</span>
-    </div>
-    <div class="background"></div>
-    <div id="welcome">
-        <div class=" welcome_header"></div>
-        <div class=" welcome_content"> &ensp;&ensp;&ensp;&ensp;欢迎来到百步梯毕业季之时光胶囊活动~ <br>
+        <script src="https://cdn.bootcss.com/PreloadJS/1.0.1/preloadjs.min.js"></script>
+        <script src="./js/preload.js"></script>
+    </head>
 
-            &ensp;&ensp;&ensp;&ensp;在这里，你可以把信放入胶囊，埋在学校 的花坛中，等待未来的TA将其找出来。<br>
+    <body style="background-color: #bfdbc6;">
+        <div id="loading">
+            <img id="rotate" src="./images/2.png" />
+            <span class="loadspan">Loading..</span>
+        </div>
+        <div id="allatt">
+            <p id="att">提示</p>
+        </div>
 
-            &ensp;&ensp;&ensp;&ensp;先留下你的基本信息吧（嘘~这是我们共同的秘密）</div>
-        <div class="welcome_btn" id="welcome_btn"></div>
-    </div>
-    <div id="getInfo">
-    <div class="Infocontain">
-        <div class="info" id="icon_div">
-            <!---span class="info_name">头像</span-->
-            <div class="icon_container" >
+        <div class="background"></div>
+        <div id="welcome">
+            <div class=" welcome_header"></div>
+            <div class=" welcome_content">
+             <!-- &ensp;&ensp;&ensp;&ensp;-->
+            欢迎来到百步梯毕业季之时光胶囊活动~ <br>
+             <!-- &ensp;&ensp;&ensp;&ensp;-->
+                在这里，你可以把信放入胶囊，埋在学校 的花坛中，等待未来的TA将其找出来。<br>
+             <!-- &ensp;&ensp;&ensp;&ensp;-->
+                先留下你的基本信息吧（嘘~这是我们共同的秘密）</div>
+            <div class="welcome_btn" id="welcome_btn"></div>
+        </div>
+        <div id="getInfo">
+            <div class="Infocontain">
+                <!--div class="info" id="icon_div">
+            <!-span class="info_name">头像</span-->
+                <!--<div class="icon_container" >
                 <img src="./images/other/icon.png" id="head_pic">
             </div>
-        </div>
-        <div class="info">
-            <span class="info_name">昵称</span>
-            <input class="info_input" type="text" name="nickname" id="nickname" maxlength="30">
-            <span class="attention_text"></span>
-        </div>
-        <div class="info">
-            <span class="info_name">手机号</span>
-            <input class="info_input" type="tel" name="phone" id="phone" maxlength="11" value="">
-            <span class="attention_text"></span>
-        </div>
-        <div class="info">
-            <span class="info_name">邮箱</span>
-            <input class="info_input" type="email" name="email" id="email" value="">
-            <span class="attention_text"></span>
+        </div-->
+                <div class="info">
+                    <span class="info_name">昵称</span>
+                    <input class="info_input" type="text" name="nickname" id="nickname" maxlength="30">
+                    <span class="attention_text"></span>
+                </div>
+                <div class="info">
+                    <span class="info_name">手机号</span>
+                    <input class="info_input" type="tel" name="phone" id="phone" maxlength="11" value="">
+                    <span class="attention_text"></span>
+                </div>
+                <div class="info">
+                    <span class="info_name">邮箱</span>
+                    <input class="info_input" type="email" placeholder="选填" name="email" id="email" value="">
+                    <span class="attention_text"></span>
 
+                </div>
+                <input id="submitInfo" type="submit" value="">
+            </div>
         </div>
-        <input id="submitInfo" type="submit" value="">
-        </div>
-    </div>
-    <div id="main">
-        <div class="header" id="go_intro"></div>
-        <div class="bottom_btn">
-            <div class="btn" id="go_write"></div>
-            <div class="btn" id="go_receive"></div>
-        </div>
+        <div id="main">
+            <div class="header" id="go_intro"></div>
+            <div class="bottom_btn">
+                <div class="btn" id="go_write"></div>
+                <div class="btn" id="go_receive"></div>
+            </div>
 
-        <div class="map"></div>
-        <div class="mai">
-            <!--埋胶囊的div-->
-            <!-- <div id="mai_att">
+            <div class="map"></div>
+            <div class="mai">
+                <!--埋胶囊的div-->
+                <!-- <div id="mai_att">
                     <p>移动地图<br>选择埋胶囊的地点吧~</p>
                     <span>点击地图开始</span>
                 </div> -->
-            <img src="./images/anim/1.gif" id="mai_anim" />
+                <img src="./images/anim/1.gif" id="mai_anim" />
+            </div>
+            <img id="img_map" src="./images/map.jpg" usemap="#mapmap" />
+            <map name="mapmap" id="mapmap">
+                <area id="A1" onfocus="this.blur()" shape="circle" coords="27,117,109,143" href="#" hidefocus="true"
+                    alt="最左边的花坛" />
+                <area id="A2" onfocus="this.blur()" shape="circle" coords="150,117,109,143" href="#" hidefocus="true"
+                    alt="左边下面的花坛" />
+                <area id="A3" onfocus="this.blur()" shape="circle" coords="200,117,109,143" href="#" hidefocus="true"
+                    alt="Venus" />
+                <area id="A4" onfocus="this.blur()" shape="circle" coords="200,227,109,143" href="#" hidefocus="true"
+                    alt="五山花坛" />
+                <area id="A5" onfocus="this.blur()" shape="circle" coords="100,117,109,143" href="#" hidefocus="true"
+                    alt="雕像" />
+                <area id="A6" onfocus="this.blur()" shape="circle" coords="45,147,109,143" href="#" hidefocus="true"
+                    alt="雕像" />
+                <area id="A7" onfocus="this.blur()" shape="circle" coords="87,115,109,143" href="#" hidefocus="true"
+                    alt="雕像" />
+                <area id="A8" onfocus="this.blur()" shape="circle" coords="87,115,109,143" href="#" hidefocus="true"
+                    alt="下面那个" />
+            </map>
         </div>
-        <img id="img_map" src="./images/map.jpg" usemap="#mapmap" />
-        <map name="mapmap" id="mapmap">
-            <area id="A1" onfocus="this.blur()" shape="circle" coords="27,117,109,143" href="#" hidefocus="true"
-                alt="最左边的花坛" />
-            <area id="A2" onfocus="this.blur()" shape="circle" coords="150,117,109,143" href="#" hidefocus="true"
-                alt="左边下面的花坛" />
-            <area id="A3" onfocus="this.blur()" shape="circle" coords="200,117,109,143" href="#" hidefocus="true"
-                alt="Venus" />
-            <area id="A4" onfocus="this.blur()" shape="circle" coords="200,227,109,143" href="#" hidefocus="true"
-                alt="五山花坛" />
-            <area id="A5" onfocus="this.blur()" shape="circle" coords="100,117,109,143" href="#" hidefocus="true"
-                alt="雕像" />
-            <area id="A6" onfocus="this.blur()" shape="circle" coords="45,147,109,143" href="#" hidefocus="true"
-                alt="雕像" />
-            <area id="A7" onfocus="this.blur()" shape="circle" coords="87,115,109,143" href="#" hidefocus="true"
-                alt="雕像" />
-        </map>
-    </div>
-    <div id="introduce">
-        <div class="header"></div>
-        <div class="intro_content">
-            <div class="intro">
-                【我要写信】：<br>
-                1、根据写信的对象选择一种胶囊<br>
-                2、再选择打开胶囊的时间，半年后或一年后<br>
-                3、选择信纸，进入信纸界面。写下你想说的话，不单单文字，语音，图片也可以<br>
-                4、写完之后可以选择想埋胶囊的地点<br>
-                5、静静等待，期限到了，便可开启<br>
-<br>
-                【我要收信】：<br>
-                生成专属二维码。分享出去，邀请朋友给自己写信，一起开启时光之旅<br>
+        <div id="introduce">
+            <div class="header"></div>
+            <div class="intro_content">
+                <div class="intro">
+                    【我要写信】：<br>
+                    1、根据写信的对象选择一种胶囊<br>
+                    2、再选择打开胶囊的时间，半年后或一年后<br>
+                    3、选择信纸，进入信纸界面。写下你想说的话，不单单文字，语音，图片也可以<br>
+                    4、写完之后可以选择想埋胶囊的地点<br>
+                    5、静静等待，期限到了，便可开启<br>
+                    <br>
+                    【我要收信】：<br>
+                    生成专属二维码。分享出去，邀请朋友给自己写信，一起开启时光之旅<br>
+                </div>
+            </div>
+            <div class="bottom" id="intro_btn">
+
             </div>
         </div>
-        <div class="bottom" id="intro_btn">
-
-        </div>
-    </div>
-</body>
-<script src="./js/main.js"></script>
-<script src="./js/show.js"></script>
+    </body>
+    <script src="./js/main.js"></script>
+    <script src="./js/show.js"></script>
 
 </html>

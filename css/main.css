@@ -5,6 +5,12 @@
 }
 
 
+input::-webkit-input-placeholder,
+ textarea::-webkit-input-placeholder ,
+ input:-moz-placeholder, textarea:-moz-placeholder { 
+    /* WebKit browsers */ 
+   color:#747070; 
+   }
 
 body {
     height: 100%;
@@ -436,7 +442,13 @@ area.go:before {
     text-align: left;
     padding: 15% 13%;
 }
-
+.intro{
+    width: 90%;
+    margin-left: 5%;
+    overflow: scroll;
+    /* font-size: 10vw; */
+    height: 100%;
+}
 #intro_btn {
     width: 40vw;
     height: 11vh;
