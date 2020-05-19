@@ -27,7 +27,6 @@ def downloadVoice(content_voice):
         current_app.logger.error(traceback.format_exc())
         return False
 
-
 def downloadPic(content_pic):
     for i in content_pic:
         try:
@@ -43,7 +42,7 @@ def downloadPic(content_pic):
         except:
             current_app.logger.error(traceback.format_exc())
             return False
-
+    return True
 
 # 下载给自己的胶囊
 def downloadSelf(open_id, time_limit, cap_template, cap_location, content_word, content_pic, content_voice):
