@@ -1,34 +1,35 @@
 body {
-    padding-top: 5%;
-    margin: 0;
-    user-select: none;
-    outline: none;
-    -webkit-tap-highlight-color: transparent;
+  margin: 0;
+  padding: 0;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #8798b0;
+}
+.QRcode {
+  width: 100vw;
+  height: auto;
+  z-index: 10;
+}
+.prePage {
+  width: 40vw;
+  margin: 5vh 30vw;
+}
+.tip {
+  text-align: center;
+  color: #4f6572;
+  font-size: 16px;
+  margin-top: 2vh;
+  user-select: none;
+}
+.wrapper{
     width: 100vw;
-    height: 100vh;
-    overflow: hidden;
-    /* background-image: url(../images/other/QR.jpg); */
-    /* background-size: contain; */
-    background-color: #8798b0;
+    height: fit-content;
+    position: relative;
 }
-.prePage{
-    width: 40%;
+.tips{
     position: absolute;
-    bottom: 10%;
-    margin-left: 30%;
-}
-.QRcode{
-    width: 100%;
-    height: auto;
-    z-index: -1;
-    position: absolute;
-}
-span{
-    position: absolute;
-    bottom: 0px;
-    color: #4f6572;
-    font-size: 14px;
-    bottom: 18%;
-    left: 50%;
-    margin-left: -40px;
+    bottom: 0;
 }

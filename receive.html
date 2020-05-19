@@ -1,36 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0,user-scalable=no"
+    />
+    <title>时光胶囊</title>
+    <link rel="stylesheet" href="./css/receive.css" />
+    <link rel="stylesheet" href="./css/load.css" />
+    <script src="./js/jquery-3.4.1.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
+    <script src="https://cdn.bootcss.com/PreloadJS/1.0.1/preloadjs.min.js"></script>
+    <script src="./js/preload1.js"></script>
+    <script src="./js/config.js"></script>
+  </head>
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport"
-            content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0,user-scalable=no">
-        <title>时光胶囊</title>
-        <link rel="stylesheet" href="./css/receive.css">
-        <link rel="stylesheet" href="./css/load.css">
-        <script src="./js/jquery-3.4.1.min.js"></script>
-        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-        <script src="https://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
-        <!--script src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script-->
-        <script src="https://cdn.bootcss.com/PreloadJS/1.0.1/preloadjs.min.js"></script>
-        <script src="./js/preload1.js"></script>
-
-    </head>
-
-    <body>
-        <div id="allatt">
-            <p id="att">提示</p>
-        </div>
-        <img src="./images/other/QR.jpg" class="QRcode" id="QR">
-        <span>长按保存图片</span>
-        <input type="image" src="./images/return.png" id="backbtn" class="prePage" />
-        <script src="./js/config.js"></script>
-    </body>
-    <script>
-        $("#backbtn").on('click', function () {
-            window.location.href = "main.html"
-        })
-    </script>
-    <script src="./js/main.js"></script>
-
+  <body>
+    <div id="loading">
+        <img id="rotate" src="./images/2.png" />
+        <span class="loadspan">Loading..</span>
+    </div>
+    <div id="allatt">
+      <p id="att">提示</p>
+    </div>
+    <div class="wrapper">
+      <img src="./images/other/QR.jpg" class="QRcode" id="QR" />
+      <div class="tips">
+        <div class="tip">长按保存图片</div>
+        <input
+          type="image"
+          src="./images/return.png"
+          id="backbtn"
+          class="prePage"
+        />
+      </div>
+    </div>
+  </body>
+  <script>
+    $("#backbtn").on("click", function () {
+      window.location.href = "main.html";
+    });
+  </script>
+  <script src="./js/receive.js"></script>
 </html>
