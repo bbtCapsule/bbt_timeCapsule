@@ -136,15 +136,21 @@ function setitem(letterType) {
       letter0.append(mp3);
       letter0.append(img1);
       letter0.append(img2);
-      letter0.on("click", "#voice_dele", function () {
+      letter0.on("click", "#voice_dele", function (e) {
+        e.preventDefault();
+
         $("#mp3").slideUp();
         voiceDel();
       });
-      letter0.on("click", "#pic_dele1", function () {
+      letter0.on("click", "#pic_dele1", function (e) {
+        e.preventDefault();
+
         $("#pic1").slideUp();
         $("#pic_dele1").slideUp();
       });
-      letter0.on("click", "#pic_dele2", function () {
+      letter0.on("click", "#pic_dele2", function (e) {
+        e.preventDefault();
+
         $("#pic2").slideUp();
         $("#pic_dele2").slideUp();
       });
@@ -153,15 +159,18 @@ function setitem(letterType) {
       letter1.append(mp3);
       letter1.append(img1);
       letter1.append(img2);
-      letter1.on("click", "#voice_dele", function () {
+      letter1.on("click", "#voice_dele", function (e) {
+        e.preventDefault();
         $("#mp3").slideUp();
         voiceDel();
       });
-      letter1.on("click", "#pic_dele1", function () {
+      letter1.on("click", "#pic_dele1", function (e) {
+        e.preventDefault();
         $("#pic1").slideUp();
         $("#pic_dele1").slideUp();
       });
-      letter1.on("click", "#pic_dele2", function () {
+      letter1.on("click", "#pic_dele2", function (e) {
+        e.preventDefault();
         $("#pic2").slideUp();
         $("#pic_dele2").slideUp();
       });
@@ -169,17 +178,20 @@ function setitem(letterType) {
     case 2:
       letter2.append(txl_img1);
       letter2.append(txl_img2);
-      letter1.on("click", "#pic_dele1", function () {
+      letter1.on("click", "#pic_dele1", function (e) {
+        e.preventDefault();
         $("#pic1").slideUp();
         $("#pic_dele1").slideUp();
       });
-      letter1.on("click", "#pic_dele2", function () {
+      letter1.on("click", "#pic_dele2", function (e) {
+        e.preventDefault();
         $("#pic2").slideUp();
         $("#pic_dele2").slideUp();
       });
       break;
   }
-  $("#player").on("click", function () {
+  $("#player").on("click", function (e) {
+    e.preventDefault();
     if (!isPlay) {
       voicePlay();
       isPlay = true;
@@ -318,6 +330,7 @@ function voiceRecord(type, minTime) {
 var isPlay = false;
 
 function voicePlay() {
+  console.log("播放");
   isPlay = true; // 播放语音接口
   wx.playVoice({
     localId: that.voice, // 需要播放的音频的本地ID，由stopRecord接口获得
@@ -326,6 +339,8 @@ function voicePlay() {
 
 // 停止播放接口
 function voiceStop() {
+  console.log("stop");
+
   isPlay = false;
   wx.stopVoice({
     localId: that.voice, // 需要停止的音频的本地ID，由stopRecord接口获得
