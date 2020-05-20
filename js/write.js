@@ -74,7 +74,7 @@ function getRadio(obj) {
   return -1;
 }
 page.writemap.on("click", function () {
-  $("#mai_att").fadeOut(300);
+  $("#mai_att").fadeOut(100);
 });
 //页面开关
 prePage.page1.on("click", function () {
@@ -242,9 +242,7 @@ prePage.writeTA.on("click", function () {
   isSet = false;
 });
 
-function OpenMove() {
-  $("body").css("overflow", "scroll");
-}
+
 // 根据type判断是否跳转填写信息
 function switchCapsule(str) {
   console.log("胶囊类型是" + str + " 0写给自己 1写给专属 2写给陌生人");
@@ -261,7 +259,20 @@ function switchCapsule(str) {
 }
 
 //writeone&writemap 1\2信纸
+function disableBtn(){
+  nextPage.writeone.attr("disabled", "disabled");
+  nextPage.writesec.attr("disabled", "disabled");
+  nextPage.writeTA.attr("disabled", "disabled");
+  setTimeout(() => {
+    nextPage.writeone.attr("disabled", false);
+    nextPage.writesec.attr("disabled", false);
+    nextPage.writeTA.attr("disabled", false);
+    console.log("提交按钮解禁")
+  }, 5000);
+}
+
 nextPage.writeone.on("click", function () {
+  disableBtn();
   content_word = $(".letter_text").val();
   if (content_word == "") {
     trySend = false;
@@ -270,7 +281,6 @@ nextPage.writeone.on("click", function () {
     //uploadCapsule(capsule_type, time_limit, cap_template, cap_location, content_word, content_pic, content_voice, content_name, content_phone, content_birth);
     if (checkInput(content_word, "str")) {
       trySend = true;
-      sendLetter(0);
     } else {
       trySend = false;
       attention("是不是有什么信息写错了呢~");
@@ -285,6 +295,7 @@ nextPage.writeone.on("click", function () {
 //同学录？？
 nextPage.writesec.on("click", function () {
   // cap_template, content_word
+  disableBtn();
   content_word = $("#letter3").val();
   if (content_word == "") {
     trySend = false;
@@ -292,7 +303,6 @@ nextPage.writesec.on("click", function () {
   } else {
     if (checkInput(content_word, "str")) {
       trySend = true;
-      sendLetter(0);
     } else {
       trySend = false;
       attention("是不是有什么信息写错了呢~");
@@ -307,6 +317,7 @@ nextPage.writesec.on("click", function () {
 //TA信息
 nextPage.writeTA.on("click", function () {
   // cap_template, content_word
+  disableBtn();
   forbidMove();
   //uploadCapsule(capsule_type, time_limit, cap_template, cap_location, content_word, content_pic, content_voice, content_name, content_phone, content_birth);
 
@@ -336,6 +347,7 @@ nextPage.writeTAsend.on("click", function () {
   TA_info.email = $("#receiver_email").val();
   if (checkInput(TA_info.phone, "num") && TA_info.name != "") {
     console.log("提交");
+    nextPage.writeTAsend.attr('disabled',true);
     TrueSend();
     page.writeTAsend.fadeOut(100);
     page.writemap.fadeIn(80);
@@ -457,10 +469,9 @@ singbtn.on({
     timeoutEvent = 0;
     e.preventDefault();
     $("#sing_anim").attr("src", "./images/record_normal.png");
-
     singbtn.val("按住 开始");
 
-    voiceRecord(1, 1000);
+    // voiceRecord(1, 1000);
     sing.fadeOut(100);
   },
   touchend: function (e) {

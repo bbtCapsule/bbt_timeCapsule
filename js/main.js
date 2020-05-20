@@ -1,13 +1,3 @@
-//config
-// const phpurl =
-//   "https://hemc.100steps.net/2018/fireman/auth.php?redirect=" +
-//   encodeURIComponent(location.href); //微信登录授权跳转页
-//   const phpurl =
-//   "https://hemc.100steps.net/2017/wechat/Home/Index/index?state=" +encodeURIComponent(window.location.href); //微信登录授权跳转页
-
-// //const baseUrl = "https://hemc.100steps.net/2020//bbt_timeCapsule/py/api";
-// const baseUrl = "https://hemc.100steps.net/2020/timecapsule_test/api"; //测试用url
-// const apiurl = `${baseUrl}/`;
 
 var nickname = "Hi~";
 var icon = "your_icon.jpg"; //头像地址
@@ -33,76 +23,18 @@ var txl_img2 =
   "<img src='B' class='txl_add_img' id='pic2'></img><input type='image' src='./images/letter/dele.png' class='deleimg' id='pic_dele2'>";
 var letterType = 0;
 
-// axios({
-//     method: "post",
-//     url: apiurl + "set_open_id",
-//     data: {
-//       openid: 11111
-//     },
-//     withCredentials: true,
-//   })
-//   .then(res => {
-//     console.log("set_openid");
-//     console.log(res);
-//   });
-// checkLogin();
-// checkInfo();
-// function checkLogin() {
-//   var checkurl = apiurl + "check_wechat_login"; //后台检测登录
-//   $.ajax({
-//     type: "GET",
-//     url: checkurl,
-//     contentType: "application/json;charset=utf-8",
-//     statusCode: {
-//       200: (res) => {
-//         return true;
-//       },
-//       410: (res) => {
-//         attention(res.responseJSON.message);
-//       },
-//       401: (res) => {
-//         attention(res.responseJSON.message);
-//         check = true;
-//         window.location.href = phpurl;
-//       },
-//       500: (res) => {
-//         attention(res.responseJSON.message);
-//       },
-//     },
-
-//     success(data, textStatus, xhr) {
-//       //console.log(xhr.status);
-//       //attention(xhr.statusText);
-//       if (xhr.status == 200) {
-//         check = true;
-//         return check;
-//       } else {
-//         // attention(xhr.statusText);
-//         // attention(textStatus);
-//         return check;
-//       }
-//     },
-//     error: function (err) {
-//       attention("出错了！请检查网络！");
-//       console.log(err);
-//       attention(err);
-//       return check;
-//     },
-//   });
-//   return check;
-// }
-
-// if (
-//   window.location.href.split("/")[window.location.href.split("/").length - 1] ==
-//   "write.html"
-// ) {
-//   checkLogin();
-//   wxlogin();
-// }
-
-//微信登录
-//检测录入信息状态
-// sessionStorage.setItem("username", "none");
+var winHeight = $(window).height();
+function moveKeyboard(id){
+  var winHeight = $(window).height();
+  if(id=="try"){
+    $("body").height(winHeight);
+    return;
+  }
+$(window).resize(function() {
+    var keyboardHeight = winHeight - winHeight;
+    $(id).css({ 'bottom': keyboardHeight + 'px' });
+});
+}
 
 // function checkInfo() {
 //   console.log("check info start");
@@ -342,10 +274,10 @@ var startTime = 0,
 //录音开始
 function voiceRecord(type, minTime) {
   //type为0是录音，type为1是结束 minTime录音最少时间(单位毫秒)
-  if (type == 0) {
+  // if (type == 0) {
     startTime = new Date().getTime();
     wx.startRecord(); //开始录音
-  } else if (type == 1) {
+  // } else if (type == 1) {
     endTime = new Date().getTime();
     if (endTime - startTime < minTime) {
       voiceDel();
@@ -355,11 +287,12 @@ function voiceRecord(type, minTime) {
         // 停止录音
         success: function (res) {
           $("#mp3").show();
+          // voiceRecord(1, 1000);
           that.voice = res.localId;
         },
       });
     }
-  }
+  // }
 }
 
 //录音播放
@@ -669,7 +602,9 @@ function forbidMove() {
   );
   $("body").css("overflow", "hidden");
 }
-
+function OpenMove() {
+  $("body").css("overflow", "scroll");
+}
 mainPage.welcome.show();
 // wxlogin();
 $("#welcome_btn").on("click", function () {

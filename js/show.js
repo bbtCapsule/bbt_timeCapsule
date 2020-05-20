@@ -1,6 +1,9 @@
 //可以把不涉及数据传输的 动画函数、展示写在这里
 $("#loading").on('click', function (e) {
-    $("#loading").fadeOut(300);
+    $("#loading").fadeOut(100);
+})
+$("#allatt").on('click', function (e) {
+    $("#allatt").fadeOut(100);
 })
 function areaShow() {
     for(i=1;i<8;i++){
@@ -27,6 +30,9 @@ function areaShow() {
 
 }
 areaShow();
+$("#mai").on('click',function(){
+    areaShow();
+})
 $("#go_receive").on('click', function (e) {
     window.location.href="receive.html"
 })
