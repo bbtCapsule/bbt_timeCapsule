@@ -283,6 +283,7 @@ function disableBtn(){
 }
 
 nextPage.writeone.on("click", function () {
+  forbidMove();
   disableBtn();
   content_word = $(".letter_text").val();
   if (content_word == "") {
@@ -307,6 +308,7 @@ nextPage.writeone.on("click", function () {
 //同学录？？
 nextPage.writesec.on("click", function () {
   // cap_template, content_word
+  OpenMove();
   disableBtn();
   content_word = $("#letter3").val();
   if (content_word == "") {
@@ -410,6 +412,10 @@ $(".letter_text").each(function () {
     moveKeyboard(letterType);
   })
   $(this).bind('blur', function (e) {
+    $("#write-one>.content.write-one_content>.deleimg").fadeIn();
+    $("#write-one>.content.write-one_content>.mp3").fadeIn();
+    $("#write-one>.content.write-one_content>.add_img").fadeIn();
+
     $("#write-sec>.content.write-one_content>.deleimg").fadeIn();
     $("#write-sec>.content.write-one_content>.mp3").fadeIn();
     $("#write-sec>.content.write-one_content>.add_img").fadeIn();
@@ -507,15 +513,15 @@ singbtn.on({
     voiceRecord(0,3000);
     hasSing =true;
   },
-  touchmove: function (e) {
-    clearTimeout(timeoutEvent);
-    timeoutEvent = 0;
-    e.preventDefault();
-    $("#sing_anim").attr("src", "./images/record_normal.png");
-    singbtn.val("按住 开始");
-    // voiceRecord(1, 1000);
-    //sing.fadeOut(100);
-  },
+  // touchmove: function (e) {
+  //   clearTimeout(timeoutEvent);
+  //   timeoutEvent = 0;
+  //   e.preventDefault();
+  //   $("#sing_anim").attr("src", "./images/record_normal.png");
+  //   singbtn.val("按住 开始");
+  //   // voiceRecord(1, 1000);
+  //   //sing.fadeOut(100);
+  // },
   touchend: function (e) {
     e.preventDefault();
     if (timeoutEvent != 0) {

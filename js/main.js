@@ -29,6 +29,11 @@ function moveKeyboard(letterid) {
   switch (letterid) {
     case 0:
       id="#write-one"
+      $("#write-one").css('height',winHeight);
+      $("#write-one>.content.write-one_content>.deleimg").slideUp();
+      $("#write-one>.content.write-one_content>.mp3").slideUp();
+      $("#write-one>.content.write-one_content>.add_img").slideUp();
+  
       break;
     case 0:
       id="#write-one"
@@ -47,7 +52,7 @@ function moveKeyboard(letterid) {
   if(id=="#writeL3"){
     console.log(1,$(id).height());
     console.log(winHeight);
-    $("#write-one").css('height',winHeight);
+    $("#write-sec").css('height',winHeight);
     $("#write-sec>.content.write-one_content>.deleimg").slideUp();
     $("#write-sec>.content.write-one_content>.mp3").slideUp();
     $("#write-sec>.content.write-one_content>.add_img").slideUp();
@@ -550,6 +555,7 @@ function uploadCapsule(
   //   uploadVoice();
   // }
   var letter = {};
+  capsule_type = Number(capsule_type);
   switch (capsule_type) {
     case 1: //写给TA
       if (cap_template == 1) {
