@@ -28,7 +28,12 @@ function moveKeyboard(letterid) {
   var id = "";
   switch (letterid) {
     case 0:
-      id = "#write-one";
+      id="#write-one"
+      $("#write-one").css('height',winHeight);
+      $("#write-one>.content.write-one_content>.deleimg").slideUp();
+      $("#write-one>.content.write-one_content>.mp3").slideUp();
+      $("#write-one>.content.write-one_content>.add_img").slideUp();
+  
       break;
     case 0:
       id = "#write-one";
@@ -47,7 +52,7 @@ function moveKeyboard(letterid) {
   if (id == "#writeL3") {
     console.log(1, $(id).height());
     console.log(winHeight);
-    $("#write-one").css("height", winHeight);
+    $("#write-sec").css('height',winHeight);
     $("#write-sec>.content.write-one_content>.deleimg").slideUp();
     $("#write-sec>.content.write-one_content>.mp3").slideUp();
     $("#write-sec>.content.write-one_content>.add_img").slideUp();
@@ -300,19 +305,28 @@ var hasSing = false;
 function voiceRecord(type, minTime) {
   //type为0是录音，type为1是结束 minTime录音最少时间(单位毫秒)
   if (type == 0) {
-    // startTime = new Date().getTime();
-    wx.startRecord(); //开始录音
-
-    return;
+    var stopClearTimeout;
+    // startTime = new Date().getTime(); //开始录音
+    wx.startRecord({
+      success: function(){
+          console.log("录音停止")
+          //30秒后自动停止;
+          stopClearTimeout = setTimeout(function(){
+              wx.stopRecord({
+                  success: function (res) {
+                    that.voice = res.localId;
+                    hasSing = true;
+                    $("#mp3").show();
+                  }
+              });
+          },60000);
+      },
+  });
   }
   if (type == 1) {
-    let endTime = new Date().getTime();
-    if (endTime - startTime < minTime) {
-      voiceDel();
-      attention("录音时间小于" + minTime / 1000 + "秒，请重试");
-      hasSing = false;
-    } else {
-      wx.stopRecord({
+    if(hasSing){
+      clearTimeout(stopClearTimeout);
+            wx.stopRecord({
         // 停止录音
         success: function (res) {
           $("#mp3").show();
@@ -322,7 +336,25 @@ function voiceRecord(type, minTime) {
         },
       });
     }
-  }
+  //   let endTime = new Date().getTime();
+  //   if (endTime - startTime < minTime) {
+  //     voiceDel();
+  //     attention("录音时间小于" + minTime / 1000 + "秒，请重试");
+  //     hasSing =false;
+  //   }
+    // } else{
+      // wx.stopRecord({
+      //   // 停止录音
+      //   success: function (res) {
+      //     $("#mp3").show();
+      //     // voiceRecord(1, 1000);
+      //     hasSing = true;
+      //     that.voice = res.localId;
+      //   },
+      // });
+  //   }
+  // }
+}
 }
 
 //录音播放
@@ -522,10 +554,9 @@ function uploadCapsule(
   //   uploadVoice();
   // }
   var letter = {};
-  console.log("capsule_type" + capsule_type);
-  console.log(typeof capsule_type);
+  capsule_type = Number(capsule_type);
   switch (capsule_type) {
-    case "1": //写给TA
+    case 1: //写给TA
       console.log("写给ta");
       console.log("capsule_template" + cap_template);
       console.log(typeof cap_template);
@@ -561,6 +592,7 @@ function uploadCapsule(
           content_pic: img_serverIds, // 调用uploadImage返回的serverid，没有上传图片就不传这个参数，就算只有一张图片也传数组
           content_voice: voiceIds, // 调用微信停止录音接口返回的serverid，没有则不传
         });
+        break;
       } else {
         console.log("普通tota");
 
@@ -578,9 +610,10 @@ function uploadCapsule(
           content_pic: img_serverIds, // 调用uploadImage返回的serverid，没有上传图片就不传这个参数，就算只有一张图片也传数组
           content_voice: voiceIds,
         });
+        break;
       }
-      break;
-    default:
+
+    case 0:
       letter = JSON.stringify({
         capsule_type: capsule_type, // （胶囊类型）0，1，2分别代表私密，Ta，陌生人
         time_limit: time_limit, // （时间期限）0，1分别代表半年、一年
@@ -592,9 +625,22 @@ function uploadCapsule(
         content_voice: voiceIds,
       });
       break;
+      case 2:
+        letter = JSON.stringify({
+          capsule_type: capsule_type, // （胶囊类型）0，1，2分别代表私密，Ta，陌生人
+          time_limit: time_limit, // （时间期限）0，1分别代表半年、一年
+          cap_template: cap_template, // （胶囊模板）0，1分别代表普通信纸和同学录
+          cap_location: cap_location, // 胶囊位置
+          content_word: content_word, // 文字内容
+          // 可选
+          content_pic: img_serverIds, // 调用uploadImage返回的serverid，没有上传图片就不传这个参数，就算只有一张图片也传数组
+          content_voice: voiceIds,
+        });
+        break;
   }
-  console.log("out switch");
-  console.log(letter);
+  if(letter!={}){
+
+
   $.ajax({
     method: "POST",
     url: apiurl + "capsule",
@@ -630,6 +676,18 @@ function uploadCapsule(
       attention(err);
     },
   });
+}else{
+  console.log(
+    capsule_type,
+    time_limit,
+    cap_template,
+    content_word,
+    txl_content,
+    TA_info,
+    from_qrcode,
+    user_id
+  )
+}
 }
 
 // main页面跳转
