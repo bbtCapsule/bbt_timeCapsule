@@ -31,9 +31,9 @@ var letterType = 0;
 if (window.location.href.split("?uid=").length == 2) {
   user_id = window.location.href.split("?uid=")[1];
   from_qrcode = true;
-  page.page1.hide();
-  capsule_type = 1;
-  page.page2.show();
+  // page.page1.hide();
+  // capsule_type = 1;
+  // page.page2.show();
 }
 var page = {
   page1: $("#page1"),
@@ -255,7 +255,8 @@ function switchCapsule(str) {
   switch (Number(str)) {
     case 1:
       forbidMove();
-      if(from_qrcode){
+      if (from_qrcode) {
+        TrueSend();
         page.writemap.fadeIn(90);
         break;
       }
@@ -365,9 +366,9 @@ nextPage.writeTA.on("click", function () {
 nextPage.writeTAsend.on("click", function () {
   // content_name,content_phone,content_birth;
   TA_info.name = $("#receiver_name").val();
-  TA_info.phone = $("#receiver_tel").val();
+  TA_info.tel = $("#receiver_tel").val();
   TA_info.email = $("#receiver_email").val();
-  if (checkInput(TA_info.phone, "num") && TA_info.name != "") {
+  if (checkInput(TA_info.tel, "num") && TA_info.name != "") {
     console.log("提交");
     console.log("write ta send");
     nextPage.writeTAsend.attr("disabled", true);
@@ -413,7 +414,7 @@ $(".letter_text").each(function () {
   $(this).bind("focus", function (e) {
     console.log("foucus", letterType);
     moveKeyboard(letterType);
-  })
+  });
   $(this).bind('blur', function (e) {
     if(voice!=undefined){
       $("#write-one>.content.write-one_content>.mp3").fadeIn();

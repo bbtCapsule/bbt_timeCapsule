@@ -401,7 +401,11 @@ function uploadVoice(succ_func) {
 
 // 上传图片
 function uploadImage(succ_func) {
-  if (show_imgList) {
+  console.log('upload img')
+  console.log(show_imgList)
+  
+  if (show_imgList.length) {
+    console.log('in show img')
     let count = 0;
     for (let i = 0; i < show_imgList.length; i++) {
       wx.uploadImage({
@@ -738,7 +742,6 @@ $("#intro_btn").on("click", function () {
     $("#introduce").fadeOut(300);
     {
       forbidMove();
-
       $("#main").fadeIn(80);
     }
     $("#go_write").show();
