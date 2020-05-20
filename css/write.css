@@ -234,7 +234,7 @@ input.prePage {
 #letter3 {
     height: 30%;
     position: static;
-    /* position: fixed; */
+    position: fixed;
     top: 40%;
     width: 200px;
 }

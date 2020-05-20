@@ -401,6 +401,8 @@ $(".txl_textarea").each(function () {
   $(this).bind('focus', function (e) {
     moveKeyboard(4);
   })
+  $(this).bind('blur', function (e) {
+    })
 });
 $(".letter_text").each(function () {
   $(this).bind('focus', function (e) {

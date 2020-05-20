@@ -3,12 +3,12 @@
     width: 60px;
     height: 60px;
 }
-.txl_add_img:hover{
+.txl_add_img:hover {
     height: auto;
-    width: 80vw;
-    position: static;
-    top: 25vh;
-    left: 5vw;
+    width: 60vw;
+    position: fixed;
+    top: 25vw;
+    left: 10vw;
     overflow-y: scroll;
 }
 .txl_imgdiv {
@@ -18,7 +18,7 @@
     /* top: 120px; */
     top: 0;
     height: 30vw;
-    background: black;
+    /* background: black; */
     text-align: left;
     margin-right: 10vw;
     margin-left: 90vw;
@@ -143,7 +143,7 @@
         /* margin-top: 5%; */
     }
     .txl_imgdiv {
-        width: 90%;
+        width:35%;
         /* position: absolute; */
         /* right: -180px; */
         /* top: 120px; */
