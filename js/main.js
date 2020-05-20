@@ -24,59 +24,58 @@ var letterType = 0;
 var winWidth = $(window).width();
 var winHeight = $(window).height();
 function moveKeyboard(letterid) {
-  console.log('change height');
-  var id="";
+  console.log("change height");
+  var id = "";
   switch (letterid) {
     case 0:
-      id="#write-one"
+      id = "#write-one";
       break;
     case 0:
-      id="#write-one"
+      id = "#write-one";
       break;
-      case 1:
-        id="#writeL3";
-        break;
-        case 4:
-          id="#write-TA";
-          break;
+    case 1:
+      id = "#writeL3";
+      break;
+    case 4:
+      id = "#write-TA";
+      break;
     default:
-      $("#write-TA-send").css("width",winWidth+"px");
-      $("#write-TA-send").css("height",winHeight+ "px" )
+      $("#write-TA-send").css("width", winWidth + "px");
+      $("#write-TA-send").css("height", winHeight + "px");
       break;
   }
-  if(id=="#writeL3"){
-    console.log(1,$(id).height());
+  if (id == "#writeL3") {
+    console.log(1, $(id).height());
     console.log(winHeight);
-    $("#write-one").css('height',winHeight);
+    $("#write-one").css("height", winHeight);
     $("#write-sec>.content.write-one_content>.deleimg").slideUp();
     $("#write-sec>.content.write-one_content>.mp3").slideUp();
     $("#write-sec>.content.write-one_content>.add_img").slideUp();
     // $(id).css('transform','scale(0.9) translate(0,-10%)');
     //  $(id).css('padding-top',0-($(id).height()));
-    console.log(2,$(id).height());
+    console.log(2, $(id).height());
     return;
   }
-  if(id == "#write-TA"){
-    var  txlHeightdio = 798/640;
-    var txlWidthdio = 567/360;
-    var newtxl_w,newtxl_h=0;
-    console.log('change');
+  if (id == "#write-TA") {
+    var txlHeightdio = 798 / 640;
+    var txlWidthdio = 567 / 360;
+    var newtxl_w,
+      newtxl_h = 0;
+    console.log("change");
     newtxl_h = txlHeightdio * winHeight;
-    newtxl_w = txlWidthdio *winWidth;
+    newtxl_w = txlWidthdio * winWidth;
     // console.log(0,$("#txl_img").height());
     // console.log(0,$("#txl_img").width());
     // $("txl_img").addClass(".change");
-    $(id).width('589px');
-    $(id).height('819px');
+    $(id).width("589px");
+    $(id).height("819px");
     // $("txl_img").attr('class',".change");
     return;
   }
   // $(window).resize(function () {
-    // var keyboardHeight = winHeight - winHeight;
-  $(id).css("width",winWidth);
-  $(id).css("height",winHeight );//宽度(vw) =  100 / width * 100; 高度(vh) = 100 / height * 40;
-
-  
+  // var keyboardHeight = winHeight - winHeight;
+  $(id).css("width", winWidth);
+  $(id).css("height", winHeight); //宽度(vw) =  100 / width * 100; 高度(vh) = 100 / height * 40;
 }
 
 $("#nickname").val("");
@@ -311,8 +310,8 @@ function voiceRecord(type, minTime) {
     if (endTime - startTime < minTime) {
       voiceDel();
       attention("录音时间小于" + minTime / 1000 + "秒，请重试");
-      hasSing =false;
-    } else{
+      hasSing = false;
+    } else {
       wx.stopRecord({
         // 停止录音
         success: function (res) {
@@ -523,9 +522,18 @@ function uploadCapsule(
   //   uploadVoice();
   // }
   var letter = {};
+  console.log("capsule_type" + capsule_type);
+  console.log(typeof capsule_type);
   switch (capsule_type) {
-    case 1: //写给TA
+    case "1": //写给TA
+      console.log("写给ta");
+      console.log("capsule_template" + cap_template);
+      console.log(typeof cap_template);
       if (cap_template == 1) {
+        console.log("同学录");
+        console.log("ta_info");
+        console.log(TA_info);
+        console.log(txl_content);
         letter = JSON.stringify({
           capsule_type: capsule_type, // （胶囊类型）0，1，2分别代表私密，Ta，陌生人
           time_limit: time_limit, // （时间期限）0，1分别代表半年、一年
@@ -554,6 +562,8 @@ function uploadCapsule(
           content_voice: voiceIds, // 调用微信停止录音接口返回的serverid，没有则不传
         });
       } else {
+        console.log("普通tota");
+
         letter = JSON.stringify({
           capsule_type: capsule_type, // （胶囊类型）0，1，2分别代表私密，Ta，陌生人
           time_limit: time_limit, // （时间期限）0，1分别代表半年、一年
@@ -583,6 +593,8 @@ function uploadCapsule(
       });
       break;
   }
+  console.log("out switch");
+  console.log(letter);
   $.ajax({
     method: "POST",
     url: apiurl + "capsule",
@@ -662,7 +674,8 @@ $("#go_intro").on("click", function () {
 $("#intro_btn").on("click", function () {
   if (info_check) {
     $("#introduce").fadeOut(300);
-    {          forbidMove();
+    {
+      forbidMove();
 
       $("#main").fadeIn(80);
     }

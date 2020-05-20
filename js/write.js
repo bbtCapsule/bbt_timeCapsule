@@ -246,7 +246,6 @@ prePage.writeTA.on("click", function () {
   isSet = false;
 });
 
-
 // 根据type判断是否跳转填写信息
 function switchCapsule(str) {
   console.log("胶囊类型是" + str + " 0写给自己 1写给专属 2写给陌生人");
@@ -263,10 +262,10 @@ function switchCapsule(str) {
 }
 
 //writeone&writemap 1\2信纸
-function disableBtn(){
-  nextPage.writeone.css("opacity", '0.6');
-  nextPage.writesec.css("opacity", '0.6');
-  nextPage.writeTA.css("opacity", '0.6');
+function disableBtn() {
+  nextPage.writeone.css("opacity", "0.6");
+  nextPage.writesec.css("opacity", "0.6");
+  nextPage.writeTA.css("opacity", "0.6");
   nextPage.writeone.attr("disabled", "disabled");
   nextPage.writesec.attr("disabled", "disabled");
   nextPage.writeTA.attr("disabled", "disabled");
@@ -274,11 +273,11 @@ function disableBtn(){
     nextPage.writeone.attr("disabled", false);
     nextPage.writesec.attr("disabled", false);
     nextPage.writeTA.attr("disabled", false);
-    nextPage.writeone.css("opacity", '1');
-    nextPage.writesec.css("opacity", '1');
-    nextPage.writeTA.css("opacity", '1');
+    nextPage.writeone.css("opacity", "1");
+    nextPage.writesec.css("opacity", "1");
+    nextPage.writeTA.css("opacity", "1");
 
-    console.log("提交按钮解禁")
+    console.log("提交按钮解禁");
   }, 6000);
 }
 
@@ -348,7 +347,7 @@ nextPage.writeTA.on("click", function () {
   page.writeTA.fadeOut(300);
   switchCapsule(capsule_type);
   sendLetter(4);
-      
+
   console.log("还需要收件人信息");
 });
 //writeTA&writeTAsend 结束
@@ -361,7 +360,8 @@ nextPage.writeTAsend.on("click", function () {
   TA_info.email = $("#receiver_email").val();
   if (checkInput(TA_info.phone, "num") && TA_info.name != "") {
     console.log("提交");
-    nextPage.writeTAsend.attr('disabled',true);
+    console.log("write ta send");
+    nextPage.writeTAsend.attr("disabled", true);
     page.writeTAsend.fadeOut(100);
     page.writemap.fadeIn(80);
     TrueSend();
@@ -380,50 +380,51 @@ $("#finish_back").on("click", function () {
   window.location.href = "main.html";
 });
 $(".txl_input").each(function () {
-  $(this).bind('focus', function (e) {
-
+  $(this).bind("focus", function (e) {
     moveKeyboard(4);
-  })
-  $(this).bind('blur', function (e) {
+  });
+  $(this).bind("blur", function (e) {
     // $("txl_img").attr('class',"");
     // $("txl_img").removeClass(".change");
-
-  })
+  });
 });
-$("txl_img").on('click',function(){
+$("txl_img").on("click", function () {
   // $("txl_img").removeClass(".change");
   // $("txl_img").attr('class',"");
   // $("txl_img").css("width","auto");
   // $("txl_img").css("height","120vh");
-
-})
+});
 $(".txl_textarea").each(function () {
-  $(this).bind('focus', function (e) {
+  $(this).bind("focus", function (e) {
     moveKeyboard(4);
-  })
-  $(this).bind('blur', function (e) {
-    })
+  });
+  $(this).bind("blur", function (e) {});
 });
 $(".letter_text").each(function () {
-  $(this).bind('focus', function (e) {
-    console.log("foucus",letterType);
+  $(this).bind("focus", function (e) {
+    console.log("foucus", letterType);
     moveKeyboard(letterType);
-  })
-  $(this).bind('blur', function (e) {
+  });
+  $(this).bind("blur", function (e) {
     $("#write-sec>.content.write-one_content>.deleimg").fadeIn();
     $("#write-sec>.content.write-one_content>.mp3").fadeIn();
     $("#write-sec>.content.write-one_content>.add_img").fadeIn();
-    })
+  });
 });
 $(".add_img").each(function () {
-  $(this).bind('touchmove', function (e) {
+  $(this).bind("touchmove", function (e) {
     e.preventDefault();
-  })
+  });
 });
+
 function sendLetter(letterType) {
   console.log("记录的是第几张信纸内容 0 前两张 1 第三张 4 同学录");
   console.log(letterType);
-  switch (letterType ) {//0普通  1同学录
+  console.log("type of lettertype");
+  console.log(typeof letterType);
+  switch (
+    letterType //0普通  1同学录
+  ) {
     case 4:
       $(".txl_input").each(function () {
         message.push($.trim($(this).val()));
@@ -456,6 +457,7 @@ function sendLetter(letterType) {
       break;
   }
 }
+
 $("#images").on("click", function () {
   setitem(0);
   isSet = true;
@@ -504,8 +506,8 @@ singbtn.on({
     $("#player").fadeIn();
     $("#voice_dele").fadeIn();
     singbtn.val("松开 结束");
-    voiceRecord(0,3000);
-    hasSing =true;
+    voiceRecord(0, 3000);
+    hasSing = true;
   },
   touchmove: function (e) {
     clearTimeout(timeoutEvent);
@@ -532,9 +534,16 @@ singbtn.on({
   // }
 });
 
-
 function TrueSend() {
-  if(letterType!=4){
+  console.log("true send");
+  console.log(typeof letterType);
+  console.log(letterType);
+  console.log(letterType != 2);
+  if (letterType != 2) {
+    console.log("不等于？");
+    // }
+    // if(letterType!=2){
+    console.log("not =");
     uploadWrapper(
       capsule_type,
       time_limit,
@@ -545,18 +554,19 @@ function TrueSend() {
       from_qrcode,
       user_id
     );
-  }else{
-  uploadWrapper(
-    capsule_type,
-    time_limit,
-    cap_template,
-    content_word,
-    txl_content,
-    TA_info,
-    from_qrcode,
-    user_id
-  );
-}
+  } else {
+    console.log("=");
+    uploadWrapper(
+      capsule_type,
+      time_limit,
+      cap_template,
+      content_word,
+      txl_content,
+      TA_info,
+      from_qrcode,
+      user_id
+    );
+  }
 }
 //信息录入
 // $("#submitCapsule").on('click', function () {
