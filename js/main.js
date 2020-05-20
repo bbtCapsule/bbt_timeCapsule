@@ -315,10 +315,9 @@ function voiceRecord(type, minTime) {
                     $("#mp3").show();
                   }
               });
-          },60000*5);
+          },60000);
       },
   });
-    // return;
   }
   if (type == 1) {
     if(hasSing){
