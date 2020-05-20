@@ -222,7 +222,7 @@ input.prePage {
 }
 .mp3,.player,.delemp3,.add_img,.deleimg,.txl_add_img{
     cursor: pointer;
-    /* display: none; */
+    display: none;
 }
 /* 第三种信纸 */
 /* #letter3 {
