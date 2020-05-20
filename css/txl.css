@@ -1,0 +1,176 @@
+.txl_add_img {
+    /* display: none; */
+    width: 60px;
+    height: 60px;
+}
+.txl_add_img:hover{
+    height: auto;
+    width: 80vw;
+    position: static;
+    top: 25vh;
+    left: 5vw;
+    overflow-y: scroll;
+}
+.txl_imgdiv {
+    width: 40%;
+    /* position: absolute; */
+    /* right: -180px; */
+    /* top: 120px; */
+    top: 0;
+    height: 30vw;
+    background: black;
+    text-align: left;
+    margin-right: 10vw;
+    margin-left: 90vw;
+}
+#txl_img{
+    top: 0;
+    position: static;
+    left: -3px;
+}
+
+
+
+#write-TA>.header_l {
+    margin-top: 3vh;
+    margin-left: -5rem;
+}
+
+#test>.add {
+    width: 12vw;
+    float: right;
+    margin-right: 30%;
+}
+
+/* 左边的同学录 姓名 基础内容 */
+.txl_left {
+    width: 50vw;
+    height: 150px;
+    margin: 0;
+    padding-left: 30px;
+    padding-top: 30px;
+}
+
+.txl_right,
+.txl_left_bottom,
+.txl_right_bottom {
+    background: none;
+    border: none;
+    display: flex;
+    flex-direction: column;
+}
+
+.txl_right {
+    width: 50%;
+    margin-left: 50%;
+    margin-top: -10%;
+}
+.txl_left_bottom {
+    width: 50%;
+    height: 40%;
+    margin-top: 9%;
+    padding-left: 30px;
+}
+.txl_right_bottom  {
+    width: 40%;
+    margin-left: 52%;
+    margin-top: -35%;
+    padding-left: 5%;
+    padding-right: 2%;
+    margin-right: 10%;
+}
+.txl_contain {
+    float: left;
+}
+
+.txl_input {
+    margin-top: -20px;
+    width: 20vh;
+    height: vh;
+    /* margin-left: 50px; */
+    /* background-image: url(../images/letter/line2.png); */
+    border-color: transparent !important;
+    border-bottom-color: white !important;
+    border-bottom-width: 1.5px !important;
+    border-style: dashed !important;
+}
+
+.txl_textarea {
+    background: none;
+    border: none;
+    /* background-image: url(../images/letter/line2.png); */
+    position: relative;
+    /* left: -125px; */
+    /* margin-top: 35px; */
+    width: 180px;
+    height: 35px;
+    background-size: cover;
+    background-position-y: 0px;
+    color: white;
+    font-size: 15px;
+    font-family: 'cute';
+    outline: none;
+    margin-top: 5px;
+    margin-bottom: 8px;
+    padding: 4px;
+}
+
+.txl_item {
+    border: none;
+    color: white;
+    float: left;
+    font-family: 'cute';
+    font-size: 20px;
+}
+#txl_tucao {
+    width: 100%;
+    /* margin: 0 !important; */
+    height: 100px;
+    left: 0;
+}
+
+.txl_left_bottom>.txl_contain {
+    display: flex;
+    flex-direction: column;
+}
+#txl_btn {
+    cursor: pointer;
+    margin: 0;
+    position: static;
+    right: -230px;
+        width: 60%;
+        margin-left: 40%;
+        /* margin-top: 5%; */
+    }
+    .txl_imgdiv {
+        width: 90%;
+        /* position: absolute; */
+        /* right: -180px; */
+        /* top: 120px; */
+        top: 0;
+        height: 30vw;
+        /* background: black; */
+        text-align: right;
+        padding-right: 10vw;
+    }
+#write-TA {
+    height: 819px;
+    width: 589px;
+    background-image: url(../images/letter/4.png);
+    background-size: 100% 100%;
+    background-position-x: -5px;
+}
+.txl_left {
+    width: 50%;
+    /* position: relative;
+    top: 25vw; */
+}
+#test {
+    position: absolute;
+    width: 590px;
+    height: 819px;
+    overflow: hidden;
+}
+#test>.prePage{
+    height: 7vw;
+}

@@ -127,13 +127,14 @@
     top: 0;
     margin: auto;
     z-index: 99;
-    background: #000000c4;
+    background: #000000;
     text-align: center;
     padding-left: 10%;
     padding-right: 10%;
     padding-top: 10vh;
     line-height: 30px;
     z-index: 99;
+    opacity: 0.8;
 }
 
 #att{

@@ -60,13 +60,15 @@ function moveKeyboard(letterid) {
     var  txlHeightdio = 798/640;
     var txlWidthdio = 567/360;
     var newtxl_w,newtxl_h=0;
-    console.log('addClass');
+    console.log('change');
     newtxl_h = txlHeightdio * winHeight;
     newtxl_w = txlWidthdio *winWidth;
     // console.log(0,$("#txl_img").height());
     // console.log(0,$("#txl_img").width());
-    $("txl_img").addClass(".change");
-    $("txl_img").attr('class',".change");
+    // $("txl_img").addClass(".change");
+    $(id).width('589px');
+    $(id).height('819px');
+    // $("txl_img").attr('class',".change");
     return;
   }
   // $(window).resize(function () {

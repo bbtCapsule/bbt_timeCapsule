@@ -385,16 +385,16 @@ $(".txl_input").each(function () {
     moveKeyboard(4);
   })
   $(this).bind('blur', function (e) {
-    $("txl_img").attr('class',"");
-    $("txl_img").removeClass(".change");
+    // $("txl_img").attr('class',"");
+    // $("txl_img").removeClass(".change");
 
   })
 });
 $("txl_img").on('click',function(){
-  $("txl_img").removeClass(".change");
-  $("txl_img").attr('class',"");
-  $("txl_img").css("width","auto");
-  $("txl_img").css("height","120vh");
+  // $("txl_img").removeClass(".change");
+  // $("txl_img").attr('class',"");
+  // $("txl_img").css("width","auto");
+  // $("txl_img").css("height","120vh");
 
 })
 $(".txl_textarea").each(function () {
