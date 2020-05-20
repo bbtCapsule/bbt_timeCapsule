@@ -441,6 +441,7 @@ function uploadInfo(nickname, phone, email) {
           $("#getinfo").fadeOut(); //关掉表单 进入下一个页面
           // mainPage.getInfo.attr('style', 'display:none;');
           mainPage.main.fadeIn();
+          forbidMove();
         }
       },
       error: function (err) {
@@ -661,7 +662,8 @@ $("#go_intro").on("click", function () {
 $("#intro_btn").on("click", function () {
   if (info_check) {
     $("#introduce").fadeOut(300);
-    {
+    {          forbidMove();
+
       $("#main").fadeIn(80);
     }
     $("#go_write").show();
