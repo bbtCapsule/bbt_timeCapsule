@@ -459,8 +459,10 @@ $("#voiceStart3").on("click", function () {
   }
   sing.fadeIn(100);
 });
+
 sing.on("click", function () {
   sing.fadeOut(100);
+  if(!hasSing){voiceRecord(1, 3000);}
 });
 var timeoutEvent = 0;
 singbtn.on({
@@ -475,6 +477,7 @@ singbtn.on({
     $("#voice_dele").fadeIn();
     singbtn.val("松开 结束");
     voiceRecord(0,3000);
+    
   },
   touchmove: function (e) {
     clearTimeout(timeoutEvent);
@@ -483,7 +486,8 @@ singbtn.on({
     $("#sing_anim").attr("src", "./images/record_normal.png");
     singbtn.val("按住 开始");
     // voiceRecord(1, 1000);
-    sing.fadeOut(100);
+    //sing.fadeOut(100);
+    if(!hasSing){voiceRecord(1, 3000);}
   },
   touchend: function (e) {
     e.preventDefault();

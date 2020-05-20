@@ -275,27 +275,31 @@ function chooseImg() {
 var startTime = 0,
   endTime = 0;
 //录音开始
+var hasSing =false;
 function voiceRecord(type, minTime) {
   //type为0是录音，type为1是结束 minTime录音最少时间(单位毫秒)
-  // if (type == 0) {
+  if (type == 0) {
     startTime = new Date().getTime();
     wx.startRecord(); //开始录音
-  // } else if (type == 1) {
-    endTime = new Date().getTime();
+    
+    return;
+  } 
+  if (type == 1) {
+    let endTime = new Date().getTime();
     if (endTime - startTime < minTime) {
       voiceDel();
       attention("录音时间小于" + minTime / 1000 + "秒，请重试");
-    } else if(type==1){
+    } else{
       wx.stopRecord({
         // 停止录音
         success: function (res) {
           $("#mp3").show();
           // voiceRecord(1, 1000);
+          hasSing =true;
           that.voice = res.localId;
-        },
-      });
+        },})
     }
-  // }
+  }
 }
 
 //录音播放
@@ -575,8 +579,8 @@ function uploadCapsule(
         voiceIds = undefined;
         
         $("#loading").fadeOut(200);
-        page.writemap.attr("style", "display:none;");
-        page.finish.attr("style", "display:block;");
+        //page.writemap.attr("style", "display:none;");
+        //page.finish.attr("style", "display:block;");
       }
     },
     error: function (err) {
