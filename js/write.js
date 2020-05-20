@@ -308,7 +308,9 @@ nextPage.writeone.on("click", function () {
     page.writeone.fadeOut(300);
     switchCapsule(capsule_type);
     sendLetter(0);
-    TrueSend();
+    if (Number(capsule_type) != 1) {
+      TrueSend();
+    }
   }
 });
 // writeone&writemap 结束
@@ -415,18 +417,17 @@ $(".letter_text").each(function () {
     console.log("foucus", letterType);
     moveKeyboard(letterType);
   });
-  $(this).bind('blur', function (e) {
-    if(voice!=undefined){
+  $(this).bind("blur", function (e) {
+    if (voice != undefined) {
       $("#write-one>.content.write-one_content>.mp3").fadeIn();
       $("#write-sec>.content.write-one_content>.mp3").fadeIn();
     }
-    if(img_serverIds.length>=1){
+    if (img_serverIds.length >= 1) {
       $("#write-one>.content.write-one_content>.deleimg").fadeIn();
       $("#write-one>.content.write-one_content>.add_img").fadeIn();
-  
+
       $("#write-sec>.content.write-one_content>.deleimg").fadeIn();
       $("#write-sec>.content.write-one_content>.add_img").fadeIn();
-  
     }
   });
 });
@@ -441,9 +442,7 @@ function sendLetter(letterType) {
   console.log(letterType);
   console.log("type of lettertype");
   console.log(typeof letterType);
-  switch (
-    letterType //0普通  1同学录
-  ) {
+  switch (letterType) {
     case 4:
       $(".txl_input").each(function () {
         message.push($.trim($(this).val()));
