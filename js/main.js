@@ -1,4 +1,3 @@
-
 var nickname = "Hi~";
 var icon = "your_icon.jpg"; //头像地址
 var imgages = {
@@ -24,16 +23,16 @@ var txl_img2 =
 var letterType = 0;
 
 var winHeight = $(window).height();
-function moveKeyboard(id){
+function moveKeyboard(id) {
   var winHeight = $(window).height();
   // if(id=="try"){
-    $("body").height(winHeight);
+  $("body").height(winHeight);
   //   return;
   // }
-$(window).resize(function() {
+  $(window).resize(function () {
     var keyboardHeight = winHeight - winHeight;
-    $('body').css({ 'height':'100vh'+ keyboardHeight + 'px' });
-});
+    $("body").css({ height: "100vh" + keyboardHeight + "px" });
+  });
 }
 
 // function checkInfo() {
@@ -170,11 +169,11 @@ function setitem(letterType) {
       break;
   }
   $("#player").on("click", function () {
-    if(!isPlay){
+    if (!isPlay) {
       voicePlay();
       isPlay = true;
       return;
-    }else{
+    } else {
       voiceStop();
       isPlay = false;
       return;
@@ -275,30 +274,35 @@ function chooseImg() {
 var startTime = 0,
   endTime = 0;
 //录音开始
-var hasSing =false;
+var hasSing = false;
 function voiceRecord(type, minTime) {
   //type为0是录音，type为1是结束 minTime录音最少时间(单位毫秒)
   if (type == 0) {
     // startTime = new Date().getTime();
     wx.startRecord(); //开始录音
-    
+
     return;
-  } 
+  }
   if (type == 1) {
     let endTime = new Date().getTime();
     if (endTime - startTime < minTime) {
       voiceDel();
       attention("录音时间小于" + minTime / 1000 + "秒，请重试");
+<<<<<<< HEAD
       hasSing =false;
     } else{
+=======
+    } else {
+>>>>>>> a7c27b516ed9d4c223a0e83e15ff39c15e911630
       wx.stopRecord({
         // 停止录音
         success: function (res) {
           $("#mp3").show();
           // voiceRecord(1, 1000);
-          hasSing =true;
+          hasSing = true;
           that.voice = res.localId;
-        },})
+        },
+      });
     }
   }
 }
@@ -315,7 +319,7 @@ function voicePlay() {
 
 // 停止播放接口
 function voiceStop() {
-  isPlay=false;
+  isPlay = false;
   wx.stopVoice({
     localId: that.voice, // 需要停止的音频的本地ID，由stopRecord接口获得
   });
@@ -323,7 +327,7 @@ function voiceStop() {
 
 //录音删除
 function voiceDel() {
-  isPlay=false;
+  isPlay = false;
   voice = undefined;
 }
 //录音上传
@@ -359,6 +363,7 @@ function uploadImage(succ_func) {
         },
       });
     }
+  } else {
     succ_func();
   }
 }
@@ -578,7 +583,7 @@ function uploadCapsule(
         // 把serverid清空
         img_serverIds = [];
         voiceIds = undefined;
-        
+
         $("#loading").fadeOut(200);
         //page.writemap.attr("style", "display:none;");
         //page.finish.attr("style", "display:block;");
