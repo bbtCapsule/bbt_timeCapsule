@@ -415,13 +415,18 @@ $(".letter_text").each(function () {
     moveKeyboard(letterType);
   })
   $(this).bind('blur', function (e) {
-    $("#write-one>.content.write-one_content>.deleimg").fadeIn();
-    $("#write-one>.content.write-one_content>.mp3").fadeIn();
-    $("#write-one>.content.write-one_content>.add_img").fadeIn();
-
-    $("#write-sec>.content.write-one_content>.deleimg").fadeIn();
-    $("#write-sec>.content.write-one_content>.mp3").fadeIn();
-    $("#write-sec>.content.write-one_content>.add_img").fadeIn();
+    if(voice!=undefined){
+      $("#write-one>.content.write-one_content>.mp3").fadeIn();
+      $("#write-sec>.content.write-one_content>.mp3").fadeIn();
+    }
+    if(img_serverIds.length>=1){
+      $("#write-one>.content.write-one_content>.deleimg").fadeIn();
+      $("#write-one>.content.write-one_content>.add_img").fadeIn();
+  
+      $("#write-sec>.content.write-one_content>.deleimg").fadeIn();
+      $("#write-sec>.content.write-one_content>.add_img").fadeIn();
+  
+    }
   });
 });
 $(".add_img").each(function () {
