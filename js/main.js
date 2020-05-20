@@ -481,8 +481,8 @@ function uploadInfo(nickname, phone, email) {
     });
   }
 }
-//把防注入单独写一个函数 传str进到函数里验证 返回true为通过验证 false为输入了非法信息
 
+//把防注入单独写一个函数 传str进到函数里验证 返回true为通过验证 false为输入了非法信息
 function checkInput(str, type) {
   //type 'str'  'num' for text or number
   let checkres = false; //wrong text
@@ -507,7 +507,7 @@ function checkInput(str, type) {
   return checkres;
 }
 
-// 上传胶囊内容
+// 上传胶囊内容，先上传图片和音频，上传完成后调用uploadCapsule
 function uploadWrapper(
   capsule_type,
   time_limit,
@@ -616,7 +616,6 @@ function uploadCapsule(
     method: "POST",
     url: apiurl + "capsule",
     contentType: "application/json;charset=utf-8",
-
     data: letter,
     statusCode: {
       410: (res) => {
@@ -633,6 +632,10 @@ function uploadCapsule(
         attention(data.errmsg);
         console.log(data);
       } else if (data.errcode == 0) {
+        // 把serverid清空
+        img_serverIds = [];
+        voiceIds = undefined;
+        
         $("#loading").fadeOut(200);
         page.writemap.attr("style", "display:none;");
         page.finish.attr("style", "display:block;");

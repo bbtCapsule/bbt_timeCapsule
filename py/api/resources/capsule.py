@@ -50,19 +50,21 @@ def capsule():
         result_pic = downloadPic(content_pic)
     else:
         result_pic = True
+
     if from_qrcode:
         to_ta_from_qrcode(open_id, time_limit, cap_template, from_qrcode, cap_location, content_word, content_pic,
                           id_decode, content_voice, content_name, content_phone,
                           content_birth, xingzuo, hobby, music, movie, food, wechat, QQ, email, place, tucao)
     else:
-        if data['capsule_type'] == 0:  # 私密
+        if int(data['capsule_type']) == 0:  # 私密
+            print('in')
             downloadSelf(open_id, time_limit, cap_template, cap_location, content_word, content_pic,
                          content_voice)
-        elif data['capsule_type'] == 1:  # 给Ta
+        elif int(data['capsule_type']) == 1:  # 给Ta
             downloadToTa(open_id, time_limit, cap_template, from_qrcode, cap_location, receiver_name, receiver_tel,
                          receiver_email, content_word, content_pic, content_voice, content_name, content_phone,
                          content_birth, xingzuo, hobby, music, movie, food, wechat, QQ, email, place, tucao)
-        elif data['capsule_type'] == 2:  # 陌生人
+        elif int(data['capsule_type']) == 2:  # 陌生人
             downloadStranger(open_id, time_limit, cap_template, cap_location, content_word, content_pic,
                              content_voice)
 
