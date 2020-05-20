@@ -31,6 +31,9 @@ var letterType = 0;
 if (window.location.href.split("?uid=").length == 2) {
   user_id = window.location.href.split("?uid=")[1];
   from_qrcode = true;
+  page.page1.hide();
+  capsule_type = 1;
+  page.page2.show();
 }
 var page = {
   page1: $("#page1"),
@@ -252,6 +255,10 @@ function switchCapsule(str) {
   switch (Number(str)) {
     case 1:
       forbidMove();
+      if(from_qrcode){
+        page.writemap.fadeIn(90);
+        break;
+      }
       page.writeTAsend.fadeIn(90);
       break;
     default:
