@@ -261,6 +261,9 @@ function switchCapsule(str) {
 
 //writeone&writemap 1\2信纸
 function disableBtn(){
+  nextPage.writeone.css("opacity", '0.6');
+  nextPage.writesec.css("opacity", '0.6');
+  nextPage.writeTA.css("opacity", '0.6');
   nextPage.writeone.attr("disabled", "disabled");
   nextPage.writesec.attr("disabled", "disabled");
   nextPage.writeTA.attr("disabled", "disabled");
@@ -268,8 +271,12 @@ function disableBtn(){
     nextPage.writeone.attr("disabled", false);
     nextPage.writesec.attr("disabled", false);
     nextPage.writeTA.attr("disabled", false);
+    nextPage.writeone.css("opacity", '1');
+    nextPage.writesec.css("opacity", '1');
+    nextPage.writeTA.css("opacity", '1');
+
     console.log("提交按钮解禁")
-  }, 5000);
+  }, 6000);
 }
 
 nextPage.writeone.on("click", function () {
@@ -290,6 +297,7 @@ nextPage.writeone.on("click", function () {
     page.writeone.fadeOut(300);
     switchCapsule(capsule_type);
     sendLetter(0);
+    TrueSend();
   }
 });
 // writeone&writemap 结束
@@ -312,7 +320,8 @@ nextPage.writesec.on("click", function () {
     //uploadCapsule(capsule_type, time_limit, cap_template, cap_location, content_word, content_pic, content_voice, content_name, content_phone, content_birth);
     page.writesec.fadeOut(300);
     switchCapsule(capsule_type);
-    sendLetter(0);
+    sendLetter(3);
+    TrueSend();
   }
 });
 //TA信息
@@ -335,7 +344,8 @@ nextPage.writeTA.on("click", function () {
   trySend = true;
   page.writeTA.fadeOut(300);
   switchCapsule(capsule_type);
-  sendLetter(1);
+  sendLetter(4);
+      
   console.log("还需要收件人信息");
 });
 //writeTA&writeTAsend 结束
@@ -349,9 +359,9 @@ nextPage.writeTAsend.on("click", function () {
   if (checkInput(TA_info.phone, "num") && TA_info.name != "") {
     console.log("提交");
     nextPage.writeTAsend.attr('disabled',true);
-    TrueSend();
     page.writeTAsend.fadeOut(100);
     page.writemap.fadeIn(80);
+    TrueSend();
   } else {
     attention("信使找不到收件人TAT");
   }
@@ -381,11 +391,11 @@ $(".letter_text").each(function () {
     moveKeyboard("try");
   })
 });
-function sendLetter(type) {
-  switch (
-    type //0普通  1同学录
-  ) {
-    case 1:
+function sendLetter(letterType) {
+  console.log("记录的是第几张信纸内容 0 前两张 1 第三张 4 同学录");
+  console.log(letterType);
+  switch (letterType ) {//0普通  1同学录
+    case 4:
       $(".txl_input").each(function () {
         message.push($.trim($(this).val()));
       });
@@ -414,16 +424,6 @@ function sendLetter(type) {
         }
       });
       console.log(message);
-      uploadWrapper(
-        capsule_type,
-        time_limit,
-        cap_template,
-        message[0],
-        [],
-        TA_info,
-        from_qrcode,
-        user_id
-      );
       break;
   }
 }
@@ -467,7 +467,7 @@ singbtn.on({
   touchstart: function (e) {
     timeoutEvent = setTimeout(() => {
       console.log("is it over?");
-    }, 2000);
+    }, 6000);
     e.preventDefault();
     $("#sing_anim").attr("src", "./images/sing.gif");
     $("#mp3").fadeIn();
@@ -490,16 +490,31 @@ singbtn.on({
     if (timeoutEvent != 0) {
       $("#sing_anim").attr("src", "./images/record_normal.png");
       singbtn.val("按住 开始");
+      voiceRecord(1, 3000);
     }
     //return false;
   },
-  touchcancel: function(e){
-    e.preventDefault();
-    $("#sing_anim").attr("src", "./images/record_normal.png");
-    singbtn.val("按住 开始");
-  }
+  // touchcancel: function(e){
+  //   e.preventDefault();
+  //   $("#sing_anim").attr("src", "./images/record_normal.png");
+  //   singbtn.val("按住 开始");
+  // }
 });
+
+
 function TrueSend() {
+  if(letterType!=4){
+    uploadWrapper(
+      capsule_type,
+      time_limit,
+      cap_template,
+      message[0],
+      [],
+      TA_info,
+      from_qrcode,
+      user_id
+    );
+  }else{
   uploadWrapper(
     capsule_type,
     time_limit,
@@ -510,6 +525,7 @@ function TrueSend() {
     from_qrcode,
     user_id
   );
+}
 }
 //信息录入
 // $("#submitCapsule").on('click', function () {

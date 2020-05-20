@@ -26,13 +26,13 @@ var letterType = 0;
 var winHeight = $(window).height();
 function moveKeyboard(id){
   var winHeight = $(window).height();
-  if(id=="try"){
+  // if(id=="try"){
     $("body").height(winHeight);
-    return;
-  }
+  //   return;
+  // }
 $(window).resize(function() {
     var keyboardHeight = winHeight - winHeight;
-    $(id).css({ 'bottom': keyboardHeight + 'px' });
+    $('body').css({ 'height':'100vh'+ keyboardHeight + 'px' });
 });
 }
 
@@ -285,7 +285,7 @@ function voiceRecord(type, minTime) {
     if (endTime - startTime < minTime) {
       voiceDel();
       attention("录音时间小于" + minTime / 1000 + "秒，请重试");
-    } else {
+    } else if(type==1){
       wx.stopRecord({
         // 停止录音
         success: function (res) {
