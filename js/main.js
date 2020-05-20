@@ -279,7 +279,7 @@ var hasSing =false;
 function voiceRecord(type, minTime) {
   //type为0是录音，type为1是结束 minTime录音最少时间(单位毫秒)
   if (type == 0) {
-    startTime = new Date().getTime();
+    // startTime = new Date().getTime();
     wx.startRecord(); //开始录音
     
     return;
@@ -289,6 +289,7 @@ function voiceRecord(type, minTime) {
     if (endTime - startTime < minTime) {
       voiceDel();
       attention("录音时间小于" + minTime / 1000 + "秒，请重试");
+      hasSing =false;
     } else{
       wx.stopRecord({
         // 停止录音
