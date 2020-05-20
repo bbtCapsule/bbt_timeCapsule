@@ -25,9 +25,10 @@
     height: -webkit-fill-available;
     height: 100%;
     width: 100%;
-    background-color: #000000c4;
+    background-color: #000000;
     position: absolute;
     z-index: 90;
+    opacity: 0.8;
 }
 #rotate{
     width: 10vw;

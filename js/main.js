@@ -170,12 +170,15 @@ function setitem(letterType) {
       break;
   }
   $("#player").on("click", function () {
-    if (isPlay) {
+    if(!isPlay){
+      voicePlay();
+      isPlay = true;
+      return;
+    }else{
       voiceStop();
       isPlay = false;
       return;
     }
-    voicePlay();
   });
 }
 
@@ -307,6 +310,7 @@ function voicePlay() {
 
 // 停止播放接口
 function voiceStop() {
+  isPlay=false;
   wx.stopVoice({
     localId: that.voice, // 需要停止的音频的本地ID，由stopRecord接口获得
   });
@@ -314,6 +318,7 @@ function voiceStop() {
 
 //录音删除
 function voiceDel() {
+  isPlay=false;
   voice = undefined;
 }
 //录音上传

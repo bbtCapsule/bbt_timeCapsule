@@ -21,8 +21,9 @@ textarea {
     position: absolute;
     width: 100vw;
     height: 100vh;
-    background: #000000a8;
+    background: #000000;
     z-index: 90;
+    opacity: 0.8;
 }
 
 #sing_anim {
@@ -36,7 +37,7 @@ textarea {
     width: 60%;
     height: 6%;
     margin-left: 20%;
-    background-color: #ffffffd6;
+    background-color: #ffffff;
     border-radius: 0.8rem;
     margin-top: 35%;
     font-size: 18px;

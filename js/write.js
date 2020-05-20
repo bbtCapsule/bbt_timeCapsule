@@ -24,6 +24,7 @@ var str2 =
   "素不相识却似曾相识/这是写给陌生人的信/虽然你我不曾认识/但你的小纸条/或许能够温暖、鼓励未来的我";
 //页面初始的显示
 var sing = $("#sing_box");
+sing.hide();
 var singbtn = $("#recordbtn");
 var isSet = false;
 var letterType = 0;
@@ -365,7 +366,21 @@ $("#finish_rewrite").on("click", function () {
 $("#finish_back").on("click", function () {
   window.location.href = "main.html";
 });
-
+$(".txl_input").each(function () {
+  $(this).bind('input', function (e) {
+    moveKeyboard("try");
+  })
+});
+$(".txl_textarea").each(function () {
+  $(this).bind('input', function (e) {
+    moveKeyboard("try");
+  })
+});
+$(".letter_text").each(function () {
+  $(this).bind('input', function (e) {
+    moveKeyboard("try");
+  })
+});
 function sendLetter(type) {
   switch (
     type //0普通  1同学录
@@ -413,14 +428,12 @@ function sendLetter(type) {
   }
 }
 $("#images").on("click", function () {
-  attention("最多可以选择两张图片喔~");
   setitem(0);
   isSet = true;
   console.log("第几张信纸" + cap_template);
   chooseImg();
 });
 $("#images3").on("click", function () {
-  attention("最多可以选择两张图片喔~");
   setitem(1);
   isSet = true;
   console.log("第3张信纸!");
@@ -428,7 +441,6 @@ $("#images3").on("click", function () {
   chooseImg();
 });
 $("#images4").on("click", function () {
-  attention("最多可以选择两张图片喔~");
   setitem(2);
   isSet = true;
   chooseImg();
@@ -462,7 +474,7 @@ singbtn.on({
     $("#player").fadeIn();
     $("#voice_dele").fadeIn();
     singbtn.val("松开 结束");
-    voiceRecord(0, 1000);
+    voiceRecord(0,3000);
   },
   touchmove: function (e) {
     clearTimeout(timeoutEvent);
@@ -470,7 +482,6 @@ singbtn.on({
     e.preventDefault();
     $("#sing_anim").attr("src", "./images/record_normal.png");
     singbtn.val("按住 开始");
-
     // voiceRecord(1, 1000);
     sing.fadeOut(100);
   },
@@ -482,6 +493,11 @@ singbtn.on({
     }
     //return false;
   },
+  touchcancel: function(e){
+    e.preventDefault();
+    $("#sing_anim").attr("src", "./images/record_normal.png");
+    singbtn.val("按住 开始");
+  }
 });
 function TrueSend() {
   uploadWrapper(
