@@ -174,13 +174,16 @@ function switchPage(type) {
   if (type == 0) {
     page.page2.fadeOut(200);
     page.writeone.fadeIn(100);
+    return page.writeone;
   } else if (type == 1) {
     page.page2.fadeOut(200);
     page.writesec.fadeIn(100);
+    return page.writesec;
   } else if (type == 2) {
     OpenMove();
     page.page2.fadeOut(200);
     page.writeTA.fadeIn(100);
+    return page.writeTA;
   }
 }
 //2&writeone&writesec&writeTA
@@ -377,18 +380,42 @@ $("#finish_back").on("click", function () {
   window.location.href = "main.html";
 });
 $(".txl_input").each(function () {
-  $(this).bind('input', function (e) {
-    moveKeyboard("try");
+  $(this).bind('focus', function (e) {
+
+    moveKeyboard(4);
+  })
+  $(this).bind('blur', function (e) {
+    $("txl_img").attr('class',"");
+    $("txl_img").removeClass(".change");
+
   })
 });
+$("txl_img").on('click',function(){
+  $("txl_img").removeClass(".change");
+  $("txl_img").attr('class',"");
+  $("txl_img").css("width","auto");
+  $("txl_img").css("height","120vh");
+
+})
 $(".txl_textarea").each(function () {
-  $(this).bind('input', function (e) {
-    moveKeyboard("try");
+  $(this).bind('focus', function (e) {
+    moveKeyboard(4);
   })
 });
 $(".letter_text").each(function () {
-  $(this).bind('input', function (e) {
-    moveKeyboard("try");
+  $(this).bind('focus', function (e) {
+    console.log("foucus",letterType);
+    moveKeyboard(letterType);
+  })
+  $(this).bind('blur', function (e) {
+    $("#write-sec>.content.write-one_content>.deleimg").fadeIn();
+    $("#write-sec>.content.write-one_content>.mp3").fadeIn();
+    $("#write-sec>.content.write-one_content>.add_img").fadeIn();
+    })
+});
+$(".add_img").each(function () {
+  $(this).bind('touchmove', function (e) {
+    e.preventDefault();
   })
 });
 function sendLetter(letterType) {
@@ -462,7 +489,6 @@ $("#voiceStart3").on("click", function () {
 
 sing.on("click", function () {
   sing.fadeOut(100);
-  if(hasSing){voiceRecord(1, 3000);}
 });
 var timeoutEvent = 0;
 singbtn.on({

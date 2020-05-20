@@ -150,8 +150,15 @@ input.prePage {
 
 .nextPage {
     width: 43%;
+    position: static;
+    /* position: fixed; */
+    bottom: 0;
+    margin-left: -5%;
+    bottom: 10%;
 }
-
+.change{
+    transform: scale(2) !important;
+}
 /* 添加的部分 */
 .mp3 {
     -webkit-appearance: media-play-button;
@@ -200,6 +207,14 @@ input.prePage {
     left: 5vw;
     overflow-y: scroll;
 }
+#write-sec>.content.write-one_content>.add_img:hover {
+    height: auto;
+    width: 80vw;
+    position: absolute;
+    top: 25vh;
+    left: 5vw;
+    overflow-y: scroll;
+}
 .deleimg {
     width: 15px;
     height: 15px;
@@ -208,28 +223,49 @@ input.prePage {
 }
 .mp3,.player,.delemp3,.add_img,.deleimg,.txl_add_img{
     cursor: pointer;
-    display: none;
+    /* display: none; */
 }
 /* 第三种信纸 */
-#letter3 {
-    /* 它的textarea会短一点 */
+/* #letter3 {
+    /* 它的textarea会短一点 
     height: 30%;
     position: relative;
     margin-top: 80%;
+} */
+#letter3 {
+    height: 30%;
+    position: static;
+    /* position: fixed; */
+    top: 40%;
+    width: 200px;
 }
-
 #write-sec {
     background-image: url(../images/letter/3.png);
 }
 
+/* #write-sec>.content.write-one_content>.add_img {
+    width: 60px;
+    height: 60px;
+    margin-left: -5%;
+    /* transform: scale(0.7); 
+    transform: scale(0.7) translate(40%, -165vw);
+} */
 #write-sec>.content.write-one_content>.add_img {
     width: 60px;
     height: 60px;
     margin-left: -5%;
     /* transform: scale(0.7); */
-    transform: scale(0.7) translate(40%, -165vw);
+    transform: scale(0.7) translate(40%, -90px);
 }
-
+/* #write-sec>.content.write-one_content>.deleimg {
+    width: 15px;
+    height: 15px;
+    margin-left: -15px;
+    transform: scale(0.7);
+    margin-bottom: 50px;
+    /* transform: scale(0.65) translate(55%,-240%); 
+    transform: scale(0.7) translate(80%, -160vw);
+} */
 #write-sec>.content.write-one_content>.deleimg {
     width: 15px;
     height: 15px;
@@ -237,10 +273,9 @@ input.prePage {
     transform: scale(0.7);
     margin-bottom: 50px;
     /* transform: scale(0.65) translate(55%,-240%); */
-    transform: scale(0.7) translate(80%, -160vw);
+    transform: scale(0.7) translate(80%, -80px);
 }
-
-#write-sec>.content.write-one_content>.mp3 {
+/* #write-sec>.content.write-one_content>.mp3 {
     -webkit-appearance: unset;
     color: transparent;
     width: 70%;
@@ -250,8 +285,18 @@ input.prePage {
     margin-bottom: 5%;
     margin-top: 3%;
     transform: scale(0.65) translate(55%, -240%);
+} */
+#write-sec>.content.write-one_content>.mp3 {
+    -webkit-appearance: unset;
+    color: transparent;
+    width: 70%;
+    margin-left: 5%;
+    border-radius: 0.6rem;
+    background-color: #f0f5f7;
+    margin-bottom: 5%;
+    margin-top: 3%;
+    transform: scale(0.65) translate(55%, -80px);
 }
-
 /* 同学录样式 */
 .txl_add_img {
     /* display: none; */

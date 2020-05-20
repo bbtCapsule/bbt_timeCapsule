@@ -21,53 +21,62 @@ var txl_img1 =
 var txl_img2 =
   "<img src='B' class='txl_add_img' id='pic2'></img><input type='image' src='./images/letter/dele.png' class='deleimg' id='pic_dele2'>";
 var letterType = 0;
-
+var winWidth = $(window).width();
 var winHeight = $(window).height();
-function moveKeyboard(id) {
-  var winHeight = $(window).height();
-  // if(id=="try"){
-  $("body").height(winHeight);
-  //   return;
-  // }
-  $(window).resize(function () {
-    var keyboardHeight = winHeight - winHeight;
-    $("body").css({ height: "100vh" + keyboardHeight + "px" });
-  });
+function moveKeyboard(letterid) {
+  console.log('change height');
+  var id="";
+  switch (letterid) {
+    case 0:
+      id="#write-one"
+      break;
+    case 0:
+      id="#write-one"
+      break;
+      case 1:
+        id="#writeL3";
+        break;
+        case 4:
+          id="#write-TA";
+          break;
+    default:
+      $("#write-TA-send").css("width",winWidth+"px");
+      $("#write-TA-send").css("height",winHeight+ "px" )
+      break;
+  }
+  if(id=="#writeL3"){
+    console.log(1,$(id).height());
+    console.log(winHeight);
+    $("#write-one").css('height',winHeight);
+    $("#write-sec>.content.write-one_content>.deleimg").slideUp();
+    $("#write-sec>.content.write-one_content>.mp3").slideUp();
+    $("#write-sec>.content.write-one_content>.add_img").slideUp();
+    // $(id).css('transform','scale(0.9) translate(0,-10%)');
+    //  $(id).css('padding-top',0-($(id).height()));
+    console.log(2,$(id).height());
+    return;
+  }
+  if(id == "#write-TA"){
+    var  txlHeightdio = 798/640;
+    var txlWidthdio = 567/360;
+    var newtxl_w,newtxl_h=0;
+    console.log('addClass');
+    newtxl_h = txlHeightdio * winHeight;
+    newtxl_w = txlWidthdio *winWidth;
+    // console.log(0,$("#txl_img").height());
+    // console.log(0,$("#txl_img").width());
+    $("txl_img").addClass(".change");
+    $("txl_img").attr('class',".change");
+    return;
+  }
+  // $(window).resize(function () {
+    // var keyboardHeight = winHeight - winHeight;
+  $(id).css("width",winWidth);
+  $(id).css("height",winHeight );//宽度(vw) =  100 / width * 100; 高度(vh) = 100 / height * 40;
+
+  
 }
 
-// function checkInfo() {
-//   console.log("check info start");
-//   var checkInfo_url = apiurl + "check_user_info";
-//   $.ajax({
-//     type: "GET",
-//     url: checkInfo_url,
-//     contentType: "application/json;charset=utf-8",
-//     statusCode: {
-//       410: (res) => {
-//         attention(res.responseJSON.message);
-//       },
-//       401: (res) => {
-//         attention(res.responseJSON.message);
-//         window.location.href = phpurl;
-//       },
-//       500: (res) => {
-//         attention(res.responseJSON.message);
-//       },
-//       200: (res) => {
-//         //attention(res.responseJSON.message);
-//         // info_check =true;
-//       },
-//     },
-
-//     success(data, textStatus, xhr) {
-//       info_check = data.record;
-//     },
-//     error: function (err) {
-//       console.log(err);
-//       info_check = false;
-//     },
-//   });
-// }
 $("#nickname").val("");
 $("#phone").val("");
 $("#email").val("");
@@ -288,12 +297,8 @@ function voiceRecord(type, minTime) {
     if (endTime - startTime < minTime) {
       voiceDel();
       attention("录音时间小于" + minTime / 1000 + "秒，请重试");
-<<<<<<< HEAD
       hasSing =false;
     } else{
-=======
-    } else {
->>>>>>> a7c27b516ed9d4c223a0e83e15ff39c15e911630
       wx.stopRecord({
         // 停止录音
         success: function (res) {
