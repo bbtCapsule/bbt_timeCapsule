@@ -33,7 +33,6 @@ function moveKeyboard(letterid) {
       $("#write-one>.content.write-one_content>.deleimg").slideUp();
       $("#write-one>.content.write-one_content>.mp3").slideUp();
       $("#write-one>.content.write-one_content>.add_img").slideUp();
-  
       break;
     case 0:
       id = "#write-one";
@@ -195,6 +194,18 @@ function setitem(letterType) {
       break;
   }
   $("#player").on("click", function (e) {
+    e.preventDefault();
+    if (!isPlay) {
+      voicePlay();
+      isPlay = true;
+      return;
+    } else {
+      voiceStop();
+      isPlay = false;
+      return;
+    }
+  });
+  $("#mp3").on("click", function (e) {
     e.preventDefault();
     if (!isPlay) {
       voicePlay();
