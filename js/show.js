@@ -6,47 +6,53 @@ $("#allatt").on('click', function (e) {
     $("#allatt").fadeOut(100);
 })
 var hasMai = false;
+function clickanim(e){
+    // var clickId = $(this).attr("id");
+    var A1 = (e.pageX >= 120) && (e.pageX <= 245) && (e.pageY <= 400) && (e.pageY >= 130);
+    var A2 = (e.pageX >= 100) && (e.pageX <= 150) && (e.pageY <= 760) && (e.pageY >= 705);
+    var A3 = (e.pageX >= 1098) && (e.pageX <= 1150) && (e.pageY <= 540) && (e.pageY >= 460);
+    var A4 = (e.pageX >= 1106) && (e.pageX <= 1180) && (e.pageY <= 1078) && (e.pageY >= 1034);
+    var A5 = (e.pageX >= 1956) && (e.pageX <= 2019) && (e.pageY <= 1086) && (e.pageY >= 1048);
+    var A6 = (e.pageX >= 1739) && (e.pageX <= 1800) && (e.pageY <= 360) && (e.pageY >= 320);
+    var A7 = (e.pageX >= 1935) && (e.pageX <= 1999) && (e.pageY <= 280) && (e.pageY >= 232);
+    var A8 = (e.pageX >= 2210) && (e.pageX <= 2280) && (e.pageY <= 879) && (e.pageY >= 770);
+    var A9 = (e.pageX >= 2400) && (e.pageX <= 2455) && (e.pageY <= 1000) && (e.pageY >= 974);
+    var A10 = (e.pageX >= 2620) && (e.pageX <= 2700) && (e.pageY <= 500) && (e.pageY >= 476);
+    if (hasMai) {
+        return;
+    }
+    if (A1 || A2 || A3 || A4 || A5 || A6 || A7 || A8 || A9 || A10) {
+        hasMai = true;
+        $("#img_map").attr("class", "go");
+        $("#mai_anim").css("top", e.pageY);
+        $("#mai_anim").css("left", e.pageX);
+        $("#jiantou").fadeIn(100);
+        setTimeout(() => {
+            $("#jiantou").fadeOut(100);
+            $("#mai_anim").fadeIn(100);
+        }, 600);
+        //addChanzi();
+        setTimeout(() => {
+            $("#img_map").attr("class", "");
+            $("#mai_anim").fadeOut(300);
+            $(".mai").hide();
+            $("#write-map").fadeOut(700);
+            $("#finish").fadeIn(600);
+        }, 1800);
+    }
 
+}
 function areaShow() {
     // for (i = 1; i < 8; i++) {
     // $("#A" + i).on('click', function (e) {
 
-    $(document).on('mousemove', function (e) {
+    $(document).on('click', function (e) {
         // console.log(e.pageX,e.pageY);
-        e.preventDefault();
-        // var clickId = $(this).attr("id");
-        var A1 = (e.pageX >= 120) && (e.pageX <= 245) && (e.pageY <= 400) && (e.pageY >= 130);
-        var A2 = (e.pageX >= 100) && (e.pageX <= 150) && (e.pageY <= 760) && (e.pageY >= 705);
-        var A3 = (e.pageX >= 1098) && (e.pageX <= 1150) && (e.pageY <= 540) && (e.pageY >= 460);
-        var A4 = (e.pageX >= 1106) && (e.pageX <= 1180) && (e.pageY <= 1078) && (e.pageY >= 1034);
-        var A5 = (e.pageX >= 1956) && (e.pageX <= 2019) && (e.pageY <= 1086) && (e.pageY >= 1048);
-        var A6 = (e.pageX >= 1739) && (e.pageX <= 1800) && (e.pageY <= 360) && (e.pageY >= 320);
-        var A7 = (e.pageX >= 1935) && (e.pageX <= 1999) && (e.pageY <= 280) && (e.pageY >= 232);
-        var A8 = (e.pageX >= 2210) && (e.pageX <= 2280) && (e.pageY <= 879) && (e.pageY >= 770);
-        var A9 = (e.pageX >= 2400) && (e.pageX <= 2455) && (e.pageY <= 1000) && (e.pageY >= 974);
-        var A10 = (e.pageX >= 2620) && (e.pageX <= 2700) && (e.pageY <= 500) && (e.pageY >= 476);
-        if (hasMai) {
-            return;
-        }
-        if (A1 || A2 || A3 || A4 || A5 || A6 || A7 || A8 || A9 || A10) {
-            hasMai = true;
-            $("#img_map").attr("class", "go");
-            $("#mai_anim").css("top", e.pageY);
-            $("#mai_anim").css("left", e.pageX);
-            $("#jiantou").fadeIn(100);
-            setTimeout(() => {
-                $("#jiantou").fadeOut(100);
-                $("#mai_anim").fadeIn(100);
-            }, 600);
-            //addChanzi();
-            setTimeout(() => {
-                $("#img_map").attr("class", "");
-                $("#mai_anim").fadeOut(300);
-                $(".mai").hide();
-                $("#write-map").fadeOut(700);
-                $("#finish").fadeIn(600);
-            }, 1800);
-        }
+        clickanim(e);
+    })
+    $('#write-map').on('click', function (e) {
+        // console.log(e.pageX,e.pageY);
+        clickanim(e);
     })
 
     // });
@@ -143,14 +149,6 @@ function goTemplate3() {
 function goTemplate4() {
     hideALL();
     page.page2.fadeOut(100);
-    page.writesec.fadeIn();
+    page.writeTA.fadeIn();
 }
-// function addChanzi(){
-//     //出现铲子动画
-// $(document).mousemove(function (e) {
-//     // var xy_keleyi_com="x坐标:"+ e.pageX+",y坐标："+ e.pageY;
-//     // console.log(xy_keleyi_com);
-//     $("#mai_anim").css("top",e.pageY);
-//     $("#mai_anim").css("left",e.pageX);
-//     })
-// }
+a
