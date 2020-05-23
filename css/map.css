@@ -1,0 +1,159 @@
+/* 从这里开始是搬运过来的地图+动画 */
+body {
+    height: 100%;
+    /* width:max-content; */
+    /* overflow-y: hidden; */
+    -webkit-user-select: none;
+    /*webkit浏览器*/
+    user-select: none;
+    background-color: #d4c5c7;
+    
+}
+
+.map::-webkit-scrollbar {
+    display: none;
+}
+
+.map {
+    z-index: -9;
+    cursor: pointer;
+
+    position: absolute;
+    top: 0;
+    margin: 0;
+    height: 100%;
+    width: 300%;
+    background-image: url("../images/map.jpg");
+    background-size: 120%;
+    background-position-x: center;
+    background-repeat: no-repeat;
+    overflow-x: scroll;
+    scroll-behavior: smooth;
+}
+
+#img_map {
+    cursor: pointer;
+    width: 2818px;
+    height: 1096px;
+    position: absolute;
+    top: 0px;
+    z-index: -9;
+}
+
+#receiver_tel,
+#receiver_email {
+    outline: none;
+    box-sizing: border-box;
+    width: 260px;
+    height: 44px;
+    width: 100%;
+    /* height: 12%; */
+    border-radius: 6px;
+    border: 2.5px solid #6e8f76;
+    margin-bottom: 4vw;
+    color: #3f454b;
+    padding: 10px;
+    font-size: 20px;
+    font-family: 'cute';
+    background: transparent;
+}
+
+#mapmap {
+    /* background-image: url("../images/map.jpg");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    cursor: pointer;
+    z-index: 0;
+    outline: none;
+    user-select: none;
+    position: absolute;
+    width: 2818px;
+    height: 1096px;
+    top: 0;
+    left: 0; */
+    /* display: flex;
+    flex-direction: row;
+    align-items: left; */
+    /* overflow: hidden; */
+}
+.mai_contain {
+    width: 100vw;
+    height: -webkit-fill-available;
+}
+/* 以上为area定位 */
+#jinatou {
+    display: block;
+    height: 40px;
+    width: 13vw;
+    background: url("../images/地图-箭头.png") no-repeat;
+    background-size: contain;
+    margin-left: 13vw;
+    animation-delay: 0.1s;
+    animation: fadeIn 1.2s;
+    animation-iteration-count: 2;
+    animation-direction: alternate reverse;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        margin-top: -30px;
+    }
+
+    25% {
+        opacity: 1;
+        margin-top: 0px;
+    }
+
+    75% {
+        opacity: 1;
+        margin-top: -40px;
+    }
+
+    100% {
+        opacity: 0;
+        margin-top: 0px;
+    }
+}
+
+/* 箭头动画↑ */
+#mai_att {
+    position: fixed;
+    width: 70vw;
+    height: 30vh;
+    left: 15vw;
+    right: 0;
+    /* bottom: 50%; */
+    top: 25%;
+    /* margin: auto; */
+    z-index: 2;
+    padding: 10px;
+    background: url(../images/地图-弹框.png) no-repeat;
+    background-size: contain;
+    text-align: center;
+    padding-top: 10vh;
+    line-height: 30px;
+    font-weight: 200;
+    left: 12.5vw;
+    /* z-index: -1; */
+
+}
+
+#mai_att>span {
+    font-size: small;
+    position: relative;
+    bottom: -2vh;
+    outline: none;
+    border: none;
+}
+
+#mai_anim {
+    display: none;
+    width: 20vh;
+    height: unset;
+    position: absolute;
+    margin-top: -36vh;
+    margin-left: -9vh;
+    transform: scale(1.5);
+}

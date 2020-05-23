@@ -19,6 +19,7 @@ body {
     -webkit-user-select: none;
     /*webkit浏览器*/
     user-select: none;
+    overflow: hidden;
 }
 
 input {

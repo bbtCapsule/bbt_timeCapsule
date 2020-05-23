@@ -24,50 +24,23 @@ var str2 =
   "素不相识却似曾相识/这是写给陌生人的信/虽然你我不曾认识/但你的小纸条/或许能够温暖、鼓励未来的我";
 //页面初始的显示
 var sing = $("#sing_box");
-sing.hide();
 var singbtn = $("#recordbtn");
 var isSet = false;
 var letterType = 0;
+var hasTAinfo = false;
+hideALL();
+
+page.page1.show();
 if (window.location.href.split("?uid=").length == 2) {
+  console.log("来自二维码！");
+  hasTAinfo = true;
   user_id = window.location.href.split("?uid=")[1];
   from_qrcode = true;
-  page.page1.hide();
   capsule_type = 1;
+  page.page1.hide();
   page.page2.show();
 }
-var page = {
-  page1: $("#page1"),
-  page2: $("#page2"),
-  writeone: $("#write-one"),
-  writesec: $("#write-sec"),
-  writeTA: $("#write-TA"),
-  writeTAsend: $("#write-TA-send"),
-  writemap: $("#write-map"),
-  finish: $("#finish"),
-};
-for (var key in page) {
-  if (key == 0) {
-    key++;
-  }
-  page[key].hide();
-}
-$("#write-map").hide();
-page.page1.show();
-var nextPage = {
-  page1: $("#page1 .nextPage"),
-  page2: $("#page2 .nextPage"),
-  writeone: $("#write-one .nextPage"),
-  writesec: $("#write-sec .nextPage"),
-  writeTA: $("#write-TA .nextPage"),
-  writeTAsend: $("#write-TA-send .nextPage"),
-};
-var prePage = {
-  page1: $("#page1 .prePage"),
-  page2: $("#page2 .prePage"),
-  writeone: $("#write-one .prePage"),
-  writesec: $("#write-sec .prePage"),
-  writeTA: $("#write-TA .prePage"),
-};
+
 //获取radio
 function getRadio(obj) {
   for (var i = 0; i < obj.length; i++) {
@@ -175,17 +148,20 @@ $(".switchbox").on("click", function () {
 function switchPage(type) {
   //根据胶囊类型选择进入 其中第三个信纸是ser
   if (type == 0) {
-    page.page2.fadeOut(200);
-    page.writeone.fadeIn(100);
+    goTemplate1();
+    // page.page2.fadeOut(200);
+    // page.writeone.fadeIn(100);
     return page.writeone;
   } else if (type == 1) {
-    page.page2.fadeOut(200);
-    page.writesec.fadeIn(100);
+    goTemplate3();
+    // page.page2.fadeOut(200);
+    // page.writesec.fadeIn(100);
     return page.writesec;
   } else if (type == 2) {
     OpenMove();
-    page.page2.fadeOut(200);
-    page.writeTA.fadeIn(100);
+    goTemplate4();
+    // page.page2.fadeOut(200);
+    // page.writeTA.fadeIn(100);
     return page.writeTA;
   }
 }
@@ -199,29 +175,19 @@ nextPage.page2.on("click", function () {
     if (template == "L1") {
       switchPage(0);
       cap_template = 0;
-      page.writeone.css("backgroundImage", "url('./images/letter/1.png')");
-      $("#images").attr("src", "./images/letter/photobtn.png");
-      $("#voiceStart").attr("src", "./images/letter/record.png");
-      $(".write-one_bottom>.nextPage").attr("src", "./images/letter/L1.png");
-      $("#player").attr("src", "./images/letter/R1.png");
+      goTemplate1();
     } else if (template == "L2") {
       switchPage(0);
-      page.writeone.css("backgroundImage", "url('./images/letter/2.png')");
-      $("#images").attr("src", "./images/letter/photobtn2.png");
-      $("#voiceStart").attr("src", "./images/letter/record2.png");
-      $(".write-one_bottom>.nextPage").attr("src", "./images/letter/L2.png");
-      $("#player").attr("src", "./images/letter/R2.png");
       cap_template = 0;
+      goTemplate2();
     } else if (template == "L3") {
       switchPage(1);
-      $("#images").attr("src", "./images/letter/photobtn3.png");
-      $("#voiceStart").attr("src", "./images/letter/record3.png");
-      $(".write-one_bottom>.nextPage").attr("src", "./images/letter/L3.png");
-      $("#player").attr("src", "./images/letter/R3.png");
       cap_template = 0; //0是普通信纸
+      goTemplate3();
     } else if (template == "L4") {
       switchPage(2);
       cap_template = 1; //1是同学录
+      goTemplate4();
     }
   }
 });
@@ -255,7 +221,7 @@ function switchCapsule(str) {
   switch (Number(str)) {
     case 1:
       forbidMove();
-      if(from_qrcode){
+      if(hasTAinfo){
         page.writemap.fadeIn(90);
         break;
       }
@@ -397,12 +363,7 @@ $(".txl_input").each(function () {
     // $("txl_img").removeClass(".change");
   });
 });
-$("txl_img").on("click", function () {
-  // $("txl_img").removeClass(".change");
-  // $("txl_img").attr('class',"");
-  // $("txl_img").css("width","auto");
-  // $("txl_img").css("height","120vh");
-});
+
 $(".txl_textarea").each(function () {
   $(this).bind("focus", function (e) {
     moveKeyboard(4);
@@ -422,7 +383,6 @@ $(".letter_text").each(function () {
     if(img_serverIds.length>=1){
       $("#write-one>.content.write-one_content>.deleimg").fadeIn();
       $("#write-one>.content.write-one_content>.add_img").fadeIn();
-  
       $("#write-sec>.content.write-one_content>.deleimg").fadeIn();
       $("#write-sec>.content.write-one_content>.add_img").fadeIn();
   
@@ -586,12 +546,3 @@ function TrueSend() {
     );
   }
 }
-//信息录入
-// $("#submitCapsule").on('click', function () {
-//     uploadCapsule(capsule_type, time_limit, cap_template, cap_location, content_word, content_pic, content_voice, content_name, content_phone, content_birth);
-// });
-// 测试用
-// window.onload = function () {
-//     page.page1.attr('style', 'display:none;');
-//     page.finish.attr('style', 'display:block;');
-// }
