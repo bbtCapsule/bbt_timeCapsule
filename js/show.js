@@ -45,36 +45,36 @@ function clickanim(e){
 function areaShow() {
     // for (i = 1; i < 8; i++) {
     // $("#A" + i).on('click', function (e) {
-        if(isiOS){
-            alert("你是ios吼！");
-            $('#write-map').on('mousemove', function (e) {
-                // console.log(e.pageX,e.pageY);
-                clickanim(e);
-            })
-            setTimeout(() => {
-                $("#img_map").attr("class", "go");
-                $("#mai_anim").css("top",'50%');
-                $("#mai_anim").css("left", '20%');
-                $("#mai_anim").css("position", 'fixed');
-                $("#mai_anim").css("transform",'scale(2.5)');
-                $("#jiantou").fadeIn(100);
-                setTimeout(() => {
-                    $("#jiantou").fadeOut(100);
-                    $("#mai_anim").fadeIn(100);
-                }, 1800);
-                //addChanzi();
-                setTimeout(() => {
-                    $("#img_map").attr("class", "");
-                    $("#mai_anim").fadeOut(300);
-                    $(".mai").hide();
-                    $("#write-map").fadeOut(700);
-                    $("#finish").fadeIn(600);
-                }, 3700);
+        // if(isiOS){
+        //     alert("你是ios吼！");
+        //     $('#write-map').on('mousemove', function (e) {
+        //         // console.log(e.pageX,e.pageY);
+        //         clickanim(e);
+        //     })
+        //     setTimeout(() => {
+        //         $("#img_map").attr("class", "go");
+        //         $("#mai_anim").css("top",'50%');
+        //         $("#mai_anim").css("left", '20%');
+        //         $("#mai_anim").css("position", 'fixed');
+        //         $("#mai_anim").css("transform",'scale(2.5)');
+        //         $("#jiantou").fadeIn(100);
+        //         setTimeout(() => {
+        //             $("#jiantou").fadeOut(100);
+        //             $("#mai_anim").fadeIn(100);
+        //         }, 1800);
+        //         //addChanzi();
+        //         setTimeout(() => {
+        //             $("#img_map").attr("class", "");
+        //             $("#mai_anim").fadeOut(300);
+        //             $(".mai").hide();
+        //             $("#write-map").fadeOut(700);
+        //             $("#finish").fadeIn(600);
+        //         }, 3700);
         
-            }, 500);
-            return;
-        }
-        console.log("你是安卓吼！");
+        //     }, 500);
+        //     return;
+        // }
+        // console.log("你是安卓吼！");
     $(document).on('mousemove', function (e) {
         // console.log(e.pageX,e.pageY);
         clickanim(e);
