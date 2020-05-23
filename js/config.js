@@ -66,7 +66,7 @@ function checkInfo() {
 
 // 加载完成后检测一次微信登录和是否填写信息
 window.onload = () => {
-  //checkLogin(checkInfo);
+  checkLogin(checkInfo);
 };
 
 // 获取微信JSSDK配置，以表单形式传参数，不要把content-type设置成"application/x-www-form-urlencoded"
