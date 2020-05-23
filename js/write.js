@@ -37,8 +37,7 @@ if (window.location.href.split("?uid=").length == 2) {
   user_id = window.location.href.split("?uid=")[1];
   from_qrcode = true;
   capsule_type = 1;
-  page.page1.hide();
-  page.page2.show();
+  goPage2();
 }
 
 //获取radio
@@ -221,7 +220,8 @@ function switchCapsule(str) {
   switch (Number(str)) {
     case 1:
       forbidMove();
-      if(hasTAinfo){
+      if (from_qrcode) {
+        TrueSend();
         page.writemap.fadeIn(90);
         break;
       }
@@ -273,7 +273,9 @@ nextPage.writeone.on("click", function () {
     page.writeone.fadeOut(300);
     switchCapsule(capsule_type);
     sendLetter(0);
-    TrueSend();
+    if (Number(capsule_type) != 1) {
+      TrueSend();
+    }
   }
 });
 // writeone&writemap 结束
@@ -331,9 +333,9 @@ nextPage.writeTA.on("click", function () {
 nextPage.writeTAsend.on("click", function () {
   // content_name,content_phone,content_birth;
   TA_info.name = $("#receiver_name").val();
-  TA_info.phone = $("#receiver_tel").val();
+  TA_info.tel = $("#receiver_tel").val();
   TA_info.email = $("#receiver_email").val();
-  if (checkInput(TA_info.phone, "num") && TA_info.name != "") {
+  if (checkInput(TA_info.tel, "num") && TA_info.name != "") {
     console.log("提交");
     console.log("write ta send");
     nextPage.writeTAsend.attr("disabled", true);
@@ -374,18 +376,17 @@ $(".letter_text").each(function () {
   $(this).bind("focus", function (e) {
     console.log("foucus", letterType);
     moveKeyboard(letterType);
-  })
-  $(this).bind('blur', function (e) {
-    if(voice!=undefined){
+  });
+  $(this).bind("blur", function (e) {
+    if (voice != undefined) {
       $("#write-one>.content.write-one_content>.mp3").fadeIn();
       $("#write-sec>.content.write-one_content>.mp3").fadeIn();
     }
-    if(img_serverIds.length>=1){
+    if (img_serverIds.length >= 1) {
       $("#write-one>.content.write-one_content>.deleimg").fadeIn();
       $("#write-one>.content.write-one_content>.add_img").fadeIn();
       $("#write-sec>.content.write-one_content>.deleimg").fadeIn();
       $("#write-sec>.content.write-one_content>.add_img").fadeIn();
-  
     }
   });
 });
@@ -400,9 +401,7 @@ function sendLetter(letterType) {
   console.log(letterType);
   console.log("type of lettertype");
   console.log(typeof letterType);
-  switch (
-    letterType //0普通  1同学录
-  ) {
+  switch (letterType) {
     case 4:
       $(".txl_input").each(function () {
         message.push($.trim($(this).val()));
