@@ -53,6 +53,8 @@ page.writemap.on("click", function () {
   $("#mai_att").fadeOut(100);
   OpenMove();
   areaShow();
+      console.log('埋胶囊');
+
 });
 //页面开关
 prePage.page1.on("click", function () {
