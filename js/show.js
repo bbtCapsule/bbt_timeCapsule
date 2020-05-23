@@ -21,9 +21,6 @@ function clickanim(e){
     var A8 = (e.pageX >= 2210) && (e.pageX <= 2280) && (e.pageY <= 879) && (e.pageY >= 770);
     var A9 = (e.pageX >= 2400) && (e.pageX <= 2455) && (e.pageY <= 1000) && (e.pageY >= 974);
     var A10 = (e.pageX >= 2620) && (e.pageX <= 2700) && (e.pageY <= 500) && (e.pageY >= 476);
-    if (hasMai) {
-        return;
-    }
     if (A1 || A2 || A3 || A4 || A5 || A6 || A7 || A8 || A9 || A10) {
         hasMai = true;
         $("#img_map").attr("class", "go");
@@ -48,35 +45,34 @@ function clickanim(e){
 function areaShow() {
     // for (i = 1; i < 8; i++) {
     // $("#A" + i).on('click', function (e) {
-        if(isiOS){
-            alert("你是ios吼！");
-            setTimeout(() => {
-                $("#img_map").attr("class", "go");
-                $("#mai_anim").css("top",'50%');
-                $("#mai_anim").css("left", '20%');
-                $("#mai_anim").css("position", 'fixed');
-                $("#mai_anim").css("transform",'scale(2.5)');
-                $("#jiantou").fadeIn(100);
-                setTimeout(() => {
-                    $("#jiantou").fadeOut(100);
-                    $("#mai_anim").fadeIn(100);
-                }, 1800);
-                //addChanzi();
-                setTimeout(() => {
-                    $("#img_map").attr("class", "");
-                    $("#mai_anim").fadeOut(300);
-                    $(".mai").hide();
-                    $("#write-map").fadeOut(700);
-                    $("#finish").fadeIn(600);
-                }, 3700);
+        // if(isiOS){
+        //     alert("你是ios吼！");
+        //     setTimeout(() => {
+        //         $("#img_map").attr("class", "go");
+        //         $("#mai_anim").css("top",'50%');
+        //         $("#mai_anim").css("left", '20%');
+        //         $("#mai_anim").css("position", 'fixed');
+        //         $("#mai_anim").css("transform",'scale(2.5)');
+        //         $("#jiantou").fadeIn(100);
+        //         setTimeout(() => {
+        //             $("#jiantou").fadeOut(100);
+        //             $("#mai_anim").fadeIn(100);
+        //         }, 1800);
+        //         //addChanzi();
+        //         setTimeout(() => {
+        //             $("#img_map").attr("class", "");
+        //             $("#mai_anim").fadeOut(300);
+        //             $(".mai").hide();
+        //             $("#write-map").fadeOut(700);
+        //             $("#finish").fadeIn(600);
+        //         }, 3700);
         
-            }, 500);
-            return;
-        }
-
+        //     }, 500);
+        //     return;
+        // }
+        alert("你是安卓吼！");
     $(document).on('mousemove', function (e) {
         // console.log(e.pageX,e.pageY);
-        alert("你是安卓吼！");
         clickanim(e);
     })
     // });
@@ -85,9 +81,7 @@ function areaShow() {
 }
 // areaShow();
 $("#mai_att").on('click', function () {
-    if(hasMai){
-        hasMai = false;
-    }
+    console.log('埋胶囊');
     OpenMove();
     areaShow();
 })
@@ -175,4 +169,3 @@ function goTemplate4() {
     page.page2.fadeOut(100);
     page.writeTA.fadeIn();
 }
-a
