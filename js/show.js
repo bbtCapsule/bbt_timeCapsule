@@ -6,6 +6,9 @@ $("#allatt").on('click', function (e) {
     $("#allatt").fadeOut(100);
 })
 var hasMai = false;
+var u = navigator.userAgent;
+var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
+var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
 function clickanim(e){
     // var clickId = $(this).attr("id");
     var A1 = (e.pageX >= 120) && (e.pageX <= 245) && (e.pageY <= 400) && (e.pageY >= 130);
@@ -45,16 +48,35 @@ function clickanim(e){
 function areaShow() {
     // for (i = 1; i < 8; i++) {
     // $("#A" + i).on('click', function (e) {
+        if(isiOS){
+            setTimeout(() => {
+                $("#img_map").attr("class", "go");
+                $("#mai_anim").css("top",'50vh');
+                $("#mai_anim").css("left", '50vw');
+                $("#mai_anim").css("position", 'fixed');
+                $("#mai_anim").css("transform",'scale(2.5)');
+                $("#jiantou").fadeIn(100);
+                setTimeout(() => {
+                    $("#jiantou").fadeOut(100);
+                    $("#mai_anim").fadeIn(100);
+                }, 1800);
+                //addChanzi();
+                setTimeout(() => {
+                    $("#img_map").attr("class", "");
+                    $("#mai_anim").fadeOut(300);
+                    $(".mai").hide();
+                    $("#write-map").fadeOut(700);
+                    $("#finish").fadeIn(600);
+                }, 3700);
+        
+            }, 500);
+            return;
+        }
 
     $(document).on('click', function (e) {
         // console.log(e.pageX,e.pageY);
         clickanim(e);
     })
-    $('#write-map').on('click', function (e) {
-        // console.log(e.pageX,e.pageY);
-        clickanim(e);
-    })
-
     // });
     // }
 

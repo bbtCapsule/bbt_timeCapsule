@@ -38,8 +38,11 @@ body {
     position: absolute;
     top: 0px;
     z-index: -9;
+    cursor: pointer;
 }
-
+#write-map{
+    cursor: pointer;
+}
 #receiver_tel,
 #receiver_email {
     outline: none;
