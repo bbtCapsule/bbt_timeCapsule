@@ -49,10 +49,11 @@ function areaShow() {
     // for (i = 1; i < 8; i++) {
     // $("#A" + i).on('click', function (e) {
         if(isiOS){
+            alert("你是ios吼！");
             setTimeout(() => {
                 $("#img_map").attr("class", "go");
-                $("#mai_anim").css("top",'50vh');
-                $("#mai_anim").css("left", '50vw');
+                $("#mai_anim").css("top",'50%');
+                $("#mai_anim").css("left", '20%');
                 $("#mai_anim").css("position", 'fixed');
                 $("#mai_anim").css("transform",'scale(2.5)');
                 $("#jiantou").fadeIn(100);
@@ -73,8 +74,9 @@ function areaShow() {
             return;
         }
 
-    $(document).on('click', function (e) {
+    $(document).on('mousemove', function (e) {
         // console.log(e.pageX,e.pageY);
+        alert("你是安卓吼！");
         clickanim(e);
     })
     // });
