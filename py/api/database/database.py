@@ -2,6 +2,7 @@ import pymysql
 from config import db
 from ..common.utils import my_abort
 
+
 def getCursor():
     con = pymysql.connect(
         host=db["host"],
@@ -18,8 +19,6 @@ def getInfo(open_id):
     (con, cur) = getCursor()
     cur.execute("SELECT uid, nickname, phone, email FROM users WHERE open_id=%s", [open_id])
     r = cur.fetchone()
-    if r is None:
-        my_abort(404, message="请先登记个人信息")
     cur.close()
     con.close()
     return r
@@ -67,10 +66,9 @@ def insertToTaCapsule(open_id, time_limit, cap_template, from_qrcode, cap_locati
 # 塞入给自己的胶囊
 def insertSelfCapsule(open_id, time_limit, cap_template, cap_location, content_word, content_pic, content_voice):
     (con, cur) = getCursor()
-    info = getInfo(open_id)
     cur.execute(
         "INSERT INTO selfCapsules(sender_id, time_limit, cap_template, cap_location, content_word, content_pic, content_voice) VALUES (%s,%s,%s,%s,%s,%s,%s)",
-        [info[0], time_limit, cap_template, cap_location, content_word, str(content_pic), content_voice])
+        [open_id, time_limit, cap_template, cap_location, content_word, str(content_pic), content_voice])
     con.commit()
     cur.close()
     con.close()
@@ -103,9 +101,10 @@ def checkPhone(phone):
         'uniqueness': uniqueness
     }
 
-def get_letter(uid, open_id)->dict:
+
+def get_letter(uid, open_id) -> dict:
     (con, cur) = getCursor()
-    cur.execute('select open_id, phone from `users` where `uid`=%s',(uid, ))
+    cur.execute('select open_id, phone from `users` where `uid`=%s', (uid,))
     result = cur.fetchone()
     if result is None:
         my_abort(404, message="用户不存在")
