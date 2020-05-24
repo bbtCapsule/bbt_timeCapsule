@@ -125,7 +125,7 @@ input[type="text"] {
     padding-top: 50px;
     text-align: left;
     width: 80%;
-    height: 75vh;
+    height: 125vw;
 }
 
 input.prePage {
@@ -229,11 +229,13 @@ input.prePage {
     margin-top: 80%;
 } */
 #letter3 {
-    height: 30%;
+    height: 50vw;
     position: static;
     position: fixed;
-    top: 40%;
-    width: 200px;
+    margin-top: 50vw;
+    margin-bottom: 10vw;
+    width: 75%;
+    padding-right: 5vw;
 }
 #write-sec {
     background-image: url(../images/letter/3.png);
@@ -493,6 +495,9 @@ input {
 
 .page1_content {
     text-align: center;
+}
+.page1_intro::-webkit-scrollbar {
+    display: none;
 }
 
 .page1_intro {
