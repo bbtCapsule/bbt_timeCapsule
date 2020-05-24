@@ -387,11 +387,9 @@ $(".letter_text").each(function () {
       $("#write-one>.content.write-one_content>.mp3").fadeIn();
       $("#write-sec>.content.write-one_content>.mp3").fadeIn();
     }
-    if (img_serverIds.length >0) {
-      $("#write-one>.content.write-one_content>.deleimg").fadeIn();
-      $("#write-one>.content.write-one_content>.add_img").fadeIn();
-      $("#write-sec>.content.write-one_content>.deleimg").fadeIn();
-      $("#write-sec>.content.write-one_content>.add_img").fadeIn();
+    if (hasImg) {
+      $(".deleimg").show();
+      $(".add_img").show();
     }
   });
 });

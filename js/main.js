@@ -23,7 +23,8 @@ var txl_img2 =
 var letterType = 0;
 var winWidth = $(window).width();
 var winHeight = $(window).height();
-
+var hasImg = false;
+var hasmusic =false;
 function moveKeyboard(letterid) {
   console.log("change height");
   var id = "";
@@ -60,7 +61,6 @@ function moveKeyboard(letterid) {
     $("#write-sec>.content.write-one_content>.deleimg").slideUp();
     $("#write-sec>.content.write-one_content>.mp3").slideUp();
     $("#write-sec>.content.write-one_content>.add_img").slideUp();
-    fixedKeyboard();
     // $(id).css('transform','scale(0.9) translate(0,-10%)');
     //  $(id).css('padding-top',0-($(id).height()));
     console.log(3, $(id).height());
@@ -233,6 +233,7 @@ function chooseImg() {
     sizeType: ["original", "compressed"], // 可以指定是原图还是压缩图，默认二者都有
     sourceType: ["album", "camera"], // 可以指定来源是相册还是相机，默认二者都有
     success: function (res) {
+      hasImg = true;
       that.images.localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
       console.log(that.images.localIds);
       for (var i = 0; i < res.localIds.length; i++) {
@@ -240,6 +241,7 @@ function chooseImg() {
       }
       var dele = function (idx) {
         if (that.show_imgList.length == 0) {
+          hasImg = false;
           return;
         }
         that.show_imgList.splice(idx, 1);
