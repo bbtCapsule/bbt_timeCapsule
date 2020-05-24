@@ -1,4 +1,4 @@
-const baseUrl = "https://hemc.100steps.net/2020/timecapsule_test/api"; //测试用url
+const baseUrl = "https://hemc.100steps.net/2020/timecapsule/api"; //测试用url
 const apiurl = `${baseUrl}/`;
 const phpurl =
   "https://hemc.100steps.net/2017/wechat/Home/Index/index?state=" +
@@ -7,7 +7,7 @@ const getWxurl = "https://hemc.100steps.net/2017/wechat/Home/Public/getJsApi"; /
 const shareurl = encodeURIComponent(location.href);
 const shareimg_url = "图片url";
 var info_check = false;
-if(Boolean(localStorage.getItem('hasInfo'))){ info_check = true};
+;
 function attention(str) {
   $("#allatt").fadeIn();
   $("#att").text(str);
