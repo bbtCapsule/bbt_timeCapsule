@@ -80,10 +80,10 @@ def insertSelfCapsule(open_id, time_limit, cap_template, cap_location, content_w
 # 塞入给陌生人的胶囊
 def insertStraengerCpasule(open_id, time_limit, cap_template, cap_location, content_word, content_pic, content_voice):
     (con, cur) = getCursor()
-    info = getInfo(open_id)
+    # info = getInfo(open_id)
     cur.execute(
         "INSERT INTO strangerCapsules(sender_id, time_limit, cap_template, cap_location, content_word, content_pic, content_voice) VALUES (%s,%s,%s,%s,%s,%s,%s)",
-        [info[0], time_limit, cap_template, cap_location, content_word, str(content_pic), content_voice])
+        [open_id, time_limit, cap_template, cap_location, content_word, str(content_pic), content_voice])
     con.commit()
     cur.close()
     con.close()
@@ -112,6 +112,10 @@ def get_letter(uid, open_id)->dict:
     if str(result[0]) == str(open_id):
         cur.execute('select count(*) from `toTaCapsules` where `receiver_tel`=%s and `from_qrcode`=1', (result[1]))
         r = cur.fetchone()
+        cur.close()
+        con.close()
         return dict(personal=True, count=r[0])
     else:
+        cur.close()
+        con.close()
         return dict(personal=False)
