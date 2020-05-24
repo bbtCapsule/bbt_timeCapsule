@@ -450,6 +450,9 @@ function uploadInfo(nickname, phone, email) {
         500: (res) => {
           attention(res.responseJSON.message);
         },
+        404:(res) =>{
+          attention(res.responseJSON.message);
+        }
       },
       success(data, textStatus, xhr) {
         if (data.errcode != 0 || xhr.status == 400) {
@@ -467,7 +470,7 @@ function uploadInfo(nickname, phone, email) {
       error: function (err) {
         console.log("出错了！请检查网络！");
         console.log(err);
-        attention(err);
+        attention(err.message);
       },
     });
   }
@@ -549,6 +552,7 @@ function uploadCapsule(
       console.log("写给ta");
       console.log("capsule_template" + cap_template);
       console.log(typeof cap_template);
+      console.log(TA_info);
       if (cap_template == 1) {
         console.log("同学录");
         console.log("ta_info");
@@ -588,7 +592,7 @@ function uploadCapsule(
         break;
       } else {
         console.log("普通tota");
-
+        console.log(TA_info);
         letter = JSON.stringify({
           capsule_type: capsule_type, // （胶囊类型）0，1，2分别代表私密，Ta，陌生人
           time_limit: time_limit, // （时间期限）0，1分别代表半年、一年
@@ -647,6 +651,9 @@ function uploadCapsule(
         attention(res.responseJSON.message);
         window.location.href = phpurl;
       },
+      404:(res) =>{
+        attention(res.responseJSON.message);
+      }
     },
     success(data, textStatus, xhr) {
       if (data.errcode != 0 || xhr.status == 400) {
@@ -666,7 +673,7 @@ function uploadCapsule(
     error: function (err) {
       console.log("出错了！请检查网络！");
       console.log(err);
-      attention(err);
+      attention(err.message);
     },
   });
 }else{
