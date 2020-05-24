@@ -294,7 +294,7 @@ input.prePage {
 
 .choose_text {
     font-family: 'cute';
-    color: white;
+    color: #646b6a;
     margin-left: -20px;
     font-size: 18px;
     margin-top: 10px;
@@ -403,6 +403,7 @@ input.prePage {
     transform: scale(0.2, 0.3);
     position: relative;
     margin-right: 20px;
+    background: none;
 }
 
 .choose:checked {
@@ -506,7 +507,7 @@ p#num {
 }
 
 .page1_text {
-    color: #3f454bcf;
+    color: #646b6a;
     font-size: 16px;
 }
 
