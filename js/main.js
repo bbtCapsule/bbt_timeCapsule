@@ -597,9 +597,9 @@ function uploadCapsule(
           time_limit: time_limit, // （时间期限）0，1分别代表半年、一年
           cap_template: cap_template, // （胶囊模板）0，1分别代表普通信纸和同学录
           cap_location: cap_location, // 胶囊位置
-          receiver_name: TA_info.name, // 收信人姓名
-          receiver_tel: TA_info.tel, // 收信人电话
-          receiver_email: TA_info.email, // 收信人邮箱
+          receiver_name: TA_info[0], // 收信人姓名
+          receiver_tel: TA_info[1], // 收信人电话
+          receiver_email: TA_info[2], // 收信人邮箱
           content_name: txl_content.name, // 同学录上的姓名
           content_phone: txl_content.tel, // 同学录上的电话
           content_birth: txl_content.birth,
@@ -628,9 +628,9 @@ function uploadCapsule(
           time_limit: time_limit, // （时间期限）0，1分别代表半年、一年
           cap_template: cap_template, // （胶囊模板）0，1分别代表普通信纸和同学录
           cap_location: cap_location, // 胶囊位置
-          receiver_name: TA_info.name, // 收信人姓名
-          receiver_tel: TA_info.tel, // 收信人电话
-          receiver_email: TA_info.email, // 收信人邮箱
+          receiver_name: TA_info[0], // 收信人姓名
+          receiver_tel: TA_info[1], // 收信人电话
+          receiver_email: TA_info[2], // 收信人邮箱
           content_word: content_word, // 文字内容
           from_qrcode: from_qrcode, // 是否二维码写信
           // 可选

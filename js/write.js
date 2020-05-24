@@ -10,7 +10,7 @@ var capsule_type,
   content_name,
   content_phone,
   content_birth;
-var TA_info = new Object();
+var TA_info = [];
 var from_qrcode = false;
 var user_id = "none";
 var txl_content = new Object();
@@ -29,6 +29,21 @@ var isSet = false;
 var letterType = 0;
 var hasTAinfo = false;
 hideALL();
+var nextPage = {
+  page1: $("#page1 .nextPage"),
+  page2: $("#page2 .nextPage"),
+  writeone: $("#OneSub"),
+  writesec: $("#ThirdSub"),
+  writeTA: $("#FourSub"),
+  writeTAsend: $("#TASub"),
+};
+var prePage = {
+  page1: $("#page1 .prePage"),
+  page2: $("#page2 .prePage"),
+  writeone: $("#write-one .prePage"),
+  writesec: $("#write-sec .prePage"),
+  writeTA: $("#write-TA .prePage"),
+};
 
 page.page1.show();
 if (window.location.href.split("?uid=").length == 2) {
@@ -223,6 +238,7 @@ prePage.writeTA.on("click", function () {
 function switchCapsule(str) {
   hideALL();
   console.log("胶囊类型是" + str + " 0写给自己 1写给专属 2写给陌生人");
+  if(str = "1"){console.log("还需要收件人信息");}
   switch (Number(str)) {
     case 1:
       forbidMove();
@@ -335,17 +351,18 @@ nextPage.writeTA.on("click", function () {
   switchCapsule(capsule_type);
   
 
-  console.log("还需要收件人信息");
+  
 });
 //writeTA&writeTAsend 结束
 // writeTAsend&writemap 开始
 
 nextPage.writeTAsend.on("click", function () {
   // content_name,content_phone,content_birth;
-  TA_info.name = $("#receiver_name").val();
-  TA_info.tel = $("#receiver_tel").val();
-  TA_info.email = $("#receiver_email").val();
-  if (checkInput(TA_info.tel, "num") && TA_info.name != "") {
+  console.log("塞 我塞");
+  TA_info[0] = $("#receiver_name").val();
+  TA_info[1] = $("#receiver_tel").val();
+  TA_info[2] = $("#receiver_email").val();
+  if (checkInput(TA_info[1], "num") && TA_info[0] != "") {
     console.log("提交");
     console.log("write ta send");
     nextPage.writeTAsend.attr("disabled", true);
@@ -354,6 +371,7 @@ nextPage.writeTAsend.on("click", function () {
     trySend =true;
     TrueSend();
   } else {
+    nextPage.writeTAsend.attr("disabled", false);
     attention("信使找不到收件人TAT");
   }
 });
@@ -522,32 +540,26 @@ singbtn.on({
 
 function TrueSend() {
   console.log("true send");
-  console.log(typeof letterType);
-  console.log(letterType);
-  console.log(letterType != 2);
-  if (letterType != 2) {
-    console.log("不等于？");
-    // }
-    // if(letterType!=2){
-    console.log("not =");
-    uploadWrapper(
-      capsule_type,
-      time_limit,
-      cap_template,
-      message[0],
-      [],
-      TA_info,
-      from_qrcode,
-      user_id
-    );
-  } else {
-    console.log("=");
+  console.log("收集信息："+(TA_info.length>0));
+  if (letterType == 4) {
+    console.log("不是同学录");
     uploadWrapper(
       capsule_type,
       time_limit,
       cap_template,
       content_word,
       txl_content,
+      TA_info,
+      from_qrcode,
+      user_id
+    );
+  } else {
+    uploadWrapper(
+      capsule_type,
+      time_limit,
+      cap_template,
+      message[0],
+      [],
       TA_info,
       from_qrcode,
       user_id
