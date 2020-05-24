@@ -70,7 +70,11 @@ function getLetter(user_id){
     },
     success(data) {
       if (data.personal == true) {
-        attention("哇！你一共收到了"+data.count+"封信=V=！记得来取信喔~");
+        if(data.count>0){
+          attention("哇！你一共收到了"+data.count+"封信=V=！记得来取信喔~");
+        }else{
+          attention("好像还没人给你写信喔=3=           (Tips:把二维码分享在朋友圈，邀请朋友来给你写信吧~)");
+        }
         isMyself =true;
       }
     },
