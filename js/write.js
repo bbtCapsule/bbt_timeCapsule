@@ -33,8 +33,13 @@ hideALL();
 
 page.page1.show();
 if (window.location.href.split("?uid=").length == 2) {
+  
+  if(getLetter(user_id)){
+    goPage1();
+    return;
+  }
   console.log("来自二维码！");
-  attention("写一封信，希望未来的TA/自己能够收获一丝感动~");
+  attention("写一封信，希望未来的TA能够收获一丝感动~");
   hasTAinfo = true;
   user_id = window.location.href.split("?uid=")[1];
   
@@ -43,7 +48,41 @@ if (window.location.href.split("?uid=").length == 2) {
   capsule_type = 1;
   goPage2();
 }
-
+function getLetter(user_id){
+  var isMyself =false;
+  $.ajax({
+    method: "GET",
+    url: apiurl + "letter?user_id=" + user_id,
+    contentType: "application/json;charset=utf-8",
+    statusCode: {
+      410: (res) => {
+        attention(res.responseJSON.message);
+      },
+      401: (res) => {
+        attention(res.responseJSON.message);
+        window.location.href = phpurl;
+      },
+      500: (res) => {
+        attention(res.responseJSON.message);
+      },
+      404:(res) =>{
+        attention(res.responseJSON.message);
+      }
+    },
+    success(data) {
+      if (data.personal == true) {
+        attention("哇！你一共收到了"+data.count+"封信=V=！记得来取信喔~");
+        isMyself =true;
+      }
+    },
+    error: function (err) {
+      console.log("出错了！请检查网络！");
+      console.log(err);
+      attention(err.message);
+    },
+  });
+return isMyself;
+}
 //获取radio
 function getRadio(obj) {
   for (var i = 0; i < obj.length; i++) {

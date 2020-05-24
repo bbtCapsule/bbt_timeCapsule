@@ -126,7 +126,10 @@ function hideALL() {
     page.finish.hide();
     page.page2.hide();
 }
-
+function goPage1() {
+    hideALL();
+    page.page1.fadeIn(200);
+}
 function goPage2() {
     page.page1.fadeOut(200);
     page.page2.fadeIn(200);
