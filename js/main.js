@@ -32,9 +32,9 @@ function moveKeyboard(letterid) {
     case 0:
       id="#write-one"
       $("#write-one").css('height',winHeight);
-      $("#write-one>.content.write-one_content>.deleimg").slideUp();
-      $("#write-one>.content.write-one_content>.mp3").slideUp();
-      $("#write-one>.content.write-one_content>.add_img").slideUp();
+      // $("#write-one>.content.write-one_content>.deleimg").slideUp();
+      // $("#write-one>.content.write-one_content>.mp3").slideUp();
+      // $("#write-one>.content.write-one_content>.add_img").slideUp();
       break;
     case 0:
       id = "#write-one";
@@ -56,12 +56,12 @@ function moveKeyboard(letterid) {
     console.log(winHeight);
     $("#write-sec").css('width',winWidth);
     $("#write-sec").css('height',winHeight);
-    $("#write-sec>.content.write-one_content").height(winHeight/1.5);
+    $("#write-sec>.content.write-one_content").height(winHeight);
     // $("#letter3").height(winHeight/3);
     $("#letter3").css('position','static');
-    $("#write-sec>.content.write-one_content>.deleimg").slideUp();
-    $("#write-sec>.content.write-one_content>.mp3").slideUp();
-    $("#write-sec>.content.write-one_content>.add_img").slideUp();
+    // $("#write-sec>.content.write-one_content>.deleimg").slideUp();
+    // $("#write-sec>.content.write-one_content>.mp3").slideUp();
+    // $("#write-sec>.content.write-one_content>.add_img").slideUp();
     // $(id).css('transform','scale(0.9) translate(0,-10%)');
     //  $(id).css('padding-top',0-($(id).height()));
     console.log(3, $(id).height());

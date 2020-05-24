@@ -249,11 +249,12 @@ input.prePage {
     transform: scale(0.7) translate(40%, -165vw);
 } */
 #write-sec>.content.write-one_content>.add_img {
+    margin-top: 10vw;
     width: 60px;
     height: 60px;
     margin-left: -5%;
     /* transform: scale(0.7); */
-    transform: scale(0.7) translate(40%, -90px);
+    transform: scale(0.7) translate(40%, -60px);
 }
 /* #write-sec>.content.write-one_content>.deleimg {
     width: 15px;
@@ -265,13 +266,14 @@ input.prePage {
     transform: scale(0.7) translate(80%, -160vw);
 } */
 #write-sec>.content.write-one_content>.deleimg {
+    margin-top: 10vw;
     width: 15px;
     height: 15px;
     margin-left: -15px;
     transform: scale(0.7);
     margin-bottom: 50px;
     /* transform: scale(0.65) translate(55%,-240%); */
-    transform: scale(0.7) translate(80%, -80px);
+    transform: scale(0.7) translate(80%, -50px);
 }
 /* #write-sec>.content.write-one_content>.mp3 {
     -webkit-appearance: unset;
@@ -293,7 +295,7 @@ input.prePage {
     background-color: #f0f5f7;
     margin-bottom: 5%;
     margin-top: 3%;
-    transform: scale(0.65) translate(55%, -80px);
+    transform: scale(0.7) translate(55%, -80px);
 }
 /* 同学录样式 */
 /* 以上为覆盖内容 包含同学录样式 */
