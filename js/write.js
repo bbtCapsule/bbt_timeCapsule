@@ -152,6 +152,7 @@ $(".switchbox").on("click", function () {
 
 function switchPage(type) {
   //根据胶囊类型选择进入 其中第三个信纸是ser
+  forbidMove();
   if (type == 0) {
     
     // page.page2.fadeOut(200);
@@ -164,7 +165,6 @@ function switchPage(type) {
     return page.writesec;
   } else if (type == 2) {
     OpenMove();
-
     // page.page2.fadeOut(200);
     // page.writeTA.fadeIn(100);
     return page.writeTA;
@@ -237,7 +237,6 @@ function switchCapsule(str) {
 
   switch (str) {
     case 1:
-
       page.writeTAsend.fadeIn(90);
       break;
     case 0:

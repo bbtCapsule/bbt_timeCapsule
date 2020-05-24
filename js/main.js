@@ -51,6 +51,7 @@ function moveKeyboard(letterid) {
       break;
   }
   if (id == "#writeL3") {
+    forbidMove();
     console.log(1, $(id).height());
     console.log(winHeight);
     $("#write-sec").css('width',winWidth);
