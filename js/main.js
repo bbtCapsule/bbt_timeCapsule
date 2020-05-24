@@ -730,6 +730,7 @@ $("#go_intro").on("click", function () {
   $("#go_receive").hide();
 });
 $("#intro_btn").on("click", function () {
+  if(Boolean(localStorage.getItem('hasInfo'))){ info_check = true};
   if (info_check) {
     $("#introduce").fadeOut(300);
     
