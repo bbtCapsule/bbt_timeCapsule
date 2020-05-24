@@ -36,12 +36,11 @@ if (window.location.href.split("?uid=").length == 2) {
   user_id = window.location.href.split("?uid=")[1];
   console.log(user_id);
   if(getLetter(user_id)){
-    goPage1();
+    console.log("自己");
   }else{
   console.log("来自二维码！");
   attention("写一封信，希望未来的TA能够收获一丝感动~");
   hasTAinfo = true;
-
   from_qrcode = true;
   capsule_type = 1;
   goPage2();
@@ -53,6 +52,7 @@ function getLetter(user_id){
     method: "GET",
     url: apiurl + "letter?user_id=" + user_id,
     contentType: "application/json;charset=utf-8",
+    async:false,
     statusCode: {
       410: (res) => {
         attention(res.responseJSON.message);

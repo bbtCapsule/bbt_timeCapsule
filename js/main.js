@@ -751,4 +751,5 @@ $("#intro_btn").on("click", function () {
 });
 if((astr1=="")||(astr1=="main.html")){
   forbidMove();
+  $('body').css('overflow','hidden');
 }
