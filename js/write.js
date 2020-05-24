@@ -32,11 +32,11 @@ hideALL();
 
 
 page.page1.show();
-if (window.location.href.split("?uid=").length == 2) {
+if (window.location.href.split("?uid").length == 2) {
   console.log("来自二维码！");
   attention("写一封信，希望未来的TA（自己）能够收获一丝感动~");
   hasTAinfo = true;
-  user_id = window.location.href.split("?uid=")[1];
+  user_id = window.location.href.split("?uid")[1];
   from_qrcode = true;
   capsule_type = 1;
   goPage2();
