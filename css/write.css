@@ -1,7 +1,6 @@
 /* 清除基础样式 */
 * {
     outline: none;
-    cursor: pointer;
 }
 li{
     appearance: none;
