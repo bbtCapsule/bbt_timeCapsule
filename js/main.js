@@ -599,6 +599,7 @@ function uploadCapsule(
           receiver_email: TA_info[2], // 收信人邮箱
           content_word: content_word, // 文字内容
           from_qrcode: from_qrcode, // 是否二维码写信
+          user_id:user_id,
           // 可选
           content_pic: img_serverIds, // 调用uploadImage返回的serverid，没有上传图片就不传这个参数，就算只有一张图片也传数组
           content_voice: voiceIds,
