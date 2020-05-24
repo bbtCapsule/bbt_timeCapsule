@@ -54,12 +54,13 @@ function moveKeyboard(letterid) {
     forbidMove();
     console.log(1, $(id).height());
     console.log(winHeight);
+    dio1 = 200/568;
     $("#write-sec").css('width',winWidth);
     $("#write-sec").css('height',winHeight);
      $("#write-sec>.content.write-one_content").height(winHeight*0.8);
-
+     $("#contain3").height(dio*winHeight);
     $("#letter3").css('position','static');
-
+    $("#letter3").css('margin-top','3rem');
     console.log(3, $(id).height());
     return;
   }
@@ -155,12 +156,14 @@ function setitem(letterType) {
 
         $("#pic1").slideUp();
         $("#pic_dele1").slideUp();
+        img_serverIds.splice(0,1);
       });
       letter0.on("click", "#pic_dele2", function (e) {
         e.preventDefault();
 
         $("#pic2").slideUp();
         $("#pic_dele2").slideUp();
+        img_serverIds.splice(1,1);
       });
       break;
     case 1:
@@ -177,11 +180,13 @@ function setitem(letterType) {
         e.preventDefault();
         $("#pic1").slideUp();
         $("#pic_dele1").slideUp();
+        img_serverIds.splice(0,1);
       });
       letter1.on("click", "#pic_dele2", function (e) {
         e.preventDefault();
         $("#pic2").slideUp();
         $("#pic_dele2").slideUp();
+        img_serverIds.splice(1,1);
       });
       break;
     case 2:
@@ -191,11 +196,13 @@ function setitem(letterType) {
         e.preventDefault();
         $("#pic1").slideUp();
         $("#pic_dele1").slideUp();
+        img_serverIds.splice(0,1);
       });
       letter1.on("click", "#pic_dele2", function (e) {
         e.preventDefault();
         $("#pic2").slideUp();
         $("#pic_dele2").slideUp();
+        img_serverIds.splice(1,1);
       });
       break;
   }
@@ -267,47 +274,6 @@ function chooseImg() {
         }
       };
       show();
-      // 上传放到提交那
-
-      // var uploadCount = 0;
-      // var localIdLength = that.images.localIds.length;
-      // var upload = function () {
-      //   wx.uploadImage({
-      //     localId: imgages.localIds[uploadCount],
-      //     success: function (res) {
-      //       that.imgages.serverId.push(res.serverId); //微信返回的该图片的服务ID，可调用获取素材的接口下载到自己项目的应用服务器
-      //       var mediaIdsLength = that.mediaIds.length;
-      //       var flag = false;
-      //       if (mediaIdsLength > 0) {
-      //         for (var i = 0; i < mediaIdsLength; i++) {
-      //           if (that.mediaIds[i].id == value.id) {
-      //             that.mediaIds[i].mediaId.push(res.serverId);
-      //           }
-      //           flag = true;
-      //         }
-      //       }
-      //       if (!flag) {
-      //         var item = {
-      //           id: "",
-      //           mediaId: [],
-      //         };
-      //         item.id = value.id;
-      //         item.mediaId.push(res.serverId);
-      //         that.mediaIds.push(item);
-      //       }
-      //       //如果还有照片，继续上传
-      //       uploadCount++;
-      //       if (uploadCount < localIdLength) {
-      //         upload();
-      //       }
-      //     },
-      //     fail: function (res) {
-      //       attention(res.data);
-      //       console.log(res);
-      //     },
-      //   });
-      // }; //循环上传
-      // upload();
     },
     fail: function (res) {
       attention(res.data);
