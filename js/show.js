@@ -74,7 +74,7 @@ function areaShow() {
         //     }, 500);
         //     return;
         // }
-        // console.log("你是安卓吼！");
+     console.log("你是安卓吼！");
     $(document).on('mousemove', function (e) {
         // console.log(e.pageX,e.pageY);
         clickanim(e);
@@ -84,11 +84,6 @@ function areaShow() {
 
 }
 // areaShow();
-$("#mai_att").on('click', function () {
-    // console.log('埋胶囊');
-    // OpenMove();
-    // areaShow();
-})
 $("#go_receive").on('click', function (e) {
     window.location.href = "receive.html"
 })

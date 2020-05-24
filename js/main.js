@@ -23,6 +23,25 @@ var txl_img2 =
 var letterType = 0;
 var winWidth = $(window).width();
 var winHeight = $(window).height();
+function fixedKeyboard() {
+  var client_h = document.documentElement.clientHeight;
+  $(window).on("resize",function(){
+    if (/iphone|ipad/i.test(navigator.userAgent.toLowerCase())) {
+
+    } else {
+       //安卓触发window.resize
+      var body_h =  document.documentElement.clientHeight;
+      if(client_h > body_h){
+        $('#letter3').css('position','static')
+        console.log("static letter3");
+      }else{
+        $('#letter3').css('position','fixed')
+        console.log("fixed letter3");
+      }
+    }
+
+  })
+}
 function moveKeyboard(letterid) {
   console.log("change height");
   var id = "";
@@ -51,13 +70,15 @@ function moveKeyboard(letterid) {
   if (id == "#writeL3") {
     console.log(1, $(id).height());
     console.log(winHeight);
+    $("#write-sec").css('width',winWidth);
     $("#write-sec").css('height',winHeight);
     $("#write-sec>.content.write-one_content>.deleimg").slideUp();
     $("#write-sec>.content.write-one_content>.mp3").slideUp();
     $("#write-sec>.content.write-one_content>.add_img").slideUp();
+    fixedKeyboard();
     // $(id).css('transform','scale(0.9) translate(0,-10%)');
     //  $(id).css('padding-top',0-($(id).height()));
-    console.log(2, $(id).height());
+    console.log(3, $(id).height());
     return;
   }
   if (id == "#write-TA") {

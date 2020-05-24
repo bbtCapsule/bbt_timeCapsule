@@ -33,6 +33,7 @@ hideALL();
 page.page1.show();
 if (window.location.href.split("?uid=").length == 2) {
   console.log("来自二维码！");
+  attention("写一封信，希望未来的TA（自己）能够收获一丝感动~");
   hasTAinfo = true;
   user_id = window.location.href.split("?uid=")[1];
   from_qrcode = true;
@@ -53,7 +54,7 @@ page.writemap.on("click", function () {
   $("#mai_att").fadeOut(100);
   OpenMove();
   areaShow();
-      console.log('埋胶囊');
+  console.log('埋胶囊');
 
 });
 //页面开关
@@ -386,7 +387,7 @@ $(".letter_text").each(function () {
       $("#write-one>.content.write-one_content>.mp3").fadeIn();
       $("#write-sec>.content.write-one_content>.mp3").fadeIn();
     }
-    if (img_serverIds.length >= 1) {
+    if (img_serverIds.length >0) {
       $("#write-one>.content.write-one_content>.deleimg").fadeIn();
       $("#write-one>.content.write-one_content>.add_img").fadeIn();
       $("#write-sec>.content.write-one_content>.deleimg").fadeIn();
@@ -480,14 +481,14 @@ singbtn.on({
   touchstart: function (e) {
     timeoutEvent = setTimeout(() => {
       console.log("is it over?");
-    }, 6000);
+    }, 3000);
     e.preventDefault();
     $("#sing_anim").attr("src", "./images/sing.gif");
     $("#mp3").fadeIn();
     $("#player").fadeIn();
     $("#voice_dele").fadeIn();
     singbtn.val("松开 结束");
-    voiceRecord(0, 3000);
+    voiceRecord(0, 1000);
     hasSing = true;
   },
   // touchmove: function (e) {
@@ -504,7 +505,7 @@ singbtn.on({
     if (timeoutEvent != 0) {
       $("#sing_anim").attr("src", "./images/record_normal.png");
       singbtn.val("按住 开始");
-      voiceRecord(1, 3000);
+      voiceRecord(1, 1000);
     }
     //return false;
   },
