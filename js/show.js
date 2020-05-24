@@ -28,17 +28,17 @@ function clickanim(e){
         $("#mai_anim").css("left", e.pageX);
         $("#jiantou").fadeIn(100);
         setTimeout(() => {
-            $("#jiantou").fadeOut(100);
-            $("#mai_anim").fadeIn(100);
+            $("#jiantou").fadeOut(20);
+            $("#mai_anim").fadeIn(20);
         }, 600);
         //addChanzi();
         setTimeout(() => {
             $("#img_map").attr("class", "");
-            $("#mai_anim").fadeOut(300);
+            $("#mai_anim").fadeOut();
             $(".mai").hide();
             $("#write-map").fadeOut(700);
             $("#finish").fadeIn(600);
-        }, 1800);
+        }, 3000);
     }
 
 }

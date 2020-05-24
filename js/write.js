@@ -2,7 +2,7 @@
 wxlogin();
 
 // 相关参数
-var capsule_type,
+var capsule_type =0,
   time_limit,
   cap_template, //胶囊类型 取信期 信纸类型
   content_word,
@@ -60,7 +60,7 @@ if (window.location.href.split("?uid=").length == 2) {
 function getRadio(obj) {
   for (var i = 0; i < obj.length; i++) {
     if (obj[i].checked === true) {
-      return obj[i].value;
+      return Number(obj[i].value);
     }
   }
   return -1;
@@ -109,7 +109,7 @@ $(".choose").on("click", function () {
   $("#page1_intro").html(mixHtml(str));
 });
 nextPage.page1.on("click", function () {
-  capsule_type = getRadio(document.getElementsByName("sender"));
+  capsule_type =  getRadio(document.getElementsByName("sender"));
 
   if (capsule_type === -1) {
     attention("你还没有选择！");
@@ -143,19 +143,19 @@ $(".switchbox").on("click", function () {
   var num = getRadio(document.getElementsByName("template"));
   switch (num) {
     case "L1":
-      letterType = 0;
+      letterType = 1;
       $("#num").text("1" + str);
       break;
     case "L2":
-      letterType = 0;
+      letterType = 2;
       $("#num").text("2" + str);
       break;
     case "L3":
-      letterType = 1;
+      letterType = 3;
       $("#num").text("3" + str);
       break;
     case "L4":
-      letterType = 2;
+      letterType = 4;
       $("#num").text("4" + str);
       break;
     default:
@@ -167,18 +167,18 @@ $(".switchbox").on("click", function () {
 function switchPage(type) {
   //根据胶囊类型选择进入 其中第三个信纸是ser
   if (type == 0) {
-    goTemplate1();
+    
     // page.page2.fadeOut(200);
     // page.writeone.fadeIn(100);
     return page.writeone;
   } else if (type == 1) {
-    goTemplate3();
+   
     // page.page2.fadeOut(200);
     // page.writesec.fadeIn(100);
     return page.writesec;
   } else if (type == 2) {
     OpenMove();
-    goTemplate4();
+
     // page.page2.fadeOut(200);
     // page.writeTA.fadeIn(100);
     return page.writeTA;
@@ -238,30 +238,33 @@ prePage.writeTA.on("click", function () {
 function switchCapsule(str) {
   hideALL();
   console.log("胶囊类型是" + str + " 0写给自己 1写给专属 2写给陌生人");
-  if(str = "1"){console.log("还需要收件人信息");}
-  switch (Number(str)) {
+  if (str == 1) {
+    console.log("还需要收件人信息");
+  }
+  forbidMove();
+  if (from_qrcode) {
+    TrueSend();
+    page.writemap.fadeIn(90);
+    return;
+  }
+
+  switch (str) {
     case 1:
-      forbidMove();
-      if (from_qrcode) {
-        TrueSend();
-        page.writemap.fadeIn(90);
-        break;
-      }
-      
+
       page.writeTAsend.fadeIn(90);
       break;
     case 0:
       OpenMove();
       TrueSend();
-      
+      console.log("进入地图");
       page.writemap.fadeIn(90);
       break;
-      case 2:
-        OpenMove();
-        TrueSend();
-        
-        page.writemap.fadeIn(90);
-        break;
+    case 2:
+      OpenMove();
+      TrueSend();
+      console.log("进入地图");
+      page.writemap.fadeIn(90);
+      break;
   }
 }
 
@@ -304,7 +307,7 @@ nextPage.writeone.on("click", function () {
     page.writeone.fadeOut(300);
     sendLetter(0);
     switchCapsule(capsule_type);
-    
+
   }
 });
 // writeone&writemap 结束
@@ -328,7 +331,7 @@ nextPage.writesec.on("click", function () {
     page.writesec.fadeOut(300);
     sendLetter(3);
     switchCapsule(capsule_type);
-    
+
   }
 });
 nextPage.writeTA.on("click", function () {
@@ -349,9 +352,9 @@ nextPage.writeTA.on("click", function () {
   page.writeTA.fadeOut(300);
   sendLetter(4);
   switchCapsule(capsule_type);
-  
 
-  
+
+
 });
 //writeTA&writeTAsend 结束
 // writeTAsend&writemap 开始
@@ -368,7 +371,7 @@ nextPage.writeTAsend.on("click", function () {
     nextPage.writeTAsend.attr("disabled", true);
     hideALL();
     page.writemap.fadeIn();
-    trySend =true;
+    trySend = true;
     TrueSend();
   } else {
     nextPage.writeTAsend.attr("disabled", false);
@@ -424,7 +427,7 @@ $(".add_img").each(function () {
 });
 
 function sendLetter(letterType) {
-  console.log("记录的是第几张信纸内容 0 前两张 1 第三张 4 同学录");
+  console.log("记录的是第几张信纸内容 4 同学录");
   console.log(letterType);
   console.log("type of lettertype");
   console.log(typeof letterType);
@@ -540,7 +543,7 @@ singbtn.on({
 
 function TrueSend() {
   console.log("true send");
-  console.log("收集信息："+(TA_info.length>0));
+  console.log("收集信息：" + (TA_info.length > 0));
   if (letterType == 4) {
     console.log("不是同学录");
     uploadWrapper(
