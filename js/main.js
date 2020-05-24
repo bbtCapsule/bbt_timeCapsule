@@ -56,15 +56,10 @@ function moveKeyboard(letterid) {
     console.log(winHeight);
     $("#write-sec").css('width',winWidth);
     $("#write-sec").css('height',winHeight);
-    // $("#write-sec>.content.write-one_content").height(winHeight);
-    // $("#letter3").height(winHeight/3);
-    // $("#letter3").css('margin-top','-50%');
+     $("#write-sec>.content.write-one_content").height(winHeight);
+
     $("#letter3").css('position','static');
-    // $("#write-sec>.content.write-one_content>.deleimg").slideUp();
-    // $("#write-sec>.content.write-one_content>.mp3").slideUp();
-    // $("#write-sec>.content.write-one_content>.add_img").slideUp();
-    // $(id).css('transform','scale(0.9) translate(0,-10%)');
-    //  $(id).css('padding-top',0-($(id).height()));
+
     console.log(3, $(id).height());
     return;
   }
@@ -170,6 +165,7 @@ function setitem(letterType) {
       letter1.append(mp3);
       letter1.append(img1);
       letter1.append(img2);
+      $("#letter3").css('margin-top','10px');
       letter1.on("click", "#voice_dele", function (e) {
         e.preventDefault();
         $("#mp3").slideUp();
