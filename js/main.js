@@ -23,6 +23,10 @@ var txl_img2 =
 var letterType = 0;
 var winWidth = $(window).width();
 var winHeight = $(window).height();
+var hasImg = false;
+var hasmusic =false;
+var astr1=window.location.href.split("/")[window.location.href.split("/").length-1];
+
 function moveKeyboard(letterid) {
   console.log("change height");
   var id = "";
@@ -30,15 +34,14 @@ function moveKeyboard(letterid) {
     case 0:
       id="#write-one"
       $("#write-one").css('height',winHeight);
-      $("#write-one>.content.write-one_content>.deleimg").slideUp();
-      $("#write-one>.content.write-one_content>.mp3").slideUp();
-      $("#write-one>.content.write-one_content>.add_img").slideUp();
-  
-      break;
-    case 0:
-      id = "#write-one";
+      // $("#write-one>.content.write-one_content>.deleimg").slideUp();
+      // $("#write-one>.content.write-one_content>.mp3").slideUp();
+      // $("#write-one>.content.write-one_content>.add_img").slideUp();
       break;
     case 1:
+      id = "#write-one";
+      break;
+    case 3:
       id = "#writeL3";
       break;
     case 4:
@@ -50,15 +53,17 @@ function moveKeyboard(letterid) {
       break;
   }
   if (id == "#writeL3") {
+    forbidMove();
     console.log(1, $(id).height());
     console.log(winHeight);
+    var dio = 200/568;
+    $("#write-sec").css('width',winWidth);
     $("#write-sec").css('height',winHeight);
-    $("#write-sec>.content.write-one_content>.deleimg").slideUp();
-    $("#write-sec>.content.write-one_content>.mp3").slideUp();
-    $("#write-sec>.content.write-one_content>.add_img").slideUp();
-    // $(id).css('transform','scale(0.9) translate(0,-10%)');
-    //  $(id).css('padding-top',0-($(id).height()));
-    console.log(2, $(id).height());
+     $("#write-sec>.content.write-one_content").height(winHeight-200);
+     $("#contain3").height(dio*winHeight);
+    $("#letter3").css('position','static');
+    $("#letter3").css('margin-top','0');
+    console.log(3, $(id).height());
     return;
   }
   if (id == "#write-TA") {
@@ -125,7 +130,7 @@ var that = this;
 
 function setitem(letterType) {
   console.log("信纸类型是" + letterType);
-  let letter1 = $("#writeL3");
+  let letter1 = $("#contain3");
   let letter0 = $("#write1");
   let letter2 = $("#txl_imgdiv");
   if ($(".add_img").length > 0 && $("#mp3").length > 0) {
@@ -140,6 +145,8 @@ function setitem(letterType) {
       letter0.append(mp3);
       letter0.append(img1);
       letter0.append(img2);
+      // $("#letter3").css('margin-top','30%');
+      // $("#ThirdSub").css('margin-top','30%');
       letter0.on("click", "#voice_dele", function (e) {
         e.preventDefault();
 
@@ -151,18 +158,21 @@ function setitem(letterType) {
 
         $("#pic1").slideUp();
         $("#pic_dele1").slideUp();
+        img_serverIds.splice(0,1);
       });
       letter0.on("click", "#pic_dele2", function (e) {
         e.preventDefault();
 
         $("#pic2").slideUp();
         $("#pic_dele2").slideUp();
+        img_serverIds.splice(1,1);
       });
       break;
     case 1:
       letter1.append(mp3);
       letter1.append(img1);
       letter1.append(img2);
+      $("#letter3").css('margin-top','');
       letter1.on("click", "#voice_dele", function (e) {
         e.preventDefault();
         $("#mp3").slideUp();
@@ -172,11 +182,13 @@ function setitem(letterType) {
         e.preventDefault();
         $("#pic1").slideUp();
         $("#pic_dele1").slideUp();
+        img_serverIds.splice(0,1);
       });
       letter1.on("click", "#pic_dele2", function (e) {
         e.preventDefault();
         $("#pic2").slideUp();
         $("#pic_dele2").slideUp();
+        img_serverIds.splice(1,1);
       });
       break;
     case 2:
@@ -186,15 +198,29 @@ function setitem(letterType) {
         e.preventDefault();
         $("#pic1").slideUp();
         $("#pic_dele1").slideUp();
+        img_serverIds.splice(0,1);
       });
       letter1.on("click", "#pic_dele2", function (e) {
         e.preventDefault();
         $("#pic2").slideUp();
         $("#pic_dele2").slideUp();
+        img_serverIds.splice(1,1);
       });
       break;
   }
   $("#player").on("click", function (e) {
+    e.preventDefault();
+    if (!isPlay) {
+      voicePlay();
+      isPlay = true;
+      return;
+    } else {
+      voiceStop();
+      isPlay = false;
+      return;
+    }
+  });
+  $("#mp3").on("click", function (e) {
     e.preventDefault();
     if (!isPlay) {
       voicePlay();
@@ -216,6 +242,7 @@ function chooseImg() {
     sizeType: ["original", "compressed"], // 可以指定是原图还是压缩图，默认二者都有
     sourceType: ["album", "camera"], // 可以指定来源是相册还是相机，默认二者都有
     success: function (res) {
+      hasImg = true;
       that.images.localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
       console.log(that.images.localIds);
       for (var i = 0; i < res.localIds.length; i++) {
@@ -223,6 +250,7 @@ function chooseImg() {
       }
       var dele = function (idx) {
         if (that.show_imgList.length == 0) {
+          hasImg = false;
           return;
         }
         that.show_imgList.splice(idx, 1);
@@ -248,47 +276,6 @@ function chooseImg() {
         }
       };
       show();
-      // 上传放到提交那
-
-      // var uploadCount = 0;
-      // var localIdLength = that.images.localIds.length;
-      // var upload = function () {
-      //   wx.uploadImage({
-      //     localId: imgages.localIds[uploadCount],
-      //     success: function (res) {
-      //       that.imgages.serverId.push(res.serverId); //微信返回的该图片的服务ID，可调用获取素材的接口下载到自己项目的应用服务器
-      //       var mediaIdsLength = that.mediaIds.length;
-      //       var flag = false;
-      //       if (mediaIdsLength > 0) {
-      //         for (var i = 0; i < mediaIdsLength; i++) {
-      //           if (that.mediaIds[i].id == value.id) {
-      //             that.mediaIds[i].mediaId.push(res.serverId);
-      //           }
-      //           flag = true;
-      //         }
-      //       }
-      //       if (!flag) {
-      //         var item = {
-      //           id: "",
-      //           mediaId: [],
-      //         };
-      //         item.id = value.id;
-      //         item.mediaId.push(res.serverId);
-      //         that.mediaIds.push(item);
-      //       }
-      //       //如果还有照片，继续上传
-      //       uploadCount++;
-      //       if (uploadCount < localIdLength) {
-      //         upload();
-      //       }
-      //     },
-      //     fail: function (res) {
-      //       attention(res.data);
-      //       console.log(res);
-      //     },
-      //   });
-      // }; //循环上传
-      // upload();
     },
     fail: function (res) {
       attention(res.data);
@@ -465,6 +452,9 @@ function uploadInfo(nickname, phone, email) {
         500: (res) => {
           attention(res.responseJSON.message);
         },
+        404:(res) =>{
+          attention(res.responseJSON.message);
+        }
       },
       success(data, textStatus, xhr) {
         if (data.errcode != 0 || xhr.status == 400) {
@@ -482,7 +472,7 @@ function uploadInfo(nickname, phone, email) {
       error: function (err) {
         console.log("出错了！请检查网络！");
         console.log(err);
-        attention(err);
+        attention(err.message);
       },
     });
   }
@@ -564,23 +554,20 @@ function uploadCapsule(
       console.log("写给ta");
       console.log("capsule_template" + cap_template);
       console.log(typeof cap_template);
+      console.log(TA_info);
       if (cap_template == 1) {
         console.log("同学录");
         console.log("ta_info");
         console.log(TA_info);
         console.log(txl_content);
-        if(img_serverIds.length<1){
-          attention("请选择照片呀~");
-          break;
-        }
         letter = JSON.stringify({
           capsule_type: capsule_type, // （胶囊类型）0，1，2分别代表私密，Ta，陌生人
           time_limit: time_limit, // （时间期限）0，1分别代表半年、一年
           cap_template: cap_template, // （胶囊模板）0，1分别代表普通信纸和同学录
           cap_location: cap_location, // 胶囊位置
-          receiver_name: TA_info.name, // 收信人姓名
-          receiver_tel: TA_info.tel, // 收信人电话
-          receiver_email: TA_info.email, // 收信人邮箱
+          receiver_name: TA_info[0], // 收信人姓名
+          receiver_tel: TA_info[1], // 收信人电话
+          receiver_email: TA_info[2], // 收信人邮箱
           content_name: txl_content.name, // 同学录上的姓名
           content_phone: txl_content.tel, // 同学录上的电话
           content_birth: txl_content.birth,
@@ -603,17 +590,18 @@ function uploadCapsule(
         break;
       } else {
         console.log("普通tota");
-
+        console.log(TA_info);
         letter = JSON.stringify({
           capsule_type: capsule_type, // （胶囊类型）0，1，2分别代表私密，Ta，陌生人
           time_limit: time_limit, // （时间期限）0，1分别代表半年、一年
           cap_template: cap_template, // （胶囊模板）0，1分别代表普通信纸和同学录
           cap_location: cap_location, // 胶囊位置
-          receiver_name: TA_info.name, // 收信人姓名
-          receiver_tel: TA_info.tel, // 收信人电话
-          receiver_email: TA_info.email, // 收信人邮箱
+          receiver_name: TA_info[0], // 收信人姓名
+          receiver_tel: TA_info[1], // 收信人电话
+          receiver_email: TA_info[2], // 收信人邮箱
           content_word: content_word, // 文字内容
           from_qrcode: from_qrcode, // 是否二维码写信
+          user_id:user_id,
           // 可选
           content_pic: img_serverIds, // 调用uploadImage返回的serverid，没有上传图片就不传这个参数，就算只有一张图片也传数组
           content_voice: voiceIds,
@@ -662,6 +650,9 @@ function uploadCapsule(
         attention(res.responseJSON.message);
         window.location.href = phpurl;
       },
+      404:(res) =>{
+        attention(res.responseJSON.message);
+      }
     },
     success(data, textStatus, xhr) {
       if (data.errcode != 0 || xhr.status == 400) {
@@ -681,7 +672,7 @@ function uploadCapsule(
     error: function (err) {
       console.log("出错了！请检查网络！");
       console.log(err);
-      attention(err);
+      attention(err.message);
     },
   });
 }else{
@@ -758,3 +749,6 @@ $("#intro_btn").on("click", function () {
     $("#go_intro").hide();
   }
 });
+if((astr1=="")||(astr1=="main.html")){
+  forbidMove();
+}

@@ -2,7 +2,6 @@
 * {
     outline: none;
 }
-
 @font-face {
     font-family: 'cute';
     src: url('../images/HYYOUYUANTIJ.TTF');
@@ -125,7 +124,7 @@ input[type="text"] {
     padding-top: 50px;
     text-align: left;
     width: 80%;
-    height: 75vh;
+    height: 125vw;
 }
 
 input.prePage {
@@ -220,61 +219,48 @@ input.prePage {
     margin-left: -15px;
     margin-bottom: 50px;
 }
-.mp3,.player,.delemp3,.add_img,.deleimg,.txl_add_img{
-    cursor: pointer;
-    display: none;
-}
+
 /* 第三种信纸 */
-/* #letter3 {
-    /* 它的textarea会短一点 
-    height: 30%;
+#writeL3>.write-one_element {
+    padding-top: 0px;
     position: relative;
-    margin-top: 80%;
-} */
+    right: 0px;
+}
 #letter3 {
-    height: 30%;
+    height: 50vw;
     position: static;
     position: fixed;
-    top: 40%;
-    width: 200px;
+    /* margin-top: 50%; */
+    margin-bottom: 10vw;
+    width: 70%;
+    padding-right: 5vw;
 }
 #write-sec {
     background-image: url(../images/letter/3.png);
 }
-
-/* #write-sec>.content.write-one_content>.add_img {
-    width: 60px;
-    height: 60px;
-    margin-left: -5%;
-    /* transform: scale(0.7); 
-    transform: scale(0.7) translate(40%, -165vw);
-} */
-#write-sec>.content.write-one_content>.add_img {
-    width: 60px;
-    height: 60px;
-    margin-left: -5%;
-    /* transform: scale(0.7); */
-    transform: scale(0.7) translate(40%, -90px);
+#contain3{
+    height: 28vh;
+    overflow: scroll;
 }
-/* #write-sec>.content.write-one_content>.deleimg {
-    width: 15px;
-    height: 15px;
-    margin-left: -15px;
-    transform: scale(0.7);
-    margin-bottom: 50px;
-    /* transform: scale(0.65) translate(55%,-240%); 
-    transform: scale(0.7) translate(80%, -160vw);
-} */
-#write-sec>.content.write-one_content>.deleimg {
+#contain3>.add_img {
+    /* margin-top: 10vw; */
+    width: 60px;
+    height: 60px;
+    /* margin-left: -5%; */
+    /* transform: scale(0.7); */
+    transform: translate(0, -70px);
+}
+#contain3>.deleimg {
+    margin-top: 10vw;
     width: 15px;
     height: 15px;
     margin-left: -15px;
     transform: scale(0.7);
     margin-bottom: 50px;
     /* transform: scale(0.65) translate(55%,-240%); */
-    transform: scale(0.7) translate(80%, -80px);
+    transform: translate(5px, -75px);
 }
-/* #write-sec>.content.write-one_content>.mp3 {
+#contain3>.mp3 {
     -webkit-appearance: unset;
     color: transparent;
     width: 70%;
@@ -283,18 +269,7 @@ input.prePage {
     background-color: #f0f5f7;
     margin-bottom: 5%;
     margin-top: 3%;
-    transform: scale(0.65) translate(55%, -240%);
-} */
-#write-sec>.content.write-one_content>.mp3 {
-    -webkit-appearance: unset;
-    color: transparent;
-    width: 70%;
-    margin-left: 5%;
-    border-radius: 0.6rem;
-    background-color: #f0f5f7;
-    margin-bottom: 5%;
-    margin-top: 3%;
-    transform: scale(0.65) translate(55%, -80px);
+    transform: scale(0.7) translate(55%, -80px);
 }
 /* 同学录样式 */
 /* 以上为覆盖内容 包含同学录样式 */
@@ -319,7 +294,7 @@ input.prePage {
 
 .choose_text {
     font-family: 'cute';
-    color: white;
+    color: #646b6a;
     margin-left: -20px;
     font-size: 18px;
     margin-top: 10px;
@@ -428,6 +403,7 @@ input.prePage {
     transform: scale(0.2, 0.3);
     position: relative;
     margin-right: 20px;
+    background: none;
 }
 
 .choose:checked {
@@ -469,222 +445,7 @@ input.prePage {
 
 
 /* ！！！！！！！！！！！！！！！！！！！！！！！！！ */
-/* 从这里开始是搬运过来的地图+动画 */
-body {
-    height: 100%;
-    /* width:max-content; */
-    /* overflow-y: hidden; */
-    -webkit-user-select: none;
-    /*webkit浏览器*/
-    user-select: none;
-    background-color: #d4c5c7;
-}
 
-.map::-webkit-scrollbar {
-    display: none;
-}
-
-.mai {
-    width: 100%;
-    height: 100%;
-}
-
-.map {
-    z-index: -9;
-    cursor: pointer;
-
-    position: absolute;
-    top: 0;
-    margin: 0;
-    height: 100%;
-    width: 300%;
-    background-image: url("../images/map.jpg");
-    background-size: 120%;
-    background-position-x: center;
-    background-repeat: no-repeat;
-    overflow-x: scroll;
-    scroll-behavior: smooth;
-}
-
-#img_map {
-    cursor: pointer;
-    height: 135vh;
-    position: absolute;
-    top: 0px;
-    z-index: -9;
-}
-
-#receiver_tel,
-#receiver_email {
-    outline: none;
-    box-sizing: border-box;
-    width: 260px;
-    height: 44px;
-    width: 100%;
-    /* height: 12%; */
-    border-radius: 6px;
-    border: 2.5px solid #6e8f76;
-    margin-bottom: 4vw;
-    color: #3f454b;
-    padding: 10px;
-    font-size: 20px;
-    font-family: 'cute';
-    background: transparent;
-}
-
-#mapmap {
-    cursor: pointer;
-    z-index: 0;
-    outline: none;
-    user-select: none;
-    position: absolute;
-    /* width: 750vw;
-    height: 290vw; */
-    /* width: 600%;
-    height: 130%; */
-    width: 340vh;
-    height: 135vh;
-    top: 0;
-    left: 0;
-}
-
-area {
-    position: absolute;
-    width: 20vh;
-    height: 17vh;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-}
-
-#A1 {
-    cursor: pointer;
-    /* top: 40vw;
-    left: 30vw; */
-    top: 18vh;
-    left: 12vh;
-}
-
-#A2 {
-    cursor: pointer;
-    bottom: 30vh;
-    left: 10vw;
-    /* bottom: 75vw;
-    left: 20vw; */
-}
-
-#A3 {
-    cursor: pointer;
-    top: 50vh;
-    left: 130vh;
-    /* top: 120vw;
-    left: 275vw; */
-
-}
-
-#A4 {
-    cursor: pointer;
-    right: 109vh;
-    top: 30vh;
-}
-
-#A5 {
-    cursor: pointer;
-    right: 86vh;
-    top: 20vh;
-
-}
-
-#A6 {
-    cursor: pointer;
-    right: 50vh;
-    bottom: 20vh;
-}
-
-#A7 {
-    cursor: pointer;
-    /* right: 20vw;
-    bottom: 150vw; */
-    right: 0vh;
-    bottom: 70vh;
-}
-
-/* 以上为area定位 */
-area.go:before {
-    content: " ";
-    display: block;
-    height: 40px;
-    width: 13vw;
-    background: url("../images/地图-箭头.png") no-repeat;
-    background-size: contain;
-    margin-left: 13vw;
-    animation-delay: 0.1s;
-    animation: fadeIn 1.2s;
-    animation-iteration-count: 2;
-    animation-direction: alternate reverse;
-    animation-fill-mode: forwards;
-}
-
-@keyframes fadeIn {
-    0% {
-        opacity: 0;
-        margin-top: -30px;
-    }
-
-    25% {
-        opacity: 1;
-        margin-top: 0px;
-    }
-
-    75% {
-        opacity: 1;
-        margin-top: -40px;
-    }
-
-    100% {
-        opacity: 0;
-        margin-top: 0px;
-    }
-}
-
-/* 箭头动画↑ */
-#mai_att {
-    position: fixed;
-    width: 70vw;
-    height: 30vh;
-    left: 15vw;
-    right: 0;
-    /* bottom: 50%; */
-    top: 25%;
-    /* margin: auto; */
-    z-index: 2;
-    padding: 10px;
-    background: url(../images/地图-弹框.png) no-repeat;
-    background-size: contain;
-    text-align: center;
-    padding-top: 10vh;
-    line-height: 30px;
-    font-weight: 200;
-    left: 12.5vw;
-    /* z-index: -1; */
-
-}
-
-#mai_att>span {
-    font-size: small;
-    position: relative;
-    bottom: -2vh;
-    outline: none;
-    border: none;
-}
-
-#mai_anim {
-    display: none;
-    width: 20vh;
-    height: unset;
-    position: absolute;
-    margin-top: -36vh;
-    margin-left: -9vh;
-    transform: scale(1.5);
-}
 
 input {
     outline: none;
@@ -693,10 +454,7 @@ input {
     -webkit-appearance: none;
 }
 
-.mai {
-    height: 100vh;
-    width: 100vw;
-}
+
 
 /* page1 */
 #page1,
@@ -714,6 +472,9 @@ input {
 
 .page1_content {
     text-align: center;
+}
+.page1_intro::-webkit-scrollbar {
+    display: none;
 }
 
 .page1_intro {
@@ -746,7 +507,7 @@ p#num {
 }
 
 .page1_text {
-    color: #3f454bcf;
+    color: #646b6a;
     font-size: 16px;
 }
 
@@ -895,4 +656,8 @@ p#num {
     height: 11vh;
     background: url(../images/other/反馈btn-返回.png) no-repeat center;
     background-size: contain;
+}
+.mp3,.player,.delemp3,.add_img,.deleimg,.txl_add_img,#sing_box{
+    cursor: pointer;
+    display: none;
 }

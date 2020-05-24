@@ -3,14 +3,13 @@
 
     <head>
         <meta charset="UTF-8">
-        <meta name="viewport"
-            content="width=device-width, initial-scale=1.0, maximum-scale=2.0, minimum-scale=1.0,
-            ">
-            <!--user-scalable=no-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, minimum-scale=1.0,user-scalable=no">
+        <!--user-scalable=no-->
         <title>时光胶囊</title>
         <link rel="stylesheet" href="./css/write.css">
         <link rel="stylesheet" href="./css/load.css">
-                <link rel="stylesheet" href="./css/txl.css">
+        <link rel="stylesheet" href="./css/map.css">
+        <link rel="stylesheet" href="./css/txl.css">
 
         <script src="./js/jquery-3.4.1.min.js"></script>
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -46,8 +45,9 @@
             </div>
             <div class="content page1_content">
                 <div class="page1_intro">
-                <p id="page1_intro">
-                当过去凋零成遗迹<br>用文字刻划出暖意<br>我们携手在华园地图上标记<br>保存那些珍贵的回忆<br>为你定格那一刻的美好</div>
+                    <p id="page1_intro">
+                        当过去凋零成遗迹<br>用文字刻划出暖意<br>我们携手在华园地图上标记<br>保存那些珍贵的回忆<br>为你定格那一刻的美好
+                </div>
                 </p>
                 <div class="page1_text">选择一个你喜欢的胶囊吧~
                 </div>
@@ -143,86 +143,74 @@
                     <input type="image" src="./images/letter/record.png" class="add" id="voiceStart" />
                     <input type="image" src="./images/letter/photobtn.png" class="add" id="images" />
                 </div>
-                <!--li audioid='./test.mp3' class="mp3" id="mp3">
-                    <input type="image" src="./images/letter/R3.png" class="player" id="player" />
-                    <input type="image" src="./images/letter/dele.png" class="delemp3" id="voice_dele" />
-                </li>
 
-                <li audioid='"+voice.localId+"' class="mp3"><button>音频任务"+riqi+mytime+"</button></li>
-                <img src="./images/letter/2.png" class="add_img" id="pic1" />
-                <input type="image" src="./images/letter/dele.png" class="deleimg" id="pic_dele1" />
-                <img src="./images/letter/1.png" class="add_img" id="pic2" />
-                <input type="image" src="./images/letter/dele.png" class="deleimg" id="pic_dele2" /-->
             </div>
             <div class="bottom write-one_bottom">
-                <input type="image" src="./images/letter/L1.png" class="nextPage" />
+                <input type="image" src="./images/letter/L1.png" class="nextPage" id="OneSub" />
             </div>
         </div>
         <div id="write-TA" width="598px" height="819px" class="letter">
-                    <div id="test">
-            <!--专属类型 同学录 -->
-            <input type="image" id="write_back" src="./images/letter/back.png" class="prePage">
-                        <input type="image" src="./images/letter/photobtn.png" class="add" id="images4" />
+            <div id="test">
+                <!--专属类型 同学录 -->
+                <input type="image" id="write_back" src="./images/letter/back.png" class="prePage">
+                <input type="image" src="./images/letter/photobtn.png" class="add" id="images4" />
 
-            <div class="txl_imgdiv" id="txl_imgdiv">
-                <!--img src="./images/letter/2.png" class="txl_add_img" id="pic1" />
-                <input type="image" src="./images/letter/dele.png" class="deleimg" id="pic_dele1" />
-                <img src="./images/letter/1.png" class="txl_add_img" id="pic2" />
-                <input type="image" src="./images/letter/dele.png" class="deleimg" id="pic_dele2" /-->
-            </div>
-            <!--img width="598px" height="819px" src="./images/letter/4.png" id="txl_img" /-->
-            <div class="txl_left">
-                <div class="txl_contain">
+                <div class="txl_imgdiv" id="txl_imgdiv">
+
+                </div>
+                <!--img width="598px" height="819px" src="./images/letter/4.png" id="txl_img" /-->
+                <div class="txl_left">
                     <div class="txl_contain">
-                        <span class="txl_item">姓名：</span><input class="txl_input" type="text" id="txl_name" />
-                    </div>
-                    <div class="txl_contain">
-                        <span class="txl_item">生日：</span><input class="txl_input" type="text" id="txl_birth" />
-                    </div>
-                    <div class="txl_contain">
-                        <span class="txl_item">星座：</span><input class="txl_input" type="text" id="txl_star" />
-                    </div>
-                    <div class="txl_contain">
-                        <span class="txl_item">爱好：</span><input type="text" class="txl_input" id="txl_hobby" />
+                        <div class="txl_contain">
+                            <span class="txl_item">姓名：</span><input class="txl_input" type="text" id="txl_name" />
+                        </div>
+                        <div class="txl_contain">
+                            <span class="txl_item">生日：</span><input class="txl_input" type="text" id="txl_birth" />
+                        </div>
+                        <div class="txl_contain">
+                            <span class="txl_item">星座：</span><input class="txl_input" type="text" id="txl_star" />
+                        </div>
+                        <div class="txl_contain">
+                            <span class="txl_item">爱好：</span><input type="text" class="txl_input" id="txl_hobby" />
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="txl_right">
-                <div class="txl_contain">
-                    <span class="txl_item">微信：</span><input type="text" class="txl_input" id="txl_wechat" />
+                <div class="txl_right">
+                    <div class="txl_contain">
+                        <span class="txl_item">微信：</span><input type="text" class="txl_input" id="txl_wechat" />
+                    </div>
+                    <div class="txl_contain">
+                        <span class="txl_item">QQ：</span><input type="tel" class="txl_input" id="txl_qq" />
+                    </div>
+                    <div class="txl_contain">
+                        <span class="txl_item">邮箱：</span><input type="email" class="txl_input" id="txl_email" />
+                    </div>
                 </div>
-                <div class="txl_contain">
-                    <span class="txl_item">QQ：</span><input type="tel" class="txl_input" id="txl_qq" />
+                <div class="txl_left_bottom">
+                    <div class="txl_contain">
+                        <span class="txl_item">想去的地方：</span><textarea rows="5" cols="15" class="txl_textarea"
+                            id="txl_place"></textarea>
+                    </div>
+                    <div class="txl_contain">
+                        <span class="txl_item">喜欢的音乐：</span><textarea rows="5" cols="15" class="txl_textarea"
+                            id="txl_music"></textarea>
+                    </div>
+                    <div class="txl_contain">
+                        <span class="txl_item">喜欢的电影：</span><textarea rows="5" cols="15" class="txl_textarea"
+                            id="txl_movie"></textarea>
+                    </div>
+                    <div class="txl_contain">
+                        <span class="txl_item">喜欢的美食：</span><textarea rows="5" cols="15" class="txl_textarea"
+                            id="txl_food"></textarea>
+                    </div>
                 </div>
-                <div class="txl_contain">
-                    <span class="txl_item">邮箱：</span><input type="email" class="txl_input" id="txl_email" />
+                <div class="txl_right_bottom">
+                    <span class="txl_item">吐槽专区：</span><textarea rows="8" cols="10" class="txl_textarea"
+                        id="txl_tucao"></textarea>
                 </div>
-            </div>
-            <div class="txl_left_bottom">
-                <div class="txl_contain">
-                    <span class="txl_item">想去的地方：</span><textarea rows="5" cols="15" class="txl_textarea"
-                        id="txl_place"></textarea>
+                <div class="bottom write-one_bottom" id="txl_btn">
+                    <input type="image" src="./images/letter/L1.png" class="nextPage" id="FourSub" />
                 </div>
-                <div class="txl_contain">
-                    <span class="txl_item">喜欢的音乐：</span><textarea rows="5" cols="15" class="txl_textarea"
-                        id="txl_music"></textarea>
-                </div>
-                <div class="txl_contain">
-                    <span class="txl_item">喜欢的电影：</span><textarea rows="5" cols="15" class="txl_textarea"
-                        id="txl_movie"></textarea>
-                </div>
-                <div class="txl_contain">
-                    <span class="txl_item">喜欢的美食：</span><textarea rows="5" cols="15" class="txl_textarea"
-                        id="txl_food"></textarea>
-                </div>
-            </div>
-            <div class="txl_right_bottom">
-                <span class="txl_item">吐槽专区：</span><textarea rows="8" cols="10" class="txl_textarea"
-                    id="txl_tucao"></textarea>
-            </div>
-            <div class="bottom write-one_bottom" id="txl_btn">
-                <input type="image" src="./images/letter/L1.png" class="nextPage" />
-            </div>
             </div>
         </div>
         <div id="write-sec" class="letter">
@@ -231,15 +219,17 @@
                 <input type="image" id="write_back" src="./images/letter/back.png" class="prePage">
             </div>
             <div class="content write-one_content" id="writeL3">
-                <textarea id="letter3" class="letter_text" rows="20" cols="25" placeholder="写下你要说的话~"></textarea>
-                <div class="write-one_element">
+                   <div class="write-one_element" id="contain3">
                     <input type="image" src="./images/letter/photobtn3.png" class="add" id="images3" />
                     <input type="image" src="./images/letter/record3.png" class="add" id="voiceStart3" />
+                    <li audio src='B' class='mp3' id='mp3'><input type='image' src='./images/letter/R1.png' class='player' id='player'><input type='image' src='./images/letter/dele.png' class='delemp3' id='voice_dele'></li>
+                    <img src='B' class='add_img' id='pic1'><input type='image' src='./images/letter/dele.png' class='deleimg' id='pic_dele1'>
                 </div>
+                <textarea id="letter3" class="letter_text" rows="20" cols="25" placeholder="写下你要说的话~"></textarea>
 
             </div>
             <div class="bottom write-one_bottom">
-                <input type="image" src="./images/letter/L3.png" class="nextPage" />
+                <input type="image" src="./images/letter/L3.png" class="nextPage" id="ThirdSub" />
             </div>
         </div>
         <div id="write-map">
@@ -249,24 +239,11 @@
                     <p>移动地图<br>选择埋胶囊的地点吧~<br>(寻找地图中的花坛)</p>
                     <span>点击地图开始</span>
                 </div>
+                <div id="jiantou"></div>
                 <img src="./images/anim/1.gif" id="mai_anim" />
             </div>
-            <img id="img_map" src="./images/map.jpg" usemap="#mapmap" />
+           <img id="img_map" src="./images/map.jpg" usemap="#mapmap" />
             <map name="mapmap" id="mapmap">
-                <area id="A1" onfocus="this.blur()" shape="circle" coords="27,117,109,143" href="#" hidefocus="true"
-                    alt="最左边的花坛" />
-                <area id="A2" onfocus="this.blur()" shape="circle" coords="150,117,109,143" href="#" hidefocus="true"
-                    alt="左边下面的花坛" />
-                <area id="A3" onfocus="this.blur()" shape="circle" coords="200,117,109,143" href="#" hidefocus="true"
-                    alt="Venus" />
-                <area id="A4" onfocus="this.blur()" shape="circle" coords="200,227,109,143" href="#" hidefocus="true"
-                    alt="五山花坛" />
-                <area id="A5" onfocus="this.blur()" shape="circle" coords="100,117,109,143" href="#" hidefocus="true"
-                    alt="雕像" />
-                <area id="A6" onfocus="this.blur()" shape="circle" coords="45,147,109,143" href="#" hidefocus="true"
-                    alt="雕像" />
-                <area id="A7" onfocus="this.blur()" shape="circle" coords="87,115,109,143" href="#" hidefocus="true"
-                    alt="雕像" />
             </map>
         </div>
         <div id="write-TA-send">
@@ -278,7 +255,7 @@
             <div class="content write-TA-re_content">
                 <div class="username">
                     <div>TA的昵称</div>
-                    <input type="text" name="" id="receiver_name">
+                    <input type="text" name="" id="receiver_name"  maxlength='50'>
                 </div>
                 <div class="write-TA-re_phone">
                     <div>TA的手机号</div>
@@ -286,11 +263,11 @@
                 </div>
                 <div class="write-TA-re_email">
                     <div>TA的邮箱</div>
-                    <input type="email" name="" id="receiver_email">
+                    <input type="email" maxlength='50' name="" id="receiver_email" placeholder="选填">
                 </div>
             </div>
             <div class="bottom write-TA-re_btn">
-                <input type="image" src="./images/other/塞入胶囊.png" class="nextPage" />
+                <input type="image" src="./images/other/塞入胶囊.png" class="nextPage" id="TASub" />
 
             </div>
         </div>

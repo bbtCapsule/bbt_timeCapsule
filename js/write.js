@@ -2,7 +2,7 @@
 wxlogin();
 
 // 相关参数
-var capsule_type,
+var capsule_type =0,
   time_limit,
   cap_template, //胶囊类型 取信期 信纸类型
   content_word,
@@ -10,7 +10,7 @@ var capsule_type,
   content_name,
   content_phone,
   content_birth;
-var TA_info = new Object();
+var TA_info = [];
 var from_qrcode = false;
 var user_id = "none";
 var txl_content = new Object();
@@ -24,50 +24,26 @@ var str2 =
   "素不相识却似曾相识/这是写给陌生人的信/虽然你我不曾认识/但你的小纸条/或许能够温暖、鼓励未来的我";
 //页面初始的显示
 var sing = $("#sing_box");
-sing.hide();
 var singbtn = $("#recordbtn");
 var isSet = false;
 var letterType = 0;
-if (window.location.href.split("?uid=").length == 2) {
-  user_id = window.location.href.split("?uid=")[1];
-  from_qrcode = true;
-  // page.page1.hide();
-  // capsule_type = 1;
-  // page.page2.show();
-}
-var page = {
-  page1: $("#page1"),
-  page2: $("#page2"),
-  writeone: $("#write-one"),
-  writesec: $("#write-sec"),
-  writeTA: $("#write-TA"),
-  writeTAsend: $("#write-TA-send"),
-  writemap: $("#write-map"),
-  finish: $("#finish"),
-};
-for (var key in page) {
-  if (key == 0) {
-    key++;
-  }
-  page[key].hide();
-}
-$("#write-map").hide();
+var hasTAinfo = false;
+hideALL();
+
+
 page.page1.show();
-var nextPage = {
-  page1: $("#page1 .nextPage"),
-  page2: $("#page2 .nextPage"),
-  writeone: $("#write-one .nextPage"),
-  writesec: $("#write-sec .nextPage"),
-  writeTA: $("#write-TA .nextPage"),
-  writeTAsend: $("#write-TA-send .nextPage"),
-};
-var prePage = {
-  page1: $("#page1 .prePage"),
-  page2: $("#page2 .prePage"),
-  writeone: $("#write-one .prePage"),
-  writesec: $("#write-sec .prePage"),
-  writeTA: $("#write-TA .prePage"),
-};
+if (window.location.href.split("?uid=").length == 2) {
+  console.log("来自二维码！");
+  attention("写一封信，希望未来的TA/自己能够收获一丝感动~");
+  hasTAinfo = true;
+  user_id = window.location.href.split("?uid=")[1];
+  
+  console.log(user_id);
+  from_qrcode = true;
+  capsule_type = 1;
+  goPage2();
+}
+
 //获取radio
 function getRadio(obj) {
   for (var i = 0; i < obj.length; i++) {
@@ -79,6 +55,10 @@ function getRadio(obj) {
 }
 page.writemap.on("click", function () {
   $("#mai_att").fadeOut(100);
+  OpenMove();
+  areaShow();
+  console.log('埋胶囊');
+
 });
 //页面开关
 prePage.page1.on("click", function () {
@@ -117,7 +97,7 @@ $(".choose").on("click", function () {
   $("#page1_intro").html(mixHtml(str));
 });
 nextPage.page1.on("click", function () {
-  capsule_type = getRadio(document.getElementsByName("sender"));
+  capsule_type =  getRadio(document.getElementsByName("sender"));
 
   if (capsule_type === -1) {
     attention("你还没有选择！");
@@ -151,19 +131,19 @@ $(".switchbox").on("click", function () {
   var num = getRadio(document.getElementsByName("template"));
   switch (num) {
     case "L1":
-      letterType = 0;
+      letterType = 1;
       $("#num").text("1" + str);
       break;
     case "L2":
-      letterType = 0;
+      letterType = 2;
       $("#num").text("2" + str);
       break;
     case "L3":
-      letterType = 1;
+      letterType = 3;
       $("#num").text("3" + str);
       break;
     case "L4":
-      letterType = 2;
+      letterType = 4;
       $("#num").text("4" + str);
       break;
     default:
@@ -174,54 +154,52 @@ $(".switchbox").on("click", function () {
 
 function switchPage(type) {
   //根据胶囊类型选择进入 其中第三个信纸是ser
+  forbidMove();
   if (type == 0) {
-    page.page2.fadeOut(200);
-    page.writeone.fadeIn(100);
+    
+    // page.page2.fadeOut(200);
+    // page.writeone.fadeIn(100);
     return page.writeone;
   } else if (type == 1) {
-    page.page2.fadeOut(200);
-    page.writesec.fadeIn(100);
+   
+    // page.page2.fadeOut(200);
+    // page.writesec.fadeIn(100);
     return page.writesec;
   } else if (type == 2) {
     OpenMove();
-    page.page2.fadeOut(200);
-    page.writeTA.fadeIn(100);
+    // page.page2.fadeOut(200);
+    // page.writeTA.fadeIn(100);
     return page.writeTA;
   }
 }
 //2&writeone&writesec&writeTA
-nextPage.page2.on("click", function () {
+$("#page2 .nextPage").on("click", function () {
   time_limit = getRadio(document.getElementsByName("year"));
   var template = getRadio(document.getElementsByName("template"));
   if (time_limit === -1) {
     attention("你还没有选择！");
   } else {
+    isSet = true;
     if (template == "L1") {
       switchPage(0);
       cap_template = 0;
-      page.writeone.css("backgroundImage", "url('./images/letter/1.png')");
-      $("#images").attr("src", "./images/letter/photobtn.png");
-      $("#voiceStart").attr("src", "./images/letter/record.png");
-      $(".write-one_bottom>.nextPage").attr("src", "./images/letter/L1.png");
-      $("#player").attr("src", "./images/letter/R1.png");
+      goTemplate1();
+      setitem(0);
     } else if (template == "L2") {
       switchPage(0);
-      page.writeone.css("backgroundImage", "url('./images/letter/2.png')");
-      $("#images").attr("src", "./images/letter/photobtn2.png");
-      $("#voiceStart").attr("src", "./images/letter/record2.png");
-      $(".write-one_bottom>.nextPage").attr("src", "./images/letter/L2.png");
-      $("#player").attr("src", "./images/letter/R2.png");
       cap_template = 0;
+      goTemplate2();
+      setitem(0);
     } else if (template == "L3") {
       switchPage(1);
-      $("#images").attr("src", "./images/letter/photobtn3.png");
-      $("#voiceStart").attr("src", "./images/letter/record3.png");
-      $(".write-one_bottom>.nextPage").attr("src", "./images/letter/L3.png");
-      $("#player").attr("src", "./images/letter/R3.png");
       cap_template = 0; //0是普通信纸
+      goTemplate3();
+      setitem(1);
     } else if (template == "L4") {
       switchPage(2);
       cap_template = 1; //1是同学录
+      goTemplate4();
+      setitem(2);
     }
   }
 });
@@ -251,19 +229,33 @@ prePage.writeTA.on("click", function () {
 
 // 根据type判断是否跳转填写信息
 function switchCapsule(str) {
+  hideALL();
   console.log("胶囊类型是" + str + " 0写给自己 1写给专属 2写给陌生人");
-  switch (Number(str)) {
+  str = parseInt(str);
+  if (str == 1) {
+    console.log("还需要收件人信息");
+  }
+  forbidMove();
+  if (from_qrcode) {
+    TrueSend();
+    page.writemap.fadeIn(90);
+    return;
+  }
+
+  switch (str) {
     case 1:
-      forbidMove();
-      if (from_qrcode) {
-        TrueSend();
-        page.writemap.fadeIn(90);
-        break;
-      }
       page.writeTAsend.fadeIn(90);
       break;
-    default:
+    case 0:
       OpenMove();
+      TrueSend();
+      console.log("进入地图");
+      page.writemap.fadeIn(90);
+      break;
+    case 2:
+      OpenMove();
+      TrueSend();
+      console.log("进入地图");
       page.writemap.fadeIn(90);
       break;
   }
@@ -286,7 +278,7 @@ function disableBtn() {
     nextPage.writeTA.css("opacity", "1");
 
     console.log("提交按钮解禁");
-  }, 6000);
+  }, 3000);
 }
 
 nextPage.writeone.on("click", function () {
@@ -294,8 +286,12 @@ nextPage.writeone.on("click", function () {
   disableBtn();
   content_word = $(".letter_text").val();
   if (content_word == "") {
-    trySend = false;
-    attention("你没有写任何东西！");
+    if((img_serverIds.length==0)&&(voice==undefined)){
+      attention("信纸是空的！");
+      trySend = false;
+      return;
+    }
+    attention("留下一句话吧~");
   } else {
     //uploadCapsule(capsule_type, time_limit, cap_template, cap_location, content_word, content_pic, content_voice, content_name, content_phone, content_birth);
     if (checkInput(content_word, "str")) {
@@ -306,24 +302,25 @@ nextPage.writeone.on("click", function () {
       return;
     }
     page.writeone.fadeOut(300);
-    switchCapsule(capsule_type);
     sendLetter(0);
-    if (Number(capsule_type) != 1) {
-      TrueSend();
-    }
+    switchCapsule(capsule_type);
+
   }
 });
 // writeone&writemap 结束
-//同学录？？
 nextPage.writesec.on("click", function () {
   // cap_template, content_word
   OpenMove();
   disableBtn();
   content_word = $("#letter3").val();
   if (content_word == "") {
-    trySend = false;
-    attention("你没有写任何东西！");
-  } else {
+    if((img_serverIds.length==0)&&(voice==undefined)){
+      attention("信纸是空的！");
+      trySend = false;
+      return;
+    }
+    attention("留下一句话吧~");
+  }else {
     if (checkInput(content_word, "str")) {
       trySend = true;
     } else {
@@ -333,18 +330,14 @@ nextPage.writesec.on("click", function () {
     }
     //uploadCapsule(capsule_type, time_limit, cap_template, cap_location, content_word, content_pic, content_voice, content_name, content_phone, content_birth);
     page.writesec.fadeOut(300);
-    switchCapsule(capsule_type);
     sendLetter(3);
-    TrueSend();
+    switchCapsule(capsule_type);
+
   }
 });
-//TA信息
 nextPage.writeTA.on("click", function () {
   // cap_template, content_word
-  disableBtn();
   forbidMove();
-  //uploadCapsule(capsule_type, time_limit, cap_template, cap_location, content_word, content_pic, content_voice, content_name, content_phone, content_birth);
-
   if (
     $("#txl_qq").val() == "" &&
     $("#txl_wechat").val() == "" &&
@@ -352,32 +345,46 @@ nextPage.writeTA.on("click", function () {
   ) {
     attention("至少留下联系方式吧~");
     OpenMove();
+    disableBtn();
     trySend = false;
     return;
   }
   trySend = true;
   page.writeTA.fadeOut(300);
-  switchCapsule(capsule_type);
   sendLetter(4);
+  switchCapsule(capsule_type);
 
-  console.log("还需要收件人信息");
+
+
 });
 //writeTA&writeTAsend 结束
 // writeTAsend&writemap 开始
 
 nextPage.writeTAsend.on("click", function () {
   // content_name,content_phone,content_birth;
-  TA_info.name = $("#receiver_name").val();
-  TA_info.tel = $("#receiver_tel").val();
-  TA_info.email = $("#receiver_email").val();
-  if (checkInput(TA_info.tel, "num") && TA_info.name != "") {
+  console.log("塞 我塞");
+  TA_info[0] = $("#receiver_name").val();
+  TA_info[1] = $("#receiver_tel").val();
+  TA_info[2] = $("#receiver_email").val();
+  if (TA_info[0] != "") {
+    if((TA_info[1]=="")&&!checkInput(TA_info[1], "num")){
+      attention("手机号输错了哦！")
+      return;
+    }
+    if((TA_info[2]!="")&&(TA_info[2].indexOf('@')==-1)){
+      attention("邮箱输错了哦！")
+      return;
+    }
     console.log("提交");
     console.log("write ta send");
     nextPage.writeTAsend.attr("disabled", true);
-    page.writeTAsend.fadeOut(100);
-    page.writemap.fadeIn(80);
+    hideALL();
+    page.writemap.fadeIn();
+    trySend = true;
     TrueSend();
+    return;
   } else {
+    nextPage.writeTAsend.attr("disabled", false);
     attention("信使找不到收件人TAT");
   }
 });
@@ -400,12 +407,7 @@ $(".txl_input").each(function () {
     // $("txl_img").removeClass(".change");
   });
 });
-$("txl_img").on("click", function () {
-  // $("txl_img").removeClass(".change");
-  // $("txl_img").attr('class',"");
-  // $("txl_img").css("width","auto");
-  // $("txl_img").css("height","120vh");
-});
+
 $(".txl_textarea").each(function () {
   $(this).bind("focus", function (e) {
     moveKeyboard(4);
@@ -419,15 +421,12 @@ $(".letter_text").each(function () {
   });
   $(this).bind("blur", function (e) {
     if (voice != undefined) {
-      $("#write-one>.content.write-one_content>.mp3").fadeIn();
-      $("#write-sec>.content.write-one_content>.mp3").fadeIn();
+      $("#contain3>.mp3").fadeIn();
+      $("#contain3>.mp3").fadeIn();
     }
-    if (img_serverIds.length >= 1) {
-      $("#write-one>.content.write-one_content>.deleimg").fadeIn();
-      $("#write-one>.content.write-one_content>.add_img").fadeIn();
-
-      $("#write-sec>.content.write-one_content>.deleimg").fadeIn();
-      $("#write-sec>.content.write-one_content>.add_img").fadeIn();
+    if (hasImg) {
+      $(".deleimg").show();
+      $(".add_img").show();
     }
   });
 });
@@ -438,7 +437,7 @@ $(".add_img").each(function () {
 });
 
 function sendLetter(letterType) {
-  console.log("记录的是第几张信纸内容 0 前两张 1 第三张 4 同学录");
+  console.log("记录的是第几张信纸内容 4 同学录");
   console.log(letterType);
   console.log("type of lettertype");
   console.log(typeof letterType);
@@ -477,26 +476,25 @@ function sendLetter(letterType) {
 }
 
 $("#images").on("click", function () {
-  setitem(0);
+  
   isSet = true;
   console.log("第几张信纸" + cap_template);
   chooseImg();
 });
 $("#images3").on("click", function () {
-  setitem(1);
+  // setitem(1);
   isSet = true;
   console.log("第3张信纸!");
-
   chooseImg();
 });
 $("#images4").on("click", function () {
-  setitem(2);
+  // setitem(2);
   isSet = true;
   chooseImg();
 });
 $("#voiceStart").on("click", function () {
   if (!isSet) {
-    setitem(letterType);
+    setitem(0);
   }
   sing.fadeIn(100);
 });
@@ -504,7 +502,7 @@ $("#voiceStart3").on("click", function () {
   if (!isSet) {
     console.log("第3张信纸!");
 
-    setitem(letterType);
+    // setitem(1);
   }
   sing.fadeIn(100);
 });
@@ -517,14 +515,14 @@ singbtn.on({
   touchstart: function (e) {
     timeoutEvent = setTimeout(() => {
       console.log("is it over?");
-    }, 6000);
+    }, 3000);
     e.preventDefault();
     $("#sing_anim").attr("src", "./images/sing.gif");
     $("#mp3").fadeIn();
     $("#player").fadeIn();
     $("#voice_dele").fadeIn();
     singbtn.val("松开 结束");
-    voiceRecord(0, 3000);
+    voiceRecord(0, 1000);
     hasSing = true;
   },
   // touchmove: function (e) {
@@ -541,7 +539,7 @@ singbtn.on({
     if (timeoutEvent != 0) {
       $("#sing_anim").attr("src", "./images/record_normal.png");
       singbtn.val("按住 开始");
-      voiceRecord(1, 3000);
+      voiceRecord(1, 1000);
     }
     //return false;
   },
@@ -554,26 +552,9 @@ singbtn.on({
 
 function TrueSend() {
   console.log("true send");
-  console.log(typeof letterType);
-  console.log(letterType);
-  console.log(letterType != 2);
-  if (letterType != 2) {
-    console.log("不等于？");
-    // }
-    // if(letterType!=2){
-    console.log("not =");
-    uploadWrapper(
-      capsule_type,
-      time_limit,
-      cap_template,
-      message[0],
-      [],
-      TA_info,
-      from_qrcode,
-      user_id
-    );
-  } else {
-    console.log("=");
+  console.log("收集信息：" + (TA_info.length > 0));
+  if (letterType == 4) {
+    console.log("不是同学录");
     uploadWrapper(
       capsule_type,
       time_limit,
@@ -584,14 +565,16 @@ function TrueSend() {
       from_qrcode,
       user_id
     );
+  } else {
+    uploadWrapper(
+      capsule_type,
+      time_limit,
+      cap_template,
+      message[0],
+      [],
+      TA_info,
+      from_qrcode,
+      user_id
+    );
   }
 }
-//信息录入
-// $("#submitCapsule").on('click', function () {
-//     uploadCapsule(capsule_type, time_limit, cap_template, cap_location, content_word, content_pic, content_voice, content_name, content_phone, content_birth);
-// });
-// 测试用
-// window.onload = function () {
-//     page.page1.attr('style', 'display:none;');
-//     page.finish.attr('style', 'display:block;');
-// }

@@ -20,7 +20,7 @@
 
     </head>
 
-    <body style="background-color: #bfdbc6;">
+    <body style="background-color: #bfdbc6; overflow:hidden !important;">
         <div id="loading">
             <img id="rotate" src="./images/2.png" />
             <span class="loadspan">Loading..</span>
@@ -33,11 +33,11 @@
         <div id="welcome">
             <div class=" welcome_header"></div>
             <div class=" welcome_content">
-             <!-- &ensp;&ensp;&ensp;&ensp;-->
-            欢迎来到百步梯毕业季之时光胶囊活动~ <br>
-             <!-- &ensp;&ensp;&ensp;&ensp;-->
+                <!-- &ensp;&ensp;&ensp;&ensp;-->
+                欢迎来到百步梯毕业季之时光胶囊活动~ <br>
+                <!-- &ensp;&ensp;&ensp;&ensp;-->
                 在这里，你可以把信放入胶囊，埋在学校 的花坛中，等待未来的TA将其找出来。<br>
-             <!-- &ensp;&ensp;&ensp;&ensp;-->
+                <!-- &ensp;&ensp;&ensp;&ensp;-->
                 先留下你的基本信息吧（嘘~这是我们共同的秘密）</div>
             <div class="welcome_btn" id="welcome_btn">轻触屏幕开始</div>
         </div>
@@ -68,7 +68,7 @@
                 <input id="submitInfo" type="submit" value="">
             </div>
         </div>
-        <div id="main">
+        <div id="main" style="overflow:hidden !important;">
             <div class="header" id="go_intro"></div>
             <div class="bottom_btn">
                 <div class="btn" id="go_write"></div>
@@ -85,29 +85,13 @@
                 <img src="./images/anim/1.gif" id="mai_anim" />
             </div>
             <img id="img_map" src="./images/map.jpg" usemap="#mapmap" />
-            <map name="mapmap" id="mapmap">
-                <area id="A1" onfocus="this.blur()" shape="circle" coords="27,117,109,143" href="#" hidefocus="true"
-                    alt="最左边的花坛" />
-                <area id="A2" onfocus="this.blur()" shape="circle" coords="150,117,109,143" href="#" hidefocus="true"
-                    alt="左边下面的花坛" />
-                <area id="A3" onfocus="this.blur()" shape="circle" coords="200,117,109,143" href="#" hidefocus="true"
-                    alt="Venus" />
-                <area id="A4" onfocus="this.blur()" shape="circle" coords="200,227,109,143" href="#" hidefocus="true"
-                    alt="五山花坛" />
-                <area id="A5" onfocus="this.blur()" shape="circle" coords="100,117,109,143" href="#" hidefocus="true"
-                    alt="雕像" />
-                <area id="A6" onfocus="this.blur()" shape="circle" coords="45,147,109,143" href="#" hidefocus="true"
-                    alt="雕像" />
-                <area id="A7" onfocus="this.blur()" shape="circle" coords="87,115,109,143" href="#" hidefocus="true"
-                    alt="雕像" />
-                <area id="A8" onfocus="this.blur()" shape="circle" coords="87,115,109,143" href="#" hidefocus="true"
-                    alt="下面那个" />
-            </map>
         </div>
         <div id="introduce">
             <div class="header"></div>
             <div class="intro_content">
                 <div class="intro">
+                    <p style="margin:0;text-align:center;width: 100%;height: 20px;
+                     overflow: hidden;margin-bottom: 12px;">------滑动查看全部------</p>
                     【我要写信】：<br>
                     1、根据写信的对象选择一种胶囊<br>
                     2、再选择打开胶囊的时间，半年后或一年后<br>
