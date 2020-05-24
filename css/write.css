@@ -222,32 +222,24 @@ input.prePage {
 }
 
 /* 第三种信纸 */
-/* #letter3 {
-    /* 它的textarea会短一点 
-    height: 30%;
+#writeL3>.write-one_element {
+    padding-top: 0px;
     position: relative;
-    margin-top: 80%;
-} */
+    right: 0px;
+}
 #letter3 {
     height: 50vw;
     position: static;
     position: fixed;
-    margin-top: 50vw;
+    margin-top: 50%;
     margin-bottom: 10vw;
-    width: 71%;
+    width: 70%;
     padding-right: 5vw;
 }
 #write-sec {
     background-image: url(../images/letter/3.png);
 }
 
-/* #write-sec>.content.write-one_content>.add_img {
-    width: 60px;
-    height: 60px;
-    margin-left: -5%;
-    /* transform: scale(0.7); 
-    transform: scale(0.7) translate(40%, -165vw);
-} */
 #write-sec>.content.write-one_content>.add_img {
     margin-top: 10vw;
     width: 60px;
@@ -256,15 +248,7 @@ input.prePage {
     /* transform: scale(0.7); */
     transform: scale(0.7) translate(40%, -60px);
 }
-/* #write-sec>.content.write-one_content>.deleimg {
-    width: 15px;
-    height: 15px;
-    margin-left: -15px;
-    transform: scale(0.7);
-    margin-bottom: 50px;
-    /* transform: scale(0.65) translate(55%,-240%); 
-    transform: scale(0.7) translate(80%, -160vw);
-} */
+
 #write-sec>.content.write-one_content>.deleimg {
     margin-top: 10vw;
     width: 15px;

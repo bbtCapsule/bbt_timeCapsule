@@ -36,10 +36,10 @@ function moveKeyboard(letterid) {
       // $("#write-one>.content.write-one_content>.mp3").slideUp();
       // $("#write-one>.content.write-one_content>.add_img").slideUp();
       break;
-    case 0:
+    case 1:
       id = "#write-one";
       break;
-    case 1:
+    case 3:
       id = "#writeL3";
       break;
     case 4:
@@ -56,8 +56,9 @@ function moveKeyboard(letterid) {
     console.log(winHeight);
     $("#write-sec").css('width',winWidth);
     $("#write-sec").css('height',winHeight);
-    $("#write-sec>.content.write-one_content").height(winHeight);
+    // $("#write-sec>.content.write-one_content").height(winHeight);
     // $("#letter3").height(winHeight/3);
+    // $("#letter3").css('margin-top','-50%');
     $("#letter3").css('position','static');
     // $("#write-sec>.content.write-one_content>.deleimg").slideUp();
     // $("#write-sec>.content.write-one_content>.mp3").slideUp();
@@ -131,7 +132,7 @@ var that = this;
 
 function setitem(letterType) {
   console.log("信纸类型是" + letterType);
-  let letter1 = $("#writeL3");
+  let letter1 = $("#writeL3>");
   let letter0 = $("#write1");
   let letter2 = $("#txl_imgdiv");
   if ($(".add_img").length > 0 && $("#mp3").length > 0) {
