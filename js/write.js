@@ -36,8 +36,7 @@ if (window.location.href.split("?uid=").length == 2) {
   
   if(getLetter(user_id)){
     goPage1();
-    return;
-  }
+  }else{
   console.log("来自二维码！");
   attention("写一封信，希望未来的TA能够收获一丝感动~");
   hasTAinfo = true;
@@ -47,6 +46,7 @@ if (window.location.href.split("?uid=").length == 2) {
   from_qrcode = true;
   capsule_type = 1;
   goPage2();
+}
 }
 function getLetter(user_id){
   var isMyself =false;
