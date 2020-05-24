@@ -12,5 +12,5 @@ Time = {
 }
 app = {
     'secret_key': '',
-    'capsule_path': 'https://hemc.100steps.net/2020/timecapsule/write.html?uid=%s'
+    'capsule_path': 'https://hemc.100steps.net/2020/timecapsule/write.html?uid='
 }

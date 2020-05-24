@@ -7,3 +7,4 @@ from .capsule import *
 from .check_user_info import *
 from .insetInfo import *
 from .getQRcode import *
+from .letter import *
