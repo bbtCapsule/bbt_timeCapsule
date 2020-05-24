@@ -110,14 +110,14 @@ var nextPage = {
     writesec: $("#ThirdSub"),
     writeTA: $("#FourSub"),
     writeTAsend: $("#TASub"),
-};
-var prePage = {
+  };
+  var prePage = {
     page1: $("#page1 .prePage"),
     page2: $("#page2 .prePage"),
     writeone: $("#write-one .prePage"),
     writesec: $("#write-sec .prePage"),
     writeTA: $("#write-TA .prePage"),
-};
+  };
 
 function hideALL() {
     page.page1.hide();

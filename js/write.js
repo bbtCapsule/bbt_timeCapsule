@@ -29,21 +29,7 @@ var isSet = false;
 var letterType = 0;
 var hasTAinfo = false;
 hideALL();
-var nextPage = {
-  page1: $("#page1 .nextPage"),
-  page2: $("#page2 .nextPage"),
-  writeone: $("#OneSub"),
-  writesec: $("#ThirdSub"),
-  writeTA: $("#FourSub"),
-  writeTAsend: $("#TASub"),
-};
-var prePage = {
-  page1: $("#page1 .prePage"),
-  page2: $("#page2 .prePage"),
-  writeone: $("#write-one .prePage"),
-  writesec: $("#write-sec .prePage"),
-  writeTA: $("#write-TA .prePage"),
-};
+
 
 page.page1.show();
 if (window.location.href.split("?uid=").length == 2) {
@@ -60,7 +46,7 @@ if (window.location.href.split("?uid=").length == 2) {
 function getRadio(obj) {
   for (var i = 0; i < obj.length; i++) {
     if (obj[i].checked === true) {
-      return Number(obj[i].value);
+      return obj[i].value;
     }
   }
   return -1;
@@ -185,7 +171,7 @@ function switchPage(type) {
   }
 }
 //2&writeone&writesec&writeTA
-nextPage.page2.on("click", function () {
+$("#page2 .nextPage").on("click", function () {
   time_limit = getRadio(document.getElementsByName("year"));
   var template = getRadio(document.getElementsByName("template"));
   if (time_limit === -1) {
@@ -238,6 +224,7 @@ prePage.writeTA.on("click", function () {
 function switchCapsule(str) {
   hideALL();
   console.log("胶囊类型是" + str + " 0写给自己 1写给专属 2写给陌生人");
+  str = parseInt(str);
   if (str == 1) {
     console.log("还需要收件人信息");
   }
