@@ -333,6 +333,7 @@ area.go:before {
     background-size: contain;
     color: #8f8475;
     font-size: 20px;
+    text-align: center;
 
 }
 

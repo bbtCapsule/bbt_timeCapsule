@@ -34,7 +34,7 @@ hideALL();
 page.page1.show();
 if (window.location.href.split("?uid=").length == 2) {
   console.log("来自二维码！");
-  attention("写一封信，希望未来的TA（自己）能够收获一丝感动~");
+  attention("写一封信，希望未来的TA/自己能够收获一丝感动~");
   hasTAinfo = true;
   user_id = window.location.href.split("?uid=")[1];
   
@@ -366,7 +366,15 @@ nextPage.writeTAsend.on("click", function () {
   TA_info[0] = $("#receiver_name").val();
   TA_info[1] = $("#receiver_tel").val();
   TA_info[2] = $("#receiver_email").val();
-  if (checkInput(TA_info[1], "num") && TA_info[0] != "") {
+  if (TA_info[0] != "") {
+    if((TA_info[1]=="")&&!checkInput(TA_info[1], "num")){
+      attention("手机号输错了哦！")
+      return;
+    }
+    if((TA_info[2]!="")&&(TA_info[2].indexOf('@')==-1)){
+      attention("邮箱输错了哦！")
+      return;
+    }
     console.log("提交");
     console.log("write ta send");
     nextPage.writeTAsend.attr("disabled", true);
@@ -374,6 +382,7 @@ nextPage.writeTAsend.on("click", function () {
     page.writemap.fadeIn();
     trySend = true;
     TrueSend();
+    return;
   } else {
     nextPage.writeTAsend.attr("disabled", false);
     attention("信使找不到收件人TAT");

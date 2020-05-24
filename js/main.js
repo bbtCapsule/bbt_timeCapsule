@@ -25,6 +25,8 @@ var winWidth = $(window).width();
 var winHeight = $(window).height();
 var hasImg = false;
 var hasmusic =false;
+var astr1=window.location.href.split("/")[window.location.href.split("/").length-1];
+
 function moveKeyboard(letterid) {
   console.log("change height");
   var id = "";
@@ -747,3 +749,6 @@ $("#intro_btn").on("click", function () {
     $("#go_intro").hide();
   }
 });
+if((astr1=="")||(astr1=="main.html")){
+  forbidMove();
+}
