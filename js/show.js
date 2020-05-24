@@ -106,10 +106,10 @@ var page = {
 var nextPage = {
     page1: $("#page1 .nextPage"),
     page2: $("#page2 .nextPage"),
-    writeone: $("#write-one>.write-one_bottom>#OneSub"),
-    writesec: $("#write-sec>.write-one_bottom>#ThirdSub"),
-    writeTA: $("#write-TA>.write-one_bottom>#FourSub"),
-    writeTAsend: $("#write-TA-send>.write-one_bottom>#TASub"),
+    writeone: $("#OneSub"),
+    writesec: $("#ThirdSub"),
+    writeTA: $("#FourSub"),
+    writeTAsend: $("#TASub"),
 };
 var prePage = {
     page1: $("#page1 .prePage"),

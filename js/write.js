@@ -221,6 +221,7 @@ prePage.writeTA.on("click", function () {
 
 // 根据type判断是否跳转填写信息
 function switchCapsule(str) {
+  hideALL();
   console.log("胶囊类型是" + str + " 0写给自己 1写给专属 2写给陌生人");
   switch (Number(str)) {
     case 1:
@@ -230,12 +231,21 @@ function switchCapsule(str) {
         page.writemap.fadeIn(90);
         break;
       }
+      
       page.writeTAsend.fadeIn(90);
       break;
-    default:
+    case 0:
       OpenMove();
+      TrueSend();
+      
       page.writemap.fadeIn(90);
       break;
+      case 2:
+        OpenMove();
+        TrueSend();
+        
+        page.writemap.fadeIn(90);
+        break;
   }
 }
 
@@ -256,7 +266,7 @@ function disableBtn() {
     nextPage.writeTA.css("opacity", "1");
 
     console.log("提交按钮解禁");
-  }, 6000);
+  }, 3000);
 }
 
 nextPage.writeone.on("click", function () {
@@ -276,15 +286,12 @@ nextPage.writeone.on("click", function () {
       return;
     }
     page.writeone.fadeOut(300);
-    switchCapsule(capsule_type);
     sendLetter(0);
-    if (Number(capsule_type) != 1) {
-      TrueSend();
-    }
+    switchCapsule(capsule_type);
+    
   }
 });
 // writeone&writemap 结束
-//同学录？？
 nextPage.writesec.on("click", function () {
   // cap_template, content_word
   OpenMove();
@@ -303,18 +310,14 @@ nextPage.writesec.on("click", function () {
     }
     //uploadCapsule(capsule_type, time_limit, cap_template, cap_location, content_word, content_pic, content_voice, content_name, content_phone, content_birth);
     page.writesec.fadeOut(300);
-    switchCapsule(capsule_type);
     sendLetter(3);
-    TrueSend();
+    switchCapsule(capsule_type);
+    
   }
 });
-//TA信息
 nextPage.writeTA.on("click", function () {
   // cap_template, content_word
-  disableBtn();
   forbidMove();
-  //uploadCapsule(capsule_type, time_limit, cap_template, cap_location, content_word, content_pic, content_voice, content_name, content_phone, content_birth);
-
   if (
     $("#txl_qq").val() == "" &&
     $("#txl_wechat").val() == "" &&
@@ -322,13 +325,15 @@ nextPage.writeTA.on("click", function () {
   ) {
     attention("至少留下联系方式吧~");
     OpenMove();
+    disableBtn();
     trySend = false;
     return;
   }
   trySend = true;
   page.writeTA.fadeOut(300);
-  switchCapsule(capsule_type);
   sendLetter(4);
+  switchCapsule(capsule_type);
+  
 
   console.log("还需要收件人信息");
 });
@@ -344,8 +349,9 @@ nextPage.writeTAsend.on("click", function () {
     console.log("提交");
     console.log("write ta send");
     nextPage.writeTAsend.attr("disabled", true);
-    page.writeTAsend.fadeOut(100);
-    page.writemap.fadeIn(80);
+    hideALL();
+    page.writemap.fadeIn();
+    trySend =true;
     TrueSend();
   } else {
     attention("信使找不到收件人TAT");
