@@ -2,9 +2,6 @@
 * {
     outline: none;
 }
-li{
-    appearance: none;
-}
 @font-face {
     font-family: 'cute';
     src: url('../images/HYYOUYUANTIJ.TTF');
