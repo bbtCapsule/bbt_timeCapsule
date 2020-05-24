@@ -420,7 +420,8 @@ function uploadInfo(nickname, phone, email) {
   $("#submitInfo").attr("disabled", "disabled");
   if (checkInput(nickname, "str") && checkInput(phone, "num")) {
     post();
-    $("#introduce").fadeIn(300);
+    info_check =true;
+    localStorage.setItem('hasInfo',true);
     $("#getInfo").fadeOut(80);
   } else {
     attention("啊喔！请输入正确信息！");
@@ -731,13 +732,10 @@ $("#go_intro").on("click", function () {
 $("#intro_btn").on("click", function () {
   if (info_check) {
     $("#introduce").fadeOut(300);
-    {
+    
       forbidMove();
       $("#main").fadeIn(80);
-    }
-    $("#go_write").show();
-    $("#go_receive").show();
-    $("#go_write").show();
+      $("#go_write").show();
     $("#go_receive").show();
     $("#go_intro").show();
   } else {

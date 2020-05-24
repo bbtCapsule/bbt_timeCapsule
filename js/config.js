@@ -6,7 +6,8 @@ const phpurl =
 const getWxurl = "https://hemc.100steps.net/2017/wechat/Home/Public/getJsApi"; //微信请求jsapi页
 const shareurl = encodeURIComponent(location.href);
 const shareimg_url = "图片url";
-
+var info_check = false;
+if(Boolean(localStorage.getItem('hasInfo'))){ info_check = true};
 function attention(str) {
   $("#allatt").fadeIn();
   $("#att").text(str);
@@ -50,7 +51,7 @@ function checkLogin(succ_fun = () => {}) {
 }
 
 // 检测用户是否填写信息
-var info_check = false;
+
 function checkInfo() {
   fetch(apiurl + "check_user_info", {
     method: "get",
