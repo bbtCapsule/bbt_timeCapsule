@@ -230,7 +230,7 @@ input.prePage {
     height: 50vw;
     position: static;
     position: fixed;
-    margin-top: 50%;
+    /* margin-top: 50%; */
     margin-bottom: 10vw;
     width: 70%;
     padding-right: 5vw;
@@ -238,16 +238,18 @@ input.prePage {
 #write-sec {
     background-image: url(../images/letter/3.png);
 }
-
+#contain3{
+    height: 28vh;
+    overflow: scroll;
+}
 #contain3>.add_img {
-    margin-top: 10vw;
+    /* margin-top: 10vw; */
     width: 60px;
     height: 60px;
-    margin-left: -5%;
+    /* margin-left: -5%; */
     /* transform: scale(0.7); */
-    transform: scale(0.7) translate(40%, -60px);
+    transform: translate(0, -70px);
 }
-
 #contain3>.deleimg {
     margin-top: 10vw;
     width: 15px;
@@ -256,19 +258,8 @@ input.prePage {
     transform: scale(0.7);
     margin-bottom: 50px;
     /* transform: scale(0.65) translate(55%,-240%); */
-    transform: scale(0.7) translate(80%, -50px);
+    transform: translate(5px, -75px);
 }
-/* #write-sec>.content.write-one_content>.mp3 {
-    -webkit-appearance: unset;
-    color: transparent;
-    width: 70%;
-    margin-left: 5%;
-    border-radius: 0.6rem;
-    background-color: #f0f5f7;
-    margin-bottom: 5%;
-    margin-top: 3%;
-    transform: scale(0.65) translate(55%, -240%);
-} */
 #contain3>.mp3 {
     -webkit-appearance: unset;
     color: transparent;

@@ -178,22 +178,27 @@ $("#page2 .nextPage").on("click", function () {
   if (time_limit === -1) {
     attention("你还没有选择！");
   } else {
+    isSet = true;
     if (template == "L1") {
       switchPage(0);
       cap_template = 0;
       goTemplate1();
+      setitem(0);
     } else if (template == "L2") {
       switchPage(0);
       cap_template = 0;
       goTemplate2();
+      setitem(0);
     } else if (template == "L3") {
       switchPage(1);
       cap_template = 0; //0是普通信纸
       goTemplate3();
+      setitem(1);
     } else if (template == "L4") {
       switchPage(2);
       cap_template = 1; //1是同学录
       goTemplate4();
+      setitem(2);
     }
   }
 });
@@ -453,20 +458,19 @@ function sendLetter(letterType) {
 }
 
 $("#images").on("click", function () {
-  setitem(0);
+  
   isSet = true;
   console.log("第几张信纸" + cap_template);
   chooseImg();
 });
 $("#images3").on("click", function () {
-  setitem(1);
+  // setitem(1);
   isSet = true;
   console.log("第3张信纸!");
-
   chooseImg();
 });
 $("#images4").on("click", function () {
-  setitem(2);
+  // setitem(2);
   isSet = true;
   chooseImg();
 });
@@ -480,7 +484,7 @@ $("#voiceStart3").on("click", function () {
   if (!isSet) {
     console.log("第3张信纸!");
 
-    setitem(1);
+    // setitem(1);
   }
   sing.fadeIn(100);
 });

@@ -54,13 +54,13 @@ function moveKeyboard(letterid) {
     forbidMove();
     console.log(1, $(id).height());
     console.log(winHeight);
-    dio1 = 200/568;
+    var dio = 200/568;
     $("#write-sec").css('width',winWidth);
     $("#write-sec").css('height',winHeight);
-     $("#write-sec>.content.write-one_content").height(winHeight*0.8);
+     $("#write-sec>.content.write-one_content").height(winHeight-200);
      $("#contain3").height(dio*winHeight);
     $("#letter3").css('position','static');
-    $("#letter3").css('margin-top','3rem');
+    $("#letter3").css('margin-top','0');
     console.log(3, $(id).height());
     return;
   }
