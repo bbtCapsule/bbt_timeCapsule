@@ -37,6 +37,7 @@ if (window.location.href.split("?uid").length == 2) {
   attention("写一封信，希望未来的TA（自己）能够收获一丝感动~");
   hasTAinfo = true;
   user_id = window.location.href.split("?uid")[1];
+  user_id.replace("=","");
   from_qrcode = true;
   capsule_type = 1;
   goPage2();
