@@ -472,7 +472,7 @@ $("#images4").on("click", function () {
 });
 $("#voiceStart").on("click", function () {
   if (!isSet) {
-    setitem(letterType);
+    setitem(0);
   }
   sing.fadeIn(100);
 });
@@ -480,7 +480,7 @@ $("#voiceStart3").on("click", function () {
   if (!isSet) {
     console.log("第3张信纸!");
 
-    setitem(letterType);
+    setitem(1);
   }
   sing.fadeIn(100);
 });
