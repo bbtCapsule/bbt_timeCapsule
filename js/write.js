@@ -398,8 +398,8 @@ $(".letter_text").each(function () {
   });
   $(this).bind("blur", function (e) {
     if (voice != undefined) {
-      $("#write-one>.content.write-one_content>.mp3").fadeIn();
-      $("#write-sec>.content.write-one_content>.mp3").fadeIn();
+      $("#contain3>.mp3").fadeIn();
+      $("#contain3>.mp3").fadeIn();
     }
     if (hasImg) {
       $(".deleimg").show();

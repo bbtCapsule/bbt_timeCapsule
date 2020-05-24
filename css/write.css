@@ -1,8 +1,11 @@
 /* 清除基础样式 */
 * {
     outline: none;
+    cursor: pointer;
 }
-
+li{
+    appearance: none;
+}
 @font-face {
     font-family: 'cute';
     src: url('../images/HYYOUYUANTIJ.TTF');
@@ -240,7 +243,7 @@ input.prePage {
     background-image: url(../images/letter/3.png);
 }
 
-#write-sec>.content.write-one_content>.add_img {
+#contain3>.add_img {
     margin-top: 10vw;
     width: 60px;
     height: 60px;
@@ -249,7 +252,7 @@ input.prePage {
     transform: scale(0.7) translate(40%, -60px);
 }
 
-#write-sec>.content.write-one_content>.deleimg {
+#contain3>.deleimg {
     margin-top: 10vw;
     width: 15px;
     height: 15px;
@@ -270,7 +273,7 @@ input.prePage {
     margin-top: 3%;
     transform: scale(0.65) translate(55%, -240%);
 } */
-#write-sec>.content.write-one_content>.mp3 {
+#contain3>.mp3 {
     -webkit-appearance: unset;
     color: transparent;
     width: 70%;

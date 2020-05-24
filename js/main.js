@@ -56,7 +56,7 @@ function moveKeyboard(letterid) {
     console.log(winHeight);
     $("#write-sec").css('width',winWidth);
     $("#write-sec").css('height',winHeight);
-     $("#write-sec>.content.write-one_content").height(winHeight);
+     $("#write-sec>.content.write-one_content").height(winHeight*0.8);
 
     $("#letter3").css('position','static');
 
@@ -127,7 +127,7 @@ var that = this;
 
 function setitem(letterType) {
   console.log("信纸类型是" + letterType);
-  let letter1 = $("#writeL3>");
+  let letter1 = $("#contain3");
   let letter0 = $("#write1");
   let letter2 = $("#txl_imgdiv");
   if ($(".add_img").length > 0 && $("#mp3").length > 0) {
@@ -142,6 +142,8 @@ function setitem(letterType) {
       letter0.append(mp3);
       letter0.append(img1);
       letter0.append(img2);
+      // $("#letter3").css('margin-top','30%');
+      // $("#ThirdSub").css('margin-top','30%');
       letter0.on("click", "#voice_dele", function (e) {
         e.preventDefault();
 
@@ -165,7 +167,7 @@ function setitem(letterType) {
       letter1.append(mp3);
       letter1.append(img1);
       letter1.append(img2);
-      $("#letter3").css('margin-top','10px');
+      $("#letter3").css('margin-top','');
       letter1.on("click", "#voice_dele", function (e) {
         e.preventDefault();
         $("#mp3").slideUp();
