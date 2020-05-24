@@ -558,10 +558,6 @@ function uploadCapsule(
         console.log("ta_info");
         console.log(TA_info);
         console.log(txl_content);
-        if(img_serverIds.length<1){
-          attention("请选择照片呀~");
-          break;
-        }
         letter = JSON.stringify({
           capsule_type: capsule_type, // （胶囊类型）0，1，2分别代表私密，Ta，陌生人
           time_limit: time_limit, // （时间期限）0，1分别代表半年、一年

@@ -285,8 +285,12 @@ nextPage.writeone.on("click", function () {
   disableBtn();
   content_word = $(".letter_text").val();
   if (content_word == "") {
-    trySend = false;
-    attention("你没有写任何东西！");
+    if((img_serverIds.length==0)&&(voice==undefined)){
+      attention("信纸是空的！");
+      trySend = false;
+      return;
+    }
+    attention("留下一句话吧~");
   } else {
     //uploadCapsule(capsule_type, time_limit, cap_template, cap_location, content_word, content_pic, content_voice, content_name, content_phone, content_birth);
     if (checkInput(content_word, "str")) {
@@ -309,9 +313,13 @@ nextPage.writesec.on("click", function () {
   disableBtn();
   content_word = $("#letter3").val();
   if (content_word == "") {
-    trySend = false;
-    attention("你没有写任何东西！");
-  } else {
+    if((img_serverIds.length==0)&&(voice==undefined)){
+      attention("信纸是空的！");
+      trySend = false;
+      return;
+    }
+    attention("留下一句话吧~");
+  }else {
     if (checkInput(content_word, "str")) {
       trySend = true;
     } else {
