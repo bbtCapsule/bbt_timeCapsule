@@ -423,6 +423,7 @@ function uploadInfo(nickname, phone, email) {
     info_check =true;
     localStorage.setItem('hasInfo',true);
     $("#getInfo").fadeOut(80);
+    $("#go_intro").show();
   } else {
     attention("啊喔！请输入正确信息！");
     $("#submitInfo").attr("disabled", true);
@@ -733,7 +734,6 @@ $("#intro_btn").on("click", function () {
   if(Boolean(localStorage.getItem('hasInfo'))){ info_check = true};
   if (info_check) {
     $("#introduce").fadeOut(300);
-    
       forbidMove();
       $("#main").fadeIn(80);
       $("#go_write").show();
