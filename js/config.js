@@ -6,8 +6,14 @@ const phpurl =
 const getWxurl = "https://hemc.100steps.net/2017/wechat/Home/Public/getJsApi"; //微信请求jsapi页
 const shareurl = encodeURIComponent(location.href);
 const shareimg_url = "图片url";
-var info_check = false;
-;
+var info_check;
+if( Boolean(localStorage.getItem('hasInfo'))!=undefined){
+  info_check = Boolean(localStorage.getItem('hasInfo'));
+  console.log("info"+info_check);
+}else{
+  info_check = false;
+  console.log("info"+info_check);
+}
 function attention(str) {
   $("#allatt").fadeIn();
   $("#att").text(str);

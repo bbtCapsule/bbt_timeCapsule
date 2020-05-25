@@ -420,8 +420,7 @@ function uploadInfo(nickname, phone, email) {
   $("#submitInfo").attr("disabled", "disabled");
   if (checkInput(nickname, "str") && checkInput(phone, "num")) {
     post();
-    info_check =true;
-    localStorage.setItem('hasInfo',true);
+
     $("#getInfo").fadeOut(80);
     $("#go_intro").show();
   } else {
@@ -469,6 +468,8 @@ function uploadInfo(nickname, phone, email) {
           // mainPage.getInfo.attr('style', 'display:none;');
           mainPage.main.fadeIn();
           forbidMove();
+          info_check =true;
+          localStorage.setItem('hasInfo',true);
         }
       },
       error: function (err) {

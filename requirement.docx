@@ -1,6 +1,0 @@
-flask
-pymysql  
-Pillow
-qrcode
-requests
-ahocorasick
