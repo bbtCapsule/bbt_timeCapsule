@@ -425,7 +425,7 @@ function uploadInfo(nickname, phone, email) {
     $("#go_intro").show();
   } else {
     attention("啊喔！请输入正确信息！");
-    $("#submitInfo").attr("disabled", true);
+    $("#submitInfo").attr("disabled", false);
   }
 
   function post() {
@@ -458,12 +458,13 @@ function uploadInfo(nickname, phone, email) {
         }
       },
       success(data, textStatus, xhr) {
+        $("#loading").fadeOut(80);
+        $("#submitInfo").attr("disabled", false);
         if (data.errcode != 0 || xhr.status == 400) {
           //上传失败 把错误信息显示出来
           attention(data.errmsg);
           console.log(data);
         } else if (data.errcode == 0) {
-          $("#loading").fadeOut(80);
           $("#getinfo").fadeOut(); //关掉表单 进入下一个页面
           // mainPage.getInfo.attr('style', 'display:none;');
           mainPage.main.fadeIn();
